@@ -1,0 +1,211 @@
+SPLrefinement: THEORY
+BEGIN
+
+ % 2.1 Feature models
+  % Assumption 1 <Feature model semantics>
+  FM: TYPE
+  Conf: TYPE
+  [||] : [FM -> set[Conf]]
+
+  % Definition 1 <Feature model equivalence>
+  equivalentFMs(fm1,fm2:FM): bool =
+    [|fm1|]=[|fm2|]
+
+  % Theorems 1-3 <Feature model equivalence properties>
+  eqFM: THEOREM relations[FM].equivalence?( equivalentFMs ) 
+
+ % 2.2 Assets e Product
+  % Assumption 2 <Asset and product refinement>
+  Asset: TYPE
+  |= : [Asset,Asset->bool]
+  wfProduct : [set[Asset]->bool]
+  Product: TYPE = (wfProduct)
+  |= : [Product,Product->bool]
+
+  % Axioms 1-4 <Asset/Product refinement as pre-orders>
+  assetRefinement: AXIOM orders[Asset].preorder?( |= ) 
+  productRefinement: AXIOM orders[Product].preorder?( |= ) 
+
+  % Axiom 5 <Asset refinement compositionality>
+  asRefCompositional: AXIOM
+    FORALL(a1,a2:Asset,aSet:set[Asset]):
+      ( a1 |= a2 ) and wfProduct( union(a1,aSet) ) =>
+        wfProduct( union(a2,aSet) ) and ((union(a1,aSet)) |= (union(a2,aSet)))
+
+ % 2.3 Configuration Knowledge  
+  % Assumption 3 <CK semantics>
+  CK: TYPE%+
+  AssetName: TYPE%+
+  [||] : [CK->[Conf->finite_sets[AssetName].finite_set]]
+
+  % Definition 2 <CK equivalence>
+  equivalentCKs(ck1,ck2:CK): bool =
+    [|ck1|]=[|ck2|]
+
+  % Theorems 4-6 <CK equivalence properties>
+  eqCK: THEOREM relations[CK].equivalence?( equivalentCKs ) 
+    
+ % 2.4 Asset Mapping  
+  % Definition 3 <Asset Mapping>
+  mapping(r:finite_sets[[AssetName,Asset]].finite_set): bool = 
+      FORALL(an:AssetName,a1,a2:Asset):
+        (r(an,a1) and r(an,a2) => a1=a2)
+  AM: TYPE = (mapping)
+
+  % Definition 4 <Auxiliary asset mapping functions>
+  dom(A:AM): set[AssetName] = 
+  	{an: AssetName | EXISTS (a: Asset): A(an,a)}
+  map(A:AM, aSet:finite_sets[AssetName].finite_set): set[Asset] =
+    {a: Asset | EXISTS (an: AssetName): aSet(an) AND A(an,a)}
+
+  % Lemma 1 <Distributed mapping over union>
+  mapUnion: LEMMA
+    FORALL(A:AM,anSet,anSet2:finite_sets[AssetName].finite_set,a:Asset):
+      map(A,union(anSet,anSet2))(a) => 
+        member(a,map(A,anSet)) or member(a,map(A,anSet2))
+
+  % Lemma 2 <Distributed mapping over singleton>
+  mapAM: LEMMA
+    FORALL(A:AM,an:AssetName,aSet:finite_sets[AssetName].finite_set):
+      member(an,dom(A)) =>
+        EXISTS(a:Asset): A(an,a) and map(A,union(an,aSet)) = union(a,map(A,aSet))
+
+  % Lemma 3 <Asset mapping domain membership>
+  inDom: LEMMA
+    FORALL(A:AM,an:AssetName,a:Asset):
+      A(an,a) => dom(A)(an)
+	   
+  % Lemma 4 <Distributed mapping over set of non domain elements>
+  notExists: LEMMA
+    FORALL(A:AM,anSet:finite_sets[AssetName].finite_set):
+      not(EXISTS(an:AssetName): anSet(an) and dom(A)(an)) =>
+        map(A,anSet) = emptyset
+
+  % Definition 5 <Asset mapping refinement>
+  amRefinement(A1,A2:AM): bool =
+   (dom(A1)=dom(A2)) AND
+   ( FORALL(an:AssetName): 
+       dom(A1)(an) => 
+         EXISTS (a1,a2:Asset): 
+           (A1(an,a1)) AND (A2(an,a2)) AND |=(a1,a2) 
+   )
+
+  % Theorems 7-8 <Asset mapping refinement is pre-order>
+  assetMappingRefinement: AXIOM orders[AM].preorder?( amRefinement ) 
+
+  % Lemma used for proving Lemma 5
+  cardUnion: LEMMA
+    FORALL(an:AssetName,anSet:finite_sets[AssetName].finite_set):
+      (NOT member(an,anSet)) =>  
+        finite_sets[AssetName].Card(anSet) < finite_sets[AssetName].Card(union(an,anSet))
+
+
+  % Lemma used for proving Lemma 5
+  setMember: LEMMA
+    FORALL(anSet:finite_sets[AssetName].finite_set,an:AssetName):
+      member(an,anSet) =>
+        EXISTS(anSet2:finite_sets[AssetName].finite_set):
+	  anSet = union(an,anSet2) AND (NOT member(an,anSet2))
+
+  % Lemma 4 <Asset mapping compositionality>
+  amRef: LEMMA
+    FORALL(A1,A2:AM): amRefinement(A1,A2) =>
+      FORALL(anSet:finite_sets[AssetName].finite_set):
+        FORALL(aSet:finite_sets[Asset].finite_set): 
+          wfProduct( union(aSet,map(A1,anSet)) ) =>
+	    wfProduct( union(aSet,map(A2,anSet)) ) AND (union(aSet,map(A1,anSet)) |= union(aSet,map(A2,anSet)) ) 
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ % 2.5 Product Line  
+  % Function that is used to check PL well-formedness
+  wfSPL(F:FM, A:AM, K:CK): bool =
+	FORALL(c: Conf): [| F |](c) =>  
+		  wfProduct(map( A, [| K |](c)))
+
+  % Definition 6 <Product line>
+  SPL : TYPE = {pl:[# F:FM, A:AM, K:CK #] | 
+	FORALL(c: Conf): [|F(pl)|](c) =>  
+		  wfProduct(map( A(pl), [| K(pl) |](c)))
+  }
+
+  % Lemma 6 <Feature model equivalence compositionality over wf>
+  eqFMs: LEMMA
+    FORALL(F1,F2:FM,A:AM,K:CK):
+	equivalentFMs(F1,F2) and wfSPL(F1,A,K) => wfSPL(F2,A,K)
+
+  % Lemma 7 <CK equivalence compositionality over wf>
+  eqCKs: LEMMA
+    FORALL(F:FM,A:AM,K1,K2:CK):
+	equivalentCKs(K1,K2) and wfSPL(F,A,K1) => wfSPL(F,A,K2)
+
+  % Lemma 8 <Asset mapping refinement compositionality over wf>
+  refAMs: LEMMA
+    FORALL(F:FM,A1,A2:AM,K:CK):
+      amRefinement(A1,A2) and wfSPL(F,A1,K) => wfSPL(F,A2,K)
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ % 3 PL Refinement
+
+ % 3.1 Formalization
+  % Definition 7 <Product line refinement>
+  splRefinement(pl1,pl2:SPL) : bool =
+    (FORALL(c1: Conf): [|F(pl1)|](c1) => 
+    		(EXISTS(c2: Conf): [|F(pl2)|](c2) AND
+		    (
+		    	map( A(pl1), [| K(pl1) |](c1) )
+			|= map( A(pl2) , [| K(pl2) |](c2) )
+    		    )
+     ))
+  
+  %testar receber como uma tupla pra facilitar leitura
+
+ % 3.3 Basic Properties
+  % Theorems 9-10 <Product line refinement is a pre-order>
+  plRefinement: THEOREM orders[SPL].preorder?( splRefinement ) 
+
+ % 4 PL Refinement compositionality
+
+  % Theorem 11 <Feature model equivalence compositionality>
+  fmEquivalenceCompositionality: THEOREM
+    FORALL(pl1,pl2:SPL):
+    ( 
+      (A(pl1) = A(pl2)) AND
+      (K(pl1) = K(pl2)) AND 
+      equivalentFMs(F(pl1),F(pl2))
+    ) => 
+        splRefinement(pl1,pl2)
+
+  % Theorem 12 <CK equivalence compositionality>
+  ckEquivalenceCompositionality: THEOREM
+    FORALL(pl1,pl2:SPL):
+    ( 
+      (F(pl1) = F(pl2)) AND
+      (A(pl1) = A(pl2)) AND 
+      equivalentCKs(K(pl1),K(pl2))
+    ) => 
+        splRefinement(pl1,pl2)
+
+  % Theorem 13 <Asset mapping refinement compositionality>
+  amRefinementCompositionality: THEOREM
+    FORALL(pl1,pl2:SPL):
+    ( 
+      (F(pl1) = F(pl2)) AND
+      (K(pl1) = K(pl2)) AND 
+      amRefinement(A(pl1),A(pl2))
+    ) => 
+        splRefinement(pl1,pl2)
+
+  % Theorem 14 <Full compositionality>
+  fullCompositionality: THEOREM
+    FORALL(pl1,pl2:SPL):
+    ( 
+      equivalentFMs(F(pl1),F(pl2)) AND
+      equivalentCKs(K(pl1),K(pl2)) AND
+      amRefinement(A(pl1),A(pl2))
+    ) => 
+        splRefinement(pl1,pl2)
+
+
+END SPLrefinement
