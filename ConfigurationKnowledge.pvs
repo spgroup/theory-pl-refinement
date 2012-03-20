@@ -1,0 +1,95 @@
+ConfigurationKnowledge: THEORY
+BEGIN
+  IMPORTING FeatureModelSemantics, set_aux_lemmas, AssetMapping, set_comp_lemmas
+
+  Item: TYPE=[# exp:Formula_, assets:finite_sets[AssetName].finite_set #]
+  CK: TYPE = finite_sets[Item].finite_set
+  
+  fm: VAR WFM
+  am,am1,am2: VAR AM
+  an,an1,an2: VAR AssetName
+  ck: VAR CK
+  exp: VAR Formula_
+  item: VAR Item
+  items: VAR finite_sets[Item].finite_set
+  c,c1,c2: VAR Configuration
+  F,G,H,opt: VAR Name
+
+  % yields all feature expressions of a given set of CK items
+  exps(items) : set[Formula_] = 
+    {f:Formula_ | EXISTS(it:Item) : items(it) and f=exp(it)}
+
+  % yields all feature expressions of a given CK
+  expsCK(ck) : set[Formula_] = 
+    exps(ck)
+
+  lemmaSetComp : LEMMA
+    FORALL(ck,c) :
+      {i:Item | ck(i) AND satisfies(exp(i),c) }
+      = intersection({i:Item | ck(i)}, {i:Item | satisfies(exp(i),c) })
+  
+  % evaluates a CK against a product configuration and yields only CK items evaluated as true
+  evalCK(ck,c):finite_sets[Item].finite_set =
+    {i:Item | ck(i) AND satisfies(exp(i),c) }
+
+  % yields all asset names referenced in a given set of CK items
+  assetsCK(items):finite_sets[AssetName].finite_set = 
+    { a:AssetName |  EXISTS (item:Item) : (assets(item)(a)) AND (items)(item) }
+
+  % yields all asset names of a given CK
+  imgCK(ck):finite_sets[AssetName].finite_set =
+    assetsCK(ck)
+
+  % yields only the asset names evaluated as true for a given product configuration 
+  eval(ck,c):finite_sets[AssetName].finite_set = 
+    assetsCK(evalCK(ck,c))
+
+  % yields the assets to build a product for a given product configuration 
+  % sCK : [ConfigKnowledge->[AM->[Configuration->finite_sets[Asset].finite_set]]] =
+  semantics(ck)(am)(c):finite_sets[Asset].finite_set =
+    map(am, eval(ck,c))
+
+  wfCK(fm,am,ck) : bool =
+    (FORALL c: semantics(fm)(c) => subset?(eval(ck,c),dom(am)) ) AND 
+    (FORALL exp: exps(ck)(exp) => wt(fm,exp))
+
+  %% WELL FORMED CK FUNCTION
+%  wfCK(fm,am,ck) : bool =
+%    (FORALL c: semantics(fm)(c) => subset?(semanticsCK(ck,c),dom(am))) 
+%    AND (FORALL exp: expsCK(ck)(exp) => subset?(names(exp),names(fm)) )  
+%   (FORALL(item): items(ck)(item) => wt(fm,exp(item))) 
+
+  wfCK2(fm,am,ck) : bool =
+    (FORALL item: ck(item) => subset?(assets(item),dom(am))) 
+    AND (FORALL exp: exps(ck)(exp) => wt(fm,exp))
+
+  % esta vai ser nossa nocao de equivalencia
+  ckEq(fm:WFM,am:AM,ck1,ck2:{K:CK | wfCK(fm,am,K)} ): bool =
+    FORALL c: semantics(fm)(c) =>  semantics(ck1)(am)(c)=semantics(ck2)(am)(c)
+
+  % Equivalence properties - reflexive
+  eqReflexive: THEOREM
+    FORALL(fm:WFM, am:AM, ck:{K: CK | wfCK(fm,am,K)}):
+  	ckEq(fm,am,ck,ck) 
+
+  % equivalence properties - symmetric
+  eqSymmetric: THEOREM
+    FORALL(fm:WFM, am:AM, ck1,ck2:{K: CK | wfCK(fm,am,K)}):
+    	ckEq(fm,am,ck1,ck2) => ckEq(fm,am,ck2,ck1)
+
+  % equivalence properties - transitive
+  eqTransitive: THEOREM
+    FORALL(fm:WFM, am:AM, ck1,ck2,ck3:{K: CK | wfCK(fm,am,K)}):
+    	(ckEq(fm,am,ck1,ck2) and ckEq(fm,am,ck2,ck3)) => ckEq(fm,am,ck1,ck3)
+
+  %% IF FEATURE opt IS NOT IN THE FM AND CK IS WELL-FORMED, ALL CK EXPRESSIONS DON'T CONTAIN opt
+  ckNames: THEOREM
+  FORALL(fm,am,ck,opt):
+    (
+      (NOT features(fm)(opt)) AND 
+      wfCK(fm,am,ck)
+    )
+    =>
+      (FORALL exp: exps(ck)(exp) => NOT(names(exp)(opt)) )
+
+End ConfigurationKnowledge

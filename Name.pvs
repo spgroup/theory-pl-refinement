@@ -1,0 +1,7 @@
+Name: THEORY
+ BEGIN
+  % representa os nomes dos nodos
+  Name: TYPE
+  % representa uma configuracao de um feature model
+  Configuration: TYPE = set[Name]
+ END Name

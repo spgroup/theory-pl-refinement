@@ -1,0 +1,35 @@
+AssetMapping: THEORY
+BEGIN
+  IMPORTING Assets, maps
+
+  % Definition <Asset Mapping>
+  AM: TYPE = maps[AssetName,Asset].mapping
+
+  am1,am2: VAR AM
+  a1,a2: VAR Asset
+  an,an1,an2: VAR AssetName
+  anSet: VAR finite_sets[AssetName].finite_set
+  aSet: VAR finite_sets[Asset].finite_set
+  pair: VAR [AssetName,Asset]
+
+  % Definition <Asset mapping refinement>
+  |>(am1,am2): bool =
+    dom(am1)=dom(am2) AND
+    FORALL an: dom(am1)(an) => 
+      EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2) 
+    
+
+  % Theorems 7-8 <Asset mapping refinement is pre-order>
+  assetMappingRefinement: THEOREM orders[AM].preorder?( |> ) 
+
+  % Lemma <Asset mapping compositionality>
+  amRefCompositional: LEMMA
+    FORALL(am1,am2): |>(am1,am2) =>
+      FORALL(anSet):
+        FORALL(aSet): 
+          wfProduct( union(aSet,map(am1,anSet)) ) =>
+	    wfProduct( union(aSet,map(am2,anSet)) ) AND 
+	    |-( union(aSet,map(am1,anSet)) , union(aSet,map(am2,anSet)) ) 
+
+
+END AssetMapping

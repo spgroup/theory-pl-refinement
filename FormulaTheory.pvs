@@ -1,0 +1,81 @@
+FormulaTheory: THEORY
+ BEGIN
+  Importing Formula_, Name, FeatureModel
+  % this function is used in the recursive functions, as the measure function
+  complexity(f: Formula_): nat =
+    reduce_nat(0,0,
+       LAMBDA (n: Name): 1,
+       LAMBDA (n: nat): n + 1,
+       LAMBDA (n: nat, m: nat): n + m + 1,
+       LAMBDA (n: nat, m: nat): n + m + 1)(f)
+
+  % yields names for a formula
+  names(f:Formula_): RECURSIVE set[Name] =
+    CASES f OF 
+      TRUE_FORMULA: emptyset,
+      FALSE_FORMULA: emptyset,
+      NAME_FORMULA(n1): {n:Name | n1=n},
+      NOT_FORMULA(f1): names(f1),
+      AND_FORMULA(f1, f2): {n:Name | names(f1)(n) OR names(f2)(n)},
+      IMPLIES_FORMULA(f1, f2): {n:Name | names(f1)(n) OR names(f2)(n)}
+    ENDCASES
+   MEASURE complexity(f)
+
+  % indicates whether a formula is well-typed
+  wt(fm: {featMod: FM | wfTree(featMod)}, f:Formula_): RECURSIVE boolean =
+    CASES f OF 
+      TRUE_FORMULA: TRUE,
+      FALSE_FORMULA: TRUE,
+      NAME_FORMULA(n): (EXISTS (n1:Name): features(fm)(n1) AND n1=n),
+      NOT_FORMULA(f1): wt(fm,f1),
+      AND_FORMULA(f1, f2): wt(fm,f1) AND wt(fm,f2),
+      IMPLIES_FORMULA(f1, f2): wt(fm,f1) AND wt(fm,f2)
+    ENDCASES
+   MEASURE complexity(f)
+
+  % indicates whether a feature model has all of its formulae well-typed
+  wfFormulae(fm: {featMod: FM | wfTree(featMod)}): boolean =
+    FORALL (f:Formula_): formulae(fm)(f) => wt(fm,f)
+
+  % indicates when a configuration satisfies a formula
+  satisfies(f:Formula_, c:Configuration): RECURSIVE boolean =
+    CASES f OF 
+      TRUE_FORMULA: TRUE,
+      FALSE_FORMULA: FALSE,
+      NAME_FORMULA(n): (EXISTS (n1:Name): c(n1) AND n1=n),
+      NOT_FORMULA(f1): NOT satisfies(f1,c),
+      AND_FORMULA(f1, f2): satisfies(f1,c) AND satisfies(f2,c),
+      IMPLIES_FORMULA(f1, f2): satisfies(f1,c) => satisfies(f2,c)
+    ENDCASES
+   MEASURE complexity(f)
+
+  % a well-typed formula only contains names from the feature model
+  formNames: LEMMA
+    FORALL(fm: {featMod: FM | wfTree(featMod)}, f:Formula_):
+      wt(fm,f) => FORALL(n:Name): names(f)(n) => features(fm)(n)
+
+  % a well-typed formula does not contain names that are not in the feature model
+  formNames2: LEMMA
+    FORALL(fm: {featMod: FM | wfTree(featMod)}, f:Formula_, n:Name):
+      wt(fm,f) and not(features(fm)(n)) => not(names(f)(n))
+
+  % satisfies's result is equal if we add a feature to the configuration that is not in the formula
+  satisfies1: LEMMA
+    FORALL(f:Formula_, c:Configuration, n1:Name):			
+      (NOT names(f)(n1)) =>
+      	   satisfies(f,c) = satisfies(f,union(c,n1))
+
+  % satisfies's result is equal if we remove a feature from the configuration that is not in the formula
+  satisfies2: LEMMA
+    FORALL(f:Formula_, c:Configuration, n1:Name):			
+      (NOT names(f)(n1)) =>
+      	   satisfies(f,c) = satisfies(f,remove(n1,c))
+
+  % well-typed formulae from a FM continue well-typed in another FM with the same features
+  wtFormSameFeatures: LEMMA
+    FORALL(abs,con:FM):
+      features(abs) = features(con) AND
+      wfTree(abs) AND wfTree(con) =>
+      	(FORALL (f:Formula_): wt(abs,f) => wt(con,f))
+
+ END FormulaTheory

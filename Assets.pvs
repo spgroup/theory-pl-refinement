@@ -1,0 +1,25 @@
+Assets: THEORY
+BEGIN
+  % Assets
+  Asset: TYPE
+  AssetName: TYPE
+
+  a: VAR Asset
+  aSet, S1,S2: VAR set[Asset]
+  
+  % Assumption <Assets refinement>
+  |- : [set[Asset],set[Asset]->bool]
+
+  wfProduct : [set[Asset]->bool]
+  Product: TYPE = (wfProduct)
+
+  % Axiom <Asset refinement is pre-order>
+  assetRefinement: AXIOM orders[set[Asset]].preorder?( |- ) 
+
+  % Axiom 5 <Asset refinement compositionality>
+  asRefCompositional: AXIOM
+    FORALL(S1,S2,aSet):
+      ( S1 |- S2 ) and wfProduct( union(S1,aSet) ) =>
+        wfProduct( union(S2,aSet) ) and ((union(S1,aSet)) |- (union(S2,aSet)))
+
+END Assets

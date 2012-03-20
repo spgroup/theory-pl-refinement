@@ -1,0 +1,74 @@
+maps[S:TYPE,T:TYPE]: THEORY
+ BEGIN
+  IMPORTING set_aux_lemmas
+
+  l,l1,l2: VAR S
+  r,r1,r2: VAR T
+  s: VAR finite_sets[[S,T]].finite_set
+  ls,ls1,ls2: VAR finite_sets[S].finite_set
+  pair: VAR [S,T]
+
+  %sets of unique pairs
+  unique(s): bool = 
+    FORALL(l,r1,r2):
+      (s(l,r1) and s(l,r2) => r1=r2)
+
+  %type defined using function above
+  mapping: TYPE = (unique)
+  
+  m,m1,m2: VAR mapping
+
+  %get domain of pairs
+  dom(m): set[S] = {l: S | EXISTS (r: T): m(l,r)}
+
+  %get image of pairs
+  img(m): set[T] = {r: T | EXISTS (l: S): m(l,r)}
+
+  % Lemma <Mapping is unique, otherwise empty>
+  mappingUnique : LEMMA
+    FORALL(m,l) :
+      singleton?({r:T | m(l,r)}) or empty?({r:T | m(l,r)})
+
+  % Lemma <Asset mapping domain membership>
+  inDom: LEMMA
+    FORALL(m,l,r):
+      m(l,r) => dom(m)(l)
+
+  % Definition <Auxiliary asset mapping functions>
+  map(m, ls): finite_sets[T].finite_set =
+    {r: T | EXISTS (l: S): ls(l) AND m(l,r)}
+
+ % Lemma <Map over union is equivalent to union of maps>
+  unionMap : LEMMA
+    FORALL(m,ls1,ls2) :
+      map(m,union(ls1,ls2)) = union(map(m,ls1),map(m,ls2))
+
+  existsMap : LEMMA
+    FORALL(m,l,r) : 
+      m(l,r) =>
+        map(m,singleton(l)) = singleton(r)
+
+ % Lemma <Distributed mapping over union>
+  mapUnion: LEMMA
+    FORALL(m,ls1,ls2,r):
+      map(m,union(ls1,ls2))(r) => 
+        map(m,ls1)(r) or map(m,ls2)(r)
+
+  % Lemma <Distributed mapping over singleton>
+  mapAM: LEMMA
+    FORALL(m,l,ls):
+      dom(m)(l) =>
+        EXISTS(r:T): m(l,r) and map(m,union(l,ls)) = union(r,map(m,ls))
+
+  % Lemma <Distributed mapping over set of non domain elements>
+  notExists: LEMMA
+    FORALL(m,ls):
+      not(EXISTS(l:S): ls(l) and dom(m)(l)) => map(m,ls) = emptyset
+
+
+  uniqueUnion: LEMMA
+    FORALL (m1,m2):
+      (FORALL l: dom(m2)(l) => NOT (dom(m1)(l))) 
+      =>
+      unique(union(m1, m2))
+ END maps
