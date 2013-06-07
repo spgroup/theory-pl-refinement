@@ -214,7 +214,8 @@ BEGIN
   cps(pl) : set[CP] = 
     { cp | EXISTS (c:Conf) : member(c,{|F(pl)|}) AND cp`1=c AND cp`2=( ([| K(pl) |] (A(pl))) (c) ) }
 
-  cps(mpl) : finite_sets[set[CP]].finite_set = 
+%  cps(mpl) : finite_sets[set[CP]].finite_set = 
+  cps(mpl) : set[set[CP]] = 
     { cs:set[CP] | EXISTS (pl:PL) : (member(pl,pls(mpl))) AND cs=cps(pl) }
 
   confs(cps):set[Conf] =
@@ -224,8 +225,9 @@ BEGIN
   satCPs(cps,cst): bool = 
     satConf(confs(cps),cst);
 
-  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[set[CP]].finite_set = 
-    { cs:set[CP] | card(cs)<card(cps) AND (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
+%  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[set[CP]].finite_set = 
+  combinations(cps:finite_sets[set[CP]].finite_set) : set[set[CP]] = 
+    { cs:set[CP] | (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
 
   %filter(cps:finite_sets[set[CP]].finite_set,c:Constraints) : finite_sets[set[CP]].finite_set = 
   filter(cps:set[set[CP]],c:Constraints) : set[set[CP]] = 
