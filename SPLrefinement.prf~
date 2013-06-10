@@ -314,52 +314,10 @@
   (product_TCC1-1 nil 3579886394 nil ("" (subtype-tcc) nil nil) nil nil
    nil nil nil nil))
  (mplRef 0
-  (mplRef-1 nil 3579886400 3579886512
+  (mplRef-1 nil 3579886400 3579886450
    ("" (expand* preorder? mplRefinement transitive? reflexive?)
     (("" (bddsimp)
-      (("1" (skolem 1 (x y z))
-        (("1" (flatten)
-          (("1" (skolem 1 p1)
-            (("1" (flatten)
-              (("1" (instantiate -1 p1)
-                (("1" (assert)
-                  (("1" (skolem -1 p2)
-                    (("1" (flatten)
-                      (("1" (instantiate -3 p2)
-                        (("1" (assert)
-                          (("1" (skolem -3 p3)
-                            (("1" (instantiate 1 p3)
-                              (("1"
-                                (flatten)
-                                (("1"
-                                  (assert)
-                                  (("1"
-                                    (use assetRefinement)
-                                    (("1"
-                                      (expand* preorder? transitive?)
-                                      (("1"
-                                        (flatten)
-                                        (("1"
-                                          (instantiate -2 (p1 p2 p3))
-                                          (("1" (assert) nil nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil)
+      (("1" (postpone) nil nil)
        ("2" (skolem 1 x)
         (("2" (skolem 1 p)
           (("2" (flatten)
@@ -380,19 +338,7 @@
         nil))
       nil))
     nil)
-   proved
-   ((mplRefinement const-decl "bool" SPLrefinement nil)
-    (reflexive? const-decl "bool" relations nil)
-    (transitive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (set type-eq-decl nil sets nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (Asset type-decl nil SPLrefinement nil))
-   60014 60 t shostak))
+   unfinished nil 49760 60 t shostak))
  (weakFMcompositionality 0
   (weakFMcompositionality-3 nil 3498493637 3499097837
    ("" (skolem 1 (pl fm))

@@ -214,8 +214,7 @@ BEGIN
   cps(pl) : set[CP] = 
     { cp | EXISTS (c:Conf) : member(c,{|F(pl)|}) AND cp`1=c AND cp`2=( ([| K(pl) |] (A(pl))) (c) ) }
 
-%  cps(mpl) : finite_sets[set[CP]].finite_set = 
-  cps(mpl) : set[set[CP]] = 
+  cps(mpl) : finite_sets[set[CP]].finite_set = 
     { cs:set[CP] | EXISTS (pl:PL) : (member(pl,pls(mpl))) AND cs=cps(pl) }
 
   confs(cps):set[Conf] =
@@ -225,22 +224,29 @@ BEGIN
   satCPs(cps,cst): bool = 
     satConf(confs(cps),cst);
 
-%  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[set[CP]].finite_set = 
-  combinations(cps:finite_sets[set[CP]].finite_set) : set[set[CP]] = 
+  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[set[CP]].finite_set = 
     { cs:set[CP] | (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
 
-  %filter(cps:finite_sets[set[CP]].finite_set,c:Constraints) : finite_sets[set[CP]].finite_set = 
-  filter(cps:set[set[CP]],c:Constraints) : set[set[CP]] = 
+  filter(cps:finite_sets[set[CP]].finite_set,c:Constraints) : finite_sets[set[CP]].finite_set = 
     { cops:set[CP] | member(cops,cps) AND satCPs(cops,c) }
 
   product(cps:set[CP]) : finite_sets[Asset].finite_set = 
     { p:Asset | EXISTS (cp:CP) : member(cp,cps) AND member(p,cp`2) }
 
-  products(cps:finite_sets[set[CP]].finite_set) : set[finite_sets[Asset].finite_set] = 
   %products(cps:finite_sets[set[CP]].finite_set) : finite_sets[finite_sets[Asset].finite_set].finite_set = 
+  products(cps:finite_sets[set[CP]].finite_set) : set[finite_sets[Asset].finite_set] = 
     { p:finite_sets[Asset].finite_set | EXISTS (cs:set[CP]) : (member(cs,cps)) AND (p=product(cs)) }
 
-%  semantics(mpl)
+  semantics(mpl) : set[finite_sets[Asset].finite_set] = 
+    products(filter(cps(mpl), c(mpl)))
+
+  mplRefinement(mpl1,mpl2) : bool =
+    (FORALL p1: semantics(mpl1)(p1) => (EXISTS p2: semantics(mpl2)(p2) AND (p1 |- p2)))
+
+  mplRef: THEOREM orders[MPL].preorder?( mplRefinement ) 
+
+%compositionality
+
 
 %  testeConfs: THEOREM
 %    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2):
