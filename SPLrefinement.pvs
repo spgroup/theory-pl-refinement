@@ -178,6 +178,36 @@ BEGIN
   products(pop) : set[finite_sets[Asset].finite_set] =
    { p |  EXISTS (pl:PL) : (member(pl,pop)) AND (products(pl)(p)) }
 
+
+  plRefinementAlt(pl1,pl2) : bool =
+    (FORALL p1: products(pl1)(p1) => 
+    		(EXISTS p2: products(pl2)(p2) AND
+		    (
+		    	( p1 )
+			|- 
+			( p2 )
+    		    )
+     ))
+
+  plRefAlt: THEOREM orders[PL].preorder?( plRefinementAlt ) 
+
+  plRefEq: THEOREM
+    FORALL(pl1,pl2): (plRefinement(pl1,pl2)) <=> (plRefinementAlt(pl1,pl2))
+
+  subsetProducts(prods,pl1):bool = 
+    subset?(prods,products(pl1))
+
+  plWeakRefinement(pl1,pl2:PL,prods:{ps | subset?(ps,products(pl1))}) : bool = 
+    (FORALL p1: prods(p1) => 
+    		(EXISTS p2: products(pl2)(p2) AND
+		    (
+		    	( p1 )
+			|- 
+			( p2 )
+    		    )
+     ))
+
+
   popRefinement(pop1,pop2) : bool =
     (FORALL p1: products(pop1)(p1) => (EXISTS p2: products(pop2)(p2) AND (p1 |- p2)))
 
@@ -187,17 +217,12 @@ BEGIN
     FORALL(pl,pop):
     	products(union(pl,pop)) = union(products(pl),products(pop))
 
-%  productsUnion: THEOREM
-%    FORALL(pl,pop):
-%    	products(union(msingleton(pl),pop)) = union(products(pl),products(pop))
-
   popCompositional: THEOREM
     FORALL(pl1,pl2,pop):
     	(plRefinement(pl1,pl2)) => popRefinement(union(pl1,pop),union(pl2,pop))
 
-%  popCompositional: THEOREM
-%    FORALL(pl1,pl2,pop):
-%    	(plRefinement(pl1,pl2)) => popRefinement(union(msingleton(pl1),pop),union(msingleton(pl2),pop))
+  plRefPop: THEOREM
+    FORALL(pl1,pl2): (plRefinement(pl1,pl2)) => popRefinement(pl1,pl2)
 
   %ArbitrarySPL : TYPE = [# F:FM, A:AM, K:CK #]
   Constraints : TYPE+
@@ -207,6 +232,15 @@ BEGIN
   CP: TYPE = [Conf,finite_sets[Asset].finite_set]
   cp,cp1,cp2: VAR CP
   cps: VAR set[CP]
+
+  member(pl,mpl): bool = 
+    IF (pls(mpl)(pl)) THEN true ELSE false ENDIF
+
+  add(pl,mpl): MPL = 
+    mpl WITH [pls:= add(pl,pls(mpl))]
+
+  remove(pl,mpl): MPL = 
+    mpl WITH [pls:= remove(pl,pls(mpl))]
 
   fms(mpl) : set[FM] = %finite_sets[FM].finite_set = 
     { fm |  EXISTS (pl:PL) : (member(pl,pls(mpl))) AND (fm=F(pl)) }
@@ -245,6 +279,11 @@ BEGIN
 
   mplRef: THEOREM orders[MPL].preorder?( mplRefinement ) 
 
+  mplCompositional: THEOREM
+    FORALL(pl1,pl2,mpl):
+    	pls(mpl)(pl1) AND plRefinementAlt(pl1,pl2) => mplRefinement(mpl,add(pl2,remove(pl1,mpl)))
+
+
 %compositionality
 
 
@@ -258,40 +297,6 @@ BEGIN
 %    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=singleton(c1) AND {|fm2|}=singleton(c2))
 %	=> member(singleton(c1),confsp(mpl)) AND member(singleton(c2),confsp(mpl))
 
-
-  plRefinementAlt(pl1,pl2) : bool =
-    (FORALL p1: products(pl1)(p1) => 
-    		(EXISTS p2: products(pl2)(p2) AND
-		    (
-		    	( p1 )
-			|- 
-			( p2 )
-    		    )
-     ))
-
-  plRefAlt: THEOREM orders[PL].preorder?( plRefinementAlt ) 
-
-  plRefEq: THEOREM
-    FORALL(pl1,pl2): (plRefinement(pl1,pl2)) <=> (plRefinementAlt(pl1,pl2))
-
-  plRefPop: THEOREM
-    FORALL(pl1,pl2): (plRefinement(pl1,pl2)) => popRefinement(pl1,pl2)
-
-%  plRefPop: THEOREM
-%    FORALL(pl1,pl2): (plRefinement(pl1,pl2)) => popRefinement(msingleton(pl1),msingleton(pl2))
-
-  subsetProducts(prods,pl1):bool = 
-    subset?(prods,products(pl1))
-
-  plWeakRefinement(pl1,pl2:PL,prods:{ps | subset?(ps,products(pl1))}) : bool = 
-    (FORALL p1: prods(p1) => 
-    		(EXISTS p2: products(pl2)(p2) AND
-		    (
-		    	( p1 )
-			|- 
-			( p2 )
-    		    )
-     ))
 
  % PL Refinement compositionality
   weakFMcompositionality: THEOREM
