@@ -1,0 +1,35 @@
+TestSPLrefinement: THEORY
+BEGIN
+  IMPORTING SPLrefinement
+
+  fm,fm1,fm2: VAR FM
+  c,c1,c2,c3: VAR Conf
+  a1,a2: VAR Asset
+  an,an1,an2: VAR AssetName
+  aSet, S1,S2: VAR set[Asset]
+  anSet: VAR finite_sets[AssetName].finite_set
+  as1,as2,p,p1,p2: VAR finite_sets[Asset].finite_set
+  prods,ps,ps1,ps2: VAR finite_sets[finite_sets[Asset].finite_set].finite_set
+  am,am1,am2: VAR AM
+  ck,ck1,ck2,ck3: VAR CK
+  pl,pl1,pl2: VAR PL
+  pop,pop1,pop2,pop3: VAR Population
+  cst,cst1,cst2: VAR Constraints
+  mpl,mpl1,mpl2: VAR MPL
+  cp,cp1,cp2: VAR CP
+  cps,cps1,cps2: VAR set[CP]
+
+  semantics(mpl) : set[finite_sets[Asset].finite_set] = 
+    products(filter(combinations(cps(mpl)), c(mpl)))
+
+  testeConfs: THEOREM
+    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2):
+    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=singleton(c1) AND {|fm2|}=singleton(c2))
+	=> confs(mpl)=add(singleton(c2),add(singleton(c1),emptyset))
+
+  testeConfs2: THEOREM
+    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2,c3):
+    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=union(c1,c2) AND {|fm2|}=singleton(c3))
+	=> confs(mpl)=add({|fm2|},add({|fm1|},emptyset))
+
+END TestSPLrefinement

@@ -12,7 +12,7 @@ BEGIN
   %permite FM vazio - que nao gera nenhum produto - eh um problema?
 
   fm,fm1,fm2: VAR FM
-  c,c1,c2: VAR Conf
+  c,c1,c2,c3: VAR Conf
 
   % Definition <Feature model refinement> -- definir com forall e exists?
   |=(fm1,fm2): bool = 
@@ -251,6 +251,13 @@ BEGIN
   cps(mpl) : finite_sets[set[CP]].finite_set = 
     { cs:set[CP] | EXISTS (pl:PL) : (member(pl,pls(mpl))) AND cs=cps(pl) }
 
+  confs(pl):set[Conf] =
+    { c | (member(c,{|F(pl)|})) };
+
+  %confs(mpl):finite_sets[set[Conf]].finite_set = 
+  confs(mpl):set[set[Conf]] = 
+    { cs:set[Conf] | EXISTS pl : (member(pl,pls(mpl))) AND cs=confs(pl) };
+
   confs(cps):set[Conf] =
     { c | EXISTS cp : (member(cp,cps)) AND c=cp`1 };
 
@@ -258,21 +265,20 @@ BEGIN
   satCPs(cps,cst): bool = 
     satConf(confs(cps),cst);
 
-  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[set[CP]].finite_set = 
-    { cs:set[CP] | (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
+  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[finite_sets[CP].finite_set].finite_set = 
+    { cs:finite_sets[CP].finite_set | card(cs)<card(cps) AND (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
 
   filter(cps:finite_sets[set[CP]].finite_set,c:Constraints) : finite_sets[set[CP]].finite_set = 
     { cops:set[CP] | member(cops,cps) AND satCPs(cops,c) }
 
-  product(cps:set[CP]) : finite_sets[Asset].finite_set = 
+  product(cps:finite_sets[CP].finite_set) : finite_sets[Asset].finite_set = 
     { p:Asset | EXISTS (cp:CP) : member(cp,cps) AND member(p,cp`2) }
 
-  %products(cps:finite_sets[set[CP]].finite_set) : finite_sets[finite_sets[Asset].finite_set].finite_set = 
   products(cps:finite_sets[set[CP]].finite_set) : set[finite_sets[Asset].finite_set] = 
     { p:finite_sets[Asset].finite_set | EXISTS (cs:set[CP]) : (member(cs,cps)) AND (p=product(cs)) }
 
   semantics(mpl) : set[finite_sets[Asset].finite_set] = 
-    products(filter(cps(mpl), c(mpl)))
+    products(filter(combinations(cps(mpl)), c(mpl)))
 
   mplRefinement(mpl1,mpl2) : bool =
     (FORALL p1: semantics(mpl1)(p1) => (EXISTS p2: semantics(mpl2)(p2) AND (p1 |- p2)))
@@ -286,11 +292,6 @@ BEGIN
 
 %compositionality
 
-
-%  testeConfs: THEOREM
-%    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2):
-%    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=singleton(c1) AND {|fm2|}=singleton(c2))
-%	=> confs(mpl)=union(c1,c2)
 
 %  testeConfsp: THEOREM
 %    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2):
