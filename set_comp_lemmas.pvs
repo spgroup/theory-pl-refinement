@@ -35,7 +35,7 @@ set_comp_lemmas[S: TYPE,T: TYPE]: THEORY
         is_finite[T]({ a:T |  EXISTS (item:S) : (f(item)(a)) AND items(item) })
 
   setCompFinite2 : LEMMA
-     FORALL (i:S, C:finite_sets[T].finite_set) :
+     FORALL (C:finite_sets[T].finite_set) :
       FORALL(X:finite_sets[S].finite_set) :
         is_finite[T]({ a:T |  EXISTS (it:S) : (C(a)) AND X(it) })
 
@@ -55,6 +55,15 @@ set_comp_lemmas[S: TYPE,T: TYPE]: THEORY
 	{i: S | EXISTS (it: S): (i=f(it,F,G)) AND it = item}
       )
 
+  setCompOR4 : LEMMA
+    FORALL(Y:finite_sets[S].finite_set, item:S, e:S, F,G:T):
+      {i: S | EXISTS (it: S): (Y(it) OR it = item) AND i = e}
+      =
+      union(
+        {i: S | EXISTS (it: S): (i=e) AND Y(it)},
+	{i: S | EXISTS (it: S): (i=e) AND it = item}
+      )
+
   basicLemma3 : LEMMA
     (FORALL (item:S, f:[S,T,T->S],F,G:T) :
       ({i: S | EXISTS (it: S): (i=f(it,F,G)) AND it = item}) = f(item,F,G) )
@@ -67,6 +76,16 @@ set_comp_lemmas[S: TYPE,T: TYPE]: THEORY
     FORALL (f:[S,T,T->S],F,G:T) : 
     	   FORALL(S:finite_sets[S].finite_set) :
 	         is_finite({i:S | EXISTS (it:S): S(it) AND i=f(it,F,G)})
+
+  setCompFinite4 : LEMMA
+    FORALL (elm:S) : 
+    	   FORALL(S:finite_sets[S].finite_set) :
+	         is_finite({i:S | EXISTS (it:S): S(it) AND i=elm})
+
+  setCompFinite5 : LEMMA
+    FORALL (f:[T->S]) : 
+    	   FORALL(S:finite_sets[T].finite_set) :
+	         is_finite({i:S | EXISTS (it:T): S(it) AND i=f(it)})
 
 
  END set_comp_lemmas
