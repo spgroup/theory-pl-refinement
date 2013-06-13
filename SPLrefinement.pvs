@@ -224,96 +224,27 @@ BEGIN
   plRefPop: THEOREM
     FORALL(pl1,pl2): (plRefinement(pl1,pl2)) => popRefinement(pl1,pl2)
 
-  %ArbitrarySPL : TYPE = [# F:FM, A:AM, K:CK #]
-  Constraint : TYPE+
-  cst,cst1,cst2: VAR set[Constraint]
-  MPL : TYPE = [# pls:finite_sets[PL].finite_set, c:set[Constraint] #]
+  MPL : TYPE
   mpl,mpl1,mpl2: VAR MPL
-  CP: TYPE = [Conf,finite_sets[Asset].finite_set]
-  cp,cp1,cp2: VAR CP
-  cps: VAR set[CP]
+  PC: TYPE = [# pl:PL, conf:Conf #]
+  pc,pc1,pc2: VAR PC
+  pcs,pcs1,pcs2: VAR set[PC]
 
-  member(pl,mpl): bool = 
-    IF (pls(mpl)(pl)) THEN true ELSE false ENDIF
-
-  add(pl,mpl): MPL = 
-    mpl WITH [pls:= add(pl,pls(mpl))]
-
-  remove(pl,mpl): MPL = 
-    mpl WITH [pls:= remove(pl,pls(mpl))]
-
-  fms(mpl) : set[FM] = %finite_sets[FM].finite_set = 
-    { fm |  EXISTS (pl:PL) : (member(pl,pls(mpl))) AND (fm=F(pl)) }
-
-  cps(pl) : set[CP] = 
-    { cp | EXISTS (c:Conf) : member(c,{|F(pl)|}) AND cp`1=c AND cp`2=( ([| K(pl) |] (A(pl))) (c) ) }
-
-  IMPORTING set_comp_lemmas
-
-  cps(mpl) : finite_sets[set[CP]].finite_set = 
-    { cs:set[CP] | EXISTS (pl:PL) : (member(pl,pls(mpl))) AND cs=cps(pl) }
-
-  confs(pl):set[Conf] =
-    { c | (member(c,{|F(pl)|})) };
-
-  confs(mpl):finite_sets[set[Conf]].finite_set = 
-    { cs:set[Conf] | EXISTS pl : (member(pl,pls(mpl))) AND cs=confs(pl) };
-
-  confs(cps):set[Conf] =
-    { c | EXISTS cp : (member(cp,cps)) AND c=cp`1 };
-
-  satConf : [set[Conf],set[Constraint]->bool];
-  satCPs(cps,cst): bool = 
-    satConf(confs(cps),cst);
-
-%  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[finite_sets[CP].finite_set].finite_set = 
-%    { cs:finite_sets[CP].finite_set | card(cs)<=card(cps) AND (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
-    %{ cs:finite_sets[CP].finite_set | (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) )) AND satCPs(cs,c) }
-
-%  filter(cps:finite_sets[finite_sets[CP].finite_set].finite_set,c:Constraint) : finite_sets[finite_sets[CP].finite_set].finite_set = 
-%    { cops:finite_sets[CP].finite_set | member(cops,cps) AND satCPs(cops,c) }
-
-  validcombs(mpl) : finite_sets[finite_sets[CP].finite_set].finite_set = 
-    { cs:finite_sets[CP].finite_set | (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps(mpl)) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) )) AND satCPs(cs,c(mpl)) }
-
-  product(cps:finite_sets[CP].finite_set) : finite_sets[Asset].finite_set = 
-    { p:Asset | EXISTS (cp:CP) : member(cp,cps) AND member(p,cp`2) }
-
-  products(cps:finite_sets[finite_sets[CP].finite_set].finite_set) : set[finite_sets[Asset].finite_set] = 
-    { p:finite_sets[Asset].finite_set | EXISTS (cs:finite_sets[CP].finite_set) : (member(cs,cps)) AND (p=product(cs)) }
+  pls: [MPL -> set[PL]]
+  confs: [MPL -> set[set[PC]]]
+  product: [set[PC] -> finite_sets[Asset].finite_set]
 
   semantics(mpl) : set[finite_sets[Asset].finite_set] = 
-    products(validcombs(mpl))
+    { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) }
 
-  mplRefinement(mpl1,mpl2) : bool =
-    (FORALL p1: semantics(mpl1)(p1) => (EXISTS p2: semantics(mpl2)(p2) AND (p1 |- p2)))
-  mplRef: THEOREM orders[MPL].preorder?( mplRefinement ) 
-
-  mpRef(mpl1,mpl2) : bool =
-    (FORALL pl1: pls(mpl1)(pl1) => (EXISTS pl2: pls(mpl2)(pl2) AND plRefinement(pl1,pl2)))
-  mpRefi: THEOREM orders[MPL].preorder?( mpRef ) 
-
-  mplPart: THEOREM
-    FORALL(mpl,pl):
-    	(FORALL p1: semantics(mpl)(p1) AND pls(mpl)(pl) => (FORALL p2: products(pl)(p2) AND subset?(p2,p1) => (EXISTS c: {|F(pl)|}(c) )))
-%    	(FORALL p1: semantics(mpl)(p1) AND pls(mpl)(pl) AND NOT(empty?(products(pl))) => (EXISTS p2: products(pl)(p2) AND subset?(p2,p1)))
-
-  mplCompositional: THEOREM
-    FORALL(pl1,pl2,mpl):
-    	pls(mpl)(pl1) AND plRefinementAlt(pl1,pl2) => mplRefinement(mpl,add(pl2,remove(pl1,mpl)))
-
-  mplComp: THEOREM
-    FORALL(pl1,pl2,mpl):
-    	pls(mpl)(pl1) AND plRefinement(pl1,pl2) => mpRef(mpl,add(pl2,remove(pl1,mpl)))
-
-
-%compositionality
-
-
-%  testeConfsp: THEOREM
-%    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2):
-%    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=singleton(c1) AND {|fm2|}=singleton(c2))
-%	=> member(singleton(c1),confsp(mpl)) AND member(singleton(c2),confsp(mpl))
+  confsRestriction: AXIOM
+    FORALL mpl:
+      FORALL pcs: confs(mpl)(pcs) 
+      =>  
+        (FORALL(e:PC): pcs(e) 
+	=> 
+	  pls(mpl)(pl(e)) AND {|F(pl(e))|}(conf(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
+%    	   (FORALL(e:PC): member(e,pcs) => (EXISTS (X:set[PC]): member(X,confs(mpl)) AND member(e,X) AND  NOT(EXISTS (z:PC): z/=e AND member(z,X)) ))
 
 
  % PL Refinement compositionality
