@@ -225,9 +225,9 @@ BEGIN
     FORALL(pl1,pl2): (plRefinement(pl1,pl2)) => popRefinement(pl1,pl2)
 
   %ArbitrarySPL : TYPE = [# F:FM, A:AM, K:CK #]
-  Constraints : TYPE+
-  cst,cst1,cst2: VAR Constraints
-  MPL : TYPE = [# pls:finite_sets[PL].finite_set, c:Constraints #]
+  Constraint : TYPE+
+  cst,cst1,cst2: VAR set[Constraint]
+  MPL : TYPE = [# pls:finite_sets[PL].finite_set, c:set[Constraint] #]
   mpl,mpl1,mpl2: VAR MPL
   CP: TYPE = [Conf,finite_sets[Asset].finite_set]
   cp,cp1,cp2: VAR CP
@@ -262,17 +262,16 @@ BEGIN
   confs(cps):set[Conf] =
     { c | EXISTS cp : (member(cp,cps)) AND c=cp`1 };
 
-  satConf : [set[Conf],Constraints->bool];
+  satConf : [set[Conf],set[Constraint]->bool];
   satCPs(cps,cst): bool = 
     satConf(confs(cps),cst);
 
-  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[finite_sets[CP].finite_set].finite_set = 
-    { cs:finite_sets[CP].finite_set | card(cs)<=card(cps) AND (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
+%  combinations(cps:finite_sets[set[CP]].finite_set) : finite_sets[finite_sets[CP].finite_set].finite_set = 
+%    { cs:finite_sets[CP].finite_set | card(cs)<=card(cps) AND (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) ) ) }
     %{ cs:finite_sets[CP].finite_set | (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) )) AND satCPs(cs,c) }
-    
 
-  filter(cps:finite_sets[finite_sets[CP].finite_set].finite_set,c:Constraints) : finite_sets[finite_sets[CP].finite_set].finite_set = 
-    { cops:finite_sets[CP].finite_set | member(cops,cps) AND satCPs(cops,c) }
+%  filter(cps:finite_sets[finite_sets[CP].finite_set].finite_set,c:Constraint) : finite_sets[finite_sets[CP].finite_set].finite_set = 
+%    { cops:finite_sets[CP].finite_set | member(cops,cps) AND satCPs(cops,c) }
 
   validcombs(mpl) : finite_sets[finite_sets[CP].finite_set].finite_set = 
     { cs:finite_sets[CP].finite_set | (FORALL(cp:CP): member(cp,cs) => (EXISTS (X:set[CP]): member(X,cps(mpl)) AND member(cp,X) AND  NOT(EXISTS (z:CP): z/=cp AND member(z,X)) )) AND satCPs(cs,c(mpl)) }
@@ -285,7 +284,6 @@ BEGIN
 
   semantics(mpl) : set[finite_sets[Asset].finite_set] = 
     products(validcombs(mpl))
-%    products(filter(combinations(cps(mpl)), c(mpl)))
 
   mplRefinement(mpl1,mpl2) : bool =
     (FORALL p1: semantics(mpl1)(p1) => (EXISTS p2: semantics(mpl2)(p2) AND (p1 |- p2)))
