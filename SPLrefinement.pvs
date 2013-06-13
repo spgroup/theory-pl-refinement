@@ -230,21 +230,42 @@ BEGIN
   pc,pc1,pc2: VAR PC
   pcs,pcs1,pcs2: VAR set[PC]
 
-  pls: [MPL -> set[PL]]
-  confs: [MPL -> set[set[PC]]]
-  product: [set[PC] -> finite_sets[Asset].finite_set]
+  pls: [MPL -> set[PL]];
+  confs: [MPL -> set[set[PC]]];
+  product: [set[PC] -> finite_sets[Asset].finite_set];
+
+  rem: [PL,MPL->MPL];
+  add: [PL,MPL->MPL];
+
+  addPLtoMPL: AXIOM
+    FORALL pl,mpl:
+      pls(add(pl,mpl))(pl)
+
+  removePLfromMPL: AXIOM
+    FORALL pl,mpl:
+      NOT(pls(rem(pl,mpl))(pl)) 
+
+  pls(pcs): set[PL] = 
+    {pl | EXISTS pc: pcs(pc) AND pl=pl(pc)}
+  
+  member(pl,pcs) : bool = 
+   pls(pcs)(pl)
+
+  remove(pl,pcs): set[PC] = 
+    {pc | pl/=pl(pc) AND pcs(pc)}
+
+  
 
   semantics(mpl) : set[finite_sets[Asset].finite_set] = 
-    { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) }
+    { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) };
 
   confsRestriction: AXIOM
     FORALL mpl:
       FORALL pcs: confs(mpl)(pcs) 
       =>  
-        (FORALL(e:PC): pcs(e) 
+        (FORALL(e:PC): pcs(e)
 	=> 
 	  pls(mpl)(pl(e)) AND {|F(pl(e))|}(conf(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
-%    	   (FORALL(e:PC): member(e,pcs) => (EXISTS (X:set[PC]): member(X,confs(mpl)) AND member(e,X) AND  NOT(EXISTS (z:PC): z/=e AND member(z,X)) ))
 
 
  % PL Refinement compositionality
