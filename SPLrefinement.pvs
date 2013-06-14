@@ -228,11 +228,18 @@ BEGIN
   mpl,mpl1,mpl2: VAR MPL
   PC: TYPE = [# pl:PL, conf:Conf #]
   pc,pc1,pc2: VAR PC
-  pcs,pcs1,pcs2: VAR set[PC]
+  pcs,pcs1,pcs2: VAR finite_sets[PC].finite_set
 
-  pls: [MPL -> set[PL]];
-  confs: [MPL -> set[set[PC]]];
-  product: [set[PC] -> finite_sets[Asset].finite_set];
+  pls: [MPL -> finite_sets[PL].finite_set];
+  confs: [MPL -> finite_sets[set[PC]].finite_set];
+
+  confsRestriction: AXIOM
+    FORALL mpl:
+      FORALL pcs: confs(mpl)(pcs) 
+      =>  
+        (FORALL(e:PC): pcs(e)
+	=> 
+	  pls(mpl)(pl(e)) AND {|F(pl(e))|}(conf(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
 
   rem: [PL,MPL->MPL];
   add: [PL,MPL->MPL];
@@ -245,27 +252,43 @@ BEGIN
     FORALL pl,mpl:
       NOT(pls(rem(pl,mpl))(pl)) 
 
-  pls(pcs): set[PL] = 
+  pls(pcs): finite_sets[PL].finite_set = 
     {pl | EXISTS pc: pcs(pc) AND pl=pl(pc)}
   
   member(pl,pcs) : bool = 
    pls(pcs)(pl)
 
-  remove(pl,pcs): set[PC] = 
+  remove(pl,pcs): finite_sets[PC].finite_set = 
     {pc | pl/=pl(pc) AND pcs(pc)}
 
-  
+%  get(pl,pcs): PC = 
+
+  prod(pc): finite_sets[Asset].finite_set = ([| K(pl(pc)) |] (A(pl(pc))))(conf(pc));
+
+  product(pcs) : finite_sets[Asset].finite_set = 
+    { p:Asset | EXISTS (pc) : pcs(pc) AND prod(pc)(p) }
+
+  productUnion: THEOREM
+    FORALL(pc,pcs):
+      union(product(singleton(pc)),product(pcs))=product(union(singleton(pc),pcs))
+
+  prodRef: THEOREM
+    FORALL(pc1,pc2,pcs):
+      ( product(singleton(pc1)) |- product(singleton(pc2)) ) and wfProduct(union(product(singleton(pc1)),product(pcs)))
+        => wfProduct(union(product(singleton(pc2)),product(pcs))) AND 
+	   ( union(product(singleton(pc1)),product(pcs)) |- union(product(singleton(pc2)),product(pcs)))
 
   semantics(mpl) : set[finite_sets[Asset].finite_set] = 
     { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) };
 
-  confsRestriction: AXIOM
-    FORALL mpl:
-      FORALL pcs: confs(mpl)(pcs) 
-      =>  
-        (FORALL(e:PC): pcs(e)
-	=> 
-	  pls(mpl)(pl(e)) AND {|F(pl(e))|}(conf(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
+  mplRefinement(mpl1,mpl2) : bool =
+    (FORALL p1: semantics(mpl1)(p1) => (EXISTS p2: semantics(mpl2)(p2) AND (p1 |- p2)))
+  
+  mplRef: THEOREM orders[MPL].preorder?( mplRefinement )   
+
+  mplCompositional: THEOREM
+    FORALL(pl1,pl2,mpl):
+    	pls(mpl)(pl1) AND plRefinement(pl1,pl2) => mplRefinement(mpl,add(pl2,rem(pl1,mpl)))
 
 
  % PL Refinement compositionality
