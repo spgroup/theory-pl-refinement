@@ -281,6 +281,22 @@ BEGIN
   semantics(mpl) : set[finite_sets[Asset].finite_set] = 
     { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) };
 
+
+  notInMPL: THEOREM
+    FORALL mpl,pl:
+      NOT(pls(mpl)(pl)) =>  
+        FORALL pcs: confs(mpl)(pcs) => NOT(member(pl,pcs))
+
+  plInMPL: THEOREM
+    FORALL mpl,pl:
+      pls(mpl)(pl) AND (EXISTS pcs: confs(mpl)(pcs) AND member(pl,pcs)) =>  
+        EXISTS p1,p2: semantics(mpl)(p1) AND products(pl)(p2) AND subset?(p2,p1)
+
+  plNotInMPL: THEOREM
+    FORALL mpl,pl:
+      pls(mpl)(pl) AND NOT(EXISTS pcs: confs(mpl)(pcs) AND member(pl,pcs)) =>  
+        NOT(EXISTS p1,p2: semantics(mpl)(p1) AND products(pl)(p2) AND subset?(p2,p1))
+
   mplRefinement(mpl1,mpl2) : bool =
     (FORALL p1: semantics(mpl1)(p1) => (EXISTS p2: semantics(mpl2)(p2) AND (p1 |- p2)))
   
