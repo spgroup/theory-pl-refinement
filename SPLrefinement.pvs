@@ -226,7 +226,7 @@ BEGIN
 
   MPL : TYPE
   mpl,mpl1,mpl2: VAR MPL
-  PC: TYPE = [# pl:PL, conf:Conf #]
+  PC: TYPE = {pc:[# pl:PL, conf:Conf  #] | {|F(pl(pc))|}(conf(pc)) }
   pc,pc1,pc2: VAR PC
   pcs,pcs1,pcs2: VAR finite_sets[PC].finite_set
 
@@ -261,8 +261,6 @@ BEGIN
   remove(pl,pcs): finite_sets[PC].finite_set = 
     {pc | pl/=pl(pc) AND pcs(pc)}
 
-%  get(pl,pcs): PC = 
-
   prod(pc): finite_sets[Asset].finite_set = ([| K(pl(pc)) |] (A(pl(pc))))(conf(pc));
 
   product(pcs) : finite_sets[Asset].finite_set = 
@@ -292,19 +290,45 @@ BEGIN
       pls(mpl)(pl) AND (EXISTS pcs: confs(mpl)(pcs) AND member(pl,pcs)) =>  
         EXISTS p1,p2: semantics(mpl)(p1) AND products(pl)(p2) AND subset?(p2,p1)
 
-  plNotInMPL: THEOREM
+  plPCS: THEOREM
+    FORALL mpl:
+      FORALL pcs: 
+       confs(mpl)(pcs) =>
+         FORALL pl:
+           member(pl,pcs) => EXISTS pc,pcs1: pcs = union(pc,pcs1) AND pl(pc)=pl AND (NOT member(pl,pcs1))
+
+  mplRefPL: THEOREM
+    FORALL mpl,pl1,pl2:
+      plRefinement(pl1,pl2) =>
+        FORALL pcs1: 
+	  confs(mpl)(pcs1) AND member(pl1,pcs1) => 
+	    EXISTS pcs2: (product(pcs1) |- product(pcs2))
+
+  plNotInConfsMPL: THEOREM
     FORALL mpl,pl:
-      pls(mpl)(pl) AND NOT(EXISTS pcs: confs(mpl)(pcs) AND member(pl,pcs)) =>  
-        NOT(EXISTS p1,p2: semantics(mpl)(p1) AND products(pl)(p2) AND subset?(p2,p1))
+      pls(mpl)(pl) AND (FORALL pcs: confs(mpl)(pcs) => NOT(member(pl,pcs))) =>  
+        FORALL pcs: confs(mpl)(pcs) => confs(rem(pl,mpl))(pcs)
+
+  confsAddPLtoMPL: THEOREM
+    FORALL mpl:
+        FORALL pcs: confs(mpl)(pcs) => confs(add(pl,mpl))(pcs)
 
   mplRefinement(mpl1,mpl2) : bool =
+    (FORALL pcs1: confs(mpl1)(pcs1) => (EXISTS pcs2: confs(mpl2)(pcs2) AND (product(pcs1) |- product(pcs2))))
+  
+  mplRefinementAlt(mpl1,mpl2) : bool =
     (FORALL p1: semantics(mpl1)(p1) => (EXISTS p2: semantics(mpl2)(p2) AND (p1 |- p2)))
   
   mplRef: THEOREM orders[MPL].preorder?( mplRefinement )   
+  mplRefi: THEOREM orders[MPL].preorder?( mplRefinementAlt )   
 
   mplCompositional: THEOREM
     FORALL(pl1,pl2,mpl):
     	pls(mpl)(pl1) AND plRefinement(pl1,pl2) => mplRefinement(mpl,add(pl2,rem(pl1,mpl)))
+
+  mplCompositionalAlt: THEOREM
+    FORALL(pl1,pl2,mpl):
+    	pls(mpl)(pl1) AND plRefinementAlt(pl1,pl2) => mplRefinementAlt(mpl,add(pl2,rem(pl1,mpl)))
 
 
  % PL Refinement compositionality
