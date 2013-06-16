@@ -224,14 +224,41 @@ BEGIN
   plRefPop: THEOREM
     FORALL(pl1,pl2): (plRefinement(pl1,pl2)) => popRefinement(pl1,pl2)
 
-  MPL : TYPE
-  mpl,mpl1,mpl2: VAR MPL
+
+  IMPORTING set_comp_lemmas
   PC: TYPE = {pc:[# pl:PL, conf:Conf  #] | {|F(pl(pc))|}(conf(pc)) }
   pc,pc1,pc2: VAR PC
   pcs,pcs1,pcs2: VAR finite_sets[PC].finite_set
 
+  pls(pcs): finite_sets[PL].finite_set = 
+    {pl | EXISTS pc: pcs(pc) AND pl=pl(pc)}
+  
+  member(pl,pcs) : bool = 
+   pls(pcs)(pl)
+
+  remove(pl,pcs): finite_sets[PC].finite_set = 
+    {pc | pl/=pl(pc) AND pcs(pc)}
+
+  prod(pc): finite_sets[Asset].finite_set = ([| K(pl(pc)) |] (A(pl(pc))))(conf(pc));
+
+  product(pcs) : finite_sets[Asset].finite_set = 
+    { p:Asset | EXISTS (pc) : pcs(pc) AND prod(pc)(p) }
+
+
+  ArbitraryMPL : TYPE
+  confs: [ArbitraryMPL -> finite_sets[set[PC]].finite_set];
+
+  % Definition <Well-formed SPL>
+  wfMPL(m:ArbitraryMPL): bool =
+    (FORALL pcs : confs(m)(pcs) => wfProduct( product(pcs) ))
+
+  % Definition <Product line> 
+  MPL : TYPE = (wfMPL)
+  mpl,mpl1,mpl2: VAR MPL
   pls: [MPL -> finite_sets[PL].finite_set];
-  confs: [MPL -> finite_sets[set[PC]].finite_set];
+
+  semantics(mpl) : set[finite_sets[Asset].finite_set] = 
+    { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) };
 
   confsRestriction: AXIOM
     FORALL mpl:
@@ -252,20 +279,6 @@ BEGIN
     FORALL pl,mpl:
       NOT(pls(rem(pl,mpl))(pl)) 
 
-  pls(pcs): finite_sets[PL].finite_set = 
-    {pl | EXISTS pc: pcs(pc) AND pl=pl(pc)}
-  
-  member(pl,pcs) : bool = 
-   pls(pcs)(pl)
-
-  remove(pl,pcs): finite_sets[PC].finite_set = 
-    {pc | pl/=pl(pc) AND pcs(pc)}
-
-  prod(pc): finite_sets[Asset].finite_set = ([| K(pl(pc)) |] (A(pl(pc))))(conf(pc));
-
-  product(pcs) : finite_sets[Asset].finite_set = 
-    { p:Asset | EXISTS (pc) : pcs(pc) AND prod(pc)(p) }
-
   productUnion: THEOREM
     FORALL(pc,pcs):
       union(product(singleton(pc)),product(pcs))=product(union(singleton(pc),pcs))
@@ -275,9 +288,6 @@ BEGIN
       ( product(singleton(pc1)) |- product(singleton(pc2)) ) and wfProduct(union(product(singleton(pc1)),product(pcs)))
         => wfProduct(union(product(singleton(pc2)),product(pcs))) AND 
 	   ( union(product(singleton(pc1)),product(pcs)) |- union(product(singleton(pc2)),product(pcs)))
-
-  semantics(mpl) : set[finite_sets[Asset].finite_set] = 
-    { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) };
 
 
   notInMPL: THEOREM
@@ -302,12 +312,12 @@ BEGIN
       plRefinement(pl1,pl2) =>
         FORALL pcs1: 
 	  confs(mpl)(pcs1) AND member(pl1,pcs1) => 
-	    EXISTS pcs2: (product(pcs1) |- product(pcs2))
+	    EXISTS pcs2: (product(pcs1) |- product(pcs2)) %AND confs(add(pl2,rem(pl1,mpl)))(pcs2)
 
   plNotInConfsMPL: THEOREM
     FORALL mpl,pl:
-      pls(mpl)(pl) AND (FORALL pcs: confs(mpl)(pcs) => NOT(member(pl,pcs))) =>  
-        FORALL pcs: confs(mpl)(pcs) => confs(rem(pl,mpl))(pcs)
+      pls(mpl)(pl) =>  
+        FORALL pcs: confs(mpl)(pcs) AND NOT(member(pl,pcs)) => confs(rem(pl,mpl))(pcs)
 
   confsAddPLtoMPL: THEOREM
     FORALL mpl:
