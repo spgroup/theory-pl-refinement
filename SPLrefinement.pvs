@@ -266,18 +266,23 @@ BEGIN
       =>  
         (FORALL(e:PC): pcs(e)
 	=> 
-	  pls(mpl)(pl(e)) AND {|F(pl(e))|}(conf(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
+	  pls(mpl)(pl(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
 
+  replace: [PL,PL,MPL->MPL];
   rem: [PL,MPL->MPL];
   add: [PL,MPL->MPL];
 
-  addPLtoMPL: AXIOM
-    FORALL pl,mpl:
-      pls(add(pl,mpl))(pl)
+  replacePLinMPL: AXIOM
+    FORALL pl1,pl2,mpl:
+      pls(replace(pl1,pl2,mpl))(pl2) AND NOT(pls(replace(pl1,pl2,mpl))(pl1))
 
-  removePLfromMPL: AXIOM
-    FORALL pl,mpl:
-      NOT(pls(rem(pl,mpl))(pl)) 
+%  addPLtoMPL: AXIOM
+%    FORALL pl,mpl:
+%      pls(add(pl,mpl))(pl)
+
+%  removePLfromMPL: AXIOM
+%    FORALL pl,mpl:
+%      NOT(pls(rem(pl,mpl))(pl)) 
 
   productUnion: THEOREM
     FORALL(pc,pcs):
@@ -312,16 +317,21 @@ BEGIN
       plRefinement(pl1,pl2) =>
         FORALL pcs1: 
 	  confs(mpl)(pcs1) AND member(pl1,pcs1) => 
-	    EXISTS pcs2: (product(pcs1) |- product(pcs2)) %AND confs(add(pl2,rem(pl1,mpl)))(pcs2)
+	    EXISTS pcs2: (product(pcs1) |- product(pcs2)) AND confs(replace(pl1,pl2,mpl))(pcs2)
 
-  plNotInConfsMPL: THEOREM
-    FORALL mpl,pl:
-      pls(mpl)(pl) =>  
-        FORALL pcs: confs(mpl)(pcs) AND NOT(member(pl,pcs)) => confs(rem(pl,mpl))(pcs)
+  confsPLreplace: THEOREM
+    FORALL mpl,pl1,pl2:
+      pls(mpl)(pl1) AND NOT(pls(mpl)(pl2)) =>  
+        FORALL pcs: confs(mpl)(pcs) AND NOT(member(pl1,pcs)) => confs(replace(pl1,pl2,mpl))(pcs)
 
-  confsAddPLtoMPL: THEOREM
-    FORALL mpl:
-        FORALL pcs: confs(mpl)(pcs) => confs(add(pl,mpl))(pcs)
+%  plNotInConfsMPL: THEOREM
+%    FORALL mpl,pl:
+%      pls(mpl)(pl) =>  
+%        FORALL pcs: confs(mpl)(pcs) AND NOT(member(pl,pcs)) => confs(rem(pl,mpl))(pcs)
+
+%  confsAddPLtoMPL: THEOREM
+%    FORALL mpl:
+%        FORALL pcs: confs(mpl)(pcs) => confs(add(pl,mpl))(pcs)
 
   mplRefinement(mpl1,mpl2) : bool =
     (FORALL pcs1: confs(mpl1)(pcs1) => (EXISTS pcs2: confs(mpl2)(pcs2) AND (product(pcs1) |- product(pcs2))))
@@ -334,11 +344,15 @@ BEGIN
 
   mplCompositional: THEOREM
     FORALL(pl1,pl2,mpl):
-    	pls(mpl)(pl1) AND plRefinement(pl1,pl2) => mplRefinement(mpl,add(pl2,rem(pl1,mpl)))
+    	pls(mpl)(pl1) AND NOT(pls(mpl)(pl2)) AND plRefinement(pl1,pl2) => 
+	  mplRefinement(mpl,replace(pl1,pl2,mpl))
+	  %mplRefinement(mpl,add(pl2,rem(pl1,mpl)))
 
   mplCompositionalAlt: THEOREM
     FORALL(pl1,pl2,mpl):
-    	pls(mpl)(pl1) AND plRefinementAlt(pl1,pl2) => mplRefinementAlt(mpl,add(pl2,rem(pl1,mpl)))
+    	pls(mpl)(pl1) AND NOT(pls(mpl)(pl2)) AND plRefinementAlt(pl1,pl2) => 
+	  mplRefinementAlt(mpl,replace(pl1,pl2,mpl))
+	  %mplRefinementAlt(mpl,add(pl2,rem(pl1,mpl)))
 
 
  % PL Refinement compositionality
