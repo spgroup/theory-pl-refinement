@@ -247,17 +247,27 @@ BEGIN
   product(pcs) : finite_sets[Asset].finite_set = 
     { p:Asset | EXISTS (pc) : pcs(pc) AND prod(pc)(p) }
 
-  replace(pl1:PL,pl2:{pl2:PL | plRefinement(pl1,pl2)},pc): PC = 
-    %IF (pl(pc)=pl1) THEN (# pl:=pl2, conf:=conf(pc)  #) ELSE pc ENDIF;
-    IF (pl(pc)=pl1) THEN (# pl:=pl2, conf:=choose({c | member(c,{|F(pl2)|}) AND |-(([| K(pl(pc)) |] (A(pl(pc))))(conf(pc)), ([| K(pl2) |] (A(pl2)))(c)) })  #) ELSE pc ENDIF;
+  replace(pl1:PL,pl2:{pl2:PL | plRefinement(pl1,pl2)},pc:{p:PC | pl(p)=pl1}): PC = 
+    (# pl:=pl2, conf:=choose({c | member(c,{|F(pl2)|}) AND |-(([| K(pl(pc)) |] (A(pl(pc))))(conf(pc)), ([| K(pl2) |] (A(pl2)))(c)) })  #)
 
   replace(pl1:PL,pl2:{pl2:PL | plRefinement(pl1,pl2)},pcs): finite_sets[PC].finite_set = 
-    {pc1 | EXISTS (pc2): pcs(pc2) AND pc1=replace(pl1,pl2,pc2)} 
+    {pc1 | EXISTS (pc2): pcs(pc2) AND 
+    	   IF (pl(pc2)=pl1) THEN pc1=replace(pl1,pl2,pc2)
+	   ELSE pc1=pc2 ENDIF } 
+
+  replaceReflexive: THEOREM
+    FORALL pl,pcs:
+      pcs=replace(pl,pl,pcs)
 
   replacePLnotInMPL: THEOREM
     FORALL pl1,pl2,pcs:
       NOT(member(pl1,pcs)) AND plRefinement(pl1,pl2) =>  
         pcs=replace(pl1,pl2,pcs)
+
+  replacePLmember: THEOREM
+    FORALL pl1,pl2,pcs:
+      member(pl1,pcs) AND plRefinement(pl1,pl2) =>  
+        member(pl2,replace(pl1,pl2,pcs))
 
 
   confs: [finite_sets[PL].finite_set, finite_sets[Constraint].finite_set -> finite_sets[set[PC]].finite_set];
@@ -270,6 +280,9 @@ BEGIN
   MPL : TYPE = {m:[# pls:finite_sets[PL].finite_set, cs:finite_sets[Constraint].finite_set  #] | wfMPL(pls(m),cs(m)) }
   mpl,mpl1,mpl2: VAR MPL
 %  pls: [MPL -> finite_sets[PL].finite_set];
+  member(pl,mpl) : bool = 
+   pls(mpl)(pl)
+
 
   confs(mpl) : finite_sets[set[PC]].finite_set = confs(pls(mpl),cs(mpl))
 
@@ -335,6 +348,25 @@ BEGIN
 	  ELSE NOT(member(pl1,replace(pl1,pl2,pcs)))
 	  ENDIF
 
+  plRefPCe: THEOREM
+    FORALL mpl:
+      FORALL pcs: 
+        confs(mpl)(pcs) =>
+          FORALL(e:PC): pcs(e) => 
+	    FORALL(pl): plRefinement(pl(e),pl) => 
+	      EXISTS(pc:PC,c:Conf): 
+	      pc = (# pl:=pl, conf:=c #) 
+	      AND pc = replace(pl(e),pl,e)
+	      AND (product(e) |- product(pc))
+
+  plRefPC: THEOREM
+    FORALL mpl:
+      FORALL pcs: 
+        confs(mpl)(pcs) =>
+          FORALL(e:PC): pcs(e) => 
+	    FORALL(pl): plRefinement(pl(e),pl) => 
+	      (product(e) |- product(replace(pl(e),pl,e)))
+
   plMemberPCS: THEOREM
     FORALL mpl:
       FORALL pcs: 
@@ -379,18 +411,11 @@ BEGIN
 %	     ENDIF
 %    )
 
-%  mplCompositionality: THEOREM
-%    FORALL(pl1,pl2,pls,cs1,cs2,mpl1):
-%    	mpl1=(# pls:=union(pl1,pls), cs:=cs1 #) AND 
-%	constraintsRef(cs1,cs2,pl1,pl2,pls) AND 
-%	plRefinementAlt(pl1,pl2) => 
-%	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #))
-
-
   compMPL: THEOREM
     FORALL(pl1,pl2,pls,cs1,cs2,mpl1):
 	plRefinementAlt(pl1,pl2) AND
 	mpl1=(# pls:=union(pl1,pls), cs:=cs1 #) AND 
+	NOT(member(pl1,pls)) AND 
 	NOT(member(pl2,pls)) AND 
 	(FORALL pcs1: confs(union(pl1,pls),cs1)(pcs1) => 
 	  EXISTS pcs2: confs(union(pl2,pls),cs2)(pcs2) AND 
