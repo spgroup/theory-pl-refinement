@@ -255,10 +255,6 @@ BEGIN
     	   IF (pl(pc2)=pl1) THEN pc1=replace(pl1,pl2,pc2)
 	   ELSE pc1=pc2 ENDIF } 
 
-  replaceReflexive: THEOREM
-    FORALL pl,pcs:
-      pcs=replace(pl,pl,pcs)
-
   replacePLnotInMPL: THEOREM
     FORALL pl1,pl2,pcs:
       NOT(member(pl1,pcs)) AND plRefinement(pl1,pl2) =>  
@@ -387,7 +383,8 @@ BEGIN
   replacePLinMPL: THEOREM
     FORALL mpl: 
       FORALL pcs1: confs(mpl)(pcs1) =>  
-        FORALL(pl1,pl2): plRefinement(pl1,pl2) AND member(pl1,pcs1) AND NOT(member(pl2,pcs1)) =>  
+        FORALL(pl1,pl2): plRefinement(pl1,pl2) AND member(pl1,pcs1) AND NOT(member(pl2,pcs1))% AND member(pl1,mpl) AND NOT(member(pl2,mpl)) 
+	=>  
 	  (product(pcs1) |- product(replace(pl1,pl2,pcs1)))
 
   mplRefPL: THEOREM

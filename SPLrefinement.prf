@@ -534,89 +534,6 @@
  (replace_TCC3 0
   (replace_TCC3-1 nil 3580508092 3580569033 ("" (subtype-tcc) nil nil)
    unfinished nil 3111 2660 nil nil))
- (replaceReflexive_TCC1 0
-  (replaceReflexive_TCC1-1 nil 3580571444 3580571478
-   ("" (lemma plRef)
-    (("" (expand* preorder? reflexive?) (("" (flatten) nil nil)) nil))
-    nil)
-   proved
-   ((reflexive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (plRef formula-decl nil SPLrefinement nil))
-   10809 10 t nil))
- (replaceReflexive 0
-  (replaceReflexive-1 nil 3580571494 3580571661
-   ("" (skolem 1 (pl pcs))
-    (("" (typepred pl)
-      (("" (expand replace)
-        (("" (decompose-equality 1)
-          (("1" (bddsimp)
-            (("1" (instantiate 1 x!1)
-              (("1" (assert)
-                (("1" (bddsimp)
-                  (("1" (expand replace)
-                    (("1" (assert)
-                      (("1" (expand member)
-                        (("1" (lemma plRef)
-                          (("1" (expand* preorder?)
-                            (("1" (expand reflexive?)
-                              (("1"
-                                (expand plRefinement)
-                                (("1"
-                                  (flatten)
-                                  (("1"
-                                    (instantiate -1 pl)
-                                    (("1"
-                                      (instantiate -1 "conf(x!1)")
-                                      (("1"
-                                        (assert)
-                                        (("1"
-                                          (grind)
-                                          (("1" (postpone) nil nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil)
-             ("2" (skolem -1 pc)
-              (("2" (flatten)
-                (("2" (bddsimp)
-                  (("1" (replace -3)
-                    (("1" (expand replace)
-                      (("1" (expand member) (("1" (postpone) nil nil))
-                        nil))
-                      nil))
-                    nil)
-                   ("2" (assert) nil nil))
-                  nil))
-                nil))
-              nil))
-            nil)
-           ("2" (lemma plRef)
-            (("2" (expand* preorder? reflexive?)
-              (("2" (flatten)
-                (("2" (skosimp)
-                  (("2" (instantiate -1 pl) (("2" (propax) nil nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   unfinished nil 167577 220 t shostak))
  (replacePLnotInMPL 0
   (replacePLnotInMPL-1 nil 3580508462 3580569033
    ("" (skolem 1 (pl1 pl2 S))
@@ -2260,151 +2177,134 @@
   (compMPL_TCC2-1 nil 3580508092 3580569042 ("" (subtype-tcc) nil nil)
    unfinished nil 6850 6530 nil nil))
  (compMPL 0
-  (compMPL-2 "" 3580571431 3580573177
-   ("" (lemma notInMPL)
-    (("" (skolem 1 (l1 l2 S cs1 cs2 mpl))
-      (("" (flatten)
-        (("" (expand mplRefinement)
-          (("" (lemma plRefEq)
-            (("" (instantiate -1 (l1 l2))
-              (("" (assert)
-                (("" (instantiate -2 (mpl l2))
-                  (("" (expand member)
-                    (("" (bddsimp)
-                      (("1" (replace -4 -2)
-                        (("1" (assert)
-                          (("1" (expand union -2)
-                            (("1" (expand singleton -2)
-                              (("1"
-                                (expand member)
-                                (("1"
-                                  (replace -2)
-                                  (("1"
-                                    (skolem 3 p1)
-                                    (("1"
-                                      (flatten)
-                                      (("1"
-                                        (expand semantics)
+  (compMPL-2 "" 3580571431 3580574854
+   ("" (skolem 1 (l1 l2 S cs1 cs2 mpl))
+    (("" (flatten)
+      (("" (expand mplRefinement)
+        (("" (lemma plRefEq)
+          (("" (instantiate -1 (l1 l2))
+            (("" (assert)
+              (("" (skolem 2 p1)
+                (("" (flatten)
+                  (("" (expand semantics)
+                    (("" (expand member)
+                      (("" (skolem -5 pcs1)
+                        (("" (flatten)
+                          (("" (expand confs)
+                            (("" (instantiate -4 pcs1)
+                              ((""
+                                (assert)
+                                ((""
+                                  (skolem -4 pcs2)
+                                  ((""
+                                    (flatten)
+                                    ((""
+                                      (instantiate 2 "product(pcs2)")
+                                      ((""
+                                        (bddsimp)
                                         (("1"
-                                          (expand member)
+                                          (case "member(l1,pcs1)")
                                           (("1"
-                                            (skolem -6 pcs1)
+                                            (lemma replacePLinMPL)
                                             (("1"
-                                              (flatten)
+                                              (instantiate
+                                               -1
+                                               (mpl pcs1))
                                               (("1"
-                                                (instantiate -5 pcs1)
+                                                (assert)
                                                 (("1"
                                                   (expand confs)
                                                   (("1"
-                                                    (assert)
+                                                    (instantiate
+                                                     -1
+                                                     (l1 l2))
                                                     (("1"
-                                                      (skolem -5 pcs2)
+                                                      (bddsimp)
                                                       (("1"
-                                                        (flatten)
+                                                        (expand member)
                                                         (("1"
-                                                          (case
-                                                           "member(l1,pcs1)")
+                                                          (lemma
+                                                           confsRestriction)
                                                           (("1"
-                                                            (lemma
-                                                             replacePLinMPL)
+                                                            (instantiate
+                                                             -1
+                                                             (mpl
+                                                              pcs1))
                                                             (("1"
-                                                              (instantiate
-                                                               -1
-                                                               (mpl
-                                                                pcs1))
+                                                              (assert)
                                                               (("1"
-                                                                (assert)
+                                                                (expand
+                                                                 confs)
                                                                 (("1"
-                                                                  (expand
-                                                                   confs)
+                                                                  (replace
+                                                                   -6
+                                                                   -1)
                                                                   (("1"
-                                                                    (instantiate
-                                                                     -1
-                                                                     (l1
-                                                                      l1))
+                                                                    (assert)
                                                                     (("1"
-                                                                      (assert)
+                                                                      (expand
+                                                                       union
+                                                                       -1)
                                                                       (("1"
-                                                                        (bddsimp)
+                                                                        (expand
+                                                                         singleton
+                                                                         -1)
                                                                         (("1"
                                                                           (expand
                                                                            member)
                                                                           (("1"
-                                                                            (expand
-                                                                             pls)
+                                                                            (assert)
                                                                             (("1"
-                                                                              (skolem
-                                                                               -1
-                                                                               pc)
+                                                                              (copy
+                                                                               -1)
                                                                               (("1"
-                                                                                (flatten)
+                                                                                (expand
+                                                                                 pls)
                                                                                 (("1"
-                                                                                  (instantiate
-                                                                                   2
-                                                                                   p1)
+                                                                                  (skolem
+                                                                                   -4
+                                                                                   pc1)
                                                                                   (("1"
-                                                                                    (bddsimp)
+                                                                                    (skolem
+                                                                                     -5
+                                                                                     pc2)
                                                                                     (("1"
-                                                                                      (postpone)
-                                                                                      nil
-                                                                                      nil)
-                                                                                     ("2"
                                                                                       (instantiate
-                                                                                       2
-                                                                                       pcs2)
-                                                                                      (("2"
-                                                                                        (assert)
-                                                                                        (("2"
-                                                                                          (replace
-                                                                                           -10)
-                                                                                          (("2"
-                                                                                            (expand
-                                                                                             product)
-                                                                                            (("2"
-                                                                                              (expand
-                                                                                               prod)
-                                                                                              (("2"
-                                                                                                (decompose-equality
-                                                                                                 2)
-                                                                                                (("2"
-                                                                                                  (bddsimp)
+                                                                                       -1
+                                                                                       pc1)
+                                                                                      (("1"
+                                                                                        (instantiate
+                                                                                         -2
+                                                                                         pc2)
+                                                                                        (("1"
+                                                                                          (flatten)
+                                                                                          (("1"
+                                                                                            (assert)
+                                                                                            (("1"
+                                                                                              (flatten)
+                                                                                              (("1"
+                                                                                                (instantiate
+                                                                                                 1
+                                                                                                 pc2)
+                                                                                                (("1"
+                                                                                                  (assert)
                                                                                                   (("1"
-                                                                                                    (lemma
-                                                                                                     replacePLmember)
+                                                                                                    (instantiate
+                                                                                                     2
+                                                                                                     pc1)
                                                                                                     (("1"
-                                                                                                      (instantiate
-                                                                                                       -1
-                                                                                                       (l1
-                                                                                                        l2
-                                                                                                        pcs1))
+                                                                                                      (assert)
                                                                                                       (("1"
-                                                                                                        (expand
-                                                                                                         member)
+                                                                                                        (flatten)
                                                                                                         (("1"
                                                                                                           (bddsimp)
                                                                                                           (("1"
-                                                                                                            (expand
-                                                                                                             pls)
-                                                                                                            (("1"
-                                                                                                              (replace
-                                                                                                               -6)
-                                                                                                              (("1"
-                                                                                                                (postpone)
-                                                                                                                nil
-                                                                                                                nil))
-                                                                                                              nil))
-                                                                                                            nil)
-                                                                                                           ("2"
                                                                                                             (postpone)
                                                                                                             nil
                                                                                                             nil))
                                                                                                           nil))
                                                                                                         nil))
                                                                                                       nil))
-                                                                                                    nil)
-                                                                                                   ("2"
-                                                                                                    (postpone)
-                                                                                                    nil
                                                                                                     nil))
                                                                                                   nil))
                                                                                                 nil))
@@ -2425,177 +2325,54 @@
                                                                   nil))
                                                                 nil))
                                                               nil))
-                                                            nil)
-                                                           ("2"
-                                                            (lemma
-                                                             replacePLnotInMPL)
-                                                            (("2"
-                                                              (instantiate
-                                                               -1
-                                                               (l1
-                                                                l2
-                                                                pcs1))
-                                                              (("2"
-                                                                (assert)
-                                                                (("2"
-                                                                  (use
-                                                                   assetRefinement)
-                                                                  (("2"
-                                                                    (expand*
-                                                                     preorder?
-                                                                     reflexive?)
-                                                                    (("2"
-                                                                      (flatten)
-                                                                      (("2"
-                                                                        (instantiate
-                                                                         -1
-                                                                         p1)
-                                                                        (("2"
-                                                                          (instantiate
-                                                                           4
-                                                                           p1)
-                                                                          (("2"
-                                                                            (assert)
-                                                                            (("2"
-                                                                              (instantiate
-                                                                               4
-                                                                               pcs1)
-                                                                              (("2"
-                                                                                (assert)
-                                                                                nil
-                                                                                nil))
-                                                                              nil))
-                                                                            nil))
-                                                                          nil))
-                                                                        nil))
-                                                                      nil))
-                                                                    nil))
-                                                                  nil))
-                                                                nil))
-                                                              nil))
                                                             nil))
                                                           nil))
+                                                        nil)
+                                                       ("2"
+                                                        (assert)
+                                                        nil
                                                         nil))
                                                       nil))
                                                     nil))
                                                   nil))
                                                 nil))
                                               nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil)
-                       ("2" (skolem 3 p1)
-                        (("2" (flatten)
-                          (("2" (expand* semantics member)
-                            (("2" (skolem -6 pcs1)
-                              (("2"
-                                (flatten)
-                                (("2"
-                                  (instantiate -2 pcs1)
-                                  (("2"
-                                    (assert)
-                                    (("2"
-                                      (instantiate -4 pcs1)
-                                      (("2"
-                                        (expand confs)
-                                        (("2"
-                                          (assert)
-                                          (("2"
-                                            (skolem -4 pcs2)
+                                            nil)
+                                           ("2"
+                                            (lemma replacePLnotInMPL)
                                             (("2"
-                                              (flatten)
+                                              (instantiate
+                                               -1
+                                               (l1 l2 pcs1))
                                               (("2"
-                                                (instantiate
-                                                 4
-                                                 "product(pcs2)")
+                                                (assert)
                                                 (("2"
-                                                  (bddsimp)
-                                                  (("1"
-                                                    (case
-                                                     "member(l1,pcs1)")
-                                                    (("1"
-                                                      (lemma
-                                                       replacePLinMPL)
-                                                      (("1"
-                                                        (instantiate
-                                                         -1
-                                                         (mpl pcs1))
-                                                        (("1"
-                                                          (assert)
-                                                          (("1"
-                                                            (instantiate
-                                                             -1
-                                                             (l1 l2))
-                                                            (("1"
-                                                              (assert)
-                                                              (("1"
-                                                                (expand
-                                                                 member)
-                                                                (("1"
-                                                                  (propax)
-                                                                  nil
-                                                                  nil))
-                                                                nil))
-                                                              nil))
-                                                            nil))
-                                                          nil))
-                                                        nil))
-                                                      nil)
-                                                     ("2"
-                                                      (lemma
-                                                       replacePLnotInMPL)
+                                                  (use assetRefinement)
+                                                  (("2"
+                                                    (expand*
+                                                     preorder?
+                                                     reflexive?)
+                                                    (("2"
+                                                      (flatten)
                                                       (("2"
                                                         (instantiate
                                                          -1
-                                                         (l1 l2 pcs1))
+                                                         p1)
                                                         (("2"
                                                           (assert)
-                                                          (("2"
-                                                            (use
-                                                             assetRefinement)
-                                                            (("2"
-                                                              (expand*
-                                                               preorder?
-                                                               reflexive?)
-                                                              (("2"
-                                                                (flatten)
-                                                                (("2"
-                                                                  (instantiate
-                                                                   -1
-                                                                   p1)
-                                                                  (("2"
-                                                                    (assert)
-                                                                    nil
-                                                                    nil))
-                                                                  nil))
-                                                                nil))
-                                                              nil))
-                                                            nil))
+                                                          nil
                                                           nil))
                                                         nil))
-                                                      nil))
-                                                    nil)
-                                                   ("2"
-                                                    (instantiate
-                                                     4
-                                                     pcs2)
-                                                    (("2"
-                                                      (propax)
-                                                      nil
                                                       nil))
                                                     nil))
                                                   nil))
                                                 nil))
                                               nil))
                                             nil))
+                                          nil)
+                                         ("2"
+                                          (instantiate 2 pcs2)
+                                          (("2" (propax) nil nil))
                                           nil))
                                         nil))
                                       nil))
@@ -2616,7 +2393,7 @@
         nil))
       nil))
     nil)
-   unfinished nil 654934 320 t shostak)
+   unfinished nil 670770 180 t shostak)
   (compMPL-1 nil 3580508145 3580571207
    ("" (skolem 1 (l1 l2 S cs1 cs2 mpl))
     (("" (flatten)
