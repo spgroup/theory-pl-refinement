@@ -285,17 +285,17 @@ BEGIN
 	  pls(mpl)(pl(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
 
 
-  rem: [PL,MPL->MPL];
-  add: [PL,MPL->MPL];
+%  rem: [PL,MPL->MPL];
+%  add: [PL,MPL->MPL];
 
-  confsAddPLtoMPL: AXIOM
-    FORALL mpl:
-        FORALL pcs: confs(mpl)(pcs) => confs(add(pl,mpl))(pcs)
+%  confsAddPLtoMPL: AXIOM
+%    FORALL mpl:
+%        FORALL pcs: confs(mpl)(pcs) => confs(add(pl,mpl))(pcs)
 
-  plNotInConfsMPL: THEOREM
-    FORALL mpl,pl:
-      pls(mpl)(pl) =>  
-        FORALL pcs: confs(mpl)(pcs) AND NOT(member(pl,pcs)) => confs(rem(pl,mpl))(pcs)
+%  plNotInConfsMPL: THEOREM
+%    FORALL mpl,pl:
+%      pls(mpl)(pl) =>  
+%        FORALL pcs: confs(mpl)(pcs) AND NOT(member(pl,pcs)) => confs(rem(pl,mpl))(pcs)
 
 
 
@@ -340,7 +340,10 @@ BEGIN
       FORALL pcs: 
        confs(mpl)(pcs) =>
          FORALL pl1,pl2:
-           plRefinement(pl1,pl2) AND member(pl1,pcs) AND NOT(member(pl2,pcs)) =>
+           plRefinement(pl1,pl2) 
+	   AND member(pl1,pcs) 
+	   AND NOT(member(pl2,pcs)) 
+	   =>
 	     EXISTS pc1,pc2,pcs1: pcs = union(pc1,pcs1) AND 
 	     	    		  pl(pc1)=pl1 AND 
 				  (NOT member(pl1,pcs1)) AND
@@ -349,14 +352,11 @@ BEGIN
 				  replace(pl1,pl2,pcs)=union(pc2,pcs1) AND
 				  (product(singleton(pc1)) |- product(singleton(pc2)))
 
-        
   replacePLinMPL: THEOREM
     FORALL mpl: 
       FORALL pcs1: confs(mpl)(pcs1) =>  
-        FORALL(pl1,pl2): plRefinement(pl1,pl2) AND member(pl1,pcs1) =>  
+        FORALL(pl1,pl2): plRefinement(pl1,pl2) AND member(pl1,pcs1) AND NOT(member(pl2,pcs1)) =>  
 	  (product(pcs1) |- product(replace(pl1,pl2,pcs1)))
-        
-
 
   mplRefPL: THEOREM
     FORALL mpl,pl1,pl2:
@@ -371,36 +371,32 @@ BEGIN
   
   mplRef: THEOREM orders[MPL].preorder?( mplRefinement )   
 
-  constraintsRef(cs1,cs2,pl1,pl2,pls) : bool =
-    (FORALL pcs1: confs(union(pl1,pls),cs1)(pcs1) => 
-      EXISTS pcs2: confs(union(pl2,pls),cs2)(pcs2) AND 
-      	     IF (NOT(member(pl1,pcs1))) THEN (pcs2 = pcs1)
-	     ELSE (EXISTS pc1,pc2,pcs: pcs1 = union(pc1,pcs) AND pcs2 = union(pc2,pcs) AND pl(pc1)=pl1 AND pl(pc2)=pl2 AND (NOT member(pl1,pcs)) AND (NOT member(pl2,pcs)))
-	     ENDIF
-    )
+%  constraintsRef(cs1,cs2,pl1,pl2,pls) : bool =
+%    (FORALL pcs1: confs(union(pl1,pls),cs1)(pcs1) => 
+%      EXISTS pcs2: confs(union(pl2,pls),cs2)(pcs2) AND 
+%      	     IF (NOT(member(pl1,pcs1))) THEN (pcs2 = pcs1)
+%	     ELSE (EXISTS pc1,pc2,pcs: pcs1 = union(pc1,pcs) AND pcs2 = union(pc2,pcs) AND pl(pc1)=pl1 AND pl(pc2)=pl2 AND (NOT member(pl1,pcs)) AND (NOT member(pl2,pcs)))
+%	     ENDIF
+%    )
 
-  mplCompositionality: THEOREM
-    FORALL(pl1,pl2,pls,cs1,cs2,mpl1):
-    	mpl1=(# pls:=union(pl1,pls), cs:=cs1 #) AND 
-	constraintsRef(cs1,cs2,pl1,pl2,pls) AND 
-	plRefinementAlt(pl1,pl2) => 
-	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #))
+%  mplCompositionality: THEOREM
+%    FORALL(pl1,pl2,pls,cs1,cs2,mpl1):
+%    	mpl1=(# pls:=union(pl1,pls), cs:=cs1 #) AND 
+%	constraintsRef(cs1,cs2,pl1,pl2,pls) AND 
+%	plRefinementAlt(pl1,pl2) => 
+%	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #))
 
 
   compMPL: THEOREM
     FORALL(pl1,pl2,pls,cs1,cs2,mpl1):
 	plRefinementAlt(pl1,pl2) AND
 	mpl1=(# pls:=union(pl1,pls), cs:=cs1 #) AND 
+	NOT(member(pl2,pls)) AND 
 	(FORALL pcs1: confs(union(pl1,pls),cs1)(pcs1) => 
 	  EXISTS pcs2: confs(union(pl2,pls),cs2)(pcs2) AND 
       	     pcs2=replace(pl1,pl2,pcs1)
         )  => 
 	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #))
-
-
-  mplCompositional: THEOREM
-    FORALL(pl1,pl2,mpl):
-    	pls(mpl)(pl1) AND plRefinementAlt(pl1,pl2) => mplRefinement(mpl,add(pl2,rem(pl1,mpl)))
 
 
  % PL Refinement compositionality

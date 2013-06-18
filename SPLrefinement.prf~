@@ -561,7 +561,7 @@
         nil))
       nil))
     nil)
-   unfinished
+   unchecked
    ((pls const-decl "finite_sets[PL].finite_set" SPLrefinement nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (replace const-decl "PC" SPLrefinement nil)
@@ -583,22 +583,6 @@
     (is_finite const-decl "bool" finite_sets nil)
     (member const-decl "bool" SPLrefinement nil))
    201396 70 t shostak))
- (rem_TCC1 0
-  (rem_TCC1-1 nil 3580146675 3580336407
-   ("" (instantiate 1 "LAMBDA(p:PL,m:MPL):m") (("" (propax) nil nil))
-    nil)
-   unchecked
-   ((MPL type-eq-decl nil SPLrefinement nil)
-    (wfMPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (CK type-decl nil SPLrefinement nil)
-    (FM type-decl nil SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil))
-   1 0 t nil))
  (productUnion 0
   (productUnion-1 nil 3580199141 3580200796
    ("" (skolem 1 (pc pcs))
@@ -991,7 +975,7 @@
     nil)
    unfinished nil 339287 130 t shostak))
  (plMemberPCS 0
-  (plMemberPCS-1 nil 3580512660 3580515975
+  (plMemberPCS-1 nil 3580512660 3580516242
    ("" (skolem 1 mpl)
     (("" (skolem 1 pcs)
       (("" (flatten)
@@ -1087,8 +1071,96 @@
                                                               nil
                                                               nil)
                                                              ("2"
-                                                              (postpone)
-                                                              nil
+                                                              (expand
+                                                               pls)
+                                                              (("2"
+                                                                (replace
+                                                                 -3
+                                                                 -7)
+                                                                (("2"
+                                                                  (expand*
+                                                                   union
+                                                                   singleton
+                                                                   member)
+                                                                  (("2"
+                                                                    (skolem
+                                                                     -7
+                                                                     pc)
+                                                                    (("2"
+                                                                      (flatten)
+                                                                      (("2"
+                                                                        (instantiate
+                                                                         4
+                                                                         pc)
+                                                                        (("2"
+                                                                          (assert)
+                                                                          (("2"
+                                                                            (case
+                                                                             "pl(pc2)=pl2")
+                                                                            (("1"
+                                                                              (instantiate
+                                                                               5
+                                                                               pc2)
+                                                                              (("1"
+                                                                                (assert)
+                                                                                nil
+                                                                                nil))
+                                                                              nil)
+                                                                             ("2"
+                                                                              (assert)
+                                                                              (("2"
+                                                                                (case
+                                                                                 "pl(pc2)=pl1")
+                                                                                (("1"
+                                                                                  (expand
+                                                                                   replace
+                                                                                   -3)
+                                                                                  (("1"
+                                                                                    (assert)
+                                                                                    (("1"
+                                                                                      (expand
+                                                                                       member)
+                                                                                      (("1"
+                                                                                        (assert)
+                                                                                        (("1"
+                                                                                          (replace
+                                                                                           -5
+                                                                                           -1
+                                                                                           RL)
+                                                                                          (("1"
+                                                                                            (replace
+                                                                                             -1)
+                                                                                            (("1"
+                                                                                              (assert)
+                                                                                              (("1"
+                                                                                                (postpone)
+                                                                                                nil
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil)
+                                                                                 ("2"
+                                                                                  (expand
+                                                                                   replace
+                                                                                   -2)
+                                                                                  (("2"
+                                                                                    (assert)
+                                                                                    nil
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
                                                               nil))
                                                             nil))
                                                           nil))
@@ -1259,9 +1331,9 @@
         nil))
       nil))
     nil)
-   unfinished nil 672892 430 t shostak))
+   unfinished nil 264753 340 t shostak))
  (replacePLinMPL 0
-  (replacePLinMPL-1 nil 3580509280 3580513268
+  (replacePLinMPL-1 nil 3580509280 3580562686
    ("" (skolem 1 mpl)
     (("" (skolem 1 pcs)
       (("" (flatten)
@@ -1273,42 +1345,47 @@
                   (("" (assert)
                     (("" (instantiate -1 (l1 l2))
                       (("" (assert)
-                        (("" (bddsimp)
-                          (("1" (skolem -1 (pc1 pc2 S))
-                            (("1" (flatten)
-                              (("1"
-                                (replace -3 2)
-                                (("1"
-                                  (replace -1 2)
-                                  (("1"
+                        (("" (expand member -1)
+                          (("" (skolem -1 (pc1 pc2 pcs1))
+                            (("" (flatten)
+                              ((""
+                                (replace -4 4)
+                                ((""
+                                  (replace -1 4)
+                                  ((""
                                     (lemma prodRef)
-                                    (("1"
-                                      (instantiate -1 (pc1 pc2 S))
-                                      (("1"
-                                        (lemma productUnion)
-                                        (("1"
-                                          (copy -1)
-                                          (("1"
-                                            (instantiate -1 (pc1 S))
-                                            (("1"
-                                              (instantiate -2 (pc2 S))
-                                              (("1"
+                                    ((""
+                                      (lemma productUnion)
+                                      ((""
+                                        (copy -1)
+                                        ((""
+                                          (instantiate -1 (pc1 pcs1))
+                                          ((""
+                                            (instantiate -2 (pc2 pcs1))
+                                            ((""
+                                              (instantiate
+                                               -3
+                                               (pc1 pc2 pcs1))
+                                              ((""
                                                 (assert)
-                                                (("1"
+                                                ((""
                                                   (typepred mpl)
-                                                  (("1"
+                                                  ((""
                                                     (expand wfMPL)
-                                                    (("1"
+                                                    ((""
                                                       (instantiate
                                                        -1
                                                        pcs)
-                                                      (("1"
-                                                        (expand
-                                                         confs
-                                                         -8)
-                                                        (("1"
-                                                          (assert)
-                                                          nil
+                                                      ((""
+                                                        (assert)
+                                                        ((""
+                                                          (expand
+                                                           confs
+                                                           -8)
+                                                          ((""
+                                                            (propax)
+                                                            nil
+                                                            nil))
                                                           nil))
                                                         nil))
                                                       nil))
@@ -1324,9 +1401,7 @@
                                   nil))
                                 nil))
                               nil))
-                            nil)
-                           ("2" (expand member)
-                            (("2" (propax) nil nil)) nil))
+                            nil))
                           nil))
                         nil))
                       nil))
@@ -1339,8 +1414,9 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((member const-decl "bool" SPLrefinement nil)
+    (productUnion formula-decl nil SPLrefinement nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (confs const-decl "finite_sets[set[PC]].finite_set" SPLrefinement
      nil)
@@ -1349,7 +1425,6 @@
      "non_empty_finite_set" finite_sets nil)
     (nonempty_finite_union1 application-judgement
      "non_empty_finite_set" finite_sets nil)
-    (productUnion formula-decl nil SPLrefinement nil)
     (prodRef formula-decl nil SPLrefinement nil)
     (PC type-eq-decl nil SPLrefinement nil)
     ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
@@ -1369,7 +1444,7 @@
     (finite_set type-eq-decl nil finite_sets nil)
     (Constraint type-decl nil SPLrefinement nil)
     (plMemberPCS formula-decl nil SPLrefinement nil))
-   123372 80 t shostak))
+   104325 120 t shostak))
  (mplRefPL 0
   (mplRefPL-1 nil 3580329650 3580331596
    ("" (skolem 1 (mpl pl1 pl2))
@@ -1704,7 +1779,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   unfinished
    ((Conf type-decl nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (PC type-eq-decl nil SPLrefinement nil)
@@ -1722,186 +1797,6 @@
     (mplRefinement const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil))
    4899 0 t shostak))
- (mplCompositionality_TCC1 0
-  (mplCompositionality_TCC1-1 nil 3580505760 nil
-   ("" (subtype-tcc) nil nil) unfinished nil nil nil nil nil))
- (mplCompositionality 0
-  (mplCompositionality-1 nil 3580505765 3580506582
-   ("" (skolem 1 (pl1 pl2 S cs1 cs2 mpl))
-    (("" (flatten)
-      (("" (expand* constraintsRef plRefinementAlt mplRefinement)
-        (("" (skolem 1 p1)
-          (("" (flatten)
-            (("" (expand semantics -4)
-              (("" (expand member)
-                (("" (skolem -4 pcs1)
-                  (("" (flatten)
-                    (("" (replace -1 -4)
-                      (("" (expand confs -4)
-                        (("" (instantiate -2 pcs1)
-                          (("" (assert)
-                            (("" (skolem -2 pcs2)
-                              ((""
-                                (flatten)
-                                ((""
-                                  (bddsimp)
-                                  (("1"
-                                    (skolem -4 (pc1 pc2 pcs))
-                                    (("1"
-                                      (flatten)
-                                      (("1"
-                                        (instantiate 3 "product(pcs2)")
-                                        (("1"
-                                          (bddsimp)
-                                          (("1"
-                                            (instantiate
-                                             -8
-                                             "product(pc1)")
-                                            (("1"
-                                              (bddsimp)
-                                              (("1"
-                                                (skolem -8 prodPL2)
-                                                (("1"
-                                                  (flatten)
-                                                  (("1"
-                                                    (expand
-                                                     products
-                                                     -8)
-                                                    (("1"
-                                                      (replace -11)
-                                                      (("1"
-                                                        (postpone)
-                                                        nil
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil)
-                                               ("2"
-                                                (expand products)
-                                                (("2"
-                                                  (expand product 3)
-                                                  (("2"
-                                                    (expand singleton)
-                                                    (("2"
-                                                      (expand prod)
-                                                      (("2"
-                                                        (instantiate
-                                                         3
-                                                         "conf(pc1)")
-                                                        (("2"
-                                                          (assert)
-                                                          (("2"
-                                                            (decompose-equality
-                                                             3)
-                                                            (("2"
-                                                              (bddsimp)
-                                                              (("1"
-                                                                (skosimp)
-                                                                (("1"
-                                                                  (assert)
-                                                                  nil
-                                                                  nil))
-                                                                nil)
-                                                               ("2"
-                                                                (instantiate
-                                                                 1
-                                                                 pc1)
-                                                                (("2"
-                                                                  (assert)
-                                                                  nil
-                                                                  nil))
-                                                                nil))
-                                                              nil))
-                                                            nil))
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil)
-                                           ("2"
-                                            (expand semantics 3)
-                                            (("2"
-                                              (expand member)
-                                              (("2"
-                                                (expand confs 3)
-                                                (("2"
-                                                  (instantiate 3 pcs2)
-                                                  (("2"
-                                                    (propax)
-                                                    nil
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil)
-                                   ("2"
-                                    (instantiate 2 p1)
-                                    (("2"
-                                      (expand semantics 2)
-                                      (("2"
-                                        (expand member)
-                                        (("2"
-                                          (bddsimp)
-                                          (("1"
-                                            (use assetRefinement)
-                                            (("1"
-                                              (expand*
-                                               preorder?
-                                               reflexive?)
-                                              (("1"
-                                                (flatten)
-                                                (("1"
-                                                  (instantiate -1 p1)
-                                                  (("1"
-                                                    (propax)
-                                                    nil
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil)
-                                           ("2"
-                                            (instantiate 2 pcs1)
-                                            (("2"
-                                              (assert)
-                                              (("2"
-                                                (expand confs 2)
-                                                (("2"
-                                                  (assert)
-                                                  nil
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   unfinished nil 282005 390 t shostak))
  (compMPL_TCC1 0
   (compMPL_TCC1-1 nil 3580508092 3580508131
    ("" (lemma plRefEq)
@@ -2092,86 +1987,6 @@
     (semantics const-decl "set[finite_sets[Asset].finite_set]"
      SPLrefinement nil))
    37645 100 t shostak))
- (mplCompositional 0
-  (mplCompositional-1 nil 3580220697 3580475876
-   ("" (skolem 1 (pl1 pl2 mpl))
-    (("" (flatten)
-      (("" (expand mplRefinement)
-        (("" (skolem 2 pcs1)
-          (("" (flatten)
-            (("" (case "member(pl1,pcs1)")
-              (("1" (lemma mplRefPL)
-                (("1" (instantiate -1 (mpl pl1 pl2))
-                  (("1" (assert)
-                    (("1" (instantiate -1 pcs1)
-                      (("1" (assert)
-                        (("1" (skolem -1 pcs2)
-                          (("1" (flatten)
-                            (("1" (instantiate 2 pcs2)
-                              (("1" (assert) nil nil)) nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil)
-               ("2" (lemma confsPLreplace)
-                (("2" (instantiate -1 (mpl pl1 pl2))
-                  (("2" (assert)
-                    (("2" (instantiate -1 pcs1)
-                      (("2" (assert)
-                        (("2" (instantiate 3 pcs1)
-                          (("2" (use assetRefinement)
-                            (("2" (expand* preorder? reflexive?)
-                              (("2"
-                                (flatten)
-                                (("2"
-                                  (instantiate -1 "product(pcs1)")
-                                  (("2" (assert) nil nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   unfinished
-   ((mplRefinement const-decl "bool" SPLrefinement nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (product const-decl "finite_sets[Asset].finite_set" SPLrefinement
-     nil)
-    (Asset type-decl nil SPLrefinement nil)
-    (preorder? const-decl "bool" orders nil)
-    (reflexive? const-decl "bool" relations nil)
-    (mplRefPL formula-decl nil SPLrefinement nil)
-    (MPL type-eq-decl nil SPLrefinement nil)
-    (wfMPL const-decl "bool" SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (FM type-decl nil SPLrefinement nil)
-    (CK type-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (Conf type-decl nil SPLrefinement nil)
-    (set type-eq-decl nil sets nil)
-    ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
-    (PC type-eq-decl nil SPLrefinement nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (member const-decl "bool" SPLrefinement nil))
-   75947 70 t shostak))
  (weakFMcompositionality 0
   (weakFMcompositionality-3 nil 3498493637 3499097837
    ("" (skolem 1 (pl fm))
