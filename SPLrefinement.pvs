@@ -335,14 +335,14 @@ BEGIN
          FORALL pl:
            member(pl,pcs) => EXISTS pc,pcs1: pcs = union(pc,pcs1) AND pl(pc)=pl AND (NOT member(pl,pcs1))
 
-  replacePLnotMember: THEOREM
-    FORALL mpl:
-      FORALL pcs: 
-       confs(mpl)(pcs) =>
-        FORALL(pl1,pl2): plRefinement(pl1,pl2) =>  
-	  IF (pl1=pl2) THEN (member(pl1,replace(pl1,pl2,pcs)))
-	  ELSE NOT(member(pl1,replace(pl1,pl2,pcs)))
-	  ENDIF
+%  replacePLnotMember: THEOREM
+%    FORALL mpl:
+%      FORALL pcs: 
+%       confs(mpl)(pcs) =>
+%        FORALL(pl1,pl2): plRefinement(pl1,pl2) =>  
+%	  IF (pl1=pl2) THEN (member(pl1,replace(pl1,pl2,pcs)))
+%	  ELSE NOT(member(pl1,replace(pl1,pl2,pcs)))
+%	  ENDIF
 
   plRefPCe: THEOREM
     FORALL mpl:
@@ -364,14 +364,14 @@ BEGIN
 	      (product(e) |- product(replace(pl(e),pl,e)))
 
   plMemberPCS: THEOREM
-    FORALL mpl:
-      FORALL pcs: 
-       confs(mpl)(pcs) =>
-         FORALL pl1,pl2:
-           plRefinement(pl1,pl2) 
-	   AND member(pl1,pcs) 
-	   AND NOT(member(pl2,pcs)) 
-	   =>
+    FORALL mpl,pl1,pl2,pls: 
+      pls(mpl)=union(pl1,pls)
+      AND plRefinement(pl1,pl2) 	
+      AND NOT(member(pl1,pls))  
+      AND NOT(member(pl2,pls))  
+      =>       
+      FORALL pcs: confs(mpl)(pcs) AND member(pl1,pcs) 
+      =>
 	     EXISTS pc1,pc2,pcs1: pcs = union(pc1,pcs1) AND 
 	     	    		  pl(pc1)=pl1 AND 
 				  (NOT member(pl1,pcs1)) AND
@@ -381,9 +381,13 @@ BEGIN
 				  (product(singleton(pc1)) |- product(singleton(pc2)))
 
   replacePLinMPL: THEOREM
-    FORALL mpl: 
-      FORALL pcs1: confs(mpl)(pcs1) =>  
-        FORALL(pl1,pl2): plRefinement(pl1,pl2) AND member(pl1,pcs1) AND NOT(member(pl2,pcs1))% AND member(pl1,mpl) AND NOT(member(pl2,mpl)) 
+    FORALL mpl,pl1,pl2,pls: 
+      pls(mpl)=union(pl1,pls)
+      AND plRefinement(pl1,pl2) 	
+      AND NOT(member(pl1,pls))  
+      AND NOT(member(pl2,pls))  
+      =>       
+        FORALL pcs1: confs(mpl)(pcs1) AND member(pl1,pcs1) 
 	=>  
 	  (product(pcs1) |- product(replace(pl1,pl2,pcs1)))
 
@@ -418,7 +422,7 @@ BEGIN
 	  EXISTS pcs2: confs(union(pl2,pls),cs2)(pcs2) AND 
       	     pcs2=replace(pl1,pl2,pcs1)
         )  => 
-	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #))
+	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #)) %AND wfMPL(union(pl2,pls), cs2)
 
 
  % PL Refinement compositionality
