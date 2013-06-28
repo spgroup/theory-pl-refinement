@@ -412,6 +412,8 @@ BEGIN
 %	     ENDIF
 %    )
 
+%QUANDO quer remover a linha? cs1==cs2??
+
   compMPL: THEOREM
     FORALL(pl1,pl2,pls,cs1,cs2,mpl1):
 	plRefinementAlt(pl1,pl2) AND
