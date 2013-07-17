@@ -303,14 +303,14 @@ BEGIN
     singleton?( products(pl) )
 
   %% SINGLE PRODUCT SPL REFINEMENT IS EQUIVALENT TO PROGRAM REFINEMENT
-  singleProductRef : THEOREM
-    FORALL(pl1,pl2,p1,p2):
-      (
-        singletonPL(pl1) AND 
-	singletonPL(pl2) AND
-	(products(pl1)(p1)) AND
-	(products(pl2)(p2))
-      )
-      => (plRefinement(pl1,pl2) <=>  ((p1) |- (p2)) )
+%  singleProductRef : THEOREM
+%    FORALL(pl1,pl2,p1,p2):
+%      (
+%        singletonPL(pl1) AND 
+%	singletonPL(pl2) AND
+%	(products(pl1)(p1)) AND
+%	(products(pl2)(p2))
+%      )
+%      => (plRefinement(pl1,pl2) <=>  ((p1) |- (p2)) )
 
 END SPLrefinement
