@@ -196,6 +196,18 @@ BEGIN
      ))
 
 
+  strongerPLrefinement(pl1,pl2:PL) : bool = 
+    (FORALL c1: {|F(pl1)|}(c1) => 
+    		({|F(pl2)|}(c1) AND
+		    (
+		    	( ([| K(pl1) |] (A(pl1))) (c1) )
+			|- 
+			( ([| K(pl2) |] (A(pl2))) (c1) )
+    		    )
+     ))
+
+  strongerPLref: THEOREM orders[PL].preorder?( strongerPLrefinement ) 
+
  % PL Refinement compositionality
   weakFMcompositionality: THEOREM
     FORALL(pl,fm):

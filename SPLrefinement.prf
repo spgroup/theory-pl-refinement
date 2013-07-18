@@ -1,7 +1,6 @@
 (SPLrefinement
  (eqFM 0
-  (eqFM-1 nil 3498492438 3582880797 ("" (grind) nil nil)
-   proved-complete
+  (eqFM-1 nil 3498492438 3582880797 ("" (grind) nil nil) unchecked
    ((equivalentFMs const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (symmetric? const-decl "bool" relations nil)
@@ -9,8 +8,7 @@
     (equivalence? const-decl "bool" relations nil))
    220 70 t shostak))
  (refFM 0
-  (refFM-1 nil 3498492442 3582880797 ("" (grind) nil nil)
-   proved-complete
+  (refFM-1 nil 3498492442 3582880797 ("" (grind) nil nil) unchecked
    ((Conf type-decl nil SPLrefinement nil)
     (member const-decl "bool" sets nil)
     (subset? const-decl "bool" sets nil)
@@ -114,7 +112,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((AM type-eq-decl nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -444,8 +442,7 @@
     nil)
    unfinished nil 400 280 t shostak))
  (eqCK 0
-  (eqCK-1 nil 3498492449 3582880798 ("" (grind) nil nil)
-   proved-complete
+  (eqCK-1 nil 3498492449 3582880798 ("" (grind) nil nil) unchecked
    ((equivalentCKs const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (symmetric? const-decl "bool" relations nil)
@@ -454,11 +451,11 @@
    54 30 t shostak))
  (weakerEqReflexive 0
   (weakerEqReflexive-1 nil 3583058305 3583058307 ("" (grind) nil nil)
-   proved ((weakerEqCK const-decl "bool" SPLrefinement nil)) 1748 10 t
+   untried ((weakerEqCK const-decl "bool" SPLrefinement nil)) 1748 10 t
    shostak))
  (weakerEqSymmetric 0
   (weakerEqSymmetric-1 nil 3583058310 3583058313 ("" (grind) nil nil)
-   proved
+   untried
    ((Conf type-decl nil SPLrefinement nil)
     (real_ge_is_total_order name-judgement "(total_order?[real])"
      real_props nil)
@@ -489,7 +486,7 @@
    3074 80 t shostak))
  (weakerEqTransitive 0
   (weakerEqTransitive-1 nil 3583058316 3583058317 ("" (grind) nil nil)
-   proved
+   untried
    ((Conf type-decl nil SPLrefinement nil)
     (real_ge_is_total_order name-judgement "(total_order?[real])"
      real_props nil)
@@ -613,7 +610,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((reflexive? const-decl "bool" relations nil)
     (plRefinement const-decl "bool" SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
@@ -703,7 +700,7 @@
         nil))
       nil))
     nil)
-   proved
+   untried
    ((Asset type-decl nil SPLrefinement nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -774,7 +771,7 @@
         nil))
       nil))
     nil)
-   proved
+   untried
    ((products const-decl "set[finite_sets[Asset].finite_set]"
      SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil)
@@ -798,6 +795,91 @@
     (plRefinement const-decl "bool" SPLrefinement nil)
     (plRefinementAlt const-decl "bool" SPLrefinement nil))
    221857 980 t shostak))
+ (strongerPLref 0
+  (strongerPLref-1 nil 3583157931 3583158109
+   ("" (expand* strongerPLrefinement preorder? reflexive? transitive?)
+    (("" (bddsimp)
+      (("1" (skolem 1 (x y z))
+        (("1" (flatten)
+          (("1" (skolem 1 c1)
+            (("1" (flatten)
+              (("1" (instantiate -1 c1)
+                (("1" (instantiate -2 c1)
+                  (("1" (assert)
+                    (("1" (flatten)
+                      (("1" (assert)
+                        (("1" (flatten)
+                          (("1" (assert)
+                            (("1" (use assetRefinement)
+                              (("1"
+                                (expand* preorder? transitive?)
+                                (("1"
+                                  (flatten)
+                                  (("1"
+                                    (instantiate
+                                     -2
+                                     ("([||](K(x))(A(x))(c1))"
+                                      "([||](K(y))(A(y))(c1))"
+                                      "([||](K(z))(A(z))(c1))"))
+                                    (("1" (assert) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil)
+       ("2" (skolem 1 x)
+        (("2" (skolem 1 c)
+          (("2" (flatten)
+            (("2" (use assetRefinement)
+              (("2" (expand* preorder? transitive?)
+                (("2" (flatten)
+                  (("2" (expand* reflexive?)
+                    (("2" (instantiate -1 "([||](K(x))(A(x))(c))")
+                      (("2" (assert) nil nil)) nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((Conf type-decl nil SPLrefinement nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (Asset type-decl nil SPLrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (CK type-decl nil SPLrefinement nil)
+    (AssetName type-decl nil SPLrefinement nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLrefinement nil)
+    (FM type-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (strongerPLrefinement const-decl "bool" SPLrefinement nil)
+    (reflexive? const-decl "bool" relations nil)
+    (transitive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil))
+   178580 140 t shostak))
  (weakFMcompositionality 0
   (weakFMcompositionality-3 nil 3498493637 3582880798
    ("" (skolem 1 (pl fm))
@@ -840,7 +922,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((\|= const-decl "bool" SPLrefinement nil)
     (member const-decl "bool" sets nil)
     (preorder? const-decl "bool" orders nil)
@@ -1021,7 +1103,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((plRefinement const-decl "bool" SPLrefinement nil)
     (equivalentFMs const-decl "bool" SPLrefinement nil)
     (preorder? const-decl "bool" orders nil)
@@ -1197,7 +1279,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -1439,7 +1521,7 @@
         nil))
       nil))
     nil)
-   proved
+   untried
    ((weakerCKcompositionality_TCC1 subtype-tcc nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
@@ -1566,7 +1648,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((plRefinement const-decl "bool" SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
@@ -1853,7 +1935,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((fmEquivalenceCompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -2522,7 +2604,7 @@
         nil))
       nil))
     nil)
-   proved-complete
+   unchecked
    ((ckEquivalenceCompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -2721,12 +2803,9 @@
         nil))
       nil))
     nil)
-   proved
+   unfinished
    ((weakerEqCK const-decl "bool" SPLrefinement nil)
     (equivalentFMs const-decl "bool" SPLrefinement nil)
-    (pl skolem-const-decl "PL" SPLrefinement nil)
-    (am skolem-const-decl "AM" SPLrefinement nil)
-    (fm skolem-const-decl "FM" SPLrefinement nil)
     (weakerCKcompositionality_TCC1 subtype-tcc nil SPLrefinement nil)
     (amRefinementCompositionality_TCC1 subtype-tcc nil SPLrefinement
      nil)
@@ -2837,7 +2916,7 @@
         nil))
       nil))
     nil)
-   proved
+   untried
    ((fullCompositionality2_TCC1 subtype-tcc nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -2928,7 +3007,7 @@
         nil))
       nil))
     nil)
-   proved
+   untried
    ((weakerCKcompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -2949,43 +3028,5 @@
     (Asset type-decl nil SPLrefinement nil)
     (AssetName type-decl nil SPLrefinement nil)
     (amRefinementCompositionality formula-decl nil SPLrefinement nil))
-   92845 100 t shostak))
- (singleProductRef 0
-  (singleProductRef-1 nil 3583059608 3583059755
-   ("" (skolem 1 (pl1 pl2 p1 p2))
-    (("" (flatten)
-      (("" (expand* products singletonPL plRefinement)
-        (("" (bddsimp)
-          (("1" (skolem -3 c1)
-            (("1" (flatten)
-              (("1" (skolem -5 c2)
-                (("1" (flatten)
-                  (("1" (instantiate -7 c1)
-                    (("1" (assert)
-                      (("1" (expand singleton?)
-                        (("1" (postpone) nil nil)) nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil)
-           ("2" (skolem -3 c1)
-            (("2" (skolem -4 c2)
-              (("2" (flatten)
-                (("2" (skolem 1 c)
-                  (("2" (flatten)
-                    (("2" (instantiate 1 c2)
-                      (("2" (assert) (("2" (postpone) nil nil)) nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   unfinished nil 147588 90 t shostak)))
+   92845 100 t shostak)))
 
