@@ -40,6 +40,15 @@ BEGIN
     	   IF (pl(pc2)=pl1) THEN pc1=replace(pl1,pl2,pc2)
 	   ELSE pc1=pc2 ENDIF } 
 
+  replaceStrong(pl1:PL,pl2:{pl2:PL | subset?({|F(pl1)|},{|F(pl2)|})},pc:{p:PC | pl(p)=pl1}): PC = 
+    (# pl:=pl2, conf:=conf(pc)  #)
+
+  replaceStrong(pl1:PL,pl2:{pl2:PL | subset?({|F(pl1)|},{|F(pl2)|})},pcs): finite_sets[PC].finite_set = 
+    {pc1 | EXISTS (pc2): pcs(pc2) AND 
+    	   IF (pl(pc2)=pl1) THEN pc1=replaceStrong(pl1,pl2,pc2)
+	   ELSE pc1=pc2 ENDIF } 
+
+
   replacePLnotInMPL: THEOREM
     FORALL pl1,pl2,pcs:
       NOT(member(pl1,pcs)) AND plRefinement(pl1,pl2) =>  
@@ -49,6 +58,17 @@ BEGIN
     FORALL pl1,pl2,pcs:
       member(pl1,pcs) AND plRefinement(pl1,pl2) =>  
         member(pl2,replace(pl1,pl2,pcs))
+
+
+  replaceStrongPLnotInPCS: THEOREM
+    FORALL pl1,pl2,pcs:
+      NOT(member(pl1,pcs)) AND subset?({|F(pl1)|},{|F(pl2)|}) =>  
+        pcs=replaceStrong(pl1,pl2,pcs)
+
+  replaceStrongPLinPCS: THEOREM
+    FORALL pl1,pl2,pcs:
+      member(pl1,pcs) AND subset?({|F(pl1)|},{|F(pl2)|}) =>  
+        member(pl2,replaceStrong(pl1,pl2,pcs))
 
 
   confs: [finite_sets[PL].finite_set, finite_sets[Constraint].finite_set -> finite_sets[set[PC]].finite_set];
@@ -76,6 +96,29 @@ BEGIN
         (FORALL(e:PC): pcs(e)
 	=> 
 	  pls(mpl)(pl(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
+
+  confsAdd: AXIOM
+    FORALL pl,pls,cs:
+      FORALL pcs: confs(pls,cs)(pcs) 
+      =>  
+        confs(union(pl,pls),cs)(pcs) 
+
+  confsRem: AXIOM
+    FORALL pl,pls,cs:
+      NOT(member(pl,pls))
+      =>
+        FORALL pcs: confs(union(pl,pls),cs)(pcs) AND NOT(member(pl,pcs))
+        =>  
+          confs(pls,cs)(pcs) 
+
+  confsReplace: AXIOM
+    FORALL pl1,pl2,pls,cs:
+      NOT(member(pl1,pls)) AND 
+      NOT(member(pl2,pls)) AND 
+      subset?({|F(pl1)|},{|F(pl2)|})
+      =>
+        FORALL(pcs): confs(union(pl1,pls),cs)(pcs) => confs(union(pl2,pls),cs)(replaceStrong(pl1,pl2,pcs))
+%        subset?(replaceStrong(pl1,pl2,confs(union(pl1,pls),cs)),confs(union(pl2,pls),cs))
 
   productUnion: THEOREM
     FORALL(pc,pcs):
@@ -151,6 +194,16 @@ BEGIN
 	=>  
 	  (product(pcs1) |- product(replace(pl1,pl2,pcs1)))
 
+  replaceStrongPLinMPL: THEOREM
+    FORALL pl1,pl2,pls,cs: 
+      strongerPLrefinement(pl1,pl2) 	
+      AND NOT(member(pl1,pls))  
+      AND NOT(member(pl2,pls))  
+      =>       
+        FORALL pcs: confs(union(singleton[PL](pl1), pls),cs)(pcs) AND member(pl1,pcs) 
+	=>  
+	  (product(pcs) |- product(replaceStrong(pl1,pl2,pcs)))
+
   mplRefPL: THEOREM
     FORALL mpl,pl1,pl2:
       plRefinement(pl1,pl2) =>
@@ -164,14 +217,6 @@ BEGIN
   
   mplRef: THEOREM orders[MPL].preorder?( mplRefinement )   
 
-%  constraintsRef(cs1,cs2,pl1,pl2,pls) : bool =
-%    (FORALL pcs1: confs(union(pl1,pls),cs1)(pcs1) => 
-%      EXISTS pcs2: confs(union(pl2,pls),cs2)(pcs2) AND 
-%      	     IF (NOT(member(pl1,pcs1))) THEN (pcs2 = pcs1)
-%	     ELSE (EXISTS pc1,pc2,pcs: pcs1 = union(pc1,pcs) AND pcs2 = union(pc2,pcs) AND pl(pc1)=pl1 AND pl(pc2)=pl2 AND (NOT member(pl1,pcs)) AND (NOT member(pl2,pcs)))
-%	     ENDIF
-%    )
-
 %QUANDO quer remover a linha? cs1==cs2??
 
   constraintsRef(cs1,cs2,pls) : bool =
@@ -182,30 +227,20 @@ BEGIN
   constraintsRefCompMPL: THEOREM
     FORALL(cs1,cs2,pls,mpl1):
 	constraintsRef(cs1,cs2,pls) AND
-	mpl1=(# pls:=pls, cs:=cs1 #)
+	mpl1=(# pls:=pls, cs:=cs1 #) AND 
+	wfMPL(pls, cs2)
 	=> 
-	  mplRefinement(mpl1,(# pls:=pls, cs:=cs2 #)) %AND wfMPL(union(pl2,pls), cs2)
-
-  strongPLrefinementMPL: THEOREM
-    FORALL(pl1,pl2,pls,cs,mpl1):
-	strongerPLrefinement(pl1,pl2) AND
-	mpl1=(# pls:=union(pl1,pls), cs:=cs #) AND 
-	NOT(member(pl1,pls)) AND 
-	NOT(member(pl2,pls))  
-	=> 
-	(FORALL pcs1: confs(union(pl1,pls),cs)(pcs1) => 
-	  confs(union(pl2,pls),cs)(pcs1)
-        )
-
+	  mplRefinement(mpl1,(# pls:=pls, cs:=cs2 #))
 
   strongCompMPL: THEOREM
     FORALL(pl1,pl2,pls,cs,mpl1):
 	strongerPLrefinement(pl1,pl2) AND
 	mpl1=(# pls:=union(pl1,pls), cs:=cs #) AND 
 	NOT(member(pl1,pls)) AND 
-	NOT(member(pl2,pls))  
+	NOT(member(pl2,pls)) 
+	AND wfMPL(union(pl2,pls), cs)
 	=> 
-	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs #)) %AND wfMPL(union(pl2,pls), cs2)
+	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs #)) 
 
 
   compMPL: THEOREM
@@ -214,11 +249,14 @@ BEGIN
 	mpl1=(# pls:=union(pl1,pls), cs:=cs1 #) AND 
 	NOT(member(pl1,pls)) AND 
 	NOT(member(pl2,pls)) AND 
+
+	wfMPL(union(pl2,pls), cs2) AND 
+
 	(FORALL pcs1: confs(union(pl1,pls),cs1)(pcs1) => 
 	  EXISTS pcs2: confs(union(pl2,pls),cs2)(pcs2) AND 
       	     pcs2=replace(pl1,pl2,pcs1)
         )  => 
-	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #)) %AND wfMPL(union(pl2,pls), cs2)
+	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs2 #)) 
 
 
 END MultiProductLines

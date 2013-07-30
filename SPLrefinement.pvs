@@ -208,6 +208,10 @@ BEGIN
 
   strongerPLref: THEOREM orders[PL].preorder?( strongerPLrefinement ) 
 
+  plStrongSubset: THEOREM
+    FORALL(pl1,pl2): (strongerPLrefinement(pl1,pl2)) => (subset?({|F(pl1)|},{|F(pl2)|}))
+
+
  % PL Refinement compositionality
   weakFMcompositionality: THEOREM
     FORALL(pl,fm):
