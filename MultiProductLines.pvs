@@ -183,6 +183,24 @@ BEGIN
 				  replace(pl1,pl2,pcs)=union(pc2,pcs1) AND
 				  (product(singleton(pc1)) |- product(singleton(pc2)))
 
+
+  plMemberReplaceStrongPCS: THEOREM
+    FORALL mpl,pl1,pl2,pls: 
+      pls(mpl)=union(pl1,pls)
+      AND strongerPLrefinement(pl1,pl2) 	
+      AND NOT(member(pl1,pls))  
+      AND NOT(member(pl2,pls))  
+      =>       
+      FORALL pcs: confs(mpl)(pcs) AND member(pl1,pcs) 
+      =>
+	     EXISTS pc1,pc2,pcs1: pcs = union(pc1,pcs1) AND 
+	     	    		  pl(pc1)=pl1 AND 
+				  (NOT member(pl1,pcs1)) AND
+	     	    		  pl(pc2)=pl2 AND 
+				  (NOT member(pl2,pcs1)) AND
+				  replaceStrong(pl1,pl2,pcs)=union(pc2,pcs1) AND
+				  (product(singleton(pc1)) |- product(singleton(pc2)))
+
   replacePLinMPL: THEOREM
     FORALL mpl,pl1,pl2,pls: 
       pls(mpl)=union(pl1,pls)
@@ -195,12 +213,13 @@ BEGIN
 	  (product(pcs1) |- product(replace(pl1,pl2,pcs1)))
 
   replaceStrongPLinMPL: THEOREM
-    FORALL pl1,pl2,pls,cs: 
-      strongerPLrefinement(pl1,pl2) 	
+    FORALL mpl,pl1,pl2,pls: 
+      pls(mpl)=union(pl1,pls)
+      AND strongerPLrefinement(pl1,pl2) 	
       AND NOT(member(pl1,pls))  
       AND NOT(member(pl2,pls))  
       =>       
-        FORALL pcs: confs(union(singleton[PL](pl1), pls),cs)(pcs) AND member(pl1,pcs) 
+        FORALL pcs: confs(mpl)(pcs) AND member(pl1,pcs) 
 	=>  
 	  (product(pcs) |- product(replaceStrong(pl1,pl2,pcs)))
 
