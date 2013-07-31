@@ -87,11 +87,6 @@ set_comp_lemmas[S: TYPE,T: TYPE]: THEORY
     	   FORALL(S:finite_sets[T].finite_set) :
 	         is_finite({i:S | EXISTS (it:T): S(it) AND i=f(it)})
 
-  setCompFinite5not : LEMMA
-    FORALL (f:[T->S]) : 
-    	   FORALL(S:finite_sets[T].finite_set) :
-	         is_finite({i:S | EXISTS (it:T): S(it) AND i/=f(it)})
-
   setCompFinite6 : LEMMA
     FORALL (f:[S,T->bool],e:T) : 
     	   FORALL(S:finite_sets[S].finite_set) :
