@@ -1,14 +1,14 @@
 (SPLrefinement
  (eqFM 0
-  (eqFM-1 nil 3498492438 3582880797 ("" (grind) nil nil) unchecked
+  (eqFM-1 nil 3498492438 3584437630 ("" (grind) nil nil) proved
    ((equivalentFMs const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (symmetric? const-decl "bool" relations nil)
     (transitive? const-decl "bool" relations nil)
     (equivalence? const-decl "bool" relations nil))
-   220 70 t shostak))
+   37 30 t shostak))
  (refFM 0
-  (refFM-1 nil 3498492442 3582880797 ("" (grind) nil nil) unchecked
+  (refFM-1 nil 3498492442 3584437630 ("" (grind) nil nil) proved
    ((Conf type-decl nil SPLrefinement nil)
     (member const-decl "bool" sets nil)
     (subset? const-decl "bool" sets nil)
@@ -16,9 +16,9 @@
     (reflexive? const-decl "bool" relations nil)
     (transitive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil))
-   83 40 t shostak))
+   65 40 t shostak))
  (assetMappingRefinement 0
-  (assetMappingRefinement-1 nil 3581433159 3582880797
+  (assetMappingRefinement-1 nil 3581433159 3584437630
    ("" (expand* preorder? reflexive? transitive? "|>")
     (("" (bddsimp)
       (("1" (skolem 1 (x y z))
@@ -112,7 +112,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((AM type-eq-decl nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -133,9 +133,257 @@
     (transitive? const-decl "bool" relations nil)
     (\|> const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil))
-   176 80 t shostak))
+   118 80 t shostak))
  (amRefCompositional 0
-  (amRefCompositional-1 nil 3506978924 3583059268
+  (amRefCompositional-2 "" 3584455815 3584455815
+   ("" (skolem 1 (A1 A2))
+    (("" (expand "|>")
+      (("" (flatten)
+        ((""
+          (use "measure_induction[finite_sets[AssetName].finite_set,nat, finite_sets[AssetName].Card, <]")
+          (("1" (bddsimp)
+            (("1" (skolem 1 ans)
+              (("1" (flatten)
+                (("1"
+                  (case "EXISTS(an:AssetName): ans(an) and dom(A1)(an)")
+                  (("1" (skolem -1 an)
+                    (("1" (flatten)
+                      (("1"
+                        (lemma sets_lemmas[AssetName].nonempty_member)
+                        (("1" (expand member)
+                          (("1" (instantiate -1 ans)
+                            (("1" (expand nonempty?)
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (instantiate 1 an)
+                                  (("1" (propax) nil nil))
+                                  nil)
+                                 ("2"
+                                  (lemma
+                                   set_aux_lemmas[AssetName].setMember)
+                                  (("2"
+                                    (expand member)
+                                    (("2"
+                                      (instantiate -1 (ans an))
+                                      (("2"
+                                        (assert)
+                                        (("2"
+                                          (skolem -1 ans2)
+                                          (("2"
+                                            (flatten)
+                                            (("2"
+                                              (instantiate -5 ans2)
+                                              (("2"
+                                                (lemma
+                                                 set_aux_lemmas[AssetName].cardUnion)
+                                                (("2"
+                                                  (expand member)
+                                                  (("2"
+                                                    (instantiate
+                                                     -1
+                                                     (an ans2))
+                                                    (("2"
+                                                      (assert)
+                                                      (("2"
+                                                        (hide -1)
+                                                        (("2"
+                                                          (skolem 3 a)
+                                                          (("2"
+                                                            (flatten)
+                                                            (("2"
+                                                              (replace
+                                                               -1)
+                                                              (("2"
+                                                                (hide
+                                                                 -2)
+                                                                (("2"
+                                                                  (replace
+                                                                   -1
+                                                                   -2
+                                                                   RL)
+                                                                  (("2"
+                                                                    (instantiate
+                                                                     -7
+                                                                     an)
+                                                                    (("2"
+                                                                      (assert)
+                                                                      (("2"
+                                                                        (skolem
+                                                                         -7
+                                                                         (a1
+                                                                          a2))
+                                                                        (("2"
+                                                                          (flatten)
+                                                                          (("2"
+                                                                            (typepred
+                                                                             A1)
+                                                                            (("2"
+                                                                              (lemma
+                                                                               "maps[AssetName,Asset].mapAM")
+                                                                              (("2"
+                                                                                (copy
+                                                                                 -1)
+                                                                                (("2"
+                                                                                  (instantiate
+                                                                                   -1
+                                                                                   (A1
+                                                                                    an
+                                                                                    ans2))
+                                                                                  (("2"
+                                                                                    (assert)
+                                                                                    (("2"
+                                                                                      (instantiate
+                                                                                       -2
+                                                                                       (A2
+                                                                                        an
+                                                                                        ans2))
+                                                                                      (("2"
+                                                                                        (assert)
+                                                                                        (("2"
+                                                                                          (skolem
+                                                                                           -1
+                                                                                           ax)
+                                                                                          (("2"
+                                                                                            (skolem
+                                                                                             -2
+                                                                                             ay)
+                                                                                            (("2"
+                                                                                              (flatten)
+                                                                                              (("2"
+                                                                                                (typepred
+                                                                                                 A2)
+                                                                                                (("2"
+                                                                                                  (expand
+                                                                                                   unique)
+                                                                                                  (("2"
+                                                                                                    (instantiate
+                                                                                                     -2
+                                                                                                     (an
+                                                                                                      ay
+                                                                                                      a2))
+                                                                                                    (("2"
+                                                                                                      (instantiate
+                                                                                                       -8
+                                                                                                       (an
+                                                                                                        ax
+                                                                                                        a1))
+                                                                                                      (("2"
+                                                                                                        (assert)
+                                                                                                        (("2"
+                                                                                                          (replace
+                                                                                                           -2)
+                                                                                                          (("2"
+                                                                                                            (replace
+                                                                                                             -8)
+                                                                                                            (("2"
+                                                                                                              (hide
+                                                                                                               (-1
+                                                                                                                -2
+                                                                                                                -3
+                                                                                                                -5
+                                                                                                                -7
+                                                                                                                -8))
+                                                                                                              (("2"
+                                                                                                                (replace
+                                                                                                                 -1)
+                                                                                                                (("2"
+                                                                                                                  (replace
+                                                                                                                   -2)
+                                                                                                                  (("2"
+                                                                                                                    (instantiate
+                                                                                                                     -6
+                                                                                                                     "union(a,a1)")
+                                                                                                                    (("2"
+                                                                                                                      (assert)
+                                                                                                                      (("2"
+                                                                                                                        (bddsimp
+                                                                                                                         -6)
+                                                                                                                        (("1"
+                                                                                                                          (lemma
+                                                                                                                           asRefCompositional)
+                                                                                                                          (("1"
+                                                                                                                            (instantiate
+                                                                                                                             -1
+                                                                                                                             (a1
+                                                                                                                              a2
+                                                                                                                              "union(a,map(A2,ans2))"))
+                                                                                                                            (("1"
+                                                                                                                              (assert)
+                                                                                                                              (("1"
+                                                                                                                                (postpone)
+                                                                                                                                nil
+                                                                                                                                nil))
+                                                                                                                              nil))
+                                                                                                                            nil))
+                                                                                                                          nil)
+                                                                                                                         ("2"
+                                                                                                                          (postpone)
+                                                                                                                          nil
+                                                                                                                          nil))
+                                                                                                                        nil))
+                                                                                                                      nil))
+                                                                                                                    nil))
+                                                                                                                  nil))
+                                                                                                                nil))
+                                                                                                              nil))
+                                                                                                            nil))
+                                                                                                          nil))
+                                                                                                        nil))
+                                                                                                      nil))
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (postpone) nil nil))
+                  nil))
+                nil))
+              nil))
+            nil)
+           ("2" (postpone) nil nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unfinished nil 3742965 1050 t shostak)
+  (amRefCompositional-1 nil 3506978924 3584437631
    ("" (skolem 1 (A1 A2))
     (("" (flatten)
       (("" (expand "|>")
@@ -440,22 +688,22 @@
         nil))
       nil))
     nil)
-   unfinished nil 400 280 t shostak))
+   unfinished nil 424 300 t shostak))
  (eqCK 0
-  (eqCK-1 nil 3498492449 3582880798 ("" (grind) nil nil) unchecked
+  (eqCK-1 nil 3498492449 3584437631 ("" (grind) nil nil) proved
    ((equivalentCKs const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (symmetric? const-decl "bool" relations nil)
     (transitive? const-decl "bool" relations nil)
     (equivalence? const-decl "bool" relations nil))
-   54 30 t shostak))
+   32 10 t shostak))
  (weakerEqReflexive 0
-  (weakerEqReflexive-1 nil 3583058305 3583058307 ("" (grind) nil nil)
-   unchecked ((weakerEqCK const-decl "bool" SPLrefinement nil)) 1748 10
-   t shostak))
+  (weakerEqReflexive-1 nil 3583058305 3584437631 ("" (grind) nil nil)
+   proved ((weakerEqCK const-decl "bool" SPLrefinement nil)) 4 10 t
+   shostak))
  (weakerEqSymmetric 0
-  (weakerEqSymmetric-1 nil 3583058310 3583058313 ("" (grind) nil nil)
-   unchecked
+  (weakerEqSymmetric-1 nil 3583058310 3584437631 ("" (grind) nil nil)
+   proved
    ((Conf type-decl nil SPLrefinement nil)
     (real_ge_is_total_order name-judgement "(total_order?[real])"
      real_props nil)
@@ -483,10 +731,10 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (weakerEqCK const-decl "bool" SPLrefinement nil))
-   3074 80 t shostak))
+   88 40 t shostak))
  (weakerEqTransitive 0
-  (weakerEqTransitive-1 nil 3583058316 3583058317 ("" (grind) nil nil)
-   unchecked
+  (weakerEqTransitive-1 nil 3583058316 3584437631 ("" (grind) nil nil)
+   proved
    ((Conf type-decl nil SPLrefinement nil)
     (real_ge_is_total_order name-judgement "(total_order?[real])"
      real_props nil)
@@ -514,9 +762,9 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (weakerEqCK const-decl "bool" SPLrefinement nil))
-   1719 120 t shostak))
+   153 130 t shostak))
  (plRef 0
-  (plRef-1 nil 3498493452 3582880798
+  (plRef-1 nil 3498493452 3584437631
    ("" (expand preorder?)
     (("" (expand reflexive?)
       (("" (expand transitive?)
@@ -610,7 +858,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((reflexive? const-decl "bool" relations nil)
     (plRefinement const-decl "bool" SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
@@ -634,9 +882,9 @@
     (PL type-eq-decl nil SPLrefinement nil)
     (transitive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil))
-   105 30 t shostak))
+   82 30 t shostak))
  (plRefAlt 0
-  (plRefAlt-1 nil 3583058561 3583058664
+  (plRefAlt-1 nil 3583058561 3584437631
    ("" (expand* preorder? reflexive? transitive? plRefinementAlt)
     (("" (bddsimp)
       (("1" (use assetRefinement)
@@ -700,7 +948,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((Asset type-decl nil SPLrefinement nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -712,9 +960,9 @@
     (transitive? const-decl "bool" relations nil)
     (plRefinementAlt const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil))
-   102897 50 t shostak))
+   84 50 t shostak))
  (plRefEq 0
-  (plRefEq-1 nil 3583058325 3583058547
+  (plRefEq-1 nil 3583058325 3584437631
    ("" (expand* plRefinement plRefinementAlt)
     (("" (skolem 1 (pl1 pl2))
       (("" (bddsimp)
@@ -771,7 +1019,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((products const-decl "set[finite_sets[Asset].finite_set]"
      SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil)
@@ -794,9 +1042,9 @@
     (PL type-eq-decl nil SPLrefinement nil)
     (plRefinement const-decl "bool" SPLrefinement nil)
     (plRefinementAlt const-decl "bool" SPLrefinement nil))
-   221857 980 t shostak))
+   64 30 t shostak))
  (strongerPLref 0
-  (strongerPLref-1 nil 3583157931 3583158109
+  (strongerPLref-1 nil 3583157931 3584437631
    ("" (expand* strongerPLrefinement preorder? reflexive? transitive?)
     (("" (bddsimp)
       (("1" (skolem 1 (x y z))
@@ -855,7 +1103,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((Conf type-decl nil SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (Asset type-decl nil SPLrefinement nil)
@@ -879,9 +1127,9 @@
     (reflexive? const-decl "bool" relations nil)
     (transitive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil))
-   178580 140 t shostak))
+   72 50 t shostak))
  (plStrongSubset 0
-  (plStrongSubset-1 nil 3584179990 3584180011
+  (plStrongSubset-1 nil 3584179990 3584437631
    ("" (skolem 1 (pl1 pl2))
     (("" (expand* strongerPLrefinement subset? member)
       (("" (flatten)
@@ -897,9 +1145,9 @@
     (member const-decl "bool" sets nil)
     (strongerPLrefinement const-decl "bool" SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil))
-   21805 30 t shostak))
+   21 10 t shostak))
  (weakFMcompositionality 0
-  (weakFMcompositionality-3 nil 3498493637 3582880798
+  (weakFMcompositionality-3 nil 3498493637 3584437631
    ("" (skolem 1 (pl fm))
     (("" (assert)
       (("" (flatten)
@@ -940,7 +1188,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((\|= const-decl "bool" SPLrefinement nil)
     (member const-decl "bool" sets nil)
     (preorder? const-decl "bool" orders nil)
@@ -966,7 +1214,7 @@
     (Conf type-decl nil SPLrefinement nil)
     (plRefinement const-decl "bool" SPLrefinement nil)
     (subset? const-decl "bool" sets nil))
-   42 20 t nil)
+   30 20 t nil)
   (weakFMcompositionality-2 nil 3498242341 3498493433
    ("" (skolem 1 (pl fm))
     (("" (assert)
@@ -1072,7 +1320,7 @@
    20 20 t shostak))
  (fmEquivalenceCompositionality_TCC1 0
   (fmEquivalenceCompositionality_TCC1-1 nil 3493396281 3581433134
-   ("" (subtype-tcc) nil nil) unchecked
+   ("" (subtype-tcc) nil nil) proved-complete
    ((boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
@@ -1086,7 +1334,7 @@
     (wfPL const-decl "bool" SPLrefinement nil))
    33 20 nil nil))
  (fmEquivalenceCompositionality 0
-  (fmEquivalenceCompositionality-3 nil 3498493705 3582880798
+  (fmEquivalenceCompositionality-3 nil 3498493705 3584437631
    ("" (skolem 1 (pl fm))
     (("" (assert)
       (("" (typepred pl)
@@ -1121,7 +1369,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((plRefinement const-decl "bool" SPLrefinement nil)
     (equivalentFMs const-decl "bool" SPLrefinement nil)
     (preorder? const-decl "bool" orders nil)
@@ -1146,7 +1394,7 @@
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil))
-   34 30 t nil)
+   44 30 t nil)
   (fmEquivalenceCompositionality-2 nil 3488033545 3498493433
    ("" (skolem 1 (pl fm))
     (("" (assert)
@@ -1253,7 +1501,7 @@
    42 20 t shostak))
  (ckEquivalenceCompositionality_TCC1 0
   (ckEquivalenceCompositionality_TCC1-1 nil 3493396281 3581433134
-   ("" (subtype-tcc) nil nil) unchecked
+   ("" (subtype-tcc) nil nil) proved-complete
    ((boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
@@ -1267,7 +1515,7 @@
     (wfPL const-decl "bool" SPLrefinement nil))
    33 20 nil nil))
  (ckEquivalenceCompositionality 0
-  (ckEquivalenceCompositionality-4 nil 3498493784 3582880798
+  (ckEquivalenceCompositionality-4 nil 3498493784 3584437631
    ("" (skolem 1 (pl K))
     (("" (typepred pl)
       (("" (expand* equivalentCKs plRefinement wfPL)
@@ -1297,7 +1545,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -1322,7 +1570,7 @@
     (preorder? const-decl "bool" orders nil)
     (equivalentCKs const-decl "bool" SPLrefinement nil)
     (plRefinement const-decl "bool" SPLrefinement nil))
-   44 10 t nil)
+   33 20 t nil)
   (ckEquivalenceCompositionality-3 nil 3498311205 3498493765
    ("" (skolem 1 (pl K))
     (("" (typepred pl)
@@ -1464,7 +1712,7 @@
    16 10 t shostak))
  (weakerCKcompositionality_TCC1 0
   (weakerCKcompositionality_TCC1-1 nil 3579886394 3581433135
-   ("" (subtype-tcc) nil nil) unchecked
+   ("" (subtype-tcc) nil nil) proved-complete
    ((boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
@@ -1484,7 +1732,7 @@
     (wfPL const-decl "bool" SPLrefinement nil))
    47 40 nil nil))
  (weakerCKcompositionality 0
-  (weakerCKcompositionality-1 nil 3583058804 3583058913
+  (weakerCKcompositionality-1 nil 3583058804 3584437631
    ("" (assert)
     (("" (skolem 1 (pl ck))
       (("" (flatten)
@@ -1539,7 +1787,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((weakerCKcompositionality_TCC1 subtype-tcc nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
@@ -1564,7 +1812,7 @@
     (preorder? const-decl "bool" orders nil)
     (reflexive? const-decl "bool" relations nil)
     (plRefinement const-decl "bool" SPLrefinement nil))
-   108974 60 t shostak))
+   49 30 t shostak))
  (amRefinementCompositionality_TCC1 0
   (amRefinementCompositionality_TCC1-1 nil 3493396281 3581433135
    ("" (skolem 1 (pl am A))
@@ -1599,7 +1847,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved-complete
    ((NOT const-decl "[bool -> bool]" booleans nil)
     (FM type-decl nil SPLrefinement nil)
     (CK type-decl nil SPLrefinement nil)
@@ -1619,7 +1867,7 @@
     (amRef formula-decl nil SPLrefinement nil))
    37 10 t nil))
  (amRefinementCompositionality 0
-  (amRefinementCompositionality-3 nil 3498493721 3582880798
+  (amRefinementCompositionality-3 nil 3498493721 3584437631
    ("" (skolem 1 (pl A))
     (("" (assert)
       (("" (typepred pl)
@@ -1666,7 +1914,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((plRefinement const-decl "bool" SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
@@ -1685,7 +1933,7 @@
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil))
-   48 30 t nil)
+   56 40 t nil)
   (amRefinementCompositionality-2 nil 3498311229 3498493433
    ("" (skolem 1 (pl A))
     (("" (assert)
@@ -1852,7 +2100,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved-complete
    ((amRef formula-decl nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -1874,7 +2122,7 @@
     (PL type-eq-decl nil SPLrefinement nil))
    40 20 t nil))
  (fullCompositionality 0
-  (fullCompositionality-6 nil 3498493744 3582880798
+  (fullCompositionality-6 nil 3498493744 3584437632
    ("" (skolem 1 (pl fm am ck))
     (("" (assert)
       (("" (flatten)
@@ -1953,7 +2201,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((fmEquivalenceCompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -1974,7 +2222,7 @@
     (preorder? const-decl "bool" orders nil)
     (amRefinementCompositionality formula-decl nil SPLrefinement nil)
     (ckEquivalenceCompositionality formula-decl nil SPLrefinement nil))
-   90 50 t nil)
+   73 40 t nil)
   (fullCompositionality-5 nil 3498311958 3498493433
    ("" (skolem 1 (pl fm am ck))
     (("" (assert)
@@ -2546,7 +2794,7 @@
     (ckEquivalenceCompositionality formula-decl nil SPLrefinement nil))
    18369 220 t shostak))
  (weakFullCompositionality 0
-  (weakFullCompositionality-2 nil 3498493759 3582880798
+  (weakFullCompositionality-2 nil 3498493759 3584437632
    ("" (skolem 1 (pl fm am ck))
     (("" (assert)
       (("" (flatten)
@@ -2622,7 +2870,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((ckEquivalenceCompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -2643,7 +2891,7 @@
     (Asset type-decl nil SPLrefinement nil)
     (AssetName type-decl nil SPLrefinement nil)
     (amRefinementCompositionality formula-decl nil SPLrefinement nil))
-   84 60 t nil)
+   77 60 t nil)
   (weakFullCompositionality-1 nil 3498242388 3498493434
    ("" (skolem 1 (pl fm am ck))
     (("" (assert)
@@ -2821,7 +3069,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved-complete
    ((weakerEqCK const-decl "bool" SPLrefinement nil)
     (equivalentFMs const-decl "bool" SPLrefinement nil)
     (weakerCKcompositionality_TCC1 subtype-tcc nil SPLrefinement nil)
@@ -2845,7 +3093,7 @@
      nil))
    301745 90 t nil))
  (fullCompositionality2 0
-  (fullCompositionality2-1 nil 3583059282 3583059494
+  (fullCompositionality2-1 nil 3583059282 3584437632
    ("" (skolem 1 (pl fm am ck))
     (("" (assert)
       (("" (flatten)
@@ -2934,7 +3182,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((fullCompositionality2_TCC1 subtype-tcc nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -2956,9 +3204,9 @@
     (transitive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil)
     (plRef formula-decl nil SPLrefinement nil))
-   211487 160 t shostak))
+   100 60 t shostak))
  (weakFullCompositionality2 0
-  (weakFullCompositionality2-1 nil 3583059505 3583059598
+  (weakFullCompositionality2-1 nil 3583059505 3584437632
    ("" (skolem 1 (pl fm am ck))
     (("" (assert)
       (("" (flatten)
@@ -3025,7 +3273,7 @@
         nil))
       nil))
     nil)
-   unchecked
+   proved
    ((weakerCKcompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -3046,5 +3294,5 @@
     (Asset type-decl nil SPLrefinement nil)
     (AssetName type-decl nil SPLrefinement nil)
     (amRefinementCompositionality formula-decl nil SPLrefinement nil))
-   92845 100 t shostak)))
+   67 50 t shostak)))
 

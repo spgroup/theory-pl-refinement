@@ -83,7 +83,6 @@ BEGIN
   member(pl,mpl) : bool = 
    pls(mpl)(pl)
 
-
   confs(mpl) : finite_sets[set[PC]].finite_set = confs(pls(mpl),cs(mpl))
 
   semantics(mpl) : set[finite_sets[Asset].finite_set] = 
@@ -250,6 +249,19 @@ BEGIN
 	wfMPL(pls, cs2)
 	=> 
 	  mplRefinement(mpl1,(# pls:=pls, cs:=cs2 #))
+
+  compRemoveMPL: THEOREM
+    FORALL(pl1,pls,cs,mpl1):
+	mpl1=(# pls:=union(pl1,pls), cs:=cs #) AND 
+	NOT(member(pl1,pls)) AND
+%	wfMPL(pls, cs) AND
+	(FORALL pcs: confs(union(pl1,pls),cs)(pcs) AND member(pl1,pcs) => 
+	  confs(pls,cs)(remove(pl1,pcs)) AND (product(pcs) |- product(remove(pl1,pcs))) 
+        )
+	=> 
+	  mplRefinement(mpl1,(# pls:=pls, cs:=cs #)) 
+
+
 
   strongCompMPL: THEOREM
     FORALL(pl1,pl2,pls,cs,mpl1):
