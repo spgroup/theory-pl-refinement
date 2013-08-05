@@ -1,6 +1,6 @@
 (SPLrefinement
  (eqFM 0
-  (eqFM-1 nil 3498492438 3584437630 ("" (grind) nil nil) proved
+  (eqFM-1 nil 3498492438 3584437630 ("" (grind) nil nil) unchecked
    ((equivalentFMs const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (symmetric? const-decl "bool" relations nil)
@@ -8,7 +8,7 @@
     (equivalence? const-decl "bool" relations nil))
    37 30 t shostak))
  (refFM 0
-  (refFM-1 nil 3498492442 3584437630 ("" (grind) nil nil) proved
+  (refFM-1 nil 3498492442 3584437630 ("" (grind) nil nil) unchecked
    ((Conf type-decl nil SPLrefinement nil)
     (member const-decl "bool" sets nil)
     (subset? const-decl "bool" sets nil)
@@ -112,7 +112,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((AM type-eq-decl nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -135,7 +135,7 @@
     (reflexive? const-decl "bool" relations nil))
    118 80 t shostak))
  (amRefCompositional 0
-  (amRefCompositional-2 "" 3584455815 3584455815
+  (amRefCompositional-2 "" 3584455815 3584715704
    ("" (skolem 1 (A1 A2))
     (("" (expand "|>")
       (("" (flatten)
@@ -311,15 +311,172 @@
                                                                                                                             (("1"
                                                                                                                               (assert)
                                                                                                                               (("1"
-                                                                                                                                (postpone)
-                                                                                                                                nil
+                                                                                                                                (bddsimp
+                                                                                                                                 -1)
+                                                                                                                                (("1"
+                                                                                                                                  (bddsimp)
+                                                                                                                                  (("1"
+                                                                                                                                    (use
+                                                                                                                                     assetRefinement)
+                                                                                                                                    (("1"
+                                                                                                                                      (expand*
+                                                                                                                                       preorder?
+                                                                                                                                       transitive?)
+                                                                                                                                      (("1"
+                                                                                                                                        (flatten)
+                                                                                                                                        (("1"
+                                                                                                                                          (instantiate
+                                                                                                                                           -2
+                                                                                                                                           ("union(union(a, singleton[Asset](a1)), map(A1, ans2))"
+                                                                                                                                            "union(union(a, singleton[Asset](a1)), map(A2, ans2))"
+                                                                                                                                            "union(singleton[Asset](a2), union(a, map(A2, ans2)))"))
+                                                                                                                                          (("1"
+                                                                                                                                            (assert)
+                                                                                                                                            (("1"
+                                                                                                                                              (case
+                                                                                                                                               "union(singleton[Asset](a2), union(a, map(A2, ans2)))=union(a, union(singleton[Asset](a2), map(A2, ans2)))")
+                                                                                                                                              (("1"
+                                                                                                                                                (replace
+                                                                                                                                                 -1)
+                                                                                                                                                (("1"
+                                                                                                                                                  (assert)
+                                                                                                                                                  (("1"
+                                                                                                                                                    (case
+                                                                                                                                                     "union(union(a, singleton[Asset](a1)), map(A1, ans2))=union(a, union(singleton[Asset](a1), map(A1, ans2)))")
+                                                                                                                                                    (("1"
+                                                                                                                                                      (replace
+                                                                                                                                                       -1)
+                                                                                                                                                      (("1"
+                                                                                                                                                        (assert)
+                                                                                                                                                        (("1"
+                                                                                                                                                          (case
+                                                                                                                                                           "union(singleton[Asset](a1), union(a, map(A2, ans2)))=union(union(a, singleton[Asset](a1)), map(A2, ans2))")
+                                                                                                                                                          (("1"
+                                                                                                                                                            (replace
+                                                                                                                                                             -1)
+                                                                                                                                                            (("1"
+                                                                                                                                                              (propax)
+                                                                                                                                                              nil
+                                                                                                                                                              nil))
+                                                                                                                                                            nil)
+                                                                                                                                                           ("2"
+                                                                                                                                                            (expand*
+                                                                                                                                                             union
+                                                                                                                                                             singleton
+                                                                                                                                                             member)
+                                                                                                                                                            (("2"
+                                                                                                                                                              (decompose-equality
+                                                                                                                                                               1)
+                                                                                                                                                              (("2"
+                                                                                                                                                                (bddsimp
+                                                                                                                                                                 1)
+                                                                                                                                                                nil
+                                                                                                                                                                nil))
+                                                                                                                                                              nil))
+                                                                                                                                                            nil))
+                                                                                                                                                          nil))
+                                                                                                                                                        nil))
+                                                                                                                                                      nil)
+                                                                                                                                                     ("2"
+                                                                                                                                                      (expand*
+                                                                                                                                                       union
+                                                                                                                                                       singleton
+                                                                                                                                                       member)
+                                                                                                                                                      nil
+                                                                                                                                                      nil))
+                                                                                                                                                    nil))
+                                                                                                                                                  nil))
+                                                                                                                                                nil)
+                                                                                                                                               ("2"
+                                                                                                                                                (expand*
+                                                                                                                                                 union
+                                                                                                                                                 singleton
+                                                                                                                                                 member)
+                                                                                                                                                (("2"
+                                                                                                                                                  (decompose-equality
+                                                                                                                                                   1)
+                                                                                                                                                  (("2"
+                                                                                                                                                    (bddsimp
+                                                                                                                                                     1)
+                                                                                                                                                    nil
+                                                                                                                                                    nil))
+                                                                                                                                                  nil))
+                                                                                                                                                nil))
+                                                                                                                                              nil))
+                                                                                                                                            nil))
+                                                                                                                                          nil))
+                                                                                                                                        nil))
+                                                                                                                                      nil))
+                                                                                                                                    nil)
+                                                                                                                                   ("2"
+                                                                                                                                    (case
+                                                                                                                                     "union(singleton[Asset](a2), union(a, map(A2, ans2)))=union(a, union(singleton[Asset](a2), map(A2, ans2)))")
+                                                                                                                                    (("1"
+                                                                                                                                      (assert)
+                                                                                                                                      nil
+                                                                                                                                      nil)
+                                                                                                                                     ("2"
+                                                                                                                                      (expand*
+                                                                                                                                       union
+                                                                                                                                       singleton
+                                                                                                                                       member)
+                                                                                                                                      (("2"
+                                                                                                                                        (decompose-equality
+                                                                                                                                         1)
+                                                                                                                                        (("2"
+                                                                                                                                          (bddsimp
+                                                                                                                                           1)
+                                                                                                                                          nil
+                                                                                                                                          nil))
+                                                                                                                                        nil))
+                                                                                                                                      nil))
+                                                                                                                                    nil))
+                                                                                                                                  nil)
+                                                                                                                                 ("2"
+                                                                                                                                  (case
+                                                                                                                                   "union(union(a, singleton[Asset](a1)), map(A2, ans2))=union(singleton[Asset](a1), union(a, map(A2, ans2)))")
+                                                                                                                                  (("1"
+                                                                                                                                    (assert)
+                                                                                                                                    nil
+                                                                                                                                    nil)
+                                                                                                                                   ("2"
+                                                                                                                                    (expand*
+                                                                                                                                     union
+                                                                                                                                     singleton
+                                                                                                                                     member)
+                                                                                                                                    (("2"
+                                                                                                                                      (decompose-equality
+                                                                                                                                       1)
+                                                                                                                                      (("2"
+                                                                                                                                        (bddsimp
+                                                                                                                                         1)
+                                                                                                                                        nil
+                                                                                                                                        nil))
+                                                                                                                                      nil))
+                                                                                                                                    nil))
+                                                                                                                                  nil))
                                                                                                                                 nil))
                                                                                                                               nil))
                                                                                                                             nil))
                                                                                                                           nil)
                                                                                                                          ("2"
-                                                                                                                          (postpone)
-                                                                                                                          nil
+                                                                                                                          (case
+                                                                                                                           "union(a, union(singleton[Asset](a1), map(A1, ans2)))=union(union(a, singleton[Asset](a1)), map(A1, ans2))")
+                                                                                                                          (("1"
+                                                                                                                            (assert)
+                                                                                                                            nil
+                                                                                                                            nil)
+                                                                                                                           ("2"
+                                                                                                                            (decompose-equality
+                                                                                                                             1)
+                                                                                                                            (("2"
+                                                                                                                              (expand*
+                                                                                                                               union
+                                                                                                                               singleton
+                                                                                                                               member)
+                                                                                                                              nil
+                                                                                                                              nil))
+                                                                                                                            nil))
                                                                                                                           nil))
                                                                                                                         nil))
                                                                                                                       nil))
@@ -372,17 +529,140 @@
                         nil))
                       nil))
                     nil)
-                   ("2" (postpone) nil nil))
+                   ("2" (lemma "maps[AssetName,Asset].notExists")
+                    (("2" (copy -1)
+                      (("2" (instantiate -1 (A1 ans))
+                        (("2" (instantiate -2 (A2 ans))
+                          (("2" (assert)
+                            (("2" (bddsimp)
+                              (("1"
+                                (replace -4)
+                                (("1" (propax) nil nil))
+                                nil)
+                               ("2"
+                                (replace -1)
+                                (("2"
+                                  (replace -2)
+                                  (("2"
+                                    (skolem 2 a)
+                                    (("2"
+                                      (flatten)
+                                      (("2"
+                                        (use assetRefinement)
+                                        (("2"
+                                          (expand*
+                                           preorder?
+                                           reflexive?)
+                                          (("2"
+                                            (flatten)
+                                            (("2"
+                                              (instantiate
+                                               -1
+                                               "union(a,emptyset)")
+                                              (("2" (assert) nil nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
                   nil))
                 nil))
               nil))
             nil)
-           ("2" (postpone) nil nil))
+           ("2" (lemma wf_nat) (("2" (grind) nil nil)) nil))
           nil))
         nil))
       nil))
     nil)
-   unfinished nil 3742965 1050 t shostak)
+   proved
+   ((wf_nat formula-decl nil naturalnumbers nil)
+    (notExists formula-decl nil maps nil)
+    (emptyset const-decl "set" sets nil)
+    (finite_emptyset name-judgement "finite_set" finite_sets nil)
+    (reflexive? const-decl "bool" relations nil)
+    (nonempty_member formula-decl nil sets_lemmas nil)
+    (cardUnion formula-decl nil set_aux_lemmas nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (preorder? const-decl "bool" orders nil)
+    (transitive? const-decl "bool" relations nil)
+    (asRefCompositional formula-decl nil SPLrefinement nil)
+    (singleton? const-decl "bool" sets nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (nonempty_union2 application-judgement "(nonempty?)" sets nil)
+    (nonempty_union1 application-judgement "(nonempty?)" sets nil)
+    (mapAM formula-decl nil maps nil)
+    (nonempty_finite_union1 application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (setMember formula-decl nil set_aux_lemmas nil)
+    (nonempty? const-decl "bool" sets nil)
+    (member const-decl "bool" sets nil)
+    (dom const-decl "set[S]" maps nil)
+    (\|- const-decl "[set[Asset], set[Asset] -> bool]" SPLrefinement
+     nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (union const-decl "set" sets nil)
+    (wfProduct const-decl "[set[Asset] -> bool]" SPLrefinement nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (Asset type-decl nil SPLrefinement nil)
+    (< const-decl "bool" reals nil)
+    (restrict const-decl "R" restrict nil)
+    (Card const-decl "nat" finite_sets nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (>= const-decl "bool" reals nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (number nonempty-type-decl nil numbers nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (AssetName type-decl nil SPLrefinement nil)
+    (measure_induction formula-decl nil measure_induction nil)
+    (irreflexive_restrict application-judgement "(irreflexive?[S])"
+     restrict_order_props nil)
+    (antisymmetric_restrict application-judgement "(antisymmetric?[S])"
+     restrict_order_props nil)
+    (transitive_restrict application-judgement "(transitive?[S])"
+     restrict_order_props nil)
+    (strict_order_restrict application-judgement "(strict_order?[S])"
+     restrict_order_props nil)
+    (trichotomous_restrict application-judgement "(trichotomous?[S])"
+     restrict_order_props nil)
+    (strict_total_order_restrict application-judgement
+     "(strict_total_order?[S])" restrict_order_props nil)
+    (real_lt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (well_founded? const-decl "bool" orders nil)
+    (pred type-eq-decl nil defined_types nil)
+    (\|> const-decl "bool" SPLrefinement nil))
+   402902 1430 t shostak)
   (amRefCompositional-1 nil 3506978924 3584437631
    ("" (skolem 1 (A1 A2))
     (("" (flatten)
@@ -690,7 +970,7 @@
     nil)
    unfinished nil 424 300 t shostak))
  (eqCK 0
-  (eqCK-1 nil 3498492449 3584437631 ("" (grind) nil nil) proved
+  (eqCK-1 nil 3498492449 3584437631 ("" (grind) nil nil) unchecked
    ((equivalentCKs const-decl "bool" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (symmetric? const-decl "bool" relations nil)
@@ -699,11 +979,11 @@
    32 10 t shostak))
  (weakerEqReflexive 0
   (weakerEqReflexive-1 nil 3583058305 3584437631 ("" (grind) nil nil)
-   proved ((weakerEqCK const-decl "bool" SPLrefinement nil)) 4 10 t
+   unchecked ((weakerEqCK const-decl "bool" SPLrefinement nil)) 4 10 t
    shostak))
  (weakerEqSymmetric 0
   (weakerEqSymmetric-1 nil 3583058310 3584437631 ("" (grind) nil nil)
-   proved
+   unchecked
    ((Conf type-decl nil SPLrefinement nil)
     (real_ge_is_total_order name-judgement "(total_order?[real])"
      real_props nil)
@@ -734,7 +1014,7 @@
    88 40 t shostak))
  (weakerEqTransitive 0
   (weakerEqTransitive-1 nil 3583058316 3584437631 ("" (grind) nil nil)
-   proved
+   unchecked
    ((Conf type-decl nil SPLrefinement nil)
     (real_ge_is_total_order name-judgement "(total_order?[real])"
      real_props nil)
@@ -858,7 +1138,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((reflexive? const-decl "bool" relations nil)
     (plRefinement const-decl "bool" SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
@@ -948,7 +1228,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((Asset type-decl nil SPLrefinement nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -1019,7 +1299,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((products const-decl "set[finite_sets[Asset].finite_set]"
      SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil)
@@ -1103,7 +1383,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((Conf type-decl nil SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (Asset type-decl nil SPLrefinement nil)
@@ -1140,7 +1420,7 @@
         nil))
       nil))
     nil)
-   proved
+   unfinished
    ((subset? const-decl "bool" sets nil)
     (member const-decl "bool" sets nil)
     (strongerPLrefinement const-decl "bool" SPLrefinement nil)
@@ -1188,7 +1468,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((\|= const-decl "bool" SPLrefinement nil)
     (member const-decl "bool" sets nil)
     (preorder? const-decl "bool" orders nil)
@@ -1369,7 +1649,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((plRefinement const-decl "bool" SPLrefinement nil)
     (equivalentFMs const-decl "bool" SPLrefinement nil)
     (preorder? const-decl "bool" orders nil)
@@ -1545,7 +1825,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -1787,7 +2067,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((weakerCKcompositionality_TCC1 subtype-tcc nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
@@ -1914,7 +2194,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((plRefinement const-decl "bool" SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
@@ -2201,7 +2481,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((fmEquivalenceCompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -2870,7 +3150,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((ckEquivalenceCompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -3182,7 +3462,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((fullCompositionality2_TCC1 subtype-tcc nil SPLrefinement nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -3273,7 +3553,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((weakerCKcompositionality formula-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)

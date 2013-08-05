@@ -48,7 +48,6 @@ BEGIN
     	   IF (pl(pc2)=pl1) THEN pc1=replaceStrong(pl1,pl2,pc2)
 	   ELSE pc1=pc2 ENDIF } 
 
-
   replacePLnotInMPL: THEOREM
     FORALL pl1,pl2,pcs:
       NOT(member(pl1,pcs)) AND plRefinement(pl1,pl2) =>  
@@ -254,7 +253,7 @@ BEGIN
     FORALL(pl1,pls,cs,mpl1):
 	mpl1=(# pls:=union(pl1,pls), cs:=cs #) AND 
 	NOT(member(pl1,pls)) AND
-%	wfMPL(pls, cs) AND
+	wfMPL(pls, cs) AND
 	(FORALL pcs: confs(union(pl1,pls),cs)(pcs) AND member(pl1,pcs) => 
 	  confs(pls,cs)(remove(pl1,pcs)) AND (product(pcs) |- product(remove(pl1,pcs))) 
         )
@@ -273,6 +272,18 @@ BEGIN
 	=> 
 	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs #)) 
 
+  strongCompMPLeq: COROLLARY
+    FORALL(pl1,pl2,pls,cs,mpl1):
+	strongerPLrefinement(pl1,pl2) AND
+	equivalentFMs(F(pl1),F(pl2)) AND
+	mpl1=(# pls:=union(pl1,pls), cs:=cs #) AND 
+	NOT(member(pl1,pls)) AND 
+	NOT(member(pl2,pls)) 
+%	AND wfMPL(union(pl2,pls), cs)
+	=> 
+	  mplRefinement(mpl1,(# pls:=union(pl2,pls), cs:=cs #)) AND wfMPL(union(pl2,pls), cs)
+
+%corolario de equivalencia de semantics de FM
 
   compMPL: THEOREM
     FORALL(pl1,pl2,pls,cs1,cs2,mpl1):

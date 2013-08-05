@@ -1,6 +1,6 @@
 (MultiProductLines
  (pls_TCC1 0
-  (pls_TCC1-1 nil 3583573499 3584287587
+  (pls_TCC1-1 nil 3583573499 3584719709
    ("" (lemma "set_comp_lemmas[PL,PC].setCompFinite5")
     (("" (skolem 1 pcs)
       (("" (instantiate -1 ("_" pcs))
@@ -9,7 +9,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (setCompFinite5 formula-decl nil set_comp_lemmas nil)
@@ -25,9 +25,9 @@
     (set type-eq-decl nil sets nil)
     ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
     (PC type-eq-decl nil MultiProductLines nil))
-   18 10 t nil))
+   24 0 t nil))
  (remove_TCC1 0
-  (remove_TCC1-1 nil 3583573499 3584287587
+  (remove_TCC1-1 nil 3583573499 3584719710
    ("" (lemma "set_comp_lemmas[PC,PL].setCompFinite6")
     (("" (skolem 1 (pl pcs))
       ((""
@@ -37,7 +37,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((finite_set type-eq-decl nil finite_sets nil)
     (is_finite const-decl "bool" finite_sets nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
@@ -47,10 +47,7 @@
     (real_ge_is_total_order name-judgement "(total_order?[real])"
      real_props nil)
     (< const-decl "bool" reals nil)
-    (below type-eq-decl nil nat_types nil)
-    (pl skolem-const-decl "PL" MultiProductLines nil)
-    (pcs skolem-const-decl "finite_sets[PC].finite_set"
-     MultiProductLines nil)
+    (below type-eq-decl nil nat_types nil) nil nil
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (IFF const-decl "[bool, bool -> bool]" booleans nil)
     (number nonempty-type-decl nil numbers nil)
@@ -78,9 +75,9 @@
     (CK type-decl nil SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil))
-   183 160 t nil))
+   290 160 t nil))
  (product_TCC1 0
-  (product_TCC1-1 nil 3583573499 3584287587
+  (product_TCC1-1 nil 3583573499 3584719710
    ("" (lemma "set_comp_lemmas[PC,Asset].setCompFinite")
     (("" (instantiate -1 "LAMBDA(x:PC):prod(x)")
       (("" (bddsimp)
@@ -116,7 +113,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((NOT const-decl "[bool -> bool]" booleans nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
@@ -134,9 +131,9 @@
     ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
     (PC type-eq-decl nil MultiProductLines nil)
     (Asset type-decl nil SPLrefinement nil))
-   59 20 t nil))
+   40 20 t nil))
  (replace_TCC1 0
-  (replace_TCC1-1 nil 3583573499 3584287587
+  (replace_TCC1-1 nil 3583573499 3584719710
    ("" (skolem 1 (l1 l2 pair))
     (("" (typepred pair)
       (("" (typepred l2)
@@ -155,7 +152,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((wfPL const-decl "bool" SPLrefinement nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -174,13 +171,13 @@
     (member const-decl "bool" sets nil)
     (empty? const-decl "bool" sets nil)
     (plRefinement const-decl "bool" SPLrefinement nil))
-   24 10 t nil))
+   45 20 t nil))
  (replace_TCC2 0
-  (replace_TCC2-1 nil 3583573499 3584287587
-   ("" (expand member) (("" (propax) nil nil)) nil) proved
-   ((member const-decl "bool" sets nil)) 4 0 t nil))
+  (replace_TCC2-1 nil 3583573499 3584719710
+   ("" (expand member) (("" (propax) nil nil)) nil) unchecked
+   ((member const-decl "bool" sets nil)) 3 0 t nil))
  (replace_TCC3 0
-  (replace_TCC3-1 nil 3583573499 3584287588
+  (replace_TCC3-1 nil 3583573499 3584719710
    ("" (lemma "set_comp_lemmas[PC,PC].setCompFinite5")
     (("" (skolem 1 (pl1 pl2 pcs))
       (("" (instantiate -1 ("_" pcs))
@@ -238,7 +235,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((finite_set type-eq-decl nil finite_sets nil)
     (is_finite const-decl "bool" finite_sets nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
@@ -259,9 +256,9 @@
     (set type-eq-decl nil sets nil)
     ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
     (PC type-eq-decl nil MultiProductLines nil))
-   73 40 t nil))
+   75 40 t nil))
  (replaceStrong_TCC1 0
-  (replaceStrong_TCC1-1 nil 3583835534 3584287588
+  (replaceStrong_TCC1-1 nil 3583835534 3584719710
    ("" (skolem 1 (l1 l2 pair))
     (("" (typepred pair)
       (("" (typepred l1)
@@ -276,7 +273,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((wfPL const-decl "bool" SPLrefinement nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -293,9 +290,9 @@
     (boolean nonempty-type-decl nil booleans nil)
     (subset? const-decl "bool" sets nil)
     (member const-decl "bool" sets nil))
-   20 10 t nil))
+   24 20 t nil))
  (replaceStrong_TCC2 0
-  (replaceStrong_TCC2-1 nil 3583835534 3584287588
+  (replaceStrong_TCC2-1 nil 3583835534 3584719710
    ("" (skolem 1 (pl1 pl2 pcs))
     (("" (lemma "set_comp_lemmas[PC,PC].setCompFinite5")
       (("" (instantiate -1 ("_" pcs))
@@ -348,7 +345,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((PC type-eq-decl nil MultiProductLines nil)
     ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
     (set type-eq-decl nil sets nil)
@@ -369,9 +366,9 @@
     (wfPL const-decl "bool" SPLrefinement nil)
     (subset? const-decl "bool" sets nil)
     (replaceStrong const-decl "PC" MultiProductLines nil))
-   72 40 t nil))
+   67 40 t nil))
  (replacePLnotInMPL 0
-  (replacePLnotInMPL-1 nil 3584202236 3584287588
+  (replacePLnotInMPL-1 nil 3584202236 3584719710
    ("" (skolem 1 (pl1 pl2 s))
     (("" (expand* replace member pls replace member)
       (("" (flatten)
@@ -418,9 +415,8 @@
         nil))
       nil))
     nil)
-   proved
-   ((member const-decl "bool" MultiProductLines nil)
-    (replace const-decl "PC" MultiProductLines nil)
+   unchecked
+   (nil (replace const-decl "PC" MultiProductLines nil)
     (member const-decl "bool" sets nil)
     (pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
     (replace const-decl "finite_sets[PC].finite_set"
@@ -432,14 +428,10 @@
     (AssetName type-decl nil SPLrefinement nil)
     (\|- const-decl "[set[Asset], set[Asset] -> bool]" SPLrefinement
      nil)
-    (Asset type-decl nil SPLrefinement nil)
-    (pl2 skolem-const-decl "PL" MultiProductLines nil)
-    (nonempty? const-decl "bool" sets nil)
-    (s skolem-const-decl "finite_sets[PC].finite_set" MultiProductLines
-     nil)
+    (Asset type-decl nil SPLrefinement nil) nil
+    (nonempty? const-decl "bool" sets nil) nil
     (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (pl1 skolem-const-decl "PL" MultiProductLines nil)
+    (is_finite const-decl "bool" finite_sets nil) nil
     (wfPL const-decl "bool" SPLrefinement nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -459,9 +451,9 @@
     (Conf type-decl nil SPLrefinement nil)
     (plRefinement const-decl "bool" SPLrefinement nil)
     (empty? const-decl "bool" sets nil))
-   97 60 t shostak))
+   138 70 t shostak))
  (replacePLmember 0
-  (replacePLmember-1 nil 3584202813 3584287588
+  (replacePLmember-1 nil 3584202813 3584719710
    ("" (skolem 1 (pl1 pl2 s))
     (("" (expand* pls replace replace member)
       (("" (flatten)
@@ -510,19 +502,15 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((replace const-decl "finite_sets[PC].finite_set"
       MultiProductLines nil)
-    (member const-decl "bool" MultiProductLines nil)
-    (member const-decl "bool" sets nil)
+    nil (member const-decl "bool" sets nil)
     (replace const-decl "PC" MultiProductLines nil)
     (pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
     (plRefinement const-decl "bool" SPLrefinement nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
-    (empty? const-decl "bool" sets nil)
-    (pl1 skolem-const-decl "PL" MultiProductLines nil)
-    (pl2 skolem-const-decl "PL" MultiProductLines nil)
-    (pc skolem-const-decl "PC" MultiProductLines nil)
+    (empty? const-decl "bool" sets nil) nil nil nil
     (replace_TCC1 subtype-tcc nil MultiProductLines nil)
     ([\|\|] const-decl
      "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
@@ -549,9 +537,9 @@
     (FM type-decl nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil))
-   98 50 t shostak))
+   94 60 t shostak))
  (replaceStrongPLnotInPCS 0
-  (replaceStrongPLnotInPCS-1 nil 3584181246 3584287588
+  (replaceStrongPLnotInPCS-1 nil 3584181246 3584719710
    ("" (skolem 1 (pl1 pl2 pcs))
     (("" (expand* subset? replaceStrong member)
       (("" (flatten)
@@ -586,18 +574,13 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((replaceStrong const-decl "finite_sets[PC].finite_set"
      MultiProductLines nil)
-    (member const-decl "bool" sets nil)
-    (member const-decl "bool" MultiProductLines nil)
-    (subset? const-decl "bool" sets nil)
-    (pl2 skolem-const-decl "PL" MultiProductLines nil)
-    (pcs skolem-const-decl "finite_sets[PC].finite_set"
-     MultiProductLines nil)
+    (member const-decl "bool" sets nil) nil
+    (subset? const-decl "bool" sets nil) nil nil
     (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (pl1 skolem-const-decl "PL" MultiProductLines nil)
+    (is_finite const-decl "bool" finite_sets nil) nil
     (wfPL const-decl "bool" SPLrefinement nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -617,9 +600,9 @@
     (Conf type-decl nil SPLrefinement nil)
     (pls const-decl "finite_sets[PL].finite_set" MultiProductLines
      nil))
-   70 40 t shostak))
+   78 50 t shostak))
  (replaceStrongPLinPCS 0
-  (replaceStrongPLinPCS-1 nil 3584181381 3584287588
+  (replaceStrongPLinPCS-1 nil 3584181381 3584719710
    ("" (skolem 1 (pl1 pl2 pcs))
     (("" (expand* subset? member)
       (("" (flatten)
@@ -644,17 +627,13 @@
         nil))
       nil))
     nil)
-   proved
-   ((member const-decl "bool" MultiProductLines nil)
-    (member const-decl "bool" sets nil)
+   unchecked
+   (nil (member const-decl "bool" sets nil)
     (subset? const-decl "bool" sets nil)
     (pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
     (replaceStrong const-decl "finite_sets[PC].finite_set"
      MultiProductLines nil)
-    (pl2 skolem-const-decl "PL" MultiProductLines nil)
-    (pl1 skolem-const-decl "PL" MultiProductLines nil)
-    (pc skolem-const-decl "PC" MultiProductLines nil)
-    (Conf type-decl nil SPLrefinement nil)
+    nil nil nil (Conf type-decl nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
     (boolean nonempty-type-decl nil booleans nil)
@@ -670,9 +649,9 @@
     (replaceStrong const-decl "PC" MultiProductLines nil)
     (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
      sets_lemmas nil))
-   42 20 t shostak))
+   34 20 t shostak))
  (productUnion 0
-  (productUnion-1 nil 3584203029 3584287588
+  (productUnion-1 nil 3584203029 3584719710
    ("" (skolem 1 (pc pcs))
     (("" (expand* product union singleton member)
       (("" (decompose-equality 1)
@@ -698,7 +677,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((union const-decl "set" sets nil)
     (member const-decl "bool" sets nil)
     (singleton const-decl "(singleton?)" sets nil)
@@ -720,9 +699,9 @@
     (Conf type-decl nil SPLrefinement nil)
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil))
-   52 30 t shostak))
+   55 30 t shostak))
  (prodRef 0
-  (prodRef-1 nil 3584203116 3584287588
+  (prodRef-1 nil 3584203116 3584719710
    ("" (lemma asRefCompositional)
     (("" (skolem 1 (pc1 pc2 pcs))
       (("" (flatten)
@@ -734,7 +713,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (singleton const-decl "(singleton?)" sets nil)
@@ -754,9 +733,9 @@
     (Asset type-decl nil SPLrefinement nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
     (asRefCompositional formula-decl nil SPLrefinement nil))
-   28 10 t shostak))
+   30 20 t shostak))
  (notInMPL 0
-  (notInMPL-1 nil 3584203497 3584287588
+  (notInMPL-1 nil 3584203497 3584719710
    ("" (skolem 1 (mpl pl))
     (("" (flatten)
       (("" (lemma confsRestriction)
@@ -781,9 +760,8 @@
         nil))
       nil))
     nil)
-   proved
-   ((member const-decl "bool" MultiProductLines nil)
-    (Constraint type-decl nil MultiProductLines nil)
+   unchecked
+   (nil (Constraint type-decl nil MultiProductLines nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (FM type-decl nil SPLrefinement nil)
@@ -802,9 +780,9 @@
     (PC type-eq-decl nil MultiProductLines nil)
     (pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
     (confsRestriction formula-decl nil MultiProductLines nil))
-   30 10 t shostak))
+   26 10 t shostak))
  (plInMPL 0
-  (plInMPL-1 nil 3584203584 3584287588
+  (plInMPL-1 nil 3584203584 3584719710
    ("" (skolem 1 (mpl pl))
     (("" (flatten)
       (("" (skolem -2 pcs)
@@ -837,7 +815,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((semantics const-decl "set[finite_sets[Asset].finite_set]"
      MultiProductLines nil)
     (subset? const-decl "bool" sets nil)
@@ -845,8 +823,7 @@
     (member const-decl "bool" sets nil)
     (products const-decl "set[finite_sets[Asset].finite_set]"
      SPLrefinement nil)
-    (member const-decl "bool" MultiProductLines nil)
-    (Asset type-decl nil SPLrefinement nil)
+    nil (Asset type-decl nil SPLrefinement nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (set type-eq-decl nil sets nil)
@@ -861,9 +838,9 @@
      MultiProductLines nil)
     (prod const-decl "finite_sets[Asset].finite_set" MultiProductLines
      nil))
-   47 20 t shostak))
+   53 40 t shostak))
  (plPCS 0
-  (plPCS-1 nil 3584204579 3584287588
+  (plPCS-1 nil 3584204579 3584719710
    ("" (skolem 1 mpl)
     (("" (skolem 1 pcs)
       (("" (flatten)
@@ -932,9 +909,9 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
-    (member const-decl "bool" MultiProductLines nil)
+    nil
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
@@ -967,9 +944,179 @@
     (wfMPL const-decl "bool" MultiProductLines nil)
     (MPL type-eq-decl nil MultiProductLines nil)
     (confsRestriction formula-decl nil MultiProductLines nil))
-   78 50 t shostak))
+   80 50 t shostak))
+ (plRefPCe 0
+  (plRefPCe-1 nil 3584722150 3584723547
+   ("" (skolem 1 mpl)
+    (("" (skolem 1 pcs)
+      (("" (flatten)
+        (("" (skolem 1 pc)
+          (("" (flatten)
+            (("" (typepred pc)
+              (("" (skolem 1 l2)
+                (("" (name l1 "pl(pc)")
+                  (("" (replace -1)
+                    (("" (flatten)
+                      (("" (expand plRefinement)
+                        (("" (name conf "conf(pc)")
+                          (("" (replace -1)
+                            ((""
+                              (instantiate 1
+                               ("(# pl:=l2, conf:=choose({c | member(c,{|F(l2)|}) AND |-(([| K(pl(pc)) |] (A(pl(pc))))(conf(pc)), ([| K(l2) |] (A(l2)))(c)) })  #)"
+                                "choose({c | member(c,{|F(l2)|}) AND |-(([| K(pl(pc)) |] (A(pl(pc))))(conf(pc)), ([| K(l2) |] (A(l2)))(c)) })"))
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (expand member)
+                                  (("1"
+                                    (name "produto" "product(pc)")
+                                    (("1"
+                                      (copy -1)
+                                      (("1"
+                                        (replace -1 1)
+                                        (("1"
+                                          (expand product -1)
+                                          (("1"
+                                            (expand singleton)
+                                            (("1"
+                                              (expand prod)
+                                              (("1"
+                                                (case
+                                                 "{p: Asset |
+          EXISTS (pc_1: PC):
+            pc_1 = pc AND [||](K(pl(pc_1)))(A(pl(pc_1)))(conf(pc_1))(p)}=([||](K(l1))(A(l1))(conf))")
+                                                (("1"
+                                                  (replace -1 -2)
+                                                  (("1"
+                                                    (replace -2 1 RL)
+                                                    (("1"
+                                                      (replace -5)
+                                                      (("1"
+                                                        (assert)
+                                                        (("1"
+                                                          (expand
+                                                           product)
+                                                          (("1"
+                                                            (expand
+                                                             choose)
+                                                            (("1"
+                                                              (expand
+                                                               prod)
+                                                              (("1"
+                                                                (replace
+                                                                 -4)
+                                                                (("1"
+                                                                  (postpone)
+                                                                  nil
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (decompose-equality
+                                                   1)
+                                                  (("2"
+                                                    (bddsimp 1)
+                                                    (("1"
+                                                      (skolem -1 e)
+                                                      (("1"
+                                                        (flatten)
+                                                        (("1"
+                                                          (replace -1)
+                                                          (("1"
+                                                            (assert)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil)
+                                                     ("2"
+                                                      (instantiate
+                                                       1
+                                                       pc)
+                                                      (("2"
+                                                        (assert)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil)
+                                 ("2"
+                                  (expand* member replace)
+                                  (("2"
+                                    (expand member)
+                                    (("2" (propax) nil nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2"
+                                (expand member)
+                                (("2" (propax) nil nil))
+                                nil)
+                               ("3"
+                                (expand member)
+                                (("3"
+                                  (expand* nonempty? member)
+                                  (("3"
+                                    (expand empty?)
+                                    (("3"
+                                      (expand member)
+                                      (("3"
+                                        (instantiate -7 conf)
+                                        (("3"
+                                          (assert)
+                                          (("3"
+                                            (skolem -7 c2)
+                                            (("3"
+                                              (flatten)
+                                              (("3"
+                                                (replace -2)
+                                                (("3"
+                                                  (instantiate -1 c2)
+                                                  (("3"
+                                                    (assert)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unfinished nil 780189 410 t shostak))
  (plRefPC 0
-  (plRefPC-1 nil 3584204789 3584287588
+  (plRefPC-1 nil 3584204789 3584719710
    ("" (lemma plRefPCe)
     (("" (skolem 1 mpl)
       (("" (skolem 1 pcs)
@@ -1008,7 +1155,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((Constraint type-decl nil MultiProductLines nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (AM type-eq-decl nil SPLrefinement nil)
@@ -1031,7 +1178,7 @@
     (plRefPCe formula-decl nil MultiProductLines nil))
    41 20 t shostak))
  (plMemberPCS 0
-  (plMemberPCS-1 nil 3584204889 3584287589
+  (plMemberPCS-1 nil 3584204889 3584719711
    ("" (skolem 1 (mpl pl1 pl2 PLS))
     (("" (flatten)
       (("" (skolem 3 pcs)
@@ -1308,9 +1455,8 @@
         nil))
       nil))
     nil)
-   proved
-   ((pl1 skolem-const-decl "PL" MultiProductLines nil)
-    (nonempty? const-decl "bool" sets nil)
+   unchecked
+   (nil (nonempty? const-decl "bool" sets nil)
     (choose const-decl "(p)" sets nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (member const-decl "bool" sets nil)
@@ -1326,14 +1472,11 @@
     (plRefinement const-decl "bool" SPLrefinement nil)
     (replace const-decl "finite_sets[PC].finite_set"
       MultiProductLines nil)
-    (OR const-decl "[bool, bool -> bool]" booleans nil)
-    (pc1 skolem-const-decl "PC" MultiProductLines nil)
-    (pl2 skolem-const-decl "PL" MultiProductLines nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil) nil nil
     (plRefPC formula-decl nil MultiProductLines nil)
     (replace const-decl "PC" MultiProductLines nil)
     (confsRestriction formula-decl nil MultiProductLines nil)
-    (singleton const-decl "(singleton?)" sets nil)
-    (member const-decl "bool" MultiProductLines nil)
+    (singleton const-decl "(singleton?)" sets nil) nil
     (union const-decl "set" sets nil)
     (pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
@@ -1360,9 +1503,9 @@
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (plPCS formula-decl nil MultiProductLines nil))
-   368 250 t shostak))
+   420 240 t shostak))
  (plMemberReplaceStrongPCS_TCC1 0
-  (plMemberReplaceStrongPCS_TCC1-1 nil 3584286067 3584287709
+  (plMemberReplaceStrongPCS_TCC1-1 nil 3584286067 3584719711
    ("" (skosimp)
     (("" (skosimp)
       (("" (skosimp)
@@ -1374,16 +1517,19 @@
         nil))
       nil))
     nil)
-   proved
-   ((Conf type-decl nil SPLrefinement nil)
-    (strongerPLrefinement const-decl "bool" SPLrefinement nil)
+   unchecked
+   ((subset? const-decl "bool" sets nil) nil
     (member const-decl "bool" sets nil)
-    (subset? const-decl "bool" sets nil)
-    (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
-     sets_lemmas nil))
-   33837 1650 t nil))
+    (strongerPLrefinement const-decl "bool" SPLrefinement nil)
+    (Conf type-decl nil SPLrefinement nil)
+    (nonempty_finite_union1 application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil))
+   49 30 t nil))
  (plMemberReplaceStrongPCS 0
-  (plMemberReplaceStrongPCS-1 nil 3584286197 3584287584
+  (plMemberReplaceStrongPCS-1 nil 3584286197 3584719711
    ("" (skolem 1 (mpl pl1 pl2 s))
     (("" (flatten)
       (("" (skolem 3 pcs)
@@ -1654,59 +1800,56 @@
         nil))
       nil))
     nil)
-   proved
-   ((plPCS formula-decl nil MultiProductLines nil)
-    (nonempty_singleton_finite application-judgement
-     "non_empty_finite_set" finite_sets nil)
-    (finite_union application-judgement "finite_set" finite_sets nil)
-    (nonempty_finite_union1 application-judgement
-     "non_empty_finite_set" finite_sets nil)
-    (Constraint type-decl nil MultiProductLines nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (FM type-decl nil SPLrefinement nil)
-    (CK type-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (set type-eq-decl nil sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (wfMPL const-decl "bool" MultiProductLines nil)
-    (MPL type-eq-decl nil MultiProductLines nil)
-    (Conf type-decl nil SPLrefinement nil)
-    ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
-    (PC type-eq-decl nil MultiProductLines nil)
-    (pc1 skolem-const-decl "PC" MultiProductLines nil)
-    (pl2 skolem-const-decl "PL" MultiProductLines nil)
-    (replaceStrong const-decl "PC" MultiProductLines nil)
+   unchecked
+   ((member const-decl "bool" sets nil) nil
+    (union const-decl "set" sets nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
+    (confsRestriction formula-decl nil MultiProductLines nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (Asset type-decl nil SPLrefinement nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (AssetName type-decl nil SPLrefinement nil)
+    (unique const-decl "bool" maps nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLrefinement nil)
+    (prod const-decl "finite_sets[Asset].finite_set" MultiProductLines
+     nil)
+    (product const-decl "finite_sets[Asset].finite_set"
+     MultiProductLines nil)
+    (strongerPLrefinement const-decl "bool" SPLrefinement nil)
     (singleton? const-decl "bool" sets nil)
     (replaceStrong const-decl "finite_sets[PC].finite_set"
      MultiProductLines nil)
     (subset? const-decl "bool" sets nil)
-    (strongerPLrefinement const-decl "bool" SPLrefinement nil)
-    (product const-decl "finite_sets[Asset].finite_set"
-     MultiProductLines nil)
-    (prod const-decl "finite_sets[Asset].finite_set" MultiProductLines
-     nil)
-    ([\|\|] const-decl
-     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLrefinement nil)
-    (unique const-decl "bool" maps nil)
-    (AssetName type-decl nil SPLrefinement nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (Asset type-decl nil SPLrefinement nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (confsRestriction formula-decl nil MultiProductLines nil)
-    (pls const-decl "finite_sets[PL].finite_set" MultiProductLines nil)
-    (singleton const-decl "(singleton?)" sets nil)
-    (union const-decl "set" sets nil)
-    (member const-decl "bool" MultiProductLines nil)
-    (member const-decl "bool" sets nil))
-   321908 400 t shostak))
+    (replaceStrong const-decl "PC" MultiProductLines nil) nil nil
+    (PC type-eq-decl nil MultiProductLines nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
+    (Conf type-decl nil SPLrefinement nil)
+    (MPL type-eq-decl nil MultiProductLines nil)
+    (wfMPL const-decl "bool" MultiProductLines nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (CK type-decl nil SPLrefinement nil)
+    (FM type-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Constraint type-decl nil MultiProductLines nil)
+    (nonempty_finite_union1 application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (plPCS formula-decl nil MultiProductLines nil))
+   408 220 t shostak))
  (replacePLinMPL 0
-  (replacePLinMPL-1 nil 3584205764 3584287591
+  (replacePLinMPL-1 nil 3584205764 3584719711
    ("" (skolem 1 (mpl l1 l2 s))
     (("" (flatten)
       (("" (lemma plMemberPCS)
@@ -1772,7 +1915,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((prodRef formula-decl nil MultiProductLines nil)
     (confs const-decl "finite_sets[set[PC]].finite_set"
      MultiProductLines nil)
@@ -1801,23 +1944,23 @@
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (plMemberPCS formula-decl nil MultiProductLines nil))
-   116 60 t shostak))
+   96 50 t shostak))
  (replaceStrongPLinMPL_TCC1 0
-  (replaceStrongPLinMPL_TCC1-1 nil 3584180432 3584287735
+  (replaceStrongPLinMPL_TCC1-1 nil 3584180432 3584719711
    ("" (skosimp)
     (("" (skosimp)
       (("" (hide-all-but (-2 3)) (("" (grind) nil nil)) nil)) nil))
     nil)
-   proved
+   unchecked
    ((subset_is_partial_order name-judgement "(partial_order?[set[T]])"
      sets_lemmas nil)
     (subset? const-decl "bool" sets nil)
     (member const-decl "bool" sets nil)
     (strongerPLrefinement const-decl "bool" SPLrefinement nil)
     (Conf type-decl nil SPLrefinement nil))
-   11476 40 t nil))
+   54 40 t nil))
  (replaceStrongPLinMPL 0
-  (replaceStrongPLinMPL-1 nil 3584180561 3584286184
+  (replaceStrongPLinMPL-1 nil 3584180561 3584719712
    ("" (skolem 1 (mpl l1 l2 s))
     (("" (lemma plMemberReplaceStrongPCS)
       (("" (instantiate -1 (mpl l1 l2 s))
@@ -1890,7 +2033,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((plMemberReplaceStrongPCS formula-decl nil MultiProductLines nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -1919,9 +2062,9 @@
     (confs const-decl "finite_sets[set[PC]].finite_set"
      MultiProductLines nil)
     (prodRef formula-decl nil MultiProductLines nil))
-   114970 120 t shostak))
+   92 50 t shostak))
  (mplRefPL 0
-  (mplRefPL-1 nil 3584287802 3584288121
+  (mplRefPL-1 nil 3584287802 3584719712
    ("" (skolem 1 (mpl pl1 pl2))
     (("" (flatten)
       (("" (skolem 1 pcs1)
@@ -2116,9 +2259,8 @@
         nil))
       nil))
     nil)
-   proved
-   ((plRefinement const-decl "bool" SPLrefinement nil)
-    (member const-decl "bool" MultiProductLines nil)
+   unchecked
+   ((plRefinement const-decl "bool" SPLrefinement nil) nil
     (prod const-decl "finite_sets[Asset].finite_set" MultiProductLines
      nil)
     (restrict const-decl "R" restrict nil)
@@ -2140,9 +2282,7 @@
     (prodRef formula-decl nil MultiProductLines nil)
     (singleton const-decl "(singleton?)" sets nil)
     (singleton? const-decl "bool" sets nil)
-    (union const-decl "set" sets nil)
-    (pl2 skolem-const-decl "PL" MultiProductLines nil)
-    (c2 skolem-const-decl "Conf" MultiProductLines nil)
+    (union const-decl "set" sets nil) nil nil
     (nonempty_finite_union1 application-judgement
      "non_empty_finite_set" finite_sets nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
@@ -2167,9 +2307,9 @@
     (finite_set type-eq-decl nil finite_sets nil)
     (Constraint type-decl nil MultiProductLines nil)
     (plPCS formula-decl nil MultiProductLines nil))
-   319254 340 t shostak))
+   327 240 t shostak))
  (mplRef 0
-  (mplRef-1 nil 3584206465 3584287591
+  (mplRef-1 nil 3584206465 3584719712
    ("" (use assetRefinement)
     (("" (expand* preorder? transitive? reflexive? mplRefinement)
       (("" (bddsimp)
@@ -2217,7 +2357,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((transitive? const-decl "bool" relations nil)
     (mplRefinement const-decl "bool" MultiProductLines nil)
     (reflexive? const-decl "bool" relations nil)
@@ -2229,9 +2369,9 @@
     (boolean nonempty-type-decl nil booleans nil)
     (Asset type-decl nil SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil))
-   65 30 t shostak))
+   56 30 t shostak))
  (constraintsRefCompMPL 0
-  (constraintsRefCompMPL-1 nil 3583576853 3584287591
+  (constraintsRefCompMPL-1 nil 3583576853 3584719712
    ("" (skolem 1 (cs1 cs2 s mpl))
     (("" (flatten)
       (("" (expand* constraintsRef mplRefinement)
@@ -2276,7 +2416,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((semantics const-decl "set[finite_sets[Asset].finite_set]"
      MultiProductLines nil)
     (confs const-decl "finite_sets[set[PC]].finite_set"
@@ -2300,9 +2440,134 @@
     (member const-decl "bool" sets nil)
     (constraintsRef const-decl "bool" MultiProductLines nil)
     (mplRefinement const-decl "bool" MultiProductLines nil))
-   41 20 t shostak))
+   58 30 t shostak))
+ (compRemoveMPL 0
+  (compRemoveMPL-1 nil 3584438654 3584719885
+   ("" (skolem 1 (pl s cs mpl))
+    (("" (flatten)
+      (("" (expand* mplRefinement member semantics)
+        (("" (skolem 2 p1)
+          (("" (flatten)
+            (("" (expand member)
+              (("" (skolem -4 pcs)
+                (("" (flatten)
+                  (("" (case "member(pl,pcs)")
+                    (("1" (expand member)
+                      (("1" (instantiate -4 pcs)
+                        (("1" (expand confs)
+                          (("1" (assert)
+                            (("1" (flatten)
+                              (("1"
+                                (instantiate
+                                 2
+                                 "product(remove(pl,pcs))")
+                                (("1"
+                                  (assert)
+                                  (("1"
+                                    (instantiate 2 "remove(pl,pcs)")
+                                    (("1" (propax) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil)
+                     ("2" (lemma confsRem)
+                      (("2" (instantiate -1 (pl s cs))
+                        (("2" (expand member)
+                          (("2" (assert)
+                            (("2" (instantiate -1 pcs)
+                              (("2"
+                                (assert)
+                                (("2"
+                                  (expand confs)
+                                  (("2"
+                                    (assert)
+                                    (("2"
+                                      (instantiate 3 p1)
+                                      (("2"
+                                        (use assetRefinement)
+                                        (("2"
+                                          (expand*
+                                           preorder?
+                                           reflexive?)
+                                          (("2"
+                                            (flatten)
+                                            (("2"
+                                              (instantiate -1 p1)
+                                              (("2"
+                                                (assert)
+                                                (("2"
+                                                  (instantiate 3 pcs)
+                                                  (("2"
+                                                    (assert)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((confsRem formula-decl nil MultiProductLines nil)
+    (Constraint type-decl nil MultiProductLines nil)
+    (reflexive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (confs const-decl "finite_sets[set[PC]].finite_set"
+     MultiProductLines nil)
+    (remove const-decl "finite_sets[PC].finite_set"
+      MultiProductLines nil)
+    (product const-decl "finite_sets[Asset].finite_set"
+     MultiProductLines nil)
+    (Asset type-decl nil SPLrefinement nil)
+    (nonempty_finite_union1 application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (FM type-decl nil SPLrefinement nil)
+    (CK type-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (Conf type-decl nil SPLrefinement nil)
+    (set type-eq-decl nil sets nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
+    (PC type-eq-decl nil MultiProductLines nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (mplRefinement const-decl "bool" MultiProductLines nil)
+    (semantics const-decl "set[finite_sets[Asset].finite_set]"
+     MultiProductLines nil)
+    nil (member const-decl "bool" sets nil))
+   134714 110 t shostak))
  (strongCompMPL 0
-  (strongCompMPL-1 nil 3583573503 3584288701
+  (strongCompMPL-1 nil 3583573503 3584719712
    ("" (skolem 1 (l1 l2 s cs mpl))
     (("" (flatten)
       (("" (expand mplRefinement)
@@ -2440,7 +2705,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((member const-decl "bool" sets nil)
     (confs const-decl "finite_sets[set[PC]].finite_set"
      MultiProductLines nil)
@@ -2483,12 +2748,95 @@
     ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
     (PC type-eq-decl nil MultiProductLines nil)
     (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (member const-decl "bool" MultiProductLines nil)
+    (finite_set type-eq-decl nil finite_sets nil) nil
     (mplRefinement const-decl "bool" MultiProductLines nil))
-   345881 160 t shostak))
+   151 80 t shostak))
+ (strongCompMPLeq_TCC1 0
+  (strongCompMPLeq_TCC1-1 nil 3584721417 3584722111
+   ("" (skolem 1 (l1 l2 s cs mpl))
+    (("" (flatten)
+      (("" (typepred mpl)
+        (("" (replace -4)
+          (("" (assert)
+            (("" (expand wfMPL)
+              (("" (skolem 3 pcs)
+                (("" (flatten)
+                  (("" (case "member(l2,pcs)")
+                    (("1" (postpone) nil nil)
+                     ("2" (lemma confsRem)
+                      (("2" (instantiate -1 (l2 s cs))
+                        (("2" (assert)
+                          (("2" (instantiate -1 pcs)
+                            (("2" (assert)
+                              (("2"
+                                (lemma confsAdd)
+                                (("2"
+                                  (instantiate -1 (l1 s cs pcs))
+                                  (("2"
+                                    (assert)
+                                    (("2"
+                                      (instantiate -3 pcs)
+                                      (("2" (assert) nil nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unfinished nil 528836 120 t nil))
+ (strongCompMPLeq 0
+  (strongCompMPLeq-1 nil 3584721439 3584721482
+   ("" (skolem 1 (pl1 pl2 s cs mpl))
+    (("" (flatten)
+      (("" (lemma strongCompMPL)
+        (("" (instantiate -1 (pl1 pl2 s cs mpl))
+          (("" (assert)
+            (("" (lemma strongCompMPLeq_TCC1)
+              (("" (instantiate -1 (pl1 pl2 s cs mpl))
+                (("" (assert) nil nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((strongCompMPLeq_TCC1 subtype-tcc nil MultiProductLines nil)
+    (MPL type-eq-decl nil MultiProductLines nil)
+    (wfMPL const-decl "bool" MultiProductLines nil)
+    (Constraint type-decl nil MultiProductLines nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (CK type-decl nil SPLrefinement nil)
+    (FM type-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (nonempty_finite_union1 application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (strongCompMPL formula-decl nil MultiProductLines nil))
+   42831 50 t shostak))
  (compMPL_TCC1 0
-  (compMPL_TCC1-1 nil 3583573499 3584287591
+  (compMPL_TCC1-1 nil 3583573499 3584719712
    ("" (lemma plRefEq)
     (("" (skolem 1 (pl1 pl2 s cs1 cs2 mpl))
       (("" (flatten)
@@ -2505,7 +2853,7 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -2520,9 +2868,9 @@
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (plRefEq formula-decl nil SPLrefinement nil))
-   35 20 t nil))
+   26 20 t nil))
  (compMPL 0
-  (compMPL-1 nil 3584288162 3584288329
+  (compMPL-1 nil 3584288162 3584719712
    ("" (skolem 1 (l1 l2 s cs1 cs2 mpl))
     (("" (flatten)
       (("" (lemma plRefEq)
@@ -2628,10 +2976,9 @@
         nil))
       nil))
     nil)
-   proved
+   unchecked
    ((mplRefinement const-decl "bool" MultiProductLines nil)
-    (member const-decl "bool" sets nil)
-    (member const-decl "bool" MultiProductLines nil)
+    (member const-decl "bool" sets nil) nil
     (Constraint type-decl nil MultiProductLines nil)
     (wfMPL const-decl "bool" MultiProductLines nil)
     (MPL type-eq-decl nil MultiProductLines nil)
@@ -2667,5 +3014,5 @@
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (plRefEq formula-decl nil SPLrefinement nil))
-   166998 120 t shostak)))
+   113 40 t shostak)))
 
