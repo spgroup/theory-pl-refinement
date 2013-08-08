@@ -35,6 +35,7 @@ BEGIN
   replace(pl1:PL,pl2:{pl2:PL | plRefinement(pl1,pl2)},pc:{p:PC | pl(p)=pl1}): PC = 
     (# pl:=pl2, conf:=choose({c | member(c,{|F(pl2)|}) AND |-(([| K(pl(pc)) |] (A(pl(pc))))(conf(pc)), ([| K(pl2) |] (A(pl2)))(c)) })  #)
 
+  %talvez esteja retornando um conjunto maior do que o que foi passado de entrada
   replace(pl1:PL,pl2:{pl2:PL | plRefinement(pl1,pl2)},pcs): finite_sets[PC].finite_set = 
     {pc1 | EXISTS (pc2): pcs(pc2) AND 
     	   IF (pl(pc2)=pl1) THEN pc1=replace(pl1,pl2,pc2)
