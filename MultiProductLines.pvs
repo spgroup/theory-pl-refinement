@@ -89,14 +89,6 @@ BEGIN
     { p:finite_sets[Asset].finite_set | EXISTS (pcs) : (member(pcs,confs(mpl))) AND (p=product(pcs)) };
 
   confsRestriction: AXIOM
-    FORALL mpl:
-      FORALL pcs: confs(mpl)(pcs) 
-      =>  
-        (FORALL(e:PC): pcs(e)
-	=> 
-	  pls(mpl)(pl(e)) AND NOT(EXISTS (z:PC): pcs(z) AND z/=e AND pl(z)=pl(e)) )
-
-  confsRest: AXIOM
     FORALL pls,cs:
       FORALL pcs: confs(pls,cs)(pcs) 
       =>  
@@ -147,16 +139,9 @@ BEGIN
       pls(mpl)(pl) AND (EXISTS pcs: confs(mpl)(pcs) AND member(pl,pcs)) =>  
         EXISTS p1,p2: semantics(mpl)(p1) AND products(pl)(p2) AND subset?(p2,p1)
 
-  plConfsPCS: THEOREM
+  plPCS: THEOREM
       FORALL pls,cs,pcs: 
        confs(pls,cs)(pcs) =>
-         FORALL pl:
-           member(pl,pcs) => EXISTS pc,pcs1: pcs = union(pc,pcs1) AND pl(pc)=pl AND (NOT member(pl,pcs1))
-
-  plPCS: THEOREM
-    FORALL mpl:
-      FORALL pcs: 
-       confs(mpl)(pcs) =>
          FORALL pl:
            member(pl,pcs) => EXISTS pc,pcs1: pcs = union(pc,pcs1) AND pl(pc)=pl AND (NOT member(pl,pcs1))
 
