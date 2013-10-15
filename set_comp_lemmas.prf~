@@ -1085,7 +1085,7 @@
        ("2" (lemma wf_nat) (("2" (grind) nil nil)) nil))
       nil))
     nil)
-   unchecked
+   proved
    ((pred type-eq-decl nil defined_types nil)
     (well_founded? const-decl "bool" orders nil)
     (real_lt_is_strict_total_order name-judgement
@@ -1132,7 +1132,10 @@
     (emptyset_is_empty? formula-decl nil sets_lemmas nil)
     (lemmaUnionRemove formula-decl nil set_aux_lemmas nil)
     (union const-decl "set" sets nil)
-    (finite_union judgement-tcc nil finite_sets nil) nil nil
+    (finite_union judgement-tcc nil finite_sets nil)
+    (item skolem-const-decl "S" set_comp_lemmas nil)
+    (f skolem-const-decl "[S -> finite_sets[T].finite_set]"
+     set_comp_lemmas nil)
     (basicLemma formula-decl nil set_comp_lemmas nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (setCompOR formula-decl nil set_comp_lemmas nil)
@@ -1397,172 +1400,6 @@
     (lemmaUnionRemove formula-decl nil set_aux_lemmas nil)
     (wf_nat formula-decl nil naturalnumbers nil))
    1869516 410 t shostak))
- (setCompFinite5not 0
-  (setCompFinite5not-1 nil 3584208492 3584209404
-   ("" (skolem 1 f)
-    ((""
-      (use "measure_induction[finite_sets[T].finite_set,nat, finite_sets[T].Card, <]")
-      (("1" (bddsimp)
-        (("1" (skolem 1 x)
-          (("1" (flatten)
-            (("1" (case "empty?(x)")
-              (("1" (lemma sets_lemmas[T].emptyset_is_empty?)
-                (("1" (instantiate -1 x)
-                  (("1" (assert)
-                    (("1" (use sets[T].emptyset)
-                      (("1" (replace -2 1)
-                        (("1" (expand emptyset 1)
-                          (("1" (use sets[S].emptyset)
-                            (("1" (replace -1 1 RL)
-                              (("1" (assert) nil nil)) nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil)
-               ("2" (expand* empty? member)
-                (("2" (skolem 1 item)
-                  (("2" (name "Y" "remove(item,x)")
-                    (("2" (instantiate -3 Y)
-                      (("2" (lemma finite_sets[T].card_remove)
-                        (("2" (instantiate -1 (x item))
-                          (("2" (replace -2 -1)
-                            (("2" (assert)
-                              (("2"
-                                (lemma
-                                 set_aux_lemmas[T].lemmaUnionRemove)
-                                (("2"
-                                  (instantiate -1 (x Y item))
-                                  (("2"
-                                    (assert)
-                                    (("2"
-                                      (expand member)
-                                      (("2"
-                                        (replace -1 1)
-                                        (("2"
-                                          (expand union +)
-                                          (("2"
-                                            (expand singleton +)
-                                            (("2"
-                                              (expand member)
-                                              (("2"
-                                                (case
-                                                 "{i: S | EXISTS (it: T): (Y(it) OR it = item) AND i /= f(it)}=union({i: S | EXISTS (it: T): Y(it) AND i /= f(it)}, {i: S | EXISTS (it: T): it = item AND i /= f(it)})")
-                                                (("1"
-                                                  (lemma
-                                                   finite_sets[S].finite_union)
-                                                  (("1"
-                                                    (instantiate
-                                                     -1
-                                                     ("{i: S | EXISTS (it: T): Y(it) AND i /= f(it)}"
-                                                      "{i: S | EXISTS (it: T): it = item AND i /= f(it)}"))
-                                                    (("1"
-                                                      (assert)
-                                                      nil
-                                                      nil)
-                                                     ("2"
-                                                      (postpone)
-                                                      nil
-                                                      nil))
-                                                    nil))
-                                                  nil)
-                                                 ("2"
-                                                  (decompose-equality
-                                                   1)
-                                                  (("2"
-                                                    (expand*
-                                                     union
-                                                     singleton
-                                                     member)
-                                                    (("2"
-                                                      (bddsimp 1)
-                                                      (("1"
-                                                        (skolem -1 it)
-                                                        (("1"
-                                                          (bddsimp)
-                                                          (("1"
-                                                            (flatten)
-                                                            (("1"
-                                                              (instantiate
-                                                               2
-                                                               it)
-                                                              (("1"
-                                                                (assert)
-                                                                nil
-                                                                nil))
-                                                              nil))
-                                                            nil)
-                                                           ("2"
-                                                            (instantiate
-                                                             2
-                                                             it)
-                                                            (("2"
-                                                              (assert)
-                                                              nil
-                                                              nil))
-                                                            nil))
-                                                          nil))
-                                                        nil)
-                                                       ("2"
-                                                        (skolem -1 it)
-                                                        (("2"
-                                                          (flatten)
-                                                          (("2"
-                                                            (instantiate
-                                                             1
-                                                             it)
-                                                            (("2"
-                                                              (assert)
-                                                              nil
-                                                              nil))
-                                                            nil))
-                                                          nil))
-                                                        nil)
-                                                       ("3"
-                                                        (skolem -1 it)
-                                                        (("3"
-                                                          (flatten)
-                                                          (("3"
-                                                            (instantiate
-                                                             1
-                                                             it)
-                                                            (("3"
-                                                              (assert)
-                                                              nil
-                                                              nil))
-                                                            nil))
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil)
-       ("2" (lemma wf_nat) (("2" (grind) nil nil)) nil))
-      nil))
-    nil)
-   unfinished nil 911963 550 t shostak))
  (setCompFinite6 0
   (setCompFinite6-1 nil 3580333652 3580336293
    ("" (skolem 1 (f e))

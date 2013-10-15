@@ -1,0 +1,90 @@
+%%%
+%%% Author: GL option students, I5 semester, year 2004-2005, ENSEIRB
+%%%         and Paul Y Gloess <Paul.Gloess@ENSEIRB.Fr>
+%%%             http://www.enseirb.fr/~gloess/
+%%%
+%%% Created November 3, 2004, last modification December 6, 2005
+%%%
+%%% Note: December 6, 2005: we move everything that depends upon
+%%%        lists into the new "list_permutation" theory.
+%%%
+multiset[T: TYPE]: THEORY
+
+  BEGIN
+
+    multiset: TYPE = [T -> nat] ;
+
+    x, y: VAR T
+    s, t: VAR multiset
+
+    emptymultiset: multiset
+      = (LAMBDA(t: T): 0) ;
+
+    add(t: T, tm: multiset): multiset
+      = tm WITH [t := 1+tm(t)] ;
+
+%    remove(t: T, tm: multiset): multiset
+%      = if () tm WITH [t := 1+tm(t)] ;
+
+    msingleton(t: T): multiset
+      = add(t, emptymultiset) ;
+
+    msingleton_if: LEMMA
+      (FORALL (t1, t2: T):
+         msingleton(t1)(t2) = IF t1 = t2 THEN 1 ELSE 0 ENDIF) ;
+
+    count(x,s): nat = s(x)
+
+    member(x,s): bool = s(x) > 0
+
+    members(s): [T -> bool] = LAMBDA x: member(x,s)
+
+
+
+    union(tm1, tm2: multiset): multiset
+      = (LAMBDA (t: T): tm1(t) + tm2(t)) ;
+
+    union_empty: LEMMA
+      (FORALL (tm: multiset):
+         union(emptymultiset, tm) = tm) ;
+
+    union_add: LEMMA
+      (FORALL (t: T, tm1, tm2: multiset):
+         union(add(t, tm1), tm2) = add(t, union(tm1, tm2))) ;
+
+    add_msingleton_union: LEMMA
+      (FORALL (t: T, tm: multiset):
+         add(t, tm) = union(msingleton(t), tm))
+
+    member_union: LEMMA
+      (FORALL (t: T, tm1,tm2: multiset):
+         member(t,union(tm1, tm2)) => member(t,tm1) OR member(t,tm2))
+
+    intersection(tm1, tm2: multiset): multiset
+      = (LAMBDA (t: T): min(tm1(t), tm2(t))) ;
+
+    difference(s,t): multiset = LAMBDA x: max(s(x) - t(x), 0)
+
+    included?(tm1, tm2: multiset): bool
+      = (FORALL (t: T): tm1(t) <= tm2(t))
+
+    inclusion_reflexive: JUDGEMENT
+      included? HAS_TYPE (reflexive?[multiset])
+
+    inclusion_transitive: JUDGEMENT
+      included? HAS_TYPE (transitive?[multiset])
+
+    inclusion_antysymmetric: JUDGEMENT
+      included? HAS_TYPE (antisymmetric?[multiset])
+
+    inclusion_partial_order: JUDGEMENT
+      included? HAS_TYPE (partial_order?[multiset])
+
+    m2s(tm: multiset): [T -> bool]
+      = (LAMBDA (t: T): tm(t) > 0)
+
+    m2s_add: LEMMA
+      (FORALL (t: T, tm: multiset):
+         m2s(add(t, tm)) = add(t, m2s(tm)))
+
+  END multiset
