@@ -1,0 +1,262 @@
+(multiset
+ (msingleton_if 0
+  (msingleton_if-1 nil 3569086120 3569086157
+   ("" (skolem 1 (t1 t2))
+    (("" (assert)
+      (("" (expand msingleton)
+        (("" (expand add)
+          (("" (expand emptymultiset)
+            (("" (case "t1=t2")
+              (("1" (assert) nil nil) ("2" (assert) nil nil)) nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((add const-decl "multiset" multiset nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (T formal-type-decl nil multiset nil)
+    (emptymultiset const-decl "multiset" multiset nil)
+    (msingleton const-decl "multiset" multiset nil))
+   37192 10 t shostak))
+ (union_empty 0
+  (union_empty-1 nil 3569086301 3569086474
+   ("" (skolem 1 tm)
+    (("" (expand* union emptymultiset)
+      (("" (assert) (("" (decompose-equality 1) nil nil)) nil)) nil))
+    nil)
+   unchecked
+   ((emptymultiset const-decl "multiset" multiset nil)
+    (union const-decl "multiset" multiset nil)
+    (numfield nonempty-type-eq-decl nil number_fields nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (number nonempty-type-decl nil numbers nil)
+    (T formal-type-decl nil multiset nil)
+    (multiset type-eq-decl nil multiset nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (>= const-decl "bool" reals nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (number_field nonempty-type-from-decl nil number_fields nil))
+   172881 10 t shostak))
+ (union_add 0
+  (union_add-1 nil 3569086616 3569086669
+   ("" (skolem 1 (t tm1 tm2))
+    (("" (expand* union add)
+      (("" (decompose-equality 1)
+        (("" (lift-if) (("" (assert) nil nil)) nil)) nil))
+      nil))
+    nil)
+   unchecked
+   ((add const-decl "multiset" multiset nil)
+    (union const-decl "multiset" multiset nil)
+    (T formal-type-decl nil multiset nil)
+    (number nonempty-type-decl nil numbers nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (numfield nonempty-type-eq-decl nil number_fields nil)
+    (multiset type-eq-decl nil multiset nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (>= const-decl "bool" reals nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (+ const-decl "[numfield, numfield -> numfield]" number_fields nil)
+    (posint_plus_nnint_is_posint application-judgement "posint"
+     integers nil)
+    (nnint_plus_nnint_is_nnint application-judgement "nonneg_int"
+     integers nil))
+   52657 100 t shostak))
+ (add_msingleton_union 0
+  (add_msingleton_union-1 nil 3569086687 3569086728
+   ("" (skolem 1 (t tm))
+    (("" (decompose-equality 1)
+      (("" (expand* add union member msingleton)
+        (("" (expand add)
+          (("" (expand emptymultiset)
+            (("" (lift-if) (("" (assert) nil nil)) nil)) nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((multiset type-eq-decl nil multiset nil)
+    (add const-decl "multiset" multiset nil)
+    (union const-decl "multiset" multiset nil)
+    (msingleton const-decl "multiset" multiset nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (>= const-decl "bool" reals nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (number nonempty-type-decl nil numbers nil)
+    (T formal-type-decl nil multiset nil)
+    (emptymultiset const-decl "multiset" multiset nil))
+   40948 30 t shostak))
+ (member_union 0
+  (member_union-1 nil 3569091118 3569091136
+   ("" (skolem 1 (t tm1 tm2))
+    (("" (flatten)
+      (("" (expand member)
+        (("" (expand* union) (("" (assert) nil nil)) nil)) nil))
+      nil))
+    nil)
+   proved
+   ((union const-decl "multiset" multiset nil)
+    (real_gt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (nnint_plus_nnint_is_nnint application-judgement "nonneg_int"
+     integers nil)
+    (member const-decl "bool" multiset nil))
+   18491 30 t shostak))
+ (difference_TCC1 0
+  (difference_TCC1-1 nil 3569091108 3569091113
+   ("" (subtype-tcc) nil nil) proved
+   ((real_ge_is_total_order name-judgement "(total_order?[real])"
+     real_props nil)
+    (int_minus_int_is_int application-judgement "int" integers nil)
+    (int_max application-judgement "{k: int | i <= k AND j <= k}"
+     real_defs nil)
+    (rat_max application-judgement "{s: rat | s >= q AND s >= r}"
+     real_defs nil)
+    (real_lt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (minus_odd_is_odd application-judgement "odd_int" integers nil))
+   40 30 nil nil))
+ (inclusion_reflexive 0
+  (inclusion_reflexive-1 nil 3569086099 3569091113
+   ("" (judgement-tcc) nil nil) proved
+   ((included? const-decl "bool" multiset nil)
+    (reflexive? const-decl "bool" relations nil))
+   3 10 t shostak))
+ (inclusion_transitive 0
+  (inclusion_transitive-1 nil 3569086100 3569091113
+   ("" (judgement-tcc) nil nil) proved
+   ((real_le_is_total_order name-judgement "(total_order?[real])"
+     real_props nil)
+    (T formal-type-decl nil multiset nil)
+    (included? const-decl "bool" multiset nil)
+    (transitive? const-decl "bool" relations nil)
+    (inclusion_reflexive name-judgement "(reflexive?[multiset])"
+     multiset nil))
+   43 30 t shostak))
+ (inclusion_antysymmetric 0
+  (inclusion_antysymmetric-1 nil 3569086100 3569091113
+   ("" (expand antisymmetric?)
+    (("" (skolem 1 (x y))
+      (("" (flatten)
+        (("" (apply-extensionality :hide? t)
+          (("" (expand included?)
+            (("" (instantiate -1 x!1)
+              (("" (assert)
+                (("" (instantiate -2 x!1) (("" (assert) nil nil)) nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((T formal-type-decl nil multiset nil)
+    (number nonempty-type-decl nil numbers nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (>= const-decl "bool" reals nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (multiset type-eq-decl nil multiset nil)
+    (inclusion_transitive name-judgement "(transitive?[multiset])"
+     multiset nil)
+    (inclusion_reflexive name-judgement "(reflexive?[multiset])"
+     multiset nil)
+    (real_le_is_total_order name-judgement "(total_order?[real])"
+     real_props nil)
+    (included? const-decl "bool" multiset nil)
+    (antisymmetric? const-decl "bool" relations nil))
+   46 30 t shostak))
+ (inclusion_partial_order 0
+  (inclusion_partial_order-1 nil 3569086100 3569091113
+   ("" (judgement-tcc) nil nil) proved
+   ((inclusion_antysymmetric name-judgement
+     "(antisymmetric?[multiset])" multiset nil)
+    (inclusion_transitive name-judgement "(transitive?[multiset])"
+     multiset nil)
+    (inclusion_reflexive name-judgement "(reflexive?[multiset])"
+     multiset nil)
+    (partial_order? const-decl "bool" orders nil)
+    (preorder? const-decl "bool" orders nil))
+   8 10 t shostak))
+ (m2s_add 0
+  (m2s_add-1 nil 3569086880 3569086921
+   ("" (skolem 1 (t tm))
+    (("" (auto-rewrite ("add" "m2s" "member"))
+      (("" (ground)
+        (("" (apply-extensionality :hide? t)
+          (("" (iff) (("" (lift-if) (("" (assert) nil nil)) nil)) nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((T formal-type-decl nil multiset nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (add const-decl "(nonempty?)" sets nil)
+    (nonempty? const-decl "bool" sets nil)
+    (set type-eq-decl nil sets nil)
+    (+ const-decl "[numfield, numfield -> numfield]" number_fields nil)
+    (numfield nonempty-type-eq-decl nil number_fields nil)
+    (m2s const-decl "[T -> bool]" multiset nil)
+    (multiset type-eq-decl nil multiset nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (>= const-decl "bool" reals nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (number nonempty-type-decl nil numbers nil)
+    (member const-decl "bool" sets nil)
+    (real_gt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (posint_plus_nnint_is_posint application-judgement "posint"
+     integers nil)
+    (add const-decl "multiset" multiset nil))
+   41351 70 t shostak)))
+

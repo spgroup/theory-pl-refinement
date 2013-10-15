@@ -1,0 +1,62 @@
+TestSPLrefinement: THEORY
+BEGIN
+  IMPORTING SPLrefinement
+
+  fm,fm1,fm2: VAR FM
+  c,c1,c2,c3,c4,c5,c6,c7,c8,c9: VAR Conf
+  cs,cs1,cs2,cs3: VAR finite_sets[Conf].finite_set
+  a1,a2: VAR Asset
+  an,an1,an2: VAR AssetName
+  aSet, S1,S2: VAR set[Asset]
+  anSet: VAR finite_sets[AssetName].finite_set
+  as1,as2,p,p1,p2: VAR finite_sets[Asset].finite_set
+  prods,ps,ps1,ps2: VAR finite_sets[finite_sets[Asset].finite_set].finite_set
+  am,am1,am2: VAR AM
+  ck,ck1,ck2,ck3: VAR CK
+  pl,pl1,pl2,pl3,pl4: VAR PL
+  pop,pop1,pop2,pop3: VAR Population
+  cst,cst1,cst2: VAR Constraints
+  mpl,mpl1,mpl2: VAR MPL
+  cp,cp1,cp2: VAR CP
+  cps,cps1,cps2: VAR set[CP]
+
+
+  testeConfs: THEOREM
+    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2):
+    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=singleton(c1) AND {|fm2|}=singleton(c2))
+	=> confs(mpl)=add(singleton(c2),add(singleton(c1),emptyset))
+
+  testeConfs2: THEOREM
+    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2,c3):
+    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=union(c1,c2) AND {|fm2|}=singleton(c3))
+	=> confs(mpl)=add({|fm2|},add({|fm1|},emptyset))
+
+
+  ccombinations(cps:finite_sets[set[Conf]].finite_set) : finite_sets[finite_sets[Conf].finite_set].finite_set = 
+    { cs:finite_sets[Conf].finite_set | (FORALL(c:Conf): member(c,cs) => (EXISTS (X:set[Conf]): member(X,cps) AND member(c,X) AND  NOT(EXISTS (z:Conf): z/=c AND member(z,X)) ) ) }
+%    { cs:finite_sets[Conf].finite_set | card(cs)<=card(cps) AND (FORALL(c:Conf): member(c,cs) => (EXISTS (X:set[Conf]): member(X,cps) AND member(c,X) AND  NOT(EXISTS (z:Conf): z/=c AND member(z,X)) ) ) }
+
+%  cfilter(cps:finite_sets[set[Conf]].finite_set,c:Constraints) : finite_sets[set[Conf]].finite_set = 
+%    { cops:set[CP] | member(cops,cps) AND satCPs(cops,c) }
+
+%  csemantics(mpl) : set[finite_sets[Asset].finite_set] = 
+%    products(filter(combinations(cps(mpl)), c(mpl)))
+
+  testeCombs: THEOREM
+    FORALL(mpl,pl1,pl2,fm1,fm2,c1,c2,cs1):
+    	(pls(mpl)=union(pl1,pl2) AND F(pl1)=fm1 AND F(pl2)=fm2 AND {|fm1|}=singleton(c1) AND {|fm2|}=singleton(c2) AND cs1=union(singleton(c1),singleton(c2)))
+	=> ccombinations(confs(mpl))(cs1) AND ccombinations(confs(mpl))(singleton(c1)) AND ccombinations(confs(mpl))(singleton(c2))
+%	=> ccombinations(confs(mpl))=add(cs1,add(singleton(c2),add(singleton(c1),emptyset)))
+
+  testeCombs2: THEOREM
+    FORALL(mpl,pl1,pl2,c1,c2,c3,c4,cs1):
+    	(pls(mpl)=union(pl1,pl2) AND {|F(pl1)|}=union(singleton(c3),union(singleton(c1),singleton(c2))) AND {|F(pl2)|}=singleton(c4) AND cs1=union(singleton(c3),union(singleton(c1),singleton(c2))) AND NOT(c1=c2) AND NOT(c1=c3) AND NOT(c1=c4) AND NOT(c2=c3) AND NOT(c2=c4) AND NOT(c3=c4))
+	=> NOT(ccombinations(confs(mpl))(cs1))
+
+  testeCombs3: THEOREM
+    FORALL(mpl,pl1,pl2,pl3,c1,c2,c3,c4,c5,cs1):
+    	(pls(mpl)=union(pl1,union(pl2,pl3)) AND {|F(pl1)|}=union(singleton(c3),union(singleton(c1),singleton(c2))) AND {|F(pl2)|}=singleton(c4) AND {|F(pl3)|}=singleton(c5) AND cs1=union(union(singleton(c5),singleton(c4)),union(singleton(c1),singleton(c2))) AND NOT(c1=c2) AND NOT(c1=c3) AND NOT(c1=c4) AND NOT(c1=c5) AND NOT(c2=c3) AND NOT(c2=c4) AND NOT(c3=c4))
+	=> NOT(ccombinations(confs(mpl))(cs1))
+
+
+END TestSPLrefinement

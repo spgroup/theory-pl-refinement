@@ -1,0 +1,264 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A multiset library, including finite multisets and induction.               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+multiset_defs[T: TYPE]: THEORY
+BEGIN
+  multiset: TYPE = [T -> nat]
+
+  x, y: VAR T
+  s, t: VAR multiset
+
+  count(x,s): nat = s(x)
+
+  member(x,s): bool = s(x) > 0
+
+  members(s): [T -> bool] = LAMBDA x: member(x,s)
+
+  submultiset?(s,t): bool = FORALL x: s(x) <= t(x)
+
+  empty: multiset = LAMBDA x: 0
+
+  union(s,t): multiset = LAMBDA x: s(x) + t(x)
+
+  intersection(s,t): multiset = LAMBDA x: min(s(x), t(x))
+
+  difference(s,t): multiset = LAMBDA x: max(s(x) - t(x), 0)
+
+  singleton(x): multiset =
+    LAMBDA y: IF x = y THEN 1 ELSE 0 ENDIF
+
+  add(x,s): multiset =
+    LAMBDA y: IF x = y THEN s(y)+1 ELSE s(y) ENDIF
+
+  remove(x,s): multiset =
+    LAMBDA y: IF x = y THEN max(s(y)-1, 0) ELSE s(y) ENDIF
+END multiset_defs
+
+
+multiset_lemmas[T: TYPE]: THEORY
+BEGIN
+  IMPORTING multiset_defs[T]
+
+  x, y, z: VAR T
+  s, t, r: VAR multiset[T]
+
+  extensionality: LEMMA (FORALL x: count(x,s) = count(x,t)) IMPLIES s = t
+
+  empty_no_members: LEMMA NOT member(x,empty)
+
+  empty_min: LEMMA submultiset?(s,empty) IMPLIES s = empty
+
+  nonempty_member: LEMMA s /= empty IFF EXISTS x: member(x,s)
+
+  submultiset_empty: LEMMA submultiset?(empty,s)
+
+  submultiset_reflexive: LEMMA submultiset?(s,s)
+
+  submultiset_antisymmetric: LEMMA
+    submultiset?(s,t) AND submultiset?(t,s) IMPLIES s = t
+
+  submultiset_transitive: LEMMA
+    submultiset?(r,s) AND submultiset?(s,t) IMPLIES submultiset?(r,t)
+
+  submultiset_partial_order: LEMMA partial_order?(submultiset?[T])
+
+  union_empty: LEMMA union(s,empty) = s
+
+  union_commutative: LEMMA union(s,t) = union(t,s)
+
+  union_associative: LEMMA union(union(r,s), t) = union(r, union(s,t))
+
+  union_submultiset: LEMMA submultiset?(s, union(s,t))
+
+  union_diff_submultiset: LEMMA
+    submultiset?(s,t) IMPLIES union(s, difference(t,s)) = t
+
+  intersection_empty: LEMMA intersection(s,empty) = empty
+
+  intersection_idempotent: LEMMA intersection(s,s) = s
+
+  intersection_commutative: LEMMA intersection(s,t) = intersection(t,s)
+
+  intersection_associative: LEMMA
+    intersection(intersection(r,s), t) = intersection(r, intersection(s,t))
+
+  intersection_submultiset1: LEMMA submultiset?(intersection(s,t), s)
+
+  intersection_submultiset2: LEMMA
+    submultiset?(s,t) IMPLIES intersection(s,t) = s
+
+  intersection_lower_bound: LEMMA
+    submultiset?(t,r) and submultiset?(t,s) IMPLIES
+      submultiset?(t, intersection(r,s))
+
+  distribute_union_intersection: LEMMA
+    union(r, intersection(s,t)) = intersection(union(r,s), union(r,t))
+
+  difference_empty1: LEMMA difference(s,empty) = s
+
+  difference_empty2: LEMMA difference(empty,s) = empty
+
+  difference_difference: LEMMA
+    difference(difference(r,s), t) = difference(r, union(s,t))
+
+  difference_submultiset : LEMMA  submultiset?(difference(s,t), s)
+
+  nonempty_singleton: LEMMA singleton(x) /= empty
+
+  nonempty_add: LEMMA add(x,s) /= empty
+
+  member_remove: LEMMA NOT member(x,s) IMPLIES remove(x,s) = s
+
+  add_remove_member: LEMMA member(x,s) IMPLIES add(x, remove(x,s)) = s
+
+  remove_add_member: LEMMA remove(x, add(x,s)) = s
+
+  submultiset_add: LEMMA submultiset?(s, add(x,s))
+
+  submultiset_remove: LEMMA submultiset?(remove(x,s), s)
+
+  add_as_union: LEMMA add(x,s) = union(s, singleton(x))
+
+  singleton_as_add: LEMMA singleton(x) = add(x, empty)
+
+  remove_as_difference: LEMMA remove(x,s) = difference(s, singleton(x))
+
+  remove_member_singleton: LEMMA remove(x, singleton(x)) = empty
+
+  remove_singleton_empty: LEMMA
+    remove(x,s) = empty IMPLIES s = empty OR s = singleton(x)
+
+  members_subset: LEMMA
+    submultiset?(s,t) IMPLIES subset?(members(s), members(t))
+
+  members_empty: LEMMA members(empty) = emptyset
+
+  members_singleton: LEMMA members(singleton(x)) = sets.singleton(x)
+
+  members_union: LEMMA
+    members(union(s,t)) = sets.union(members(s),members(t))
+
+  members_intersection: LEMMA
+    members(intersection(s,t)) = sets.intersection(members(s),members(t))
+
+  members_difference: LEMMA
+    subset?(members(difference(s,t)), members(s))
+
+  members_add: LEMMA
+    members(add(x,s)) = sets.add(x,members(s))
+
+  members_remove1: LEMMA
+    count(x,s) <= 1 IMPLIES members(remove(x,s)) = sets.remove(x,members(s))
+
+  members_remove2: LEMMA
+    count(x,s) /= 1 IMPLIES members(remove(x,s)) = members(s)
+
+  nonempty_nonsingleton: LEMMA
+    s /= empty AND (FORALL x: s /= singleton(x)) IMPLIES
+      (EXISTS x: count(x,s) > 1) OR
+      (EXISTS x, y: member(x,s) AND member(y,s) AND x /= y)
+END multiset_lemmas
+
+
+finite_multiset_defs[T: TYPE]: THEORY
+BEGIN
+  IMPORTING multiset_defs[T]
+  IMPORTING finite_sets@finite_sets_sum_real[T]
+
+  n: VAR nat
+  x: VAR T
+  s: VAR multiset[T]
+
+  is_finite(s): bool = finite_sets_def.is_finite(members(s))
+
+  finite_multiset: TYPE = (is_finite) CONTAINING empty[T]
+
+  JUDGEMENT members(fs: finite_multiset) HAS_TYPE finite_set[T]
+
+  fs: VAR finite_multiset
+
+  size(fs): nat = sum(members(fs),fs)
+END finite_multiset_defs
+
+
+finite_multiset_lemmas[T: TYPE]: THEORY
+BEGIN
+  IMPORTING finite_multiset_defs[T]
+  IMPORTING multiset_lemmas[T]
+
+  x, y, z: VAR T
+  s, t: VAR multiset[T]
+  fs, ft, ft1, ft2: VAR finite_multiset[T]
+
+  % Finite multiset lemmas and judgements.
+  finite_submultiset:  LEMMA submultiset?(s,fs) IMPLIES is_finite(s)
+
+  finite_empty: JUDGEMENT empty HAS_TYPE finite_multiset[T]
+
+  finite_singleton: JUDGEMENT singleton(x) HAS_TYPE finite_multiset[T]
+
+  finite_union: JUDGEMENT union(fs,ft) HAS_TYPE finite_multiset[T]
+
+  finite_intersection1: JUDGEMENT
+    intersection(fs,t) HAS_TYPE finite_multiset[T]
+  finite_intersection2: JUDGEMENT
+    intersection(s,ft) HAS_TYPE finite_multiset[T]
+
+  finite_difference: JUDGEMENT difference(fs,t) HAS_TYPE finite_multiset[T]
+
+  finite_add: JUDGEMENT add(x,fs) HAS_TYPE finite_multiset[T]
+
+  finite_remove: JUDGEMENT remove(x,fs) HAS_TYPE finite_multiset[T]
+
+  % Computing the size of finite multisets.
+  size_empty: LEMMA size(empty) = 0
+
+  size_singleton: LEMMA size(singleton(x)) = 1
+
+  size_add: LEMMA size(add(x,fs)) = size(fs) + 1
+
+  % 'Constructors' of finite multisets.
+  empty_or_add: LEMMA
+    fs = empty OR
+    (EXISTS x, ft: fs = add(x,ft))
+
+  empty_or_singleton_or_union: LEMMA
+    fs = empty OR
+    (EXISTS x: fs = singleton(x)) OR
+    (EXISTS ft1, ft2: ft1 /= empty AND ft2 /= empty AND fs = union(ft1,ft2))
+
+  % Induction rules for finite multisets.
+  finite_multiset_induction: THEOREM
+    FORALL (P: [finite_multiset[T] -> bool]):
+      P(empty) AND
+      (FORALL x, fs: P(fs) IMPLIES P(add(x,fs))) IMPLIES
+        FORALL ft: P(ft)
+
+  finite_multiset_induction_union: THEOREM
+    FORALL (P: [finite_multiset[T] -> bool]):
+      P(empty) AND
+      (FORALL x: P(singleton(x))) AND
+      (FORALL fs, ft: P(fs) AND P(ft) IMPLIES P(union(fs,ft))) IMPLIES
+        FORALL ft: P(ft)
+
+  % More size computation, uses finite_multiset_induction
+  size_union: LEMMA size(union(fs,ft)) = size(fs) + size(ft)
+
+  size_is_0: LEMMA size(fs) = 0 IMPLIES fs = empty
+
+  size_is_1: LEMMA size(fs) = 1 IMPLIES EXISTS x: fs = singleton(x)
+
+  card_members_size: LEMMA card(members(fs)) <= size(fs)
+
+  % 'Discrimination' of finite multisets.
+  finite_multiset_disc: LEMMA
+    NOT (fs = empty AND (EXISTS x, ft: fs = add(x,ft)))
+
+  finite_multiset_disc_union: LEMMA
+    NOT (fs = empty AND (EXISTS x: fs = singleton(x))) AND
+    NOT (fs = empty AND (EXISTS ft1, ft2:
+          ft1 /= empty AND ft2 /= empty AND fs = union(ft1,ft2))) AND 
+    NOT ((EXISTS x: fs = singleton(x)) AND (EXISTS ft1, ft2:
+          ft1 /= empty AND ft2 /= empty AND fs = union(ft1,ft2)))
+END finite_multiset_lemmas

@@ -1,0 +1,26 @@
+%%%
+%%% Author: GL option students, I5 semester, year 2004-2005, ENSEIRB
+%%%         and Paul Y Gloess <Paul.Gloess@ENSEIRB.Fr>
+%%%             http://www.enseirb.fr/~gloess/
+%%%
+%%% Created November 23, 2004, last modification December 6, 2005
+%%%
+%%% Note: December 6, 2005: we moved everything that depended upon
+%%%        lists into "list_permutation_props" new theory.
+%%%
+multiset_props[T: TYPE]: THEORY
+
+  BEGIN
+
+    IMPORTING multiset[T]
+    IMPORTING finite_sets@finite_sets_sum_real[T]
+
+    sum_union: LEMMA
+      (FORALL (tm1, tm2: multiset[T], ts: finite_set[T]):
+         sum(ts, union(tm1, tm2)) = sum(ts, tm1) + sum(ts, tm2))
+
+    sum_msingleton: LEMMA
+      (FORALL (t: T, ts: finite_set[T]):
+         sum(ts, msingleton(t)) = IF ts(t) THEN 1 ELSE 0 ENDIF)
+
+  END multiset_props
