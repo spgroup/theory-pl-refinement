@@ -1,6 +1,6 @@
 FeatureModel: THEORY
  BEGIN
-  IMPORTING Name, Formula_
+  IMPORTING Formula_
 
   % represents the model, flattened
   FM: TYPE = [# features:set[Name], formulae:set[Formula_] #]

@@ -27,6 +27,9 @@ BEGIN
   semantics(ck)(am)(c): finite_sets[Asset].finite_set
 
   notshowup(its,an): bool
+  showup(its,an): bool
+  notshowup(it,an): bool
+  showup(it,an): bool
 
 
 
@@ -55,6 +58,32 @@ BEGIN
         FORALL c: [||](fm)(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
     )  
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DELETE ASSET %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  syntaxDeleteAsset(ck1,ck2,item1,item2,its,an1) : bool =
+    ck1 = cons(item1,its) AND                        
+    ck2 = cons(item2,its) AND                        
+    showup(item1,an1) AND
+    notshowup(item2,an1);
+
+  conditionsDeleteAsset(am1,an1,its) : bool =
+    (FORALL an: (dom(am1)(an) AND NOT(an=an1)) => 
+      EXISTS a1: am1(an,a1) AND NOT(reference(a1,map(am1,singleton(an1)))) )
+    AND notshowup(its,an1);
+
+  deleteAsset_EqualCKeval: AXIOM
+    FORALL(fm,am,ck1,ck2,item1,item2,its,an1):
+    (
+      (
+      wfCK(fm,am,ck1) AND
+      syntaxDeleteAsset(ck1,ck2,item1,item2,its,an1) AND
+      conditionsDeleteAsset(am,an1,its)
+      )
+      =>
+        FORALL c: [||](fm)(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+    )  
 
 
 
