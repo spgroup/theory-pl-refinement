@@ -1,5 +1,6 @@
 set_aux_lemmas [T: TYPE]: THEORY
  BEGIN
+  CONVERSION+ singleton
 
   cardUnion: LEMMA
     FORALL(an:T,anSet:finite_sets[T].finite_set):
@@ -52,9 +53,42 @@ set_aux_lemmas [T: TYPE]: THEORY
     FORALL(x,y:T):
       singleton(x)(y) => x=y
 
+  singletonEqualMember: LEMMA
+    FORALL(x,y:T,S:set[T]):
+      singleton?(S) and S(x) and S(y) => x=y
+
   memberUnion: LEMMA
     FORALL(x,y:T, S:set[T]):
       S(x) => member(x,union(S,y))
 
+  intersectionNotMember: LEMMA
+    FORALL(x,y:finite_sets[T].finite_set, e:T):
+      x(e) AND intersection(x,y)=emptyset => NOT y(e)
+
+  intersectionSubset: LEMMA
+    FORALL(x,y,z:finite_sets[T].finite_set):
+      intersection(x,y)=emptyset AND subset?(z,y) => intersection(x,z)=emptyset
+
+  disjointUnion: LEMMA
+    FORALL(x,y:finite_sets[T].finite_set, e:T):
+      y(e) AND disjoint?(x,y) => NOT(x(e))
+
+  disjointSubset: LEMMA
+    FORALL(x,y,z:finite_sets[T].finite_set, e:T):
+      y(e) AND disjoint?(x,y) AND y=union(e,z) AND NOT(z(e)) => disjoint?(x,z)
+
+  unionRemoveEqual: LEMMA
+    FORALL(x:finite_sets[T].finite_set, m,n:T):
+      x=union(m,remove(n,x)) AND x(n) => m=n
+  
+  unionRemoveEqual2: LEMMA
+    FORALL(x,y:finite_sets[T].finite_set, m:T):
+      union(x,y)(m) => union(x,y)=union(union(x,m),remove(m,union(x,y)))
+
+  singletonEqual: LEMMA
+    FORALL(m:T):
+      singleton[T](m) = singleton[{a: T | singleton[T](m)(a)}](m) 
+      AND
+      singleton[{a: T | singleton[T](m)(a)}](m) = singleton[T](m)
 
  END set_aux_lemmas

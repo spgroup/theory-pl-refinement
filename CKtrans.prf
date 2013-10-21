@@ -1,0 +1,474 @@
+(CKtrans
+ (exps_TCC1 0
+  (exps_TCC1-1 nil 3558290101 3559485478 ("" (termination-tcc) nil nil)
+   unchecked
+   ((real_lt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (nnint_plus_posint_is_posint application-judgement "posint"
+     integers nil)
+    (length def-decl "nat" list_props nil))
+   65 50 nil nil))
+ (transform_TCC1 0
+  (transform_TCC1-1 nil 3558290101 3559485579
+   ("" (instantiate 1 "lambda (t:Transformation,am:AM,amt:AM) : am")
+    (("" (propax) nil nil)) nil)
+   unchecked
+   ((AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Transformation nonempty-type-decl nil CKtrans nil))
+   48047 0 t nil))
+ (semantics_TCC1 0
+  (semantics_TCC1-1 nil 3558290101 3559485478
+   ("" (subtype-tcc) nil nil) unchecked
+   ((emptyset const-decl "set" sets nil)
+    (unique const-decl "bool" maps nil)
+    (finite_emptyset name-judgement "finite_set" finite_sets nil))
+   9 10 nil nil))
+ (preserv 0
+  (preserv-1 nil 3559485519 3559485524 ("" (postpone) nil nil)
+   unchecked nil 5468 0 t shostak))
+ (compAmRef 0
+  (compAmRef-1 nil 3558430780 3559657189
+   ("" (skolem 1 (am1 am2))
+    (("" (flatten)
+      (("" (induct ck)
+        (("1" (expand semanticsCK)
+          (("1" (skolem 1 (c amt1 amt2))
+            (("1" (flatten)
+              (("1" (lemma amRefCompositional)
+                (("1" (instantiate -1 (amt1 amt2))
+                  (("1" (assert)
+                    (("1" (instantiate -1 "domain(amt1)")
+                      (("1" (instantiate -1 emptyset)
+                        (("1"
+                          (lemma
+                           "sets_lemmas[Asset].union_commutative")
+                          (("1"
+                            (lemma "sets_lemmas[Asset].union_empty")
+                            (("1" (copy -2)
+                              (("1"
+                                (instantiate
+                                 -1
+                                 (emptyset "map(amt1,domain(amt1))"))
+                                (("1"
+                                  (replace -1)
+                                  (("1"
+                                    (copy -2)
+                                    (("1"
+                                      (instantiate
+                                       -4
+                                       (emptyset
+                                        "map(amt2,domain(amt2))"))
+                                      (("1"
+                                        (instantiate
+                                         -3
+                                         ("map(amt2,domain(amt2))"))
+                                        (("1"
+                                          (instantiate
+                                           -1
+                                           ("map(amt1,domain(amt1))"))
+                                          (("1"
+                                            (replace -1)
+                                            (("1"
+                                              (expand "|>" -6)
+                                              (("1"
+                                                (flatten)
+                                                (("1"
+                                                  (replace -6)
+                                                  (("1"
+                                                    (case
+                                                     "dom(amt1)=domain(amt1) AND dom(amt2)=domain(amt2)")
+                                                    (("1"
+                                                      (flatten)
+                                                      (("1"
+                                                        (replace -1)
+                                                        (("1"
+                                                          (replace -2)
+                                                          (("1"
+                                                            (replace
+                                                             -8)
+                                                            (("1"
+                                                              (replace
+                                                               -6)
+                                                              (("1"
+                                                                (replace
+                                                                 -5)
+                                                                (("1"
+                                                                  (case
+                                                                   "map(amt1, domain(amt1))=image(amt1) AND map(amt2, domain(amt2))=image(amt2)")
+                                                                  (("1"
+                                                                    (flatten)
+                                                                    (("1"
+                                                                      (assert)
+                                                                      (("1"
+                                                                        (flatten)
+                                                                        (("1"
+                                                                          (assert)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil)
+                                                                   ("2"
+                                                                    (bddsimp
+                                                                     1)
+                                                                    (("1"
+                                                                      (expand*
+                                                                       map
+                                                                       domain
+                                                                       image)
+                                                                      (("1"
+                                                                        (decompose-equality
+                                                                         1)
+                                                                        (("1"
+                                                                          (bddsimp
+                                                                           1)
+                                                                          (("1"
+                                                                            (skolem
+                                                                             -1
+                                                                             an)
+                                                                            (("1"
+                                                                              (flatten)
+                                                                              (("1"
+                                                                                (instantiate
+                                                                                 1
+                                                                                 an)
+                                                                                (("1"
+                                                                                  (propax)
+                                                                                  nil
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil)
+                                                                           ("2"
+                                                                            (skolem
+                                                                             -1
+                                                                             an)
+                                                                            (("2"
+                                                                              (instantiate
+                                                                               1
+                                                                               an)
+                                                                              (("2"
+                                                                                (assert)
+                                                                                (("2"
+                                                                                  (instantiate
+                                                                                   1
+                                                                                   x!1)
+                                                                                  (("2"
+                                                                                    (propax)
+                                                                                    nil
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil)
+                                                                     ("2"
+                                                                      (decompose-equality
+                                                                       1)
+                                                                      (("2"
+                                                                        (expand
+                                                                         map
+                                                                         1)
+                                                                        (("2"
+                                                                          (expand
+                                                                           domain
+                                                                           1)
+                                                                          (("2"
+                                                                            (expand
+                                                                             image
+                                                                             1)
+                                                                            (("2"
+                                                                              (bddsimp
+                                                                               1)
+                                                                              (("1"
+                                                                                (skolem
+                                                                                 -1
+                                                                                 an)
+                                                                                (("1"
+                                                                                  (flatten)
+                                                                                  (("1"
+                                                                                    (instantiate
+                                                                                     1
+                                                                                     an)
+                                                                                    (("1"
+                                                                                      (propax)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil)
+                                                                               ("2"
+                                                                                (skolem
+                                                                                 -1
+                                                                                 an)
+                                                                                (("2"
+                                                                                  (instantiate
+                                                                                   1
+                                                                                   an)
+                                                                                  (("2"
+                                                                                    (assert)
+                                                                                    (("2"
+                                                                                      (instantiate
+                                                                                       1
+                                                                                       x!1)
+                                                                                      (("2"
+                                                                                        (propax)
+                                                                                        nil
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil)
+                                                     ("2"
+                                                      (hide-all-but 1)
+                                                      (("2"
+                                                        (expand*
+                                                         dom
+                                                         domain)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("2" (skolem 1 (it its))
+          (("2" (flatten)
+            (("2" (skolem 1 (c amt1 amt2))
+              (("2" (expand semanticsCK +)
+                (("2" (flatten)
+                  (("2" (lemma preserv)
+                    (("2" (bddsimp)
+                      (("1" (assert)
+                        (("1"
+                          (instantiate -1
+                           (am1 am2 "tasks(it)" amt1 amt2))
+                          (("1" (assert)
+                            (("1"
+                              (instantiate -2
+                               (c
+                                "transform(tasks(it), am1, amt1)"
+                                "transform(tasks(it), am2, amt2)"))
+                              (("1" (assert) nil nil)) nil))
+                            nil))
+                          nil))
+                        nil)
+                       ("2"
+                        (instantiate -2
+                         (c "transform(tasks(it), am1, amt1)"
+                          "transform(tasks(it), am2, amt2)"))
+                        (("2"
+                          (instantiate -1
+                           (am1 am2 "tasks(it)" amt1 amt2))
+                          (("2" (assert) nil nil)) nil))
+                        nil)
+                       ("3" (assert)
+                        (("3" (instantiate -2 (c amt1 amt2))
+                          (("3" (assert) nil nil)) nil))
+                        nil)
+                       ("4" (instantiate -2 (c amt1 amt2))
+                        (("4" (assert) nil nil)) nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unfinished
+   ((transform const-decl "AM" CKtrans nil)
+    (preserv formula-decl nil CKtrans nil)
+    (emptyset const-decl "set" sets nil)
+    (union_commutative formula-decl nil sets_lemmas nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (image const-decl "finite_sets[T].finite_set" maps nil)
+    (dom const-decl "set[S]" maps nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (union_empty formula-decl nil sets_lemmas nil)
+    (finite_emptyset name-judgement "finite_set" finite_sets nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (amRefCompositional formula-decl nil AssetMapping nil)
+    (list_induction formula-decl nil list_adt nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (Transformation nonempty-type-decl nil CKtrans nil)
+    (Item type-eq-decl nil CKtrans nil)
+    (\|- const-decl "[set[Asset], set[Asset] -> bool]" Assets nil)
+    (semanticsCK def-decl "finite_sets[Asset].finite_set" CKtrans nil)
+    (wfProduct const-decl "[set[Asset] -> bool]" Assets nil)
+    (\|> const-decl "bool" AssetMapping nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (Name type-decl nil Name nil) (CK type-eq-decl nil CKtrans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (list type-decl nil list_adt nil))
+   458331 390 t shostak))
+ (compAmRefEmptyset 0
+  (compAmRefEmptyset-2 "" 3558376872 3558431380
+   ("" (lemma compAmRef)
+    (("" (skolem 1 (am1 am2))
+      (("" (flatten)
+        (("" (instantiate -1 (am1 am2))
+          (("" (assert)
+            (("" (expand semantics)
+              (("" (skolem 1 (ck c))
+                (("" (flatten)
+                  (("" (instantiate -1 (ck c emptyset emptyset))
+                    (("" (assert)
+                      (("" (bddsimp -)
+                        (("1" (assert) nil nil)
+                         ("2" (expand "|>")
+                          (("2" (skolem 1 an)
+                            (("2" (flatten)
+                              (("2"
+                                (expand dom)
+                                (("2"
+                                  (expand emptyset)
+                                  (("2" (propax) nil nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((semantics const-decl "finite_sets[Asset].finite_set" CKtrans nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (Item type-eq-decl nil CKtrans nil)
+    (list type-decl nil list_adt nil) (CK type-eq-decl nil CKtrans nil)
+    (Name type-decl nil Name nil)
+    (Configuration type-eq-decl nil Name nil)
+    (emptyset const-decl "set" sets nil)
+    (\|> const-decl "bool" AssetMapping nil)
+    (dom const-decl "set[S]" maps nil)
+    (finite_emptyset name-judgement "finite_set" finite_sets nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (compAmRef formula-decl nil CKtrans nil))
+   96053 60 t shostak)
+  (compAmRefEmptyset-1 nil 3558290103 3558290255
+   ("" (skolem 1 (am1 am2))
+    (("" (flatten)
+      (("" (induct ck)
+        (("1" (expand semantics)
+          (("1" (expand semanticsCK)
+            (("1" (expand image)
+              (("1" (expand emptyset)
+                (("1" (lemma sets[Asset].emptyset)
+                  (("1" (replace -1 1 RL)
+                    (("1" (skosimp)
+                      (("1" (use assetRefinement)
+                        (("1" (expand* preorder? reflexive?)
+                          (("1" (flatten)
+                            (("1" (instantiate -1 emptyset)
+                              (("1" (assert) nil nil)) nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("2" (skolem 1 (it its))
+          (("2" (flatten)
+            (("2" (skolem 1 c)
+              (("2" (expand semantics +)
+                (("2" (expand semantics)
+                  (("2" (expand semanticsCK +)
+                    (("2" (bddsimp)
+                      (("1" (assert) (("1" (postpone) nil nil)) nil)
+                       ("2" (postpone) nil nil)
+                       ("3" (assert)
+                        (("3" (instantiate -1 c)
+                          (("3" (assert) nil nil)) nil))
+                        nil)
+                       ("4" (instantiate -1 c) (("4" (assert) nil nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unfinished nil 152713 120 t shostak))
+ (wfCK_TCC1 0
+  (wfCK_TCC1-1 nil 3562497283 3562497305
+   ("" (expand wfTree) (("" (propax) nil nil)) nil) proved
+   ((wfTree const-decl "bool" FeatureModel nil)) 4782 0 t nil)))
+

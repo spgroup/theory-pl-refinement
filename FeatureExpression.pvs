@@ -1,0 +1,9 @@
+FeatureExpression: THEORY
+ BEGIN
+  Importing Configuration
+  FeatureExpression: TYPE
+
+  % indicates when a configuration satisfies a formula
+  sat(f:FeatureExpression, c:Configuration): boolean
+
+ END FeatureExpression

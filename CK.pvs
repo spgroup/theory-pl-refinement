@@ -1,0 +1,61 @@
+CK: THEORY
+BEGIN
+  IMPORTING FMint,FeatureExpression, AssetMapping
+
+  RightSide: TYPE+
+
+  Item: TYPE=[# exp:FeatureExpression, right:RightSide #]
+  CK: TYPE = list[Item]
+
+  am,am1,am2: VAR AM
+  a1,a2,a3: VAR Asset
+  an,an1,an2: VAR AssetName
+  anSet: VAR finite_sets[AssetName].finite_set
+  aSet,S1,S2: VAR finite_sets[Asset].finite_set
+  pair: VAR [AssetName,Asset]
+  pairs: VAR finite_sets[[AssetName,Asset]].finite_set
+  fm,fm1,fm2: VAR FMi
+  ck,its,ck1,ck2: VAR CK
+  item,it,item1,item2: VAR Item
+  items,its1,its2: VAR list[Item]
+  c: VAR Configuration
+
+  exps(ck) : set[FeatureExpression]
+
+  wfCK(fm,am,ck) : bool
+
+  semantics(ck)(am)(c): finite_sets[Asset].finite_set
+
+  notshowup(its,an): bool
+
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% REPLACE FEATURE EXPRESSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  syntaxReplaceFeatureExp(ck1,ck2,item1,item2,its) : bool =
+    ck1 = cons(item1,its) AND                        
+    ck2 = cons(item2,its) AND                        
+    right(item1) = right(item2);
+
+  conditionsReplaceFeatureExp(fm,item1,item2) : bool =
+    wt(fm,exp(item2)) AND
+    FORALL c: [||](fm)(c) => (satisfies(exp(item1),c)<=>satisfies(exp(item2),c))
+
+  replaceFeatureExp_EqualCKeval: AXIOM
+    FORALL(fm,am,ck1,ck2,item1,item2,its):
+    (
+      (
+      wfCK(fm,am,ck1) AND
+      syntaxReplaceFeatureExp(ck1,ck2,item1,item2,its) AND
+      conditionsReplaceFeatureExp(fm,item1,item2)
+      )
+      =>
+        FORALL c: [||](fm)(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+    )  
+
+
+
+
+End CK

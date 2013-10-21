@@ -1,0 +1,15 @@
+PropositionalFMSPL: THEORY
+BEGIN
+  IMPORTING FeatureModelRefinements, AssetMapping
+  
+  IMPORTING SPLrefinement{{ 
+  	    FM:=WFM, Conf:=Configuration, {||} := semantics
+  }}
+
+  fm,fm1,fm2: VAR WFM
+  c: VAR Configuration
+  exp: VAR Formula_;
+  F,G,opt: VAR Name
+  pl,pl1,pl2: VAR PL
+
+END PropositionalFMSPL

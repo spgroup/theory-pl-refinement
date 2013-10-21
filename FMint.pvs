@@ -1,0 +1,15 @@
+FMint: THEORY
+BEGIN
+  Importing Configuration,FeatureExpression
+
+  % Assumption <Feature model semantics>
+  FMi: TYPE
+  [||] : [FMi -> set[Configuration]]
+
+  satisfies(f:FeatureExpression, c:Configuration):boolean
+  wt(fm:FMi, f:FeatureExpression):boolean
+
+%  IMPORTING SPLrefinement{{Conf:=Config,FM:=FMi, {||} := [||]}}  
+
+
+END FMint

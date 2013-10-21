@@ -1,0 +1,1545 @@
+(CKifdef
+ (preprocess_TCC1 0
+  (preprocess_TCC1-1 nil 3559395275 3559395421
+   ("" (skolem 1 (t am amt))
+    (("" (flatten)
+      (("" (lemma "maps[AssetName,Asset].mappingUnique")
+        (("" (instantiate -1 (amt "t`1"))
+          (("" (bddsimp)
+            (("1"
+              (case "{r: Asset | amt(t`1, r)}=map[AssetName, Asset](amt, singleton[AssetName](t`1))")
+              (("1" (assert) nil nil)
+               ("2" (decompose-equality 1)
+                (("2" (expand* map singleton)
+                  (("2" (bddsimp)
+                    (("1" (instantiate 1 "t`1")
+                      (("1" (propax) nil nil)) nil)
+                     ("2" (skolem -1 an)
+                      (("2" (flatten) (("2" (assert) nil nil)) nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("2" (expand* empty? dom singleton? member)
+              (("2" (skolem -2 a)
+                (("2" (instantiate -1 a) (("2" (propax) nil nil)) nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((dom const-decl "set[S]" maps nil)
+    (member const-decl "bool" sets nil)
+    (empty? const-decl "bool" sets nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (singleton? const-decl "bool" sets nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (AssetIfdef type-eq-decl nil CKifdef nil)
+    (mappingUnique formula-decl nil maps nil) nil nil)
+   127138 80 t shostak))
+ (keepdom 0
+  (keepdom-1 nil 3559403027 3559403552
+   ("" (skolem 1 (am amt t))
+    (("" (decompose-equality 1)
+      (("" (bddsimp)
+        (("1" (expand preprocess)
+          (("1" (assert)
+            (("1" (bddsimp)
+              (("1" (expand ow)
+                (("1" (assert)
+                  (("1" (expand rm)
+                    (("1" (expand* union singleton remove map member)
+                      (("1" (expand dom)
+                        (("1" (case "t`1=x!1")
+                          (("1"
+                            (instantiate 1
+                             "preprocessfile(singleton_elt[Asset]
+                             ({r: Asset |
+                                 EXISTS (l: AssetName):
+                                   l = t`1 AND amt(l, r)}),
+                         t`2)")
+                            (("1" (assert) nil nil)
+                             ("2"
+                              (lemma
+                               "maps[AssetName,Asset].mappingUnique")
+                              (("2"
+                                (instantiate -1 (amt "t`1"))
+                                (("2"
+                                  (bddsimp)
+                                  (("1"
+                                    (case
+                                     "{r: Asset | amt(t`1, r)}={r: Asset | EXISTS (l: AssetName): l = t`1 AND amt(l, r)}")
+                                    (("1" (assert) nil nil)
+                                     ("2"
+                                      (decompose-equality 1)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (instantiate 1 "t`1")
+                                          (("1" (propax) nil nil))
+                                          nil)
+                                         ("2"
+                                          (skolem -1 an)
+                                          (("2"
+                                            (flatten)
+                                            (("2"
+                                              (replace -1)
+                                              (("2" (propax) nil nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil)
+                                   ("2"
+                                    (expand empty?)
+                                    (("2"
+                                      (expand member)
+                                      (("2"
+                                        (skolem -4 a)
+                                        (("2"
+                                          (instantiate -1 a)
+                                          (("2" (propax) nil nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil)
+                           ("2" (skolem -1 a)
+                            (("2" (instantiate 2 a)
+                              (("2" (assert) nil nil)) nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("2" (expand preprocess)
+          (("2" (bddsimp)
+            (("2" (expand ow)
+              (("2" (assert)
+                (("2" (expand rm)
+                  (("2" (expand* union singleton remove member)
+                    (("2" (expand dom) (("2" (propax) nil nil)) nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((ow const-decl "mapping" maps nil)
+    (rm const-decl "mapping" maps nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (singleton_elt const-decl "T" sets nil)
+    (singleton? const-decl "bool" sets nil)
+    (preprocessfile const-decl "Asset" CKifdef nil)
+    (empty? const-decl "bool" sets nil)
+    (mappingUnique formula-decl nil maps nil) nil nil
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (union const-decl "set" sets nil)
+    (remove const-decl "set" sets nil)
+    (member const-decl "bool" sets nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (nonempty_finite_union1 application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    nil (boolean nonempty-type-decl nil booleans nil)
+    (preprocess const-decl "AM" CKifdef nil)
+    (AssetIfdef type-eq-decl nil CKifdef nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (dom const-decl "set[S]" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil) nil)
+   225806 190 t shostak))
+ (preprocessPreserves 0
+  (preprocessPreserves-1 nil 3560774254 3560774269
+   ("" (skolem 1 (am1 am2 t amt1 amt2))
+    (("" (flatten)
+      (("" (expand "|>")
+        (("" (flatten)
+          (("" (bddsimp)
+            (("1" (skolem 1 an)
+              (("1" (flatten)
+                (("1" (lemma keepdom)
+                  (("1" (instantiate -1 (am1 amt1 t))
+                    (("1" (instantiate -5 an)
+                      (("1" (assert)
+                        (("1" (hide (-2 -3))
+                          (("1" (skolem -3 (a1 a2))
+                            (("1" (flatten)
+                              (("1"
+                                (lemma ifdefrefinement)
+                                (("1"
+                                  (instantiate -1 (a1 a2))
+                                  (("1"
+                                    (assert)
+                                    (("1"
+                                      (instantiate -1 "t`2")
+                                      (("1"
+                                        (expand preprocess -7)
+                                        (("1"
+                                          (lemma keepdom)
+                                          (("1"
+                                            (instantiate
+                                             -1
+                                             (am2 amt2 t))
+                                            (("1"
+                                              (assert)
+                                              (("1"
+                                                (case "dom(amt1)(t`1)")
+                                                (("1"
+                                                  (assert)
+                                                  (("1"
+                                                    (expand ow -9)
+                                                    (("1"
+                                                      (expand rm)
+                                                      (("1"
+                                                        (expand dom -9)
+                                                        (("1"
+                                                          (expand*
+                                                           union
+                                                           remove
+                                                           member)
+                                                          (("1"
+                                                            (expand
+                                                             singleton
+                                                             -9)
+                                                            (("1"
+                                                              (skolem
+                                                               -9
+                                                               a)
+                                                              (("1"
+                                                                (bddsimp)
+                                                                (("1"
+                                                                  (replace
+                                                                   -9)
+                                                                  (("1"
+                                                                    (expand
+                                                                     preprocess
+                                                                     +)
+                                                                    (("1"
+                                                                      (expand*
+                                                                       ow
+                                                                       rm
+                                                                       remove
+                                                                       union
+                                                                       singleton
+                                                                       member)
+                                                                      (("1"
+                                                                        (instantiate
+                                                                         1
+                                                                         (a
+                                                                          "_"))
+                                                                        (("1"
+                                                                          (assert)
+                                                                          (("1"
+                                                                            (instantiate
+                                                                             1
+                                                                             "preprocessfile(map(amt2,{y: AssetName | y = t`1}), t`2)")
+                                                                            (("1"
+                                                                              (case
+                                                                               "{y: Asset | y = a}={y: Asset | y = preprocessfile(a1, t`2)}")
+                                                                              (("1"
+                                                                                (replace
+                                                                                 -1)
+                                                                                (("1"
+                                                                                  (case
+                                                                                   "map(amt2, {y: AssetName | y = t`1})=singleton(a2)")
+                                                                                  (("1"
+                                                                                    (replace
+                                                                                     -1)
+                                                                                    (("1"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil)
+                                                                                   ("2"
+                                                                                    (decompose-equality
+                                                                                     1)
+                                                                                    (("1"
+                                                                                      (expand
+                                                                                       map)
+                                                                                      (("1"
+                                                                                        (expand
+                                                                                         singleton)
+                                                                                        (("1"
+                                                                                          (bddsimp
+                                                                                           1)
+                                                                                          (("1"
+                                                                                            (skolem
+                                                                                             -1
+                                                                                             aann)
+                                                                                            (("1"
+                                                                                              (flatten)
+                                                                                              (("1"
+                                                                                                (assert)
+                                                                                                (("1"
+                                                                                                  (typepred
+                                                                                                   amt2)
+                                                                                                  (("1"
+                                                                                                    (expand
+                                                                                                     unique)
+                                                                                                    (("1"
+                                                                                                      (instantiate
+                                                                                                       -2
+                                                                                                       (aann
+                                                                                                        x!1
+                                                                                                        a2))
+                                                                                                      (("1"
+                                                                                                        (assert)
+                                                                                                        nil
+                                                                                                        nil))
+                                                                                                      nil))
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil)
+                                                                                           ("2"
+                                                                                            (instantiate
+                                                                                             1
+                                                                                             "t`1")
+                                                                                            (("2"
+                                                                                              (assert)
+                                                                                              nil
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("2"
+                                                                                      (lemma
+                                                                                       finite_sets[AssetName].finite_singleton)
+                                                                                      (("2"
+                                                                                        (instantiate
+                                                                                         -1
+                                                                                         "t`1")
+                                                                                        (("2"
+                                                                                          (expand
+                                                                                           singleton)
+                                                                                          (("2"
+                                                                                            (propax)
+                                                                                            nil
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil)
+                                                                                   ("3"
+                                                                                    (lemma
+                                                                                     finite_sets[AssetName].finite_singleton)
+                                                                                    (("3"
+                                                                                      (instantiate
+                                                                                       -1
+                                                                                       "t`1")
+                                                                                      (("3"
+                                                                                        (expand
+                                                                                         singleton)
+                                                                                        (("3"
+                                                                                          (propax)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil)
+                                                                               ("2"
+                                                                                (hide
+                                                                                 2)
+                                                                                (("2"
+                                                                                  (hide
+                                                                                   (-3
+                                                                                    -8))
+                                                                                  (("2"
+                                                                                    (case
+                                                                                     "map(amt1, {y: AssetName | y = t`1})=singleton(a1)")
+                                                                                    (("1"
+                                                                                      (replace
+                                                                                       -1)
+                                                                                      (("1"
+                                                                                        (replace
+                                                                                         -9)
+                                                                                        (("1"
+                                                                                          (assert)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("2"
+                                                                                      (expand*
+                                                                                       map
+                                                                                       singleton)
+                                                                                      (("2"
+                                                                                        (decompose-equality
+                                                                                         1)
+                                                                                        (("2"
+                                                                                          (bddsimp)
+                                                                                          (("1"
+                                                                                            (skolem
+                                                                                             -1
+                                                                                             l)
+                                                                                            (("1"
+                                                                                              (flatten)
+                                                                                              (("1"
+                                                                                                (assert)
+                                                                                                (("1"
+                                                                                                  (typepred
+                                                                                                   amt1)
+                                                                                                  (("1"
+                                                                                                    (expand
+                                                                                                     unique)
+                                                                                                    (("1"
+                                                                                                      (instantiate
+                                                                                                       -2
+                                                                                                       (l
+                                                                                                        a1
+                                                                                                        x!1))
+                                                                                                      (("1"
+                                                                                                        (assert)
+                                                                                                        nil
+                                                                                                        nil))
+                                                                                                      nil))
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil)
+                                                                                           ("2"
+                                                                                            (instantiate
+                                                                                             1
+                                                                                             "t`1")
+                                                                                            (("2"
+                                                                                              (assert)
+                                                                                              nil
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("3"
+                                                                                      (lemma
+                                                                                       finite_sets[AssetName].finite_singleton)
+                                                                                      (("3"
+                                                                                        (instantiate
+                                                                                         -1
+                                                                                         "t`1")
+                                                                                        (("3"
+                                                                                          (expand
+                                                                                           singleton)
+                                                                                          (("3"
+                                                                                            (propax)
+                                                                                            nil
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil)
+                                                                             ("2"
+                                                                              (lemma
+                                                                               "maps[AssetName,Asset].mappingUnique")
+                                                                              (("2"
+                                                                                (instantiate
+                                                                                 -1
+                                                                                 (amt2
+                                                                                  "t`1"))
+                                                                                (("2"
+                                                                                  (expand
+                                                                                   map
+                                                                                   +)
+                                                                                  (("2"
+                                                                                    (bddsimp)
+                                                                                    (("1"
+                                                                                      (case
+                                                                                       "{r: Asset | EXISTS (l: AssetName): l = t`1 AND amt2(l, r)}={r: Asset | amt2(t`1, r)}")
+                                                                                      (("1"
+                                                                                        (assert)
+                                                                                        nil
+                                                                                        nil)
+                                                                                       ("2"
+                                                                                        (decompose-equality
+                                                                                         1)
+                                                                                        (("2"
+                                                                                          (bddsimp)
+                                                                                          (("1"
+                                                                                            (skolem
+                                                                                             -1
+                                                                                             aann)
+                                                                                            (("1"
+                                                                                              (flatten)
+                                                                                              (("1"
+                                                                                                (assert)
+                                                                                                nil
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil)
+                                                                                           ("2"
+                                                                                            (instantiate
+                                                                                             1
+                                                                                             "t`1")
+                                                                                            (("2"
+                                                                                              (propax)
+                                                                                              nil
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("2"
+                                                                                      (expand*
+                                                                                       empty?
+                                                                                       member)
+                                                                                      (("2"
+                                                                                        (instantiate
+                                                                                         -1
+                                                                                         a2)
+                                                                                        (("2"
+                                                                                          (propax)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil)
+                                                                             ("3"
+                                                                              (lemma
+                                                                               finite_sets[AssetName].finite_singleton)
+                                                                              (("3"
+                                                                                (instantiate
+                                                                                 -1
+                                                                                 "t`1")
+                                                                                (("3"
+                                                                                  (expand
+                                                                                   singleton)
+                                                                                  (("3"
+                                                                                    (propax)
+                                                                                    nil
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil)
+                                                                 ("2"
+                                                                  (case
+                                                                   "an=t`1")
+                                                                  (("1"
+                                                                    (expand
+                                                                     map)
+                                                                    (("1"
+                                                                      (case
+                                                                       "{r: Asset | EXISTS (l: AssetName): l = t`1 AND amt1(l, r)}={r: Asset | amt1(t`1, r)}")
+                                                                      (("1"
+                                                                        (replace
+                                                                         -1)
+                                                                        (("1"
+                                                                          (lemma
+                                                                           "maps[AssetName,Asset].mappingUnique")
+                                                                          (("1"
+                                                                            (instantiate
+                                                                             -1
+                                                                             (amt1
+                                                                              "t`1"))
+                                                                            (("1"
+                                                                              (bddsimp)
+                                                                              (("1"
+                                                                                (assert)
+                                                                                (("1"
+                                                                                  (case
+                                                                                   "{r: Asset | amt1(t`1, r)}=singleton(a)")
+                                                                                  (("1"
+                                                                                    (replace
+                                                                                     -1)
+                                                                                    (("1"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil)
+                                                                                   ("2"
+                                                                                    (decompose-equality
+                                                                                     1)
+                                                                                    (("2"
+                                                                                      (expand
+                                                                                       singleton)
+                                                                                      (("2"
+                                                                                        (bddsimp)
+                                                                                        (("1"
+                                                                                          (assert)
+                                                                                          (("1"
+                                                                                            (replace
+                                                                                             -4)
+                                                                                            (("1"
+                                                                                              (typepred
+                                                                                               amt1)
+                                                                                              (("1"
+                                                                                                (expand
+                                                                                                 unique)
+                                                                                                (("1"
+                                                                                                  (instantiate
+                                                                                                   -2
+                                                                                                   (an
+                                                                                                    x!1
+                                                                                                    a))
+                                                                                                  (("1"
+                                                                                                    (assert)
+                                                                                                    nil
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil)
+                                                                                         ("2"
+                                                                                          (assert)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil)
+                                                                               ("2"
+                                                                                (expand
+                                                                                 empty?)
+                                                                                (("2"
+                                                                                  (expand
+                                                                                   member)
+                                                                                  (("2"
+                                                                                    (instantiate
+                                                                                     -1
+                                                                                     a)
+                                                                                    (("2"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil)
+                                                                       ("2"
+                                                                        (decompose-equality
+                                                                         1)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          (("1"
+                                                                            (skolem
+                                                                             -1
+                                                                             aann)
+                                                                            (("1"
+                                                                              (flatten)
+                                                                              (("1"
+                                                                                (assert)
+                                                                                nil
+                                                                                nil))
+                                                                              nil))
+                                                                            nil)
+                                                                           ("2"
+                                                                            (instantiate
+                                                                             1
+                                                                             "t`1")
+                                                                            (("2"
+                                                                              (propax)
+                                                                              nil
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil)
+                                                                   ("2"
+                                                                    (typepred
+                                                                     amt1)
+                                                                    (("2"
+                                                                      (expand
+                                                                       unique)
+                                                                      (("2"
+                                                                        (instantiate
+                                                                         -2
+                                                                         (an
+                                                                          a1
+                                                                          a))
+                                                                        (("2"
+                                                                          (assert)
+                                                                          (("2"
+                                                                            (expand
+                                                                             preprocess
+                                                                             +)
+                                                                            (("2"
+                                                                              (expand
+                                                                               ow)
+                                                                              (("2"
+                                                                                (expand
+                                                                                 rm)
+                                                                                (("2"
+                                                                                  (expand*
+                                                                                   union
+                                                                                   singleton
+                                                                                   remove
+                                                                                   member)
+                                                                                  (("2"
+                                                                                    (instantiate
+                                                                                     3
+                                                                                     (a1
+                                                                                      a2))
+                                                                                    (("2"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil)
+                                                                 ("3"
+                                                                  (expand*
+                                                                   preprocess
+                                                                   ow
+                                                                   rm
+                                                                   remove
+                                                                   union
+                                                                   singleton
+                                                                   remove
+                                                                   member)
+                                                                  (("3"
+                                                                    (assert)
+                                                                    (("3"
+                                                                      (instantiate
+                                                                       2
+                                                                       (a1
+                                                                        a2))
+                                                                      (("3"
+                                                                        (assert)
+                                                                        nil
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (assert)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (instantiate
+                                                       2
+                                                       (a1 a2))
+                                                      (("2"
+                                                        (assert)
+                                                        (("2"
+                                                          (expand
+                                                           preprocess
+                                                           +)
+                                                          (("2"
+                                                            (propax)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("2" (lemma keepdom)
+              (("2" (copy -1)
+                (("2" (instantiate -1 (am1 amt1 t))
+                  (("2" (instantiate -2 (am2 amt2 t))
+                    (("2" (assert) nil nil)) nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((\|> const-decl "bool" AssetMapping nil)
+    (ifdefrefinement formula-decl nil CKifdef nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (preprocess const-decl "AM" CKifdef nil)
+    (mapping type-eq-decl nil maps nil)
+    (dom const-decl "set[S]" maps nil)
+    (ow const-decl "mapping" maps nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (t skolem-const-decl "AssetIfdef" CKifdef nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (finite_singleton judgement-tcc nil finite_sets nil)
+    (singleton_rew formula-decl nil sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (singleton_elt const-decl "T" sets nil)
+    (singleton? const-decl "bool" sets nil)
+    (preprocessfile const-decl "Asset" CKifdef nil)
+    (empty? const-decl "bool" sets nil)
+    (mappingUnique formula-decl nil maps nil)
+    (amt2 skolem-const-decl "AM" CKifdef nil)
+    (union const-decl "set" sets nil)
+    (member const-decl "bool" sets nil)
+    (remove const-decl "set" sets nil)
+    (rm const-decl "mapping" maps nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (AssetIfdef type-eq-decl nil CKifdef nil)
+    (keepdom formula-decl nil CKifdef nil))
+   13386 740 nil nil))
+ (IMP_CKtrans_preserv_TCC1 0
+  (IMP_CKtrans_preserv_TCC1-1 nil 3559396796 3559409057
+   ("" (skolem 1 (am1 am2 t amt1 amt2))
+    (("" (flatten)
+      (("" (expand "|>")
+        (("" (flatten)
+          (("" (bddsimp)
+            (("1" (skolem 1 an)
+              (("1" (flatten)
+                (("1" (lemma keepdom)
+                  (("1" (instantiate -1 (am1 amt1 t))
+                    (("1" (instantiate -5 an)
+                      (("1" (assert)
+                        (("1" (hide (-2 -3))
+                          (("1" (skolem -3 (a1 a2))
+                            (("1" (flatten)
+                              (("1"
+                                (lemma ifdefrefinement)
+                                (("1"
+                                  (instantiate -1 (a1 a2))
+                                  (("1"
+                                    (assert)
+                                    (("1"
+                                      (instantiate -1 "t`2")
+                                      (("1"
+                                        (expand preprocess -7)
+                                        (("1"
+                                          (lemma keepdom)
+                                          (("1"
+                                            (instantiate
+                                             -1
+                                             (am2 amt2 t))
+                                            (("1"
+                                              (assert)
+                                              (("1"
+                                                (case "dom(amt1)(t`1)")
+                                                (("1"
+                                                  (assert)
+                                                  (("1"
+                                                    (expand ow -9)
+                                                    (("1"
+                                                      (expand rm)
+                                                      (("1"
+                                                        (expand dom -9)
+                                                        (("1"
+                                                          (expand*
+                                                           union
+                                                           remove
+                                                           member)
+                                                          (("1"
+                                                            (expand
+                                                             singleton
+                                                             -9)
+                                                            (("1"
+                                                              (skolem
+                                                               -9
+                                                               a)
+                                                              (("1"
+                                                                (bddsimp)
+                                                                (("1"
+                                                                  (replace
+                                                                   -9)
+                                                                  (("1"
+                                                                    (expand
+                                                                     preprocess
+                                                                     +)
+                                                                    (("1"
+                                                                      (expand*
+                                                                       ow
+                                                                       rm
+                                                                       remove
+                                                                       union
+                                                                       singleton
+                                                                       member)
+                                                                      (("1"
+                                                                        (instantiate
+                                                                         1
+                                                                         (a
+                                                                          "_"))
+                                                                        (("1"
+                                                                          (assert)
+                                                                          (("1"
+                                                                            (instantiate
+                                                                             1
+                                                                             "preprocessfile(map(amt2,{y: AssetName | y = t`1}), t`2)")
+                                                                            (("1"
+                                                                              (case
+                                                                               "{y: Asset | y = a}={y: Asset | y = preprocessfile(a1, t`2)}")
+                                                                              (("1"
+                                                                                (replace
+                                                                                 -1)
+                                                                                (("1"
+                                                                                  (case
+                                                                                   "map(amt2, {y: AssetName | y = t`1})=singleton(a2)")
+                                                                                  (("1"
+                                                                                    (replace
+                                                                                     -1)
+                                                                                    (("1"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil)
+                                                                                   ("2"
+                                                                                    (decompose-equality
+                                                                                     1)
+                                                                                    (("1"
+                                                                                      (expand
+                                                                                       map)
+                                                                                      (("1"
+                                                                                        (expand
+                                                                                         singleton)
+                                                                                        (("1"
+                                                                                          (bddsimp
+                                                                                           1)
+                                                                                          (("1"
+                                                                                            (skolem
+                                                                                             -1
+                                                                                             aann)
+                                                                                            (("1"
+                                                                                              (flatten)
+                                                                                              (("1"
+                                                                                                (assert)
+                                                                                                (("1"
+                                                                                                  (typepred
+                                                                                                   amt2)
+                                                                                                  (("1"
+                                                                                                    (expand
+                                                                                                     unique)
+                                                                                                    (("1"
+                                                                                                      (instantiate
+                                                                                                       -2
+                                                                                                       (aann
+                                                                                                        x!1
+                                                                                                        a2))
+                                                                                                      (("1"
+                                                                                                        (assert)
+                                                                                                        nil
+                                                                                                        nil))
+                                                                                                      nil))
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil)
+                                                                                           ("2"
+                                                                                            (instantiate
+                                                                                             1
+                                                                                             "t`1")
+                                                                                            (("2"
+                                                                                              (assert)
+                                                                                              nil
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("2"
+                                                                                      (lemma
+                                                                                       finite_sets[AssetName].finite_singleton)
+                                                                                      (("2"
+                                                                                        (instantiate
+                                                                                         -1
+                                                                                         "t`1")
+                                                                                        (("2"
+                                                                                          (expand
+                                                                                           singleton)
+                                                                                          (("2"
+                                                                                            (propax)
+                                                                                            nil
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil)
+                                                                                   ("3"
+                                                                                    (lemma
+                                                                                     finite_sets[AssetName].finite_singleton)
+                                                                                    (("3"
+                                                                                      (instantiate
+                                                                                       -1
+                                                                                       "t`1")
+                                                                                      (("3"
+                                                                                        (expand
+                                                                                         singleton)
+                                                                                        (("3"
+                                                                                          (propax)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil)
+                                                                               ("2"
+                                                                                (hide
+                                                                                 2)
+                                                                                (("2"
+                                                                                  (hide
+                                                                                   (-3
+                                                                                    -8))
+                                                                                  (("2"
+                                                                                    (case
+                                                                                     "map(amt1, {y: AssetName | y = t`1})=singleton(a1)")
+                                                                                    (("1"
+                                                                                      (replace
+                                                                                       -1)
+                                                                                      (("1"
+                                                                                        (replace
+                                                                                         -9)
+                                                                                        (("1"
+                                                                                          (assert)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("2"
+                                                                                      (expand*
+                                                                                       map
+                                                                                       singleton)
+                                                                                      (("2"
+                                                                                        (decompose-equality
+                                                                                         1)
+                                                                                        (("2"
+                                                                                          (bddsimp)
+                                                                                          (("1"
+                                                                                            (skolem
+                                                                                             -1
+                                                                                             l)
+                                                                                            (("1"
+                                                                                              (flatten)
+                                                                                              (("1"
+                                                                                                (assert)
+                                                                                                (("1"
+                                                                                                  (typepred
+                                                                                                   amt1)
+                                                                                                  (("1"
+                                                                                                    (expand
+                                                                                                     unique)
+                                                                                                    (("1"
+                                                                                                      (instantiate
+                                                                                                       -2
+                                                                                                       (l
+                                                                                                        a1
+                                                                                                        x!1))
+                                                                                                      (("1"
+                                                                                                        (assert)
+                                                                                                        nil
+                                                                                                        nil))
+                                                                                                      nil))
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil)
+                                                                                           ("2"
+                                                                                            (instantiate
+                                                                                             1
+                                                                                             "t`1")
+                                                                                            (("2"
+                                                                                              (assert)
+                                                                                              nil
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("3"
+                                                                                      (lemma
+                                                                                       finite_sets[AssetName].finite_singleton)
+                                                                                      (("3"
+                                                                                        (instantiate
+                                                                                         -1
+                                                                                         "t`1")
+                                                                                        (("3"
+                                                                                          (expand
+                                                                                           singleton)
+                                                                                          (("3"
+                                                                                            (propax)
+                                                                                            nil
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil)
+                                                                             ("2"
+                                                                              (lemma
+                                                                               "maps[AssetName,Asset].mappingUnique")
+                                                                              (("2"
+                                                                                (instantiate
+                                                                                 -1
+                                                                                 (amt2
+                                                                                  "t`1"))
+                                                                                (("2"
+                                                                                  (expand
+                                                                                   map
+                                                                                   +)
+                                                                                  (("2"
+                                                                                    (bddsimp)
+                                                                                    (("1"
+                                                                                      (case
+                                                                                       "{r: Asset | EXISTS (l: AssetName): l = t`1 AND amt2(l, r)}={r: Asset | amt2(t`1, r)}")
+                                                                                      (("1"
+                                                                                        (assert)
+                                                                                        nil
+                                                                                        nil)
+                                                                                       ("2"
+                                                                                        (decompose-equality
+                                                                                         1)
+                                                                                        (("2"
+                                                                                          (bddsimp)
+                                                                                          (("1"
+                                                                                            (skolem
+                                                                                             -1
+                                                                                             aann)
+                                                                                            (("1"
+                                                                                              (flatten)
+                                                                                              (("1"
+                                                                                                (assert)
+                                                                                                nil
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil)
+                                                                                           ("2"
+                                                                                            (instantiate
+                                                                                             1
+                                                                                             "t`1")
+                                                                                            (("2"
+                                                                                              (propax)
+                                                                                              nil
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("2"
+                                                                                      (expand*
+                                                                                       empty?
+                                                                                       member)
+                                                                                      (("2"
+                                                                                        (instantiate
+                                                                                         -1
+                                                                                         a2)
+                                                                                        (("2"
+                                                                                          (propax)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil)
+                                                                             ("3"
+                                                                              (lemma
+                                                                               finite_sets[AssetName].finite_singleton)
+                                                                              (("3"
+                                                                                (instantiate
+                                                                                 -1
+                                                                                 "t`1")
+                                                                                (("3"
+                                                                                  (expand
+                                                                                   singleton)
+                                                                                  (("3"
+                                                                                    (propax)
+                                                                                    nil
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil)
+                                                                 ("2"
+                                                                  (case
+                                                                   "an=t`1")
+                                                                  (("1"
+                                                                    (expand
+                                                                     map)
+                                                                    (("1"
+                                                                      (case
+                                                                       "{r: Asset | EXISTS (l: AssetName): l = t`1 AND amt1(l, r)}={r: Asset | amt1(t`1, r)}")
+                                                                      (("1"
+                                                                        (replace
+                                                                         -1)
+                                                                        (("1"
+                                                                          (lemma
+                                                                           "maps[AssetName,Asset].mappingUnique")
+                                                                          (("1"
+                                                                            (instantiate
+                                                                             -1
+                                                                             (amt1
+                                                                              "t`1"))
+                                                                            (("1"
+                                                                              (bddsimp)
+                                                                              (("1"
+                                                                                (assert)
+                                                                                (("1"
+                                                                                  (case
+                                                                                   "{r: Asset | amt1(t`1, r)}=singleton(a)")
+                                                                                  (("1"
+                                                                                    (replace
+                                                                                     -1)
+                                                                                    (("1"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil)
+                                                                                   ("2"
+                                                                                    (decompose-equality
+                                                                                     1)
+                                                                                    (("2"
+                                                                                      (expand
+                                                                                       singleton)
+                                                                                      (("2"
+                                                                                        (bddsimp)
+                                                                                        (("1"
+                                                                                          (assert)
+                                                                                          (("1"
+                                                                                            (replace
+                                                                                             -4)
+                                                                                            (("1"
+                                                                                              (typepred
+                                                                                               amt1)
+                                                                                              (("1"
+                                                                                                (expand
+                                                                                                 unique)
+                                                                                                (("1"
+                                                                                                  (instantiate
+                                                                                                   -2
+                                                                                                   (an
+                                                                                                    x!1
+                                                                                                    a))
+                                                                                                  (("1"
+                                                                                                    (assert)
+                                                                                                    nil
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil)
+                                                                                         ("2"
+                                                                                          (assert)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil)
+                                                                               ("2"
+                                                                                (expand
+                                                                                 empty?)
+                                                                                (("2"
+                                                                                  (expand
+                                                                                   member)
+                                                                                  (("2"
+                                                                                    (instantiate
+                                                                                     -1
+                                                                                     a)
+                                                                                    (("2"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil)
+                                                                       ("2"
+                                                                        (decompose-equality
+                                                                         1)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          (("1"
+                                                                            (skolem
+                                                                             -1
+                                                                             aann)
+                                                                            (("1"
+                                                                              (flatten)
+                                                                              (("1"
+                                                                                (assert)
+                                                                                nil
+                                                                                nil))
+                                                                              nil))
+                                                                            nil)
+                                                                           ("2"
+                                                                            (instantiate
+                                                                             1
+                                                                             "t`1")
+                                                                            (("2"
+                                                                              (propax)
+                                                                              nil
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil)
+                                                                   ("2"
+                                                                    (typepred
+                                                                     amt1)
+                                                                    (("2"
+                                                                      (expand
+                                                                       unique)
+                                                                      (("2"
+                                                                        (instantiate
+                                                                         -2
+                                                                         (an
+                                                                          a1
+                                                                          a))
+                                                                        (("2"
+                                                                          (assert)
+                                                                          (("2"
+                                                                            (expand
+                                                                             preprocess
+                                                                             +)
+                                                                            (("2"
+                                                                              (expand
+                                                                               ow)
+                                                                              (("2"
+                                                                                (expand
+                                                                                 rm)
+                                                                                (("2"
+                                                                                  (expand*
+                                                                                   union
+                                                                                   singleton
+                                                                                   remove
+                                                                                   member)
+                                                                                  (("2"
+                                                                                    (instantiate
+                                                                                     3
+                                                                                     (a1
+                                                                                      a2))
+                                                                                    (("2"
+                                                                                      (assert)
+                                                                                      nil
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil)
+                                                                 ("3"
+                                                                  (expand*
+                                                                   preprocess
+                                                                   ow
+                                                                   rm
+                                                                   remove
+                                                                   union
+                                                                   singleton
+                                                                   remove
+                                                                   member)
+                                                                  (("3"
+                                                                    (assert)
+                                                                    (("3"
+                                                                      (instantiate
+                                                                       2
+                                                                       (a1
+                                                                        a2))
+                                                                      (("3"
+                                                                        (assert)
+                                                                        nil
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (assert)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (instantiate
+                                                       2
+                                                       (a1 a2))
+                                                      (("2"
+                                                        (assert)
+                                                        (("2"
+                                                          (expand
+                                                           preprocess
+                                                           +)
+                                                          (("2"
+                                                            (propax)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("2" (lemma keepdom)
+              (("2" (copy -1)
+                (("2" (instantiate -1 (am1 amt1 t))
+                  (("2" (instantiate -2 (am2 amt2 t))
+                    (("2" (assert) nil nil)) nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unchecked
+   ((\|> const-decl "bool" AssetMapping nil)
+    (ifdefrefinement formula-decl nil CKifdef nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (preprocess const-decl "AM" CKifdef nil)
+    (mapping type-eq-decl nil maps nil)
+    (dom const-decl "set[S]" maps nil)
+    (ow const-decl "mapping" maps nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil) nil
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (finite_singleton judgement-tcc nil finite_sets nil)
+    (singleton_rew formula-decl nil sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (singleton_elt const-decl "T" sets nil)
+    (singleton? const-decl "bool" sets nil)
+    (preprocessfile const-decl "Asset" CKifdef nil)
+    (empty? const-decl "bool" sets nil)
+    (mappingUnique formula-decl nil maps nil) nil
+    (union const-decl "set" sets nil)
+    (member const-decl "bool" sets nil)
+    (remove const-decl "set" sets nil)
+    (rm const-decl "mapping" maps nil) nil nil
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (AssetIfdef type-eq-decl nil CKifdef nil)
+    (keepdom formula-decl nil CKifdef nil))
+   503622 710 t nil)))
+

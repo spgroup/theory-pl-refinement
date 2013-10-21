@@ -5,19 +5,30 @@ BEGIN
   % Definition <Asset Mapping>
   AM: TYPE = maps[AssetName,Asset].mapping
 
-  am1,am2: VAR AM
-  a1,a2: VAR Asset
+  am,am1,am2: VAR AM
+  a1,a2,a3: VAR Asset
   an,an1,an2: VAR AssetName
   anSet: VAR finite_sets[AssetName].finite_set
-  aSet: VAR finite_sets[Asset].finite_set
+  aSet,S1,S2: VAR finite_sets[Asset].finite_set
   pair: VAR [AssetName,Asset]
+  pairs: VAR finite_sets[[AssetName,Asset]].finite_set
 
   % Definition <Asset mapping refinement>
   |>(am1,am2): bool =
-    dom(am1)=dom(am2) AND
-    FORALL an: dom(am1)(an) => 
-      EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2) 
-    
+    (dom(am1)=dom(am2) AND
+    (FORALL an: dom(am1)(an) => 
+      EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2)))
+
+  teste: THEOREM
+    FORALL(am): dom(am)(an) => (empty?(map(rm(an,am),an)))
+%    FORALL(am): dom(am)(an) => not(empty?(map(am,an)))
+%    FORALL(S:finite_sets[[AssetName,Asset]].finite_set): S=ow((an,a1),am) => unique(S)
+
+  testeNovo: THEOREM
+    FORALL(A:AM): A=union((an,a1),(an,a2)) => unique(union((an,a1),(an,a2)))
+
+  teste2: THEOREM
+    FORALL(pairs): pairs=union((an,a1),(an,a2)) and not(a1=a2) => NOT unique(pairs)
 
   % Theorems 7-8 <Asset mapping refinement is pre-order>
   assetMappingRefinement: THEOREM orders[AM].preorder?( |> ) 
@@ -28,8 +39,29 @@ BEGIN
       FORALL(anSet):
         FORALL(aSet): 
           wfProduct( union(aSet,map(am1,anSet)) ) =>
-	    wfProduct( union(aSet,map(am2,anSet)) ) AND 
-	    |-( union(aSet,map(am1,anSet)) , union(aSet,map(am2,anSet)) ) 
+	    wfProduct( union(aSet,map(am2,anSet)) ) AND |-( union(aSet,map(am1,anSet)) , union(aSet,map(am2,anSet)) )
+
+
+%  amRefCompositional2: LEMMA
+%    FORALL(am1,am2): |>(am1,am2) =>
+%      FORALL(anSet):
+%        FORALL(S1,S2): 
+%          (S1|-S2) =>
+%	    |-( union(S1,map(am1,anSet)) , union(S2,map(am2,anSet)) ) 
+
+%  amRefCompositional2WF: LEMMA
+%    FORALL(am1,am2): |>(am1,am2) =>
+%      FORALL(anSet):
+%        FORALL(S1,S2): 
+%          (S1|-S2) AND wfProduct( union(S1,map(am1,anSet)) ) =>
+%	    wfProduct( union(S2,map(am2,anSet)) ) 
+
+
+  renameAMitem(pair,an1,an2):[AssetName,Asset] =
+    IF (pair`1=an1) THEN (an2,pair`2) ELSE pair ENDIF
+
+  renameAM(pairs,an1,an2):set[[AssetName,Asset]] =
+    {p:[AssetName,Asset] | EXISTS (p2:[AssetName,Asset]): pairs(p2) AND p=renameAMitem(p2,an1,an2)}
 
 
 END AssetMapping
