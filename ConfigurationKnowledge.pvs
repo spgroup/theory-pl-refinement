@@ -1,6 +1,7 @@
 ConfigurationKnowledge: THEORY
 BEGIN
-  IMPORTING FeatureModelSemantics, set_aux_lemmas, AssetMapping, set_comp_lemmas
+  IMPORTING FeatureModelSemantics, AssetMapping, set_comp_lemmas
+  CONVERSION+ singleton
 
   Item: TYPE=[# exp:Formula_, assets:finite_sets[AssetName].finite_set #]
   CK: TYPE = finite_sets[Item].finite_set
@@ -10,10 +11,17 @@ BEGIN
   an,an1,an2: VAR AssetName
   ck: VAR CK
   exp: VAR Formula_
-  item: VAR Item
-  items: VAR finite_sets[Item].finite_set
+  item,it: VAR Item
+  items,its1,its2: VAR finite_sets[Item].finite_set
   c,c1,c2: VAR Configuration
   F,G,H,opt: VAR Name
+
+  % yields all items of a given CK
+  items(ck) : set[Item] = 
+    ck
+
+  getExp(it) : Formula_ = exp(it)
+  getRS(it) : finite_sets[AssetName].finite_set = assets(it)
 
   % yields all feature expressions of a given set of CK items
   exps(items) : set[Formula_] = 
@@ -44,10 +52,28 @@ BEGIN
   eval(ck,c):finite_sets[AssetName].finite_set = 
     assetsCK(evalCK(ck,c))
 
+  % yields only the asset names evaluated as true for a given product configuration 
+  eval2(ck)(c):finite_sets[AssetName].finite_set = 
+    assetsCK(evalCK(ck,c))
+
+  notshowupItem(it,an) : bool =
+    NOT(assets(it)(an))
+
+  showupItem(it,an) : bool =
+    assets(it)(an)
+
   % yields the assets to build a product for a given product configuration 
   % sCK : [ConfigKnowledge->[AM->[Configuration->finite_sets[Asset].finite_set]]] =
   semantics(ck)(am)(c):finite_sets[Asset].finite_set =
     map(am, eval(ck,c))
+
+  % Evaluate union
+  evalUnion: LEMMA
+    FORALL(items,its1,its2,c,am):
+      items=union(its1,its2)
+    => 
+      semantics(items)(am)(c)=union(semantics(its1)(am)(c),semantics(its2)(am)(c))
+
 
   wfCK(fm,am,ck) : bool =
     (FORALL c: semantics(fm)(c) => subset?(eval(ck,c),dom(am)) ) AND 
@@ -81,6 +107,53 @@ BEGIN
   eqTransitive: THEOREM
     FORALL(fm:WFM, am:AM, ck1,ck2,ck3:{K: CK | wfCK(fm,am,K)}):
     	(ckEq(fm,am,ck1,ck2) and ckEq(fm,am,ck2,ck3)) => ckEq(fm,am,ck1,ck3)
+
+  % esta vai ser nossa nocao de equivalencia
+  ckEq2(ck1,ck2:CK): bool =
+    eval2(ck1)=eval2(ck2)
+
+  % Equivalence properties - reflexive
+  eqReflexive2: THEOREM
+    FORALL(ck:CK):
+  	ckEq2(ck,ck) 
+
+  % equivalence properties - symmetric
+  eqSymmetric2: THEOREM
+    FORALL(ck1,ck2:CK):
+    	ckEq2(ck1,ck2) => ckEq2(ck2,ck1)
+
+  % equivalence properties - transitive
+  eqTransitive2: THEOREM
+    FORALL(ck1,ck2,ck3:CK):
+    	(ckEq2(ck1,ck2) and ckEq2(ck2,ck3)) => ckEq2(ck1,ck3)
+
+
+  renameCKitem(item,an1,an2):Item =
+    IF (assets(item)(an1)) THEN item WITH [assets:= add(an2,remove(an1,assets(item)))] ELSE item ENDIF
+
+  renameCKitem(item:Item, F,G:Name):Item =
+    (item WITH [exp:= rename(exp(item),F,G)])
+
+% operacao de renaming --> ren: CK x F x F -> CK
+%  renameCK(ck: CK, F,G:Name): set[CKitem] =
+  renameCK(ck: CK, F,G:Name): CK =
+    {i:Item | EXISTS (it:Item): ck(it) AND i=renameCKitem(it,F,G)}
+
+  evalEqCK : THEOREM
+    FORALL(fm1:WFM,ck1:CK,F,G:Name):
+    ( 
+      (
+        (NOT features(fm1)(G))
+      )
+     => 
+       FORALL (c: Configuration, f:Formula_):
+        semantics(fm1)(c) =>
+         (NOT (member(G,names(f)))) =>
+              (satisfies(f,c) <=> satisfies(rename(f,F,G),
+                          IF (c(F)) THEN add(G,remove(F,c))
+                                  ELSE c ENDIF))
+
+    )  
 
   %% IF FEATURE opt IS NOT IN THE FM AND CK IS WELL-FORMED, ALL CK EXPRESSIONS DON'T CONTAIN opt
   ckNames: THEOREM

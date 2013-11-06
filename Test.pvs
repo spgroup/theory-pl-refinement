@@ -1,0 +1,16 @@
+Test[
+  F: TYPE,
+  (IMPORTING FMint) FM : TYPE FROM FMi
+]: THEORY
+BEGIN
+
+End Test
+
+
+Testando: THEORY
+BEGIN
+Opa : TYPE
+IMPORTING FMint
+IMPORTING Test[Opa, FMi]
+
+END Testando

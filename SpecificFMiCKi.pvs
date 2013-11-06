@@ -1,0 +1,99 @@
+SpecificFMiCKi: THEORY
+BEGIN
+  IMPORTING FMint,FeatureExpression, AssetMapping, CK
+
+  am,am1,am2: VAR AM
+  a1,a2,a3: VAR Asset
+  an,an1,an2: VAR AssetName
+  anSet: VAR finite_sets[AssetName].finite_set
+  aSet,S1,S2: VAR finite_sets[Asset].finite_set
+  pair: VAR [AssetName,Asset]
+  pairs: VAR finite_sets[[AssetName,Asset]].finite_set
+  fm,fm1,fm2: VAR FMi
+  ck,ck1,ck2: VAR CK
+  item,it,item1,item2: VAR Item
+  items,its,its1,its2: VAR list[Item]
+  c,c1,c2: VAR Configuration
+  e,e1,e2: VAR FeatureExpression
+  f,f1,f2: VAR Feature
+  p,p1,p2: VAR Feature
+
+  addItemsFeature(ck,it,f): CK
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DELETE ASSET %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  reference(a1,a2):bool
+
+
+%  syntaxDeleteAsset(ck1,ck2,item1,item2,its,am1,an1,a1) : bool =
+%    items(ck1) = union(item1,its) AND                        
+%    items(ck2) = union(item2,its) AND                        
+%    showup(item1,an1) AND
+%    dom(am1)(an1) AND
+%    a1 = map(am1,singleton(an1)) AND
+%    notshowup(item2,an1);
+
+
+%  conditionsDeleteAsset(am1,an1,a1,its) : bool =
+%    (FORALL an: (dom(am1)(an) AND NOT(an=an1)) => 
+%      EXISTS a2: am1(an,a2) AND NOT(reference(a2,a1)) )
+%    AND notshowup(its,an1);
+
+%  deleteAsset_EqualCKeval: AXIOM
+%    FORALL(fm,am,ck1,ck2,item1,item2,its,an1,a1):
+%    (
+%      (
+%      wfCK(fm,am,ck1) AND
+%      syntaxDeleteAsset(ck1,ck2,item1,item2,its,am1,an1,a1) AND
+%      conditionsDeleteAsset(am,an1,a1,its)
+%      )
+%      =>
+%        FORALL c: [||](fm)(c) AND NOT((semantics(ck1)(am)(c))(a1))  => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+%    )  
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD MANDATORY FEATURE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  syntaxAddMandatory(fm1,fm2,p,f) : bool =
+    getFeatures(fm1)(p) AND                        
+    NOT(getFeatures(fm1)(f)) AND                        
+    fm2 = addMandatory(fm1,p,f);
+
+  addMandatory_EqualCKeval: AXIOM
+    FORALL(fm1,fm2,am,ck,p,f):
+    (
+      (
+      wfCK(fm1,am,ck) AND
+      syntaxAddMandatory(fm1,fm2,p,f)
+      )
+      =>
+        FORALL c1: [||](fm1)(c1) => (EXISTS c2: [||](fm2)(c2) AND semantics(ck)(am)(c1) = semantics(ck)(am)(c2))
+    )  
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD OPTIONAL FEATURE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  syntaxAddOptional(fm1,fm2,p,f,ck1,ck2,it) : bool =
+    getFeatures(fm1)(p) AND                        
+    NOT(getFeatures(fm1)(f)) AND                        
+    fm2 = addOptional(fm1,p,f) AND
+    ck2 = addItemsFeature(ck1,it,f);
+
+  addOptional_EqualCKeval: AXIOM
+    FORALL(fm1,fm2,am1,am2,ck1,ck2,p,f,it):
+    (
+      (
+      wfCK(fm1,am1,ck1) AND
+      syntaxAddOptional(fm1,fm2,p,f,ck1,ck2,it)
+      )
+      =>
+        FORALL c: [||](fm1)(c) => [||](fm2)(c) AND semantics(ck1)(am1)(c) = semantics(ck2)(am2)(c)
+    )  
+
+
+End SpecificFMiCKi

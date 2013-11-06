@@ -1,165 +1,287 @@
 (FormulaTheory
  (names_TCC1 0
-  (names_TCC1-1 nil 3498313094 3507395017
-   ("" (termination-tcc) nil nil) proved
-   ((real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   102 80 nil nil))
+  (names_TCC1-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil
+   nil nil nil nil nil))
  (names_TCC2 0
-  (names_TCC2-1 nil 3498313094 3507395017
-   ("" (termination-tcc) nil nil) proved
-   ((real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   128 80 nil nil))
+  (names_TCC2-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil
+   nil nil nil nil nil))
  (names_TCC3 0
-  (names_TCC3-1 nil 3498313094 3507395017
-   ("" (termination-tcc) nil nil) proved
-   ((reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   117 100 nil nil))
+  (names_TCC3-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil
+   nil nil nil nil nil))
  (names_TCC4 0
-  (names_TCC4-1 nil 3498313094 3507395018
-   ("" (termination-tcc) nil nil) proved
-   ((real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   125 100 nil nil))
+  (names_TCC4-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil
+   nil nil nil nil nil))
  (names_TCC5 0
-  (names_TCC5-1 nil 3498313094 3507395018
-   ("" (termination-tcc) nil nil) proved
-   ((reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   110 100 nil nil))
+  (names_TCC5-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil
+   nil nil nil nil nil))
  (wt_TCC1 0
-  (wt_TCC1-1 nil 3507394996 3507395018 ("" (termination-tcc) nil nil)
-   proved
-   ((boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (wfTree const-decl "bool" FeatureModel nil)
-    (real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   123 100 nil nil))
+  (wt_TCC1-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil nil
+   nil nil nil nil))
  (wt_TCC2 0
-  (wt_TCC2-1 nil 3507394996 3507395018 ("" (termination-tcc) nil nil)
-   proved
-   ((boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (wfTree const-decl "bool" FeatureModel nil)
-    (real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   111 90 nil nil))
+  (wt_TCC2-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil nil
+   nil nil nil nil))
  (wt_TCC3 0
-  (wt_TCC3-1 nil 3507394996 3507395018 ("" (termination-tcc) nil nil)
-   proved
-   ((boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (wfTree const-decl "bool" FeatureModel nil)
-    (real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   107 90 nil nil))
+  (wt_TCC3-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil nil
+   nil nil nil nil))
  (wt_TCC4 0
-  (wt_TCC4-1 nil 3507394996 3507395018 ("" (termination-tcc) nil nil)
+  (wt_TCC4-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil nil
+   nil nil nil nil))
+ (satisfies_TCC1 0
+  (satisfies_TCC1-1 nil 3532711142 nil ("" (termination-tcc) nil nil)
+   nil nil nil nil nil nil))
+ (satisfies_TCC2 0
+  (satisfies_TCC2-1 nil 3532711142 nil ("" (termination-tcc) nil nil)
+   nil nil nil nil nil nil))
+ (satisfies_TCC3 0
+  (satisfies_TCC3-1 nil 3532711142 nil ("" (termination-tcc) nil nil)
+   nil nil nil nil nil nil))
+ (satisfies_TCC4 0
+  (satisfies_TCC4-1 nil 3532711142 nil ("" (termination-tcc) nil nil)
+   nil nil nil nil nil nil))
+ (rename_TCC1 0
+  (rename_TCC1-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil
+   nil nil nil nil nil))
+ (rename_TCC2 0
+  (rename_TCC2-1 nil 3532711142 nil ("" (termination-tcc) nil nil) nil
+   nil nil nil nil nil))
+ (notInNames 0
+  (notInNames-1 nil 3532711143 3532711156
+   ("" (induct f)
+    (("1" (grind) nil nil) ("2" (grind) nil nil) ("3" (grind) nil nil)
+     ("4" (grind) nil nil) ("5" (grind) nil nil) ("6" (grind) nil nil))
+    nil)
    proved
-   ((boolean nonempty-type-decl nil booleans nil)
+   ((emptyset const-decl "set" sets nil)
+    (Formula__induction formula-decl nil Formula__adt nil)
+    (rename def-decl "Formula_" FormulaTheory nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (names def-decl "set[Name]" FormulaTheory nil)
+    (set type-eq-decl nil sets nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Formula_ type-decl nil Formula__adt nil))
+   12671 320 t shostak))
+ (eqRename 0
+  (eqRename-1 nil 3532711160 3532711170
+   ("" (induct f)
+    (("1" (grind) nil nil) ("2" (grind) nil nil) ("3" (grind) nil nil)
+     ("4" (grind) nil nil) ("5" (grind) nil nil) ("6" (grind) nil nil))
+    nil)
+   proved
+   ((emptyset const-decl "set" sets nil)
+    (Formula__induction formula-decl nil Formula__adt nil)
+    (rename def-decl "Formula_" FormulaTheory nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (names def-decl "set[Name]" FormulaTheory nil)
+    (set type-eq-decl nil sets nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Formula_ type-decl nil Formula__adt nil))
+   10507 370 t shostak))
+ (evalRename 0
+  (evalRename-1 nil 3532711175 3532711551
+   ("" (skolem 1 (F G))
+    (("" (skolem 1 (c "_"))
+      (("" (expand member)
+        (("" (induct f 1)
+          (("1" (expand rename)
+            (("1" (expand satisfies) (("1" (propax) nil nil)) nil))
+            nil)
+           ("2" (expand rename)
+            (("2" (expand satisfies) (("2" (propax) nil nil)) nil))
+            nil)
+           ("3" (skolem 1 nf)
+            (("3" (flatten)
+              (("3" (expand* names add remove member)
+                (("3" (bddsimp)
+                  (("1" (expand satisfies -)
+                    (("1" (skolem -1 n1)
+                      (("1" (flatten)
+                        (("1" (replace -2 2 RL)
+                          (("1" (bddsimp)
+                            (("1" (assert)
+                              (("1"
+                                (expand rename)
+                                (("1"
+                                  (expand satisfies)
+                                  (("1"
+                                    (instantiate 2 G)
+                                    (("1" (assert) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil)
+                             ("2" (expand rename)
+                              (("2"
+                                (case "n1=F")
+                                (("1"
+                                  (expand satisfies)
+                                  (("1"
+                                    (assert)
+                                    (("1"
+                                      (instantiate 2 G)
+                                      (("1" (propax) nil nil))
+                                      nil))
+                                    nil))
+                                  nil)
+                                 ("2"
+                                  (assert)
+                                  (("2"
+                                    (expand satisfies)
+                                    (("2"
+                                      (instantiate 3 n1)
+                                      (("2" (assert) nil nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil)
+                             ("3" (expand rename)
+                              (("3"
+                                (expand satisfies)
+                                (("3"
+                                  (case "n1=F")
+                                  (("1"
+                                    (assert)
+                                    (("1"
+                                      (instantiate 3 G)
+                                      (("1" (propax) nil nil))
+                                      nil))
+                                    nil)
+                                   ("2"
+                                    (assert)
+                                    (("2"
+                                      (instantiate 4 n1)
+                                      (("2" (assert) nil nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (expand rename)
+                    (("2" (expand satisfies)
+                      (("2" (case "nf=F")
+                        (("1" (assert)
+                          (("1" (skolem -2 n1)
+                            (("1" (flatten)
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (instantiate 2 F)
+                                  (("1" (assert) nil nil))
+                                  nil)
+                                 ("2"
+                                  (instantiate 2 F)
+                                  (("2" (assert) nil nil))
+                                  nil)
+                                 ("3"
+                                  (instantiate 2 F)
+                                  (("3" (assert) nil nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil)
+                         ("2" (assert)
+                          (("2" (skolem -1 n1)
+                            (("2" (flatten)
+                              (("2"
+                                (bddsimp)
+                                (("1"
+                                  (instantiate 3 F)
+                                  (("1" (assert) nil nil))
+                                  nil)
+                                 ("2"
+                                  (instantiate 3 n1)
+                                  (("2" (assert) nil nil))
+                                  nil)
+                                 ("3"
+                                  (assert)
+                                  (("3"
+                                    (instantiate 3 n1)
+                                    (("3" (assert) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil)
+           ("4" (skolem 1 nf)
+            (("4" (flatten)
+              (("4" (expand names +)
+                (("4" (expand rename +)
+                  (("4" (expand satisfies +)
+                    (("4" (assert) (("4" (bddsimp) nil nil)) nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil)
+           ("5" (skolem 1 (f1 f2))
+            (("5" (flatten)
+              (("5" (expand names +)
+                (("5" (expand rename +)
+                  (("5" (expand satisfies +) (("5" (bddsimp) nil nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil)
+           ("6" (skolem 1 (f1 f2))
+            (("6" (flatten)
+              (("6" (expand names +)
+                (("6" (expand rename +)
+                  (("6" (expand satisfies +) (("6" (bddsimp) nil nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((Formula_ type-decl nil Formula__adt nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (wfTree const-decl "bool" FeatureModel nil)
-    (real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   125 80 nil nil))
- (satisfies_TCC1 0
-  (satisfies_TCC1-1 nil 3507394996 3507395018
-   ("" (termination-tcc) nil nil) proved
-   ((real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   104 100 nil nil))
- (satisfies_TCC2 0
-  (satisfies_TCC2-1 nil 3507394996 3507395018
-   ("" (termination-tcc) nil nil) proved
-   ((real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   122 100 nil nil))
- (satisfies_TCC3 0
-  (satisfies_TCC3-1 nil 3507394996 3507395018
-   ("" (termination-tcc) nil nil) proved
-   ((real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   109 80 nil nil))
- (satisfies_TCC4 0
-  (satisfies_TCC4-1 nil 3507394996 3507395019
-   ("" (termination-tcc) nil nil) proved
-   ((real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (reduce_nat adt-def-decl "[Formula_ -> nat]" Formula__adt nil)
-    (complexity const-decl "nat" FormulaTheory nil)
-    (posint_plus_nnint_is_posint application-judgement "posint"
-     integers nil))
-   123 90 nil nil))
+    (names def-decl "set[Name]" FormulaTheory nil)
+    (IFF const-decl "[bool, bool -> bool]" booleans nil)
+    (Configuration type-eq-decl nil Name nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (IF const-decl "[boolean, T, T -> T]" if_def nil)
+    (nonempty? const-decl "bool" sets nil)
+    (add const-decl "(nonempty?)" sets nil)
+    (remove const-decl "set" sets nil)
+    (rename def-decl "Formula_" FormulaTheory nil)
+    (Formula__induction formula-decl nil Formula__adt nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (member const-decl "bool" sets nil))
+   376975 400 t shostak))
  (formNames 0
-  (formNames-1 nil 3498313480 3507395019
-   ("" (induct "f" 1)
+  (formNames-1 nil 3532711559 3532711568
+   ("" (induct f)
     (("1" (grind) nil nil) ("2" (grind) nil nil) ("3" (grind) nil nil)
      ("4" (grind) nil nil) ("5" (grind) nil nil) ("6" (grind) nil nil))
     nil)
@@ -167,7 +289,6 @@
    ((NOT const-decl "[bool -> bool]" booleans nil)
     (emptyset const-decl "set" sets nil)
     (Formula__induction formula-decl nil Formula__adt nil)
-    (names const-decl "set[Name]" FeatureModel nil)
     (names def-decl "set[Name]" FormulaTheory nil)
     (wt def-decl "boolean" FormulaTheory nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
@@ -177,10 +298,10 @@
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Formula_ type-decl nil Formula__adt nil))
-   327 240 t shostak))
+   8879 380 t shostak))
  (formNames2 0
-  (formNames2-1 nil 3498313499 3507395019
-   ("" (induct "f" 1)
+  (formNames2-1 nil 3532711573 3532711581
+   ("" (induct f)
     (("1" (grind) nil nil) ("2" (grind) nil nil) ("3" (grind) nil nil)
      ("4" (grind) nil nil) ("5" (grind) nil nil) ("6" (grind) nil nil))
     nil)
@@ -188,7 +309,6 @@
    ((emptyset const-decl "set" sets nil)
     (Formula__induction formula-decl nil Formula__adt nil)
     (names def-decl "set[Name]" FormulaTheory nil)
-    (names const-decl "set[Name]" FeatureModel nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (wt def-decl "boolean" FormulaTheory nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
@@ -199,10 +319,10 @@
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Formula_ type-decl nil Formula__adt nil))
-   267 180 t shostak))
+   8069 300 t shostak))
  (satisfies1 0
-  (satisfies1-1 nil 3507395039 3507395058
-   ("" (induct "f" 1)
+  (satisfies1-1 nil 3532711593 3532711600
+   ("" (induct f)
     (("1" (grind) nil nil) ("2" (grind) nil nil) ("3" (grind) nil nil)
      ("4" (grind) nil nil) ("5" (grind) nil nil) ("6" (grind) nil nil))
     nil)
@@ -227,10 +347,10 @@
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Formula_ type-decl nil Formula__adt nil))
-   19345 360 t shostak))
+   7006 490 t shostak))
  (satisfies2 0
-  (satisfies2-1 nil 3507395062 3507395073
-   ("" (induct "f" 1)
+  (satisfies2-1 nil 3532711605 3532711611
+   ("" (induct f)
     (("1" (grind) nil nil) ("2" (grind) nil nil) ("3" (grind) nil nil)
      ("4" (grind) nil nil) ("5" (grind) nil nil) ("6" (grind) nil nil))
     nil)
@@ -251,11 +371,11 @@
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Formula_ type-decl nil Formula__adt nil))
-   10744 340 t shostak))
+   6991 480 t shostak))
  (wtFormSameFeatures 0
-  (wtFormSameFeatures-1 nil 3498313558 3507395019
+  (wtFormSameFeatures-1 nil 3532711615 3532711631
    ("" (skosimp)
-    (("" (induct "f" 1)
+    (("" (induct f)
       (("1" (grind) nil nil) ("2" (grind) nil nil)
        ("3" (grind) nil nil) ("4" (grind) nil nil)
        ("5" (grind) nil nil) ("6" (grind) nil nil)
@@ -273,7 +393,6 @@
     (con!1 skolem-const-decl "FM" FormulaTheory nil)
     (wt def-decl "boolean" FormulaTheory nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
-    (Formula__induction formula-decl nil Formula__adt nil)
-    (names const-decl "set[Name]" FeatureModel nil))
-   150 100 t shostak)))
+    (Formula__induction formula-decl nil Formula__adt nil))
+   16089 170 t shostak)))
 

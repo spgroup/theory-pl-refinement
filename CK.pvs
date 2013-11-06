@@ -1,11 +1,19 @@
 CK: THEORY
 BEGIN
-  IMPORTING FMint,FeatureExpression, AssetMapping
+  IMPORTING AssetMapping
+
+  Configuration: TYPE
+  FeatureExpression: TYPE+
+  sat(f:FeatureExpression, c:Configuration): boolean
+
+  FMi: TYPE
+  Feature : TYPE
+  [||] : [FMi -> set[Configuration]]
+  wt(fm:FMi, f:FeatureExpression):boolean
 
   RightSide: TYPE+
-
-  Item: TYPE=[# exp:FeatureExpression, right:RightSide #]
-  CK: TYPE = list[Item]
+  Item: TYPE% = [# exp:FeatureExpression, right:RightSide #]
+  CK: TYPE
 
   am,am1,am2: VAR AM
   a1,a2,a3: VAR Asset
@@ -15,36 +23,44 @@ BEGIN
   pair: VAR [AssetName,Asset]
   pairs: VAR finite_sets[[AssetName,Asset]].finite_set
   fm,fm1,fm2: VAR FMi
-  ck,its,ck1,ck2: VAR CK
+  ck,ck1,ck2: VAR CK
   item,it,item1,item2: VAR Item
-  items,its1,its2: VAR list[Item]
-  c: VAR Configuration
+  its,its1,its2: VAR set[Item]
+  c,c1,c2: VAR Configuration
+  e,e1,e2: VAR FeatureExpression
+  f,f1,f2: VAR Feature
+  p,p1,p2: VAR Feature
 
   exps(ck) : set[FeatureExpression]
+  items(ck) : set[Item]
+
+  getExp(item) : FeatureExpression
+  getRS(item) : RightSide
 
   wfCK(fm,am,ck) : bool
 
   semantics(ck)(am)(c): finite_sets[Asset].finite_set
 
-  notshowup(its,an): bool
-  showup(its,an): bool
-  notshowup(it,an): bool
-  showup(it,an): bool
+  notshowupItem(it,an): bool
+  showupItem(it,an): bool
 
-
+  notshowup(ck,an): bool =
+  	FORALL it: items(ck)(it) => notshowupItem(it,an)
+  showup(ck,an): bool =
+  	EXISTS it: items(ck)(it) AND showupItem(it,an)
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% REPLACE FEATURE EXPRESSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   syntaxReplaceFeatureExp(ck1,ck2,item1,item2,its) : bool =
-    ck1 = cons(item1,its) AND                        
-    ck2 = cons(item2,its) AND                        
-    right(item1) = right(item2);
+    items(ck1) = add(item1,its) AND                        
+    items(ck2) = add(item2,its) AND                        
+    getRS(item1) = getRS(item2);
 
   conditionsReplaceFeatureExp(fm,item1,item2) : bool =
-    wt(fm,exp(item2)) AND
-    FORALL c: [||](fm)(c) => (satisfies(exp(item1),c)<=>satisfies(exp(item2),c))
+    wt(fm,getExp(item2)) AND
+    FORALL c: [||](fm)(c) => (sat(getExp(item1),c)<=>sat(getExp(item2),c))
 
   replaceFeatureExp_EqualCKeval: AXIOM
     FORALL(fm,am,ck1,ck2,item1,item2,its):
@@ -58,33 +74,26 @@ BEGIN
         FORALL c: [||](fm)(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
     )  
 
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DELETE ASSET %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% DELETE ASSET NOT REFERRED IN CK %%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  syntaxDeleteAsset(ck1,ck2,item1,item2,its,an1) : bool =
-    ck1 = cons(item1,its) AND                        
-    ck2 = cons(item2,its) AND                        
-    showup(item1,an1) AND
-    notshowup(item2,an1);
+  syntaxSimpleDeleteAsset(ck,am1,am2,an) : bool =
+    dom(am1)(an) AND
+    am2 = rm(an,am1) AND
+    notshowup(ck,an);
 
-  conditionsDeleteAsset(am1,an1,its) : bool =
-    (FORALL an: (dom(am1)(an) AND NOT(an=an1)) => 
-      EXISTS a1: am1(an,a1) AND NOT(reference(a1,map(am1,singleton(an1)))) )
-    AND notshowup(its,an1);
 
-  deleteAsset_EqualCKeval: AXIOM
-    FORALL(fm,am,ck1,ck2,item1,item2,its,an1):
+  simpleDeleteAsset_EqualCKeval: AXIOM
+    FORALL(fm,ck,am1,am2,an):
     (
       (
-      wfCK(fm,am,ck1) AND
-      syntaxDeleteAsset(ck1,ck2,item1,item2,its,an1) AND
-      conditionsDeleteAsset(am,an1,its)
+      wfCK(fm,am1,ck) AND
+      syntaxSimpleDeleteAsset(ck,am1,am2,an)
       )
       =>
-        FORALL c: [||](fm)(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+        FORALL c: [||](fm)(c) => semantics(ck)(am1)(c) = semantics(ck)(am2)(c)
     )  
-
-
 
 End CK

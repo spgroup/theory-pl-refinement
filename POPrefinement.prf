@@ -1,0 +1,754 @@
+(POPrefinement
+ (popRef 0
+  (popRef-1 nil 3569088985 3569154893
+   ("" (expand* preorder? reflexive? transitive?)
+    (("" (expand popRefinement)
+      (("" (bddsimp)
+        (("1" (skolem 1 (x y z))
+          (("1" (flatten)
+            (("1" (skolem 1 p1)
+              (("1" (flatten)
+                (("1" (instantiate -1 p1)
+                  (("1" (assert)
+                    (("1" (skolem -1 p2)
+                      (("1" (flatten)
+                        (("1" (instantiate -3 p2)
+                          (("1" (assert)
+                            (("1" (skolem -3 p3)
+                              (("1"
+                                (instantiate 1 p3)
+                                (("1"
+                                  (flatten)
+                                  (("1"
+                                    (assert)
+                                    (("1"
+                                      (use assetRefinement)
+                                      (("1"
+                                        (expand*
+                                         preorder?
+                                         reflexive?
+                                         transitive?)
+                                        (("1"
+                                          (flatten)
+                                          (("1"
+                                            (instantiate -2 (p1 p2 p3))
+                                            (("1" (assert) nil nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("2" (skolem 1 x)
+          (("2" (skolem 1 p1)
+            (("2" (flatten)
+              (("2" (instantiate 1 p1)
+                (("2" (use assetRefinement)
+                  (("2" (expand* preorder? reflexive?)
+                    (("2" (flatten)
+                      (("2" (instantiate -1 p1)
+                        (("2" (assert) nil nil)) nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((popRefinement const-decl "bool" POPrefinement nil)
+    (assetRefinement formula-decl nil POPrefinement nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset type-decl nil POPrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (transitive? const-decl "bool" relations nil)
+    (reflexive? const-decl "bool" relations nil))
+   2501 70 t shostak))
+ (productsUnion 0
+  (productsUnion-1 nil 3569089154 3569154898
+   ("" (skolem 1 (pl pop))
+    (("" (decompose-equality 1)
+      (("" (expand* union products msingleton)
+        (("" (expand member)
+          (("" (expand* add emptymultiset)
+            (("" (bddsimp)
+              (("1" (skolem -1 spl)
+                (("1" (flatten)
+                  (("1" (assert)
+                    (("1" (expand products)
+                      (("1" (skolem -2 c)
+                        (("1" (flatten)
+                          (("1" (instantiate 2 spl)
+                            (("1" (assert)
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (instantiate 2 c)
+                                  (("1" (assert) nil nil))
+                                  nil)
+                                 ("2"
+                                  (lift-if)
+                                  (("2"
+                                    (assert)
+                                    (("2"
+                                      (bddsimp)
+                                      (("2"
+                                        (instantiate 1 c)
+                                        (("2" (assert) nil nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil)
+               ("2" (skolem -1 c)
+                (("2" (flatten)
+                  (("2" (expand products)
+                    (("2" (instantiate 1 pl)
+                      (("2" (bddsimp)
+                        (("1" (instantiate 1 c)
+                          (("1" (assert) nil nil)) nil)
+                         ("2" (grind) nil nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil)
+               ("3" (skolem -1 spl)
+                (("3" (flatten)
+                  (("3" (instantiate 1 spl) (("3" (assert) nil nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((AM type-eq-decl nil POPrefinement nil)
+    (FM type-decl nil POPrefinement nil)
+    (CK type-decl nil POPrefinement nil)
+    (ArbitrarySPL type-eq-decl nil POPrefinement nil)
+    (wfPL const-decl "bool" POPrefinement nil)
+    (PL type-eq-decl nil POPrefinement nil)
+    (number nonempty-type-decl nil numbers nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (>= const-decl "bool" reals nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (Population type-eq-decl nil POPrefinement nil)
+    (products const-decl "set[finite_sets[Asset].finite_set]"
+     POPrefinement nil)
+    (multiset type-eq-decl nil multiset nil)
+    (union const-decl "multiset" multiset nil)
+    (msingleton const-decl "multiset" multiset nil)
+    (union const-decl "set" sets nil)
+    (products const-decl "set[finite_sets[Asset].finite_set]"
+     POPrefinement nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset type-decl nil POPrefinement nil)
+    (member const-decl "bool" sets nil)
+    (member const-decl "bool" multiset nil)
+    (Conf type-decl nil POPrefinement nil)
+    (real_gt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (nnint_plus_nnint_is_nnint application-judgement "nonneg_int"
+     integers nil)
+    (add const-decl "multiset" multiset nil)
+    (emptymultiset const-decl "multiset" multiset nil))
+   5435 130 t shostak))
+ (popCompositional 0
+  (popCompositional-2 "" 3569091406 3569154899
+   ("" (skolem 1 (pl1 pl2 S))
+    (("" (expand* plRefinement popRefinement)
+      (("" (flatten)
+        (("" (skolem 1 p1)
+          (("" (flatten)
+            (("" (expand products -2)
+              (("" (skolem -2 spl1)
+                (("" (flatten)
+                  (("" (lemma member_union)
+                    (("" (instantiate -1 (spl1 "msingleton(pl1)" S))
+                      (("" (assert)
+                        (("" (bddsimp)
+                          (("1" (expand member)
+                            (("1" (expand union)
+                              (("1"
+                                (assert)
+                                (("1"
+                                  (expand products)
+                                  (("1"
+                                    (skolem -4 c)
+                                    (("1"
+                                      (expand member)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (case "pl1=spl1")
+                                          (("1"
+                                            (instantiate -3 c)
+                                            (("1"
+                                              (assert)
+                                              (("1"
+                                                (skolem -3 c2)
+                                                (("1"
+                                                  (flatten)
+                                                  (("1"
+                                                    (instantiate
+                                                     1
+                                                     "([||](K(pl2))(A(pl2))(c2))")
+                                                    (("1"
+                                                      (assert)
+                                                      (("1"
+                                                        (instantiate
+                                                         1
+                                                         pl2)
+                                                        (("1"
+                                                          (expand
+                                                           products)
+                                                          (("1"
+                                                            (bddsimp)
+                                                            (("1"
+                                                              (instantiate
+                                                               1
+                                                               c2)
+                                                              (("1"
+                                                                (propax)
+                                                                nil
+                                                                nil))
+                                                              nil)
+                                                             ("2"
+                                                              (grind)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("2"
+                                            (assert)
+                                            (("2"
+                                              (expand msingleton)
+                                              (("2"
+                                                (expand*
+                                                 add
+                                                 emptymultiset)
+                                                (("2"
+                                                  (assert)
+                                                  nil
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil)
+                           ("2" (expand products -4)
+                            (("2" (expand member)
+                              (("2"
+                                (expand*
+                                 products
+                                 union
+                                 msingleton
+                                 products)
+                                (("2"
+                                  (expand* add member)
+                                  (("2"
+                                    (expand emptymultiset)
+                                    (("2"
+                                      (skolem -4 c)
+                                      (("2"
+                                        (flatten)
+                                        (("2"
+                                          (instantiate 1 p1)
+                                          (("2"
+                                            (bddsimp)
+                                            (("1"
+                                              (use assetRefinement)
+                                              (("1"
+                                                (expand*
+                                                 preorder?
+                                                 reflexive?)
+                                                (("1"
+                                                  (flatten)
+                                                  (("1"
+                                                    (instantiate -1 p1)
+                                                    (("1"
+                                                      (propax)
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("2"
+                                              (instantiate 1 spl1)
+                                              (("2"
+                                                (assert)
+                                                (("2"
+                                                  (bddsimp)
+                                                  (("1"
+                                                    (instantiate 1 c)
+                                                    (("1"
+                                                      (assert)
+                                                      nil
+                                                      nil))
+                                                    nil)
+                                                   ("2"
+                                                    (assert)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((popRefinement const-decl "bool" POPrefinement nil)
+    (plRefinement const-decl "bool" POPrefinement nil)
+    (products const-decl "set[finite_sets[Asset].finite_set]"
+     POPrefinement nil)
+    (union const-decl "multiset" multiset nil)
+    (products const-decl "set[finite_sets[Asset].finite_set]"
+     POPrefinement nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (Conf type-decl nil POPrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     POPrefinement nil)
+    (unique const-decl "bool" maps nil)
+    (AssetName type-decl nil POPrefinement nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (Asset type-decl nil POPrefinement nil)
+    (emptymultiset const-decl "multiset" multiset nil)
+    (add const-decl "multiset" multiset nil)
+    (posint_plus_nnint_is_posint application-judgement "posint"
+     integers nil)
+    (real_gt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (nnint_plus_nnint_is_nnint application-judgement "nonneg_int"
+     integers nil)
+    (member const-decl "bool" multiset nil)
+    (assetRefinement formula-decl nil POPrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (Population type-eq-decl nil POPrefinement nil)
+    (msingleton const-decl "multiset" multiset nil)
+    (multiset type-eq-decl nil multiset nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (>= const-decl "bool" reals nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (number nonempty-type-decl nil numbers nil)
+    (member_union formula-decl nil multiset nil)
+    (AM type-eq-decl nil POPrefinement nil)
+    (FM type-decl nil POPrefinement nil)
+    (CK type-decl nil POPrefinement nil)
+    (ArbitrarySPL type-eq-decl nil POPrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfPL const-decl "bool" POPrefinement nil)
+    (PL type-eq-decl nil POPrefinement nil))
+   232 150 t shostak)
+  (popCompositional-1 nil 3569089425 3569090485
+   ("" (skolem 1 (pl1 pl2 S))
+    (("" (expand* plRefinement popRefinement)
+      (("" (flatten)
+        (("" (skolem 1 p1)
+          (("" (flatten)
+            (("" (expand products -2)
+              (("" (skolem -2 spl1)
+                (("" (flatten)
+                  (("" (expand union -2)
+                    (("" (expand msingleton -2)
+                      (("" (expand member)
+                        (("" (expand add -2)
+                          (("" (expand emptymultiset)
+                            (("" (case "S=emptymultiset")
+                              (("1"
+                                (replace -1)
+                                (("1"
+                                  (expand emptymultiset -3)
+                                  (("1"
+                                    (expand emptymultiset 1)
+                                    (("1"
+                                      (expand products -4)
+                                      (("1"
+                                        (skolem -4 c)
+                                        (("1"
+                                          (flatten)
+                                          (("1"
+                                            (instantiate -2 c)
+                                            (("1"
+                                              (assert)
+                                              (("1"
+                                                (bddsimp)
+                                                (("1"
+                                                  (skolem -2 c2)
+                                                  (("1"
+                                                    (flatten)
+                                                    (("1"
+                                                      (instantiate
+                                                       1
+                                                       "([||](K(pl2))(A(pl2))(c2))")
+                                                      (("1"
+                                                        (assert)
+                                                        (("1"
+                                                          (case
+                                                           "pl1=spl1")
+                                                          (("1"
+                                                            (assert)
+                                                            (("1"
+                                                              (expand
+                                                               products)
+                                                              (("1"
+                                                                (expand*
+                                                                 union
+                                                                 msingleton
+                                                                 products
+                                                                 member)
+                                                                (("1"
+                                                                  (expand*
+                                                                   add
+                                                                   emptymultiset)
+                                                                  (("1"
+                                                                    (instantiate
+                                                                     1
+                                                                     pl2)
+                                                                    (("1"
+                                                                      (assert)
+                                                                      (("1"
+                                                                        (instantiate
+                                                                         1
+                                                                         c2)
+                                                                        (("1"
+                                                                          (propax)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil)
+                                                           ("2"
+                                                            (assert)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (assert)
+                                                  nil
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2"
+                                (expand products)
+                                (("2"
+                                  (expand*
+                                   union
+                                   msingleton
+                                   products
+                                   member)
+                                  (("2"
+                                    (expand* add emptymultiset)
+                                    (("2"
+                                      (skolem -3 c)
+                                      (("2"
+                                        (flatten)
+                                        (("2"
+                                          (assert)
+                                          (("2"
+                                            (instantiate 2 p1)
+                                            (("2"
+                                              (bddsimp)
+                                              (("1"
+                                                (use assetRefinement)
+                                                (("1"
+                                                  (expand*
+                                                   preorder?
+                                                   reflexive?)
+                                                  (("1"
+                                                    (flatten)
+                                                    (("1"
+                                                      (instantiate
+                                                       -1
+                                                       p1)
+                                                      (("1"
+                                                        (propax)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil)
+                                               ("2"
+                                                (instantiate 2 spl1)
+                                                (("2"
+                                                  (assert)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (instantiate 2 c)
+                                                      (("1"
+                                                        (assert)
+                                                        nil
+                                                        nil))
+                                                      nil)
+                                                     ("2"
+                                                      (assert)
+                                                      (("2"
+                                                        (case
+                                                         "pl1=pl2")
+                                                        (("1"
+                                                          (assert)
+                                                          nil
+                                                          nil)
+                                                         ("2"
+                                                          (assert)
+                                                          (("2"
+                                                            (postpone)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   unfinished nil 581501 240 t shostak))
+ (popCompositionalAlt 0
+  (popCompositionalAlt-1 nil 3569093948 3569154899
+   ("" (postpone) nil nil) unfinished nil 1 0 t shostak))
+ (plRefPop 0
+  (plRefPop-1 nil 3569154926 3569155053
+   ("" (skolem 1 (pl1 pl2))
+    (("" (expand* plRefinement popRefinement)
+      (("" (flatten)
+        (("" (skolem 1 p1)
+          (("" (flatten)
+            (("" (expand products -2)
+              (("" (skolem -2 spl1)
+                (("" (flatten)
+                  (("" (expand member -2)
+                    (("" (expand msingleton -2)
+                      (("" (expand add -2)
+                        (("" (expand emptymultiset)
+                          (("" (case "pl1=spl1")
+                            (("1" (expand products)
+                              (("1"
+                                (expand products)
+                                (("1"
+                                  (expand* member)
+                                  (("1"
+                                    (skolem -4 c)
+                                    (("1"
+                                      (flatten)
+                                      (("1"
+                                        (instantiate -2 c)
+                                        (("1"
+                                          (assert)
+                                          (("1"
+                                            (skolem -2 c2)
+                                            (("1"
+                                              (flatten)
+                                              (("1"
+                                                (instantiate
+                                                 1
+                                                 "([||](K(pl2))(A(pl2))(c2))")
+                                                (("1"
+                                                  (assert)
+                                                  (("1"
+                                                    (instantiate 1 pl2)
+                                                    (("1"
+                                                      (expand
+                                                       msingleton
+                                                       1)
+                                                      (("1"
+                                                        (expand add)
+                                                        (("1"
+                                                          (expand
+                                                           emptymultiset)
+                                                          (("1"
+                                                            (instantiate
+                                                             1
+                                                             c2)
+                                                            (("1"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil)
+                             ("2" (assert) nil nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   proved
+   ((popRefinement const-decl "bool" POPrefinement nil)
+    (plRefinement const-decl "bool" POPrefinement nil)
+    (products const-decl "set[finite_sets[Asset].finite_set]"
+     POPrefinement nil)
+    (msingleton const-decl "multiset" multiset nil)
+    (emptymultiset const-decl "multiset" multiset nil)
+    (products const-decl "set[finite_sets[Asset].finite_set]"
+     POPrefinement nil)
+    (real_gt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (Conf type-decl nil POPrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     POPrefinement nil)
+    (unique const-decl "bool" maps nil)
+    (AssetName type-decl nil POPrefinement nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (Asset type-decl nil POPrefinement nil)
+    (AM type-eq-decl nil POPrefinement nil)
+    (FM type-decl nil POPrefinement nil)
+    (CK type-decl nil POPrefinement nil)
+    (ArbitrarySPL type-eq-decl nil POPrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfPL const-decl "bool" POPrefinement nil)
+    (PL type-eq-decl nil POPrefinement nil)
+    (add const-decl "multiset" multiset nil)
+    (member const-decl "bool" multiset nil))
+   127215 100 t shostak)))
+

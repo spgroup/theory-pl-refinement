@@ -1,6 +1,6 @@
 FeatureModelSemantics: THEORY
  BEGIN
-  IMPORTING FeatureModel, FormulaTheory
+  IMPORTING Name, FormulaTheory
 
   % well-formed feature model
   wfFM(fm: FM): bool = 
@@ -36,5 +36,52 @@ FeatureModelSemantics: THEORY
     FORALL(fm:WFM,opt:Name):
       (not(features(fm)(opt))) =>
         (FORALL (c:Configuration) : semantics(fm)(c) => NOT c(opt)) 
+
+  teste2: LEMMA
+       FORALL (F,G:Name):
+       (FORALL (c:Configuration, f:Formula_):
+        NOT (member(G,names(f))) =>
+              (satisfies(f,
+                        IF (c(G)) THEN add(F,remove(G,c))
+                        ELSE c ENDIF) 
+             <=> 
+         satisfies(rename(f,F,G),
+            IF (c(F)) THEN add(G,remove(F,c))
+                        ELSE c ENDIF)))
+
+  renameFormulae(forms:set[Formula_],F,G:Name):set[Formula_] =
+    {f:Formula_ | EXISTS (f1:Formula_): forms(f1) AND f=rename(f1,F,G)}
+
+% operacao de renaming --> ren: FM x F x F -> FM
+  renameFM(fm: FM, F,G:Name): FM =
+    (# features:=add(G,remove(F,features(fm))), formulae:=renameFormulae(formulae(fm),F,G) #)
+
+  wtFormRename2: LEMMA
+    FORALL(fm1:WFM, F,G:Name):
+      (
+        (wfTree(fm1) AND wfTree(fm2)) 
+        =>
+          (FORALL (f:Formula_): wt(fm1,f) => wt(fm2,rename(f,F,G)))
+      )
+      WHERE fm2=renameFM(fm1,F,G)
+
+  renameFeature_WF : THEOREM
+    FORALL(fm1:WFM,F,G:Name): wfFM(fm2)
+    WHERE fm2=renameFM(fm1,F,G)
+
+  satFormula3 : THEOREM
+    FORALL(fm1:WFM,F,G:Name):
+      (NOT features(fm1)(G)) =>
+      (FORALL (c:Configuration, f:Formula_):
+              semantics(fm1)(c) AND
+            (NOT (member(G,names(f)))) =>
+              (satisfies(f,c) => satisfies(rename(f,F,G),
+                          IF (c(F)) THEN add(G,remove(F,c))
+                                  ELSE c ENDIF)))
+    WHERE fm2=renameFM(fm1,F,G) 
+
+  renameFeature3 : THEOREM
+    FORALL(fm1:WFM,F,G:Name): (NOT features(fm1)(G)) => refines2(fm1,fm2)
+    WHERE fm2=renameFM(fm1,F,G)
 
  END FeatureModelSemantics

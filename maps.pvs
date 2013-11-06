@@ -26,7 +26,7 @@ maps[S:TYPE,T:TYPE]: THEORY
   dom(m): set[S] = {l: S | EXISTS (r: T): m(l,r)}
   domain(m): finite_sets[S].finite_set = {l: S | EXISTS (r: T): m(l,r)}
 
-  indomain?(l,m):bool = member(l,dom(m))
+  indomain?(l,m):bool = NOT(dom(m)(l))
 
   %get image of pairs
   img(m): set[T] = {r: T | EXISTS (l: S): m(l,r)}

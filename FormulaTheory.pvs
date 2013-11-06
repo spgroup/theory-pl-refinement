@@ -1,6 +1,7 @@
 FormulaTheory: THEORY
  BEGIN
-  Importing Formula_, Name, FeatureModel
+  Importing FeatureModel
+
   % this function is used in the recursive functions, as the measure function
   complexity(f: Formula_): nat =
     reduce_nat(0,0,
@@ -48,6 +49,50 @@ FormulaTheory: THEORY
       IMPLIES_FORMULA(f1, f2): satisfies(f1,c) => satisfies(f2,c)
     ENDCASES
    MEASURE complexity(f)
+
+  %funcao que renomeia features em uma formula
+  rename(f:Formula_, x,y:Name): RECURSIVE Formula_ =
+      CASES f OF
+          TRUE_FORMULA: TRUE_FORMULA,
+          FALSE_FORMULA: FALSE_FORMULA,
+          NAME_FORMULA(n1):
+              IF (n1 = x) THEN
+                  NAME_FORMULA(y)
+              ELSE
+                  NAME_FORMULA(n1)
+	      ENDIF,
+          NOT_FORMULA(f1):
+                  NOT_FORMULA(rename(f1,x,y)),
+          AND_FORMULA(f1, f2):
+                  AND_FORMULA(rename(f1,x,y), rename(f2,x,y)),
+          IMPLIES_FORMULA(f1, f2):
+                  IMPLIES_FORMULA(rename(f1,x,y), rename(f2,x,y))
+      ENDCASES
+  MEASURE complexity(f)
+
+  %Caso x nao esteja presente na formula, o efeito de rename eh nulo
+  notInNames: THEOREM
+    FORALL(f:Formula_,x,y:Name): 
+      NOT(names(f)(x)) =>
+        f = (rename(f,x,y))
+
+  %Caso y nao esteja presente na formula, o efeito de aplicar rename 2 vezes eh nulo
+  eqRename: THEOREM
+    FORALL(f:Formula_,x,y:Name): 
+      NOT(names(f)(y)) =>
+        f = rename(rename(f,x,y),y,x)
+
+  evalRename: LEMMA
+       FORALL (F,G:Name):
+       (FORALL (c:Configuration, f:Formula_):
+        NOT (member(G,names(f))) =>
+              (satisfies(f,
+                        IF (c(G)) THEN add(F,remove(G,c))
+                        ELSE c ENDIF) 
+             <=> 
+         satisfies(rename(f,F,G),
+            IF (c(F)) THEN add(G,remove(F,c))
+                        ELSE c ENDIF)))
 
   % a well-typed formula only contains names from the feature model
   formNames: LEMMA

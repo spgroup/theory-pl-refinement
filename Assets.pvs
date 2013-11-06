@@ -17,8 +17,6 @@ BEGIN
   wfProduct : [set[Asset]->bool]
   Product: TYPE = (wfProduct)
 
-  
-
   % Axiom <Asset refinement is pre-order>
   assetRefinement: AXIOM orders[set[Asset]].preorder?( |- ) 
 

@@ -1,0 +1,39 @@
+POPrefinement: THEORY
+BEGIN
+ 
+  IMPORTING SPLrefinement
+
+  p,p1,p2: VAR finite_sets[Asset].finite_set
+%  prods,ps,ps1,ps2: VAR finite_sets[finite_sets[Asset].finite_set].finite_set
+  pl,pl1,pl2: VAR PL
+
+  IMPORTING multiset[PL]
+  Population : TYPE = multiset
+  pop,pop1,pop2,pop3: VAR Population
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%% PL REFINEMENT DEFINITION AND PROPERTIES %%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  products(pop) : set[finite_sets[Asset].finite_set] =
+   { p |  EXISTS (pl:PL) : (member(pl,pop)) AND (products(pl)(p)) }
+
+  popRefinement(pop1,pop2) : bool =
+    (FORALL p1: products(pop1)(p1) => (EXISTS p2: products(pop2)(p2) AND (p1 |- p2)))
+
+  popRef: THEOREM orders[Population].preorder?( popRefinement ) 
+
+  productsUnion: THEOREM
+    FORALL(pl,pop):
+    	products(union(msingleton(pl),pop)) = union(products(pl),products(pop))
+
+  popCompositional: THEOREM
+    FORALL(pl1,pl2,pop):
+    	(plRefinement(pl1,pl2)) => popRefinement(union(msingleton(pl1),pop),union(msingleton(pl2),pop))
+
+  plRefPop: THEOREM
+    FORALL(pl1,pl2): (plRefinement(pl1,pl2)) => popRefinement(msingleton(pl1),msingleton(pl2))
+
+
+
+END POPrefinement

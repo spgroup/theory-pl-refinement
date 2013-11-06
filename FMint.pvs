@@ -4,10 +4,17 @@ BEGIN
 
   % Assumption <Feature model semantics>
   FMi: TYPE
+  Feature : TYPE
   [||] : [FMi -> set[Configuration]]
 
   satisfies(f:FeatureExpression, c:Configuration):boolean
   wt(fm:FMi, f:FeatureExpression):boolean
+
+  getFeatures(fm:FMi):set[Feature]
+  addMandatory(fm:FMi, p:Feature, f:Feature):FMi
+  addOptional(fm:FMi, p:Feature, f:Feature):FMi
+  addOR(fm:FMi, p:Feature, f:Feature):FMi
+  addAlternative(fm:FMi, p:Feature, f:Feature):FMi
 
 %  IMPORTING SPLrefinement{{Conf:=Config,FM:=FMi, {||} := [||]}}  
 
