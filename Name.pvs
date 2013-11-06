@@ -4,6 +4,5 @@ Name: THEORY
   Name: TYPE
   % representa uma configuracao de um feature model
   Configuration: TYPE = set[Name]
-  CONVERSION+ singleton
 
  END Name

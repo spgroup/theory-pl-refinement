@@ -1,6 +1,6 @@
 FeatureModelSemantics: THEORY
  BEGIN
-  IMPORTING Name, FormulaTheory
+  IMPORTING FormulaTheory
 
   % well-formed feature model
   wfFM(fm: FM): bool = 
