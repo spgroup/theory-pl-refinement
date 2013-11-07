@@ -108,7 +108,7 @@ FormulaTheory: THEORY
   satisfies1: LEMMA
     FORALL(f:Formula_, c:Configuration, n1:Name):			
       (NOT names(f)(n1)) =>
-      	   satisfies(f,c) = satisfies(f,union(c,n1))
+      	   satisfies(f,c) = satisfies(f,add(n1,c))
 
   % satisfies's result is equal if we remove a feature from the configuration that is not in the formula
   satisfies2: LEMMA

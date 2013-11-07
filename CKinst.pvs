@@ -1,23 +1,27 @@
 CKinst: THEORY
 BEGIN
 
-  IMPORTING FMint
+  IMPORTING FeatureModelSemantics
   IMPORTING ConfigurationKnowledge
 
   IMPORTING CK{{ 
-  	    Configuration:=Configuration.Configuration, 
-  	    FMi:=FMint.FMi, 
-  	    FeatureExpression:=FeatureExpression.FeatureExpression, 
+  	    Configuration:=Name.Configuration, 
+  	    FeatureExpression:=Formula_, 
+	    sat:=FormulaTheory.satisfies, 
+  	    FMi:=FeatureModelSemantics.WFM, 
+  	    Feature:=Name.Name, 
+  	    [||]:=FeatureModelSemantics.semantics, 
+  	    wt:=FormulaTheory.wt, 
 
   	    RightSide:=finite_sets[AssetName].finite_set, 
   	    Item:=ConfigurationKnowledge.Item, 
   	    CK:=ConfigurationKnowledge.CK, 
-%	    exps:=ConfigurationKnowledge.expsCK, 
-%	    getExp := ConfigurationKnowledge.getExp,
+	    exps:=ConfigurationKnowledge.expsCK, 
+	    getExp := ConfigurationKnowledge.getExp,
 	    getRS := ConfigurationKnowledge.getRS,
 	    items := ConfigurationKnowledge.items,
-%  	    wfCK:=ConfigurationKnowledge.wfCK, 
-%	    semantics:=ConfigurationKnowledge.semantics, 
+  	    wfCK:=ConfigurationKnowledge.wfCK, 
+	    semantics:=ConfigurationKnowledge.semantics, 
 	    notshowupItem := ConfigurationKnowledge.notshowupItem, 
 	    showupItem:=ConfigurationKnowledge.showupItem
   }}
