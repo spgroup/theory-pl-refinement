@@ -1,25 +1,38 @@
-TestImp[F: TYPE]: THEORY
+BaseF[C:TYPE, E:TYPE]: THEORY
+BEGIN
+  FMi:TYPE
+  Feat:TYPE
+  sat(c:C,e:E):bool
+  wt(e:E,f:Feat):bool
+END BaseF
+
+TestImp[FM: TYPE, F:TYPE, E:TYPE, C:TYPE]: THEORY
 BEGIN
 
-  IMPORTING FMint{{ 
-  	FMi:=F
+  IMPORTING BaseF[E,C]{{ 
+  	FMi:=FM,
+  	Feat:=F
   }}
   CK: TYPE
-  wf(fm:F,ck:CK) : bool
+  wf(fm:FM,ck:CK) : bool
+  wt(fm:FM,f:F) : bool
 
 END TestImp
-
-
 
 TestInst: THEORY
 BEGIN
 
+  ConcreteC: TYPE
+  ConcreteE: TYPE
   ConcreteF: TYPE
+  ConcreteFM: TYPE
   ConcreteK: TYPE
-  wfC(fm:ConcreteF,ck:ConcreteK) : bool
-  IMPORTING TestImp[ConcreteF]{{ 
+  wfC(fm:ConcreteFM,ck:ConcreteK) : bool
+  wtC(fm:ConcreteFM,f:ConcreteF) : bool
+  IMPORTING TestImp[ConcreteFM,ConcreteF,ConcreteE,ConcreteC]{{ 
   	    CK:=ConcreteK,
-	    wf:=wfC
+	    wf:=wfC,
+	    wt:=wtC
   }}
 
 END TestInst

@@ -1,6 +1,8 @@
-FMint: THEORY
+FMint[Configuration:TYPE, FeatureExpression:TYPE]: THEORY
 BEGIN
-  Importing Configuration,FeatureExpression
+  IMPORTING FeatureExpression[Configuration]{{ 
+    FeatureExpression:=FeatureExpression 
+  }}
 
   % Assumption <Feature model semantics>
   FMi: TYPE
@@ -16,5 +18,6 @@ BEGIN
   addOR(fm:FMi, p:Feature, f:Feature):FMi
   addAlternative(fm:FMi, p:Feature, f:Feature):FMi
 
+%  sat(f:FeatureExpression, c:Configuration): boolean
 
 END FMint

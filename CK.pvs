@@ -1,15 +1,16 @@
-CK: THEORY
+CK[Configuration:TYPE, 
+   FeatureExpression:TYPE+,
+   FMi:TYPE, 
+   Feature:TYPE, 
+   [||] : [FMi -> set[Configuration]],
+   wt: [FMi, FeatureExpression -> boolean]
+   ]: THEORY
 BEGIN
+
   IMPORTING AssetMapping
-
-  Configuration: TYPE
-  FeatureExpression: TYPE+
-  sat(f:FeatureExpression, c:Configuration): boolean
-
-  FMi: TYPE
-  Feature : TYPE
-  [||] : [FMi -> set[Configuration]]
-  wt(fm:FMi, f:FeatureExpression):boolean
+  IMPORTING FMint[Configuration,FeatureExpression]{{ 
+    FMi:=FMi 
+  }}
 
   RightSide: TYPE+
   Item: TYPE% = [# exp:FeatureExpression, right:RightSide #]
