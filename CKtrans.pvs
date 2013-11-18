@@ -25,6 +25,12 @@ BEGIN
     ENDCASES
   MEASURE length(ck)
 
+  items(ck) : set[Item] = list2set(ck)
+
+  getExp(it) : Formula_ = exp(it)
+  getRS(it) : Transformation = tasks(it)
+
+
   transform(t,am,amt): AM
   
   semanticsCK(ck,am,c,amt): RECURSIVE finite_sets[Asset].finite_set = 

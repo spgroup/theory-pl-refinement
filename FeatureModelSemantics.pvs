@@ -8,6 +8,8 @@ FeatureModelSemantics: THEORY
 
   WFM : TYPE = (wfFM)
 
+  getFeatures(fm:FM): set[Name] = features(fm)
+
   % configuration only contain names from the feature model
   satImpConsts(fm: WFM, c:Configuration): bool =
     FORALL (n: Name): c(n) => features(fm)(n)

@@ -1,0 +1,29 @@
+CKtInst: THEORY
+BEGIN
+
+  IMPORTING FeatureModelSemantics
+  IMPORTING CKtrans
+
+  IMPORTING CK{{ 
+  	    Configuration:=Name.Configuration, 
+  	    FeatureExpression:=Formula_, 
+	    sat:=FormulaTheory.satisfies, 
+  	    FMi:=FeatureModelSemantics.WFM, 
+  	    Feature:=Name.Name, 
+  	    [||]:=FeatureModelSemantics.semantics, 
+  	    wt:=FormulaTheory.wt, 
+
+  	    RightSide:=CKtrans.Transformation, 
+  	    Item:=CKtrans.Item, 
+  	    CK:=CKtrans.CK, 
+	    exps:=CKtrans.exps, 
+	    getExp := CKtrans.getExp,
+	    getRS := CKtrans.getRS,
+	    items := CKtrans.items,
+  	    wfCK:=CKtrans.wfCK, 
+	    semantics:=CKtrans.semantics 
+  }}
+
+
+
+END CKtInst

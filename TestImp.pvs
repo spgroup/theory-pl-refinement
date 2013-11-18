@@ -1,0 +1,26 @@
+TestImp[F: TYPE]: THEORY
+BEGIN
+
+  IMPORTING FMint{{ 
+  	FMi:=F
+  }}
+  CK: TYPE
+  wf(fm:F,ck:CK) : bool
+
+END TestImp
+
+
+
+TestInst: THEORY
+BEGIN
+
+  ConcreteF: TYPE
+  ConcreteK: TYPE
+  wfC(fm:ConcreteF,ck:ConcreteK) : bool
+  IMPORTING TestImp[ConcreteF]{{ 
+  	    CK:=ConcreteK,
+	    wf:=wfC
+  }}
+
+END TestInst
+

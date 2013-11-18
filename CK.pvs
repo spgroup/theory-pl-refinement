@@ -15,6 +15,11 @@ BEGIN
   Item: TYPE% = [# exp:FeatureExpression, right:RightSide #]
   CK: TYPE
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
   am,am1,am2: VAR AM
   a1,a2,a3: VAR Asset
   an,an1,an2: VAR AssetName
@@ -30,6 +35,8 @@ BEGIN
   e,e1,e2: VAR FeatureExpression
   f,f1,f2: VAR Feature
   p,p1,p2: VAR Feature
+
+
 
   exps(ck) : set[FeatureExpression]
   items(ck) : set[Item]
