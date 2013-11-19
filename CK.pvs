@@ -3,13 +3,28 @@ CK[Configuration:TYPE,
    FMi:TYPE, 
    Feature:TYPE, 
    [||] : [FMi -> set[Configuration]],
-   wt: [FMi, FeatureExpression -> boolean]
+   wf: [FMi -> boolean],
+   wt: [FMi, FeatureExpression -> boolean],
+   getFeatures: [FMi -> set[Feature]],
+   addMandatory: [FMi, Feature, Feature -> FMi],
+%   addOR: [FMi, Feature, Feature -> FMi],
+%   addAlternative: [FMi, Feature, Feature -> FMi],
+   addOptional: [FMi, Feature, Feature -> FMi]
    ]: THEORY
 BEGIN
 
   IMPORTING AssetMapping
   IMPORTING FMint[Configuration,FeatureExpression]{{ 
-    FMi:=FMi 
+    FMi:=FMi,
+    Feature:=Feature,
+    [||]:=[||],
+    wf:=wf,
+    wt:=wt,
+    getFeatures:=getFeatures,
+    addMandatory:=addMandatory,
+%    addOR:=addOR,
+%    addAlternative:=addAlternative,
+    addOptional:=addOptional
   }}
 
   RightSide: TYPE+

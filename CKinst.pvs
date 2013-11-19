@@ -4,15 +4,17 @@ BEGIN
   IMPORTING FeatureModelSemantics
   IMPORTING ConfigurationKnowledge
 
-  IMPORTING CK{{ 
-  	    Configuration:=Name.Configuration, 
-  	    FeatureExpression:=Formula_, 
-	    sat:=FormulaTheory.satisfies, 
-  	    FMi:=FeatureModelSemantics.WFM, 
-  	    Feature:=Name.Name, 
-  	    [||]:=FeatureModelSemantics.semantics, 
-  	    wt:=FormulaTheory.wt, 
-
+  IMPORTING CK[Name.Configuration, 
+  	       Formula_, 
+	       FeatureModel.FM, 
+	       Name.Name, 
+	       FeatureModelSemantics.semantics, 
+	       FeatureModelSemantics.wfFM, 
+	       FormulaTheory.wt,
+	       FeatureModelSemantics.getFeatures, 
+	       FeatureModelSemantics.addMandatory, 
+	       FeatureModelSemantics.addOptional 
+	    ]{{ 
   	    RightSide:=finite_sets[AssetName].finite_set, 
   	    Item:=ConfigurationKnowledge.Item, 
   	    CK:=ConfigurationKnowledge.CK, 

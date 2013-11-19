@@ -6,7 +6,7 @@ BEGIN
   Item: TYPE=[# exp:Formula_, assets:finite_sets[AssetName].finite_set #]
   CK: TYPE = finite_sets[Item].finite_set
   
-  fm: VAR WFM
+  fm: VAR FM
   am,am1,am2: VAR AM
   an,an1,an2: VAR AssetName
   ck: VAR CK
@@ -76,6 +76,7 @@ BEGIN
 
 
   wfCK(fm,am,ck) : bool =
+    wfFM(fm) AND 
     (FORALL c: semantics(fm)(c) => subset?(eval(ck,c),dom(am)) ) AND 
     (FORALL exp: exps(ck)(exp) => wt(fm,exp))
 
@@ -90,22 +91,22 @@ BEGIN
     AND (FORALL exp: exps(ck)(exp) => wt(fm,exp))
 
   % esta vai ser nossa nocao de equivalencia
-  ckEq(fm:WFM,am:AM,ck1,ck2:{K:CK | wfCK(fm,am,K)} ): bool =
+  ckEq(fm:FM,am:AM,ck1,ck2:{K:CK | wfCK(fm,am,K)} ): bool =
     FORALL c: semantics(fm)(c) =>  semantics(ck1)(am)(c)=semantics(ck2)(am)(c)
 
   % Equivalence properties - reflexive
   eqReflexive: THEOREM
-    FORALL(fm:WFM, am:AM, ck:{K: CK | wfCK(fm,am,K)}):
+    FORALL(fm:FM, am:AM, ck:{K: CK | wfCK(fm,am,K)}):
   	ckEq(fm,am,ck,ck) 
 
   % equivalence properties - symmetric
   eqSymmetric: THEOREM
-    FORALL(fm:WFM, am:AM, ck1,ck2:{K: CK | wfCK(fm,am,K)}):
+    FORALL(fm:FM, am:AM, ck1,ck2:{K: CK | wfCK(fm,am,K)}):
     	ckEq(fm,am,ck1,ck2) => ckEq(fm,am,ck2,ck1)
 
   % equivalence properties - transitive
   eqTransitive: THEOREM
-    FORALL(fm:WFM, am:AM, ck1,ck2,ck3:{K: CK | wfCK(fm,am,K)}):
+    FORALL(fm:FM, am:AM, ck1,ck2,ck3:{K: CK | wfCK(fm,am,K)}):
     	(ckEq(fm,am,ck1,ck2) and ckEq(fm,am,ck2,ck3)) => ckEq(fm,am,ck1,ck3)
 
   % esta vai ser nossa nocao de equivalencia

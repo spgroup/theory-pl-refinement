@@ -1,0 +1,125 @@
+(ConfigurationKnowledge
+ (evalCK_TCC1 0
+  (evalCK_TCC1-1 nil 3593880850 ("" (subtype-tcc) nil nil) nil nil))
+ (assetsCK_TCC1 0
+  (assetsCK_TCC1-1 nil 3593880850 ("" (subtype-tcc) nil nil) nil nil))
+ (wfCK_TCC1 0
+  (wfCK_TCC1-1 nil 3593880850
+   ("" (expand wfTree) (("" (propax) nil nil)) nil)
+   ((wfTree const-decl "bool" FeatureModel nil)) nil))
+ (wfCK2_TCC1 0
+  (wfCK2_TCC1-1 nil 3593880850
+   ("" (expand wfTree) (("" (propax) nil nil)) nil)
+   ((wfTree const-decl "bool" FeatureModel nil)) nil))
+ (ckEq_TCC1 0
+  (ckEq_TCC1-1 nil 3593880902
+   ("" (skolem 1 (fm am ck1 ck2))
+    (("" (typepred ck1)
+      (("" (expand wfCK) (("" (flatten) nil nil)) nil)) nil))
+    nil)
+   ((wfCK const-decl "bool" ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Name type-decl nil Name nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil))
+   nil))
+ (eqReflexive 0
+  (eqReflexive-1 nil 3593881211
+   ("" (expand ckEq) (("" (propax) nil nil)) nil)
+   ((ckEq const-decl "bool" ConfigurationKnowledge nil)) shostak))
+ (eqSymmetric 0
+  (eqSymmetric-1 nil 3593881220
+   ("" (expand ckEq)
+    (("" (skolem 1 (fm am ck1 ck2))
+      (("" (flatten)
+        (("" (skolem 1 c)
+          (("" (flatten)
+            (("" (instantiate -1 c) (("" (assert) nil nil)) nil)) nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (ckEq const-decl "bool" ConfigurationKnowledge nil))
+   shostak))
+ (eqTransitive 0
+  (eqTransitive-1 nil 3593881243
+   ("" (skolem 1 (fm am ck1 ck2 ck3))
+    (("" (expand ckEq)
+      (("" (flatten)
+        (("" (skolem 1 c)
+          (("" (flatten)
+            (("" (instantiate -1 c)
+              (("" (instantiate -2 c) (("" (assert) nil nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((ckEq const-decl "bool" ConfigurationKnowledge nil)
+    (Name type-decl nil Name nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (Configuration type-eq-decl nil Name nil))
+   shostak))
+ (eqReflexive2 0
+  (eqReflexive2-1 nil 3593881276
+   ("" (expand ckEq2) (("" (propax) nil nil)) nil)
+   ((ckEq2 const-decl "bool" ConfigurationKnowledge nil)) shostak))
+ (eqSymmetric2 0
+  (eqSymmetric2-1 nil 3593881285
+   ("" (expand ckEq2)
+    (("" (skolem 1 (ck1 ck2))
+      (("" (flatten) (("" (assert) nil nil)) nil)) nil))
+    nil)
+   ((ckEq2 const-decl "bool" ConfigurationKnowledge nil)) shostak))
+ (eqTransitive2 0
+  (eqTransitive2-1 nil 3593881300
+   ("" (expand ckEq2)
+    (("" (skolem 1 (ck1 ck2 ck3))
+      (("" (flatten) (("" (assert) nil nil)) nil)) nil))
+    nil)
+   ((ckEq2 const-decl "bool" ConfigurationKnowledge nil)) shostak))
+ (renameCK_TCC1 0
+  (renameCK_TCC1-1 nil 3593880902 ("" (subtype-tcc) nil nil) nil nil))
+ (evalEqCK 0
+  (evalEqCK-1 nil 3593881475
+   ("" (skolem 1 (fm ck F G))
+    (("" (flatten)
+      (("" (skolem 2 (c f))
+        (("" (flatten)
+          (("" (expand member)
+            (("" (expand semantics)
+              (("" (expand* satImpConsts satExpConsts)
+                (("" (flatten)
+                  (("" (bddsimp)
+                    (("1" (instantiate -1 F)
+                      (("1" (assert) (("1" (postpone) nil nil)) nil))
+                      nil)
+                     ("2" (postpone) nil nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak)))
+

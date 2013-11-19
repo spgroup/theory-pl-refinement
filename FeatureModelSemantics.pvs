@@ -28,6 +28,14 @@ FeatureModelSemantics: THEORY
     FORALL (c1: Configuration): semantics(abs)(c1) 
       => EXISTS(c2: Configuration): semantics(con)(c2)
 
+%  addMandatory(fm:FM,n1:{n: Name | features(fm)(n)},n2:{n: Name | NOT(features(fm)(n))}):FM =
+  addMandatory(fm:FM,n1,n2:Name):FM =
+    fm WITH [features:= add(n2,features(fm)), formulae:=add(IMPLIES_FORMULA(NAME_FORMULA(n2),NAME_FORMULA(n1)),add(IMPLIES_FORMULA(NAME_FORMULA(n1),NAME_FORMULA(n2)),formulae(fm)))]    
+
+%  addOptional(fm:FM,n1:{n: Name | features(fm)(n)},n2:{n: Name | NOT(features(fm)(n))}):FM =
+  addOptional(fm:FM,n1,n2:Name):FM =
+    fm WITH [features:= add(n2,features(fm)), formulae:=add(IMPLIES_FORMULA(NAME_FORMULA(n2),NAME_FORMULA(n1)),formulae(fm))]    
+
   wtFormRefinement: LEMMA
     FORALL(abs,con:FM):
       (FORALL(name:Name): features(abs)(name) => features(con)(name) ) AND
