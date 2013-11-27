@@ -28,6 +28,4 @@ BEGIN
 	    showupItem:=ConfigurationKnowledge.showupItem
   }}
 
-
-
 END CKinst

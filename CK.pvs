@@ -1,5 +1,5 @@
 CK[Configuration:TYPE, 
-   FeatureExpression:TYPE+,
+   FeatureExpression:TYPE,
    FMi:TYPE, 
    Feature:TYPE, 
    [||] : [FMi -> set[Configuration]],
@@ -118,5 +118,6 @@ BEGIN
       =>
         FORALL c: [||](fm)(c) => semantics(ck)(am1)(c) = semantics(ck)(am2)(c)
     )  
+
 
 End CK
