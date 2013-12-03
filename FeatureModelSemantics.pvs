@@ -8,7 +8,9 @@ FeatureModelSemantics: THEORY
 
   WFM : TYPE = (wfFM)
 
-  getFeatures(fm:FM): set[Name] = features(fm)
+  getFeatures(fm:FM): set[Name] = features(fm);
+
+  genFE(f:Name):Formula_ = NAME_FORMULA(f);
 
   % configuration only contain names from the feature model
   satImpConsts(fm: WFM, c:Configuration): bool =
@@ -29,12 +31,24 @@ FeatureModelSemantics: THEORY
       => EXISTS(c2: Configuration): semantics(con)(c2)
 
 %  addMandatory(fm:FM,n1:{n: Name | features(fm)(n)},n2:{n: Name | NOT(features(fm)(n))}):FM =
-  addMandatory(fm:FM,n1,n2:Name):FM =
+  addMandatoryFM(fm:FM,n1,n2:Name):FM =
     fm WITH [features:= add(n2,features(fm)), formulae:=add(IMPLIES_FORMULA(NAME_FORMULA(n2),NAME_FORMULA(n1)),add(IMPLIES_FORMULA(NAME_FORMULA(n1),NAME_FORMULA(n2)),formulae(fm)))]    
 
 %  addOptional(fm:FM,n1:{n: Name | features(fm)(n)},n2:{n: Name | NOT(features(fm)(n))}):FM =
-  addOptional(fm:FM,n1,n2:Name):FM =
+  addOptionalFM(fm:FM,n1,n2:Name):FM =
     fm WITH [features:= add(n2,features(fm)), formulae:=add(IMPLIES_FORMULA(NAME_FORMULA(n2),NAME_FORMULA(n1)),formulae(fm))]    
+
+  addMandatory(abs:WFM,con:FM, n1,n2:Name):bool =
+    features(con) = add(n2,features(abs)) AND
+    formulae(con) = add(IMPLIES_FORMULA(NAME_FORMULA(n2),NAME_FORMULA(n1)),add(IMPLIES_FORMULA(NAME_FORMULA(n1),NAME_FORMULA(n2)),formulae(abs))) AND
+    features(abs)(n1) AND 
+    (NOT features(abs)(n2)) 
+
+  addOptional(abs:WFM,con:FM, n1,n2:Name):bool =
+    features(con) = add(n2,features(abs)) AND
+    features(abs)(n1) AND 
+    formulae(con) = add(IMPLIES_FORMULA(NAME_FORMULA(n2),NAME_FORMULA(n1)),formulae(abs)) AND
+    (NOT features(abs)(n2))
 
   wtFormRefinement: LEMMA
     FORALL(abs,con:FM):

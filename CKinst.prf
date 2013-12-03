@@ -11,65 +11,61 @@
             (expand* syntaxReplaceFeatureExp
              conditionsReplaceFeatureExp)
             (("" (flatten)
-              (("" (expand getRS)
-                (("" (expand getExp)
-                  (("" (instantiate -6 c)
-                    (("" (assert)
-                      (("" (flatten)
-                        (("" (expand semantics 1)
-                          (("" (expand* map eval evalCK assetsCK)
-                            (("" (decompose-equality 1)
+              (("" (expand* getRS getExp)
+                (("" (instantiate -6 c)
+                  (("" (assert)
+                    (("" (expand semantics 1)
+                      (("" (expand* map eval evalCK assetsCK)
+                        (("" (decompose-equality 1)
+                          (("" (expand items)
+                            (("" (replace -2)
                               ((""
-                                (expand items)
+                                (replace -3)
                                 ((""
-                                  (replace -2)
+                                  (expand* add member)
                                   ((""
-                                    (replace -3)
-                                    ((""
-                                      (expand* add member)
-                                      ((""
-                                        (bddsimp 1)
+                                    (bddsimp 1)
+                                    (("1"
+                                      (skolem -1 an)
+                                      (("1"
+                                        (flatten)
                                         (("1"
-                                          (skolem -1 an)
+                                          (instantiate 1 an)
                                           (("1"
-                                            (flatten)
+                                            (assert)
                                             (("1"
-                                              (instantiate 1 an)
+                                              (skolem -1 it)
                                               (("1"
-                                                (assert)
+                                                (flatten)
                                                 (("1"
-                                                  (skolem -1 it)
+                                                  (bddsimp -2)
                                                   (("1"
-                                                    (flatten)
+                                                    (instantiate 1 it2)
                                                     (("1"
-                                                      (bddsimp -2)
-                                                      (("1"
-                                                        (instantiate
-                                                         1
-                                                         it2)
-                                                        (("1"
-                                                          (assert)
-                                                          nil
-                                                          nil))
-                                                        nil)
-                                                       ("2"
-                                                        (instantiate
-                                                         1
-                                                         it)
-                                                        (("2"
-                                                          (assert)
-                                                          nil
-                                                          nil))
-                                                        nil))
+                                                      (assert)
+                                                      nil
+                                                      nil))
+                                                    nil)
+                                                   ("2"
+                                                    (instantiate 1 it)
+                                                    (("2"
+                                                      (assert)
+                                                      nil
                                                       nil))
                                                     nil))
                                                   nil))
                                                 nil))
                                               nil))
                                             nil))
-                                          nil)
-                                         ("2"
-                                          (skolem -1 an)
+                                          nil))
+                                        nil))
+                                      nil)
+                                     ("2"
+                                      (skolem -1 an)
+                                      (("2"
+                                        (flatten)
+                                        (("2"
+                                          (skolem -1 it)
                                           (("2"
                                             (flatten)
                                             (("2"
@@ -77,26 +73,19 @@
                                               (("2"
                                                 (assert)
                                                 (("2"
-                                                  (skolem -1 it)
-                                                  (("2"
-                                                    (bddsimp -1)
+                                                  (bddsimp -2)
+                                                  (("1"
+                                                    (instantiate 1 it1)
                                                     (("1"
-                                                      (instantiate
-                                                       1
-                                                       it1)
-                                                      (("1"
-                                                        (assert)
-                                                        nil
-                                                        nil))
-                                                      nil)
-                                                     ("2"
-                                                      (instantiate
-                                                       1
-                                                       it)
-                                                      (("2"
-                                                        (assert)
-                                                        nil
-                                                        nil))
+                                                      (assert)
+                                                      nil
+                                                      nil))
+                                                    nil)
+                                                   ("2"
+                                                    (instantiate 1 it)
+                                                    (("2"
+                                                      (assert)
+                                                      nil
                                                       nil))
                                                     nil))
                                                   nil))
@@ -123,122 +112,94 @@
         nil))
       nil))
     nil)
-   ((getExp const-decl "Formula_" ConfigurationKnowledge nil)
+   ((conditionsReplaceFeatureExp const-decl "bool" CK nil)
+    (syntaxReplaceFeatureExp const-decl "bool" CK nil)
+    (getExp const-decl "Formula_" ConfigurationKnowledge nil)
+    (getRS const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (Configuration type-eq-decl nil Name nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (set type-eq-decl nil sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (satisfies def-decl "boolean" FormulaTheory nil)
-    (unique const-decl "bool" maps nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (member const-decl "bool" sets nil)
-    (add const-decl "(nonempty?)" sets nil)
-    (items const-decl "set[Item]" ConfigurationKnowledge nil)
-    (map const-decl "finite_sets[T].finite_set" maps nil)
-    (evalCK const-decl "finite_sets[Item].finite_set"
-     ConfigurationKnowledge nil)
-    (assetsCK const-decl "finite_sets[AssetName].finite_set"
-     ConfigurationKnowledge nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (getRS const-decl "finite_sets[AssetName].finite_set"
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil)
-    (syntaxReplaceFeatureExp const-decl "bool" CK nil)
-    (conditionsReplaceFeatureExp const-decl "bool" CK nil))
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (items const-decl "set[Item]" ConfigurationKnowledge nil)
+    (add const-decl "(nonempty?)" sets nil)
+    (member const-decl "bool" sets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil))
    nil))
  (IMP_CK_simpleDeleteAsset_EqualCKeval_TCC1 0
   (IMP_CK_simpleDeleteAsset_EqualCKeval_TCC1-1 nil 3592823409
    ("" (skolem 1 (fm ck am1 am2 an))
     (("" (flatten)
-      (("" (skolem 1 c)
-        (("" (flatten)
-          (("" (expand semantics +)
-            (("" (expand* map eval evalCK assetsCK)
-              (("" (expand syntaxSimpleDeleteAsset)
-                (("" (expand notshowup)
-                  (("" (flatten)
-                    (("" (expand items -4)
-                      (("" (expand notshowupItem)
-                        (("" (decompose-equality 1)
-                          (("" (replace -3 1)
-                            (("" (expand rm 1)
-                              ((""
-                                (bddsimp 1)
+      (("" (expand syntaxSimpleDeleteAsset)
+        (("" (skolem 1 c)
+          (("" (flatten)
+            (("" (expand semantics +)
+              (("" (expand* map eval evalCK assetsCK notshowup)
+                (("" (decompose-equality 1)
+                  (("" (expand* items notshowupItem)
+                    (("" (replace -3 1)
+                      (("" (expand rm 1)
+                        (("" (bddsimp 1)
+                          (("1" (skolem -1 aname)
+                            (("1" (flatten)
+                              (("1"
+                                (instantiate 1 aname)
                                 (("1"
-                                  (skolem -1 aname)
+                                  (bddsimp)
                                   (("1"
-                                    (flatten)
+                                    (expand remove)
                                     (("1"
-                                      (instantiate 1 aname)
+                                      (expand member)
                                       (("1"
-                                        (bddsimp)
+                                        (assert)
                                         (("1"
-                                          (expand remove)
+                                          (skolem -1 it)
                                           (("1"
-                                            (expand member)
+                                            (flatten)
                                             (("1"
-                                              (assert)
-                                              (("1"
-                                                (flatten)
-                                                (("1"
-                                                  (expand dom)
-                                                  (("1"
-                                                    (skolem -1 it)
-                                                    (("1"
-                                                      (flatten)
-                                                      (("1"
-                                                        (replace
-                                                         -5
-                                                         -1
-                                                         RL)
-                                                        (("1"
-                                                          (instantiate
-                                                           -10
-                                                           it)
-                                                          (("1"
-                                                            (assert)
-                                                            nil
-                                                            nil))
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
+                                              (instantiate -10 it)
+                                              (("1" (assert) nil nil))
                                               nil))
                                             nil))
                                           nil))
                                         nil))
                                       nil))
                                     nil))
-                                  nil)
-                                 ("2"
-                                  (skolem -1 aname)
+                                  nil))
+                                nil))
+                              nil))
+                            nil)
+                           ("2" (skolem -1 aname)
+                            (("2" (flatten)
+                              (("2"
+                                (instantiate 1 aname)
+                                (("2"
+                                  (bddsimp)
                                   (("2"
-                                    (flatten)
+                                    (expand remove)
                                     (("2"
-                                      (instantiate 1 aname)
-                                      (("2"
-                                        (bddsimp)
-                                        (("2"
-                                          (expand remove)
-                                          (("2"
-                                            (expand member)
-                                            (("2" (flatten) nil nil))
-                                            nil))
-                                          nil))
-                                        nil))
+                                      (expand member)
+                                      (("2" (flatten) nil nil))
                                       nil))
                                     nil))
                                   nil))
@@ -257,15 +218,8 @@
         nil))
       nil))
     nil)
-   ((eval const-decl "finite_sets[AssetName].finite_set"
-          ConfigurationKnowledge nil)
-    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+   ((semantics const-decl "finite_sets[Asset].finite_set"
      ConfigurationKnowledge nil)
-    (evalCK const-decl "finite_sets[Item].finite_set"
-     ConfigurationKnowledge nil)
-    (map const-decl "finite_sets[T].finite_set" maps nil)
-    (notshowup const-decl "bool" CK nil)
-    (items const-decl "set[Item]" ConfigurationKnowledge nil)
     (AssetName nonempty-type-decl nil Assets nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
@@ -282,15 +236,27 @@
     (AM type-eq-decl nil AssetMapping nil)
     (Asset nonempty-type-decl nil Assets nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (rm const-decl "mapping" maps nil)
-    (remove const-decl "set" sets nil)
+    (member const-decl "bool" sets nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
-    (dom const-decl "set[S]" maps nil)
-    (member const-decl "bool" sets nil)
+    (remove const-decl "set" sets nil)
+    (rm const-decl "mapping" maps nil)
+    (items const-decl "set[Item]" ConfigurationKnowledge nil)
     (notshowupItem const-decl "bool" ConfigurationKnowledge nil)
-    (syntaxSimpleDeleteAsset const-decl "bool" CK nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil))
-   nil)))
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (notshowup const-decl "bool" CK nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
+          ConfigurationKnowledge nil)
+    (syntaxSimpleDeleteAsset const-decl "bool" CK nil))
+   nil))
+ (IMP_CK_addMandatory_EqualCKeval_TCC1 0
+  (IMP_CK_addMandatory_EqualCKeval_TCC1-1 nil 3595085864
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (IMP_CK_addOptional_EqualCKeval_TCC1 0
+  (IMP_CK_addOptional_EqualCKeval_TCC1-1 nil 3595085864
+   ("" (mapped-axiom-tcc) nil nil) nil nil)))
 
