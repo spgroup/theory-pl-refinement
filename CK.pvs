@@ -39,13 +39,13 @@ BEGIN
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-  am,am1,am2: VAR AM
+  am,am1,am2,pairs: VAR AM
   a1,a2,a3: VAR Asset
   an,an1,an2: VAR AssetName
   anSet: VAR finite_sets[AssetName].finite_set
   aSet,S1,S2: VAR finite_sets[Asset].finite_set
   pair: VAR [AssetName,Asset]
-  pairs: VAR finite_sets[[AssetName,Asset]].finite_set
+%  pairs: VAR finite_sets[[AssetName,Asset]].finite_set
   fm,fm1,fm2: VAR FMi
   ck,ck1,ck2: VAR CK
   item,it,item1,item2: VAR Item
@@ -54,8 +54,6 @@ BEGIN
   e,e1,e2: VAR FeatureExpression
   f,f1,f2: VAR Feature
   p,p1,p2: VAR Feature
-
-
 
   exps(ck) : set[FeatureExpression]
   items(ck) : set[Item]
@@ -187,20 +185,24 @@ BEGIN
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD OPTIONAL FEATURE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  syntaxAddOptional(fm1,fm2,p,f,ck1,ck2,its) : bool =
+  syntaxAddOptional(fm1,fm2,p,f,ck1,ck2,its,am1,am2,pairs) : bool =
     getFeatures(fm1)(p) AND                        
     NOT(getFeatures(fm1)(f)) AND                        
     addOptional(fm1,fm2,p,f) AND
     items(ck2) = union(items(ck1),its) AND
+    am2=union(am1,pairs) AND
+    (FORALL an: dom(pairs)(an) => NOT (dom(am1)(an))) AND 
     itsFeature(its,f);
+
+
 
   %When we add an optional feature to the FM, including new assets to the AM, which are only referred in the CK by the new feature, the CK semantics for the existing products remains the same
   addOptional_EqualCKeval: AXIOM
-    FORALL(fm1,fm2,am1,am2,ck1,ck2,p,f,it):
+    FORALL(fm1,fm2,am1,am2,ck1,ck2,p,f,its,pairs):
     (
       (
       wfCK(fm1,am1,ck1) AND
-      syntaxAddOptional(fm1,fm2,p,f,ck1,ck2,it)
+      syntaxAddOptional(fm1,fm2,p,f,ck1,ck2,its,am1,am2,pairs)
       )
       =>
         FORALL c: [||](fm1)(c) => [||](fm2)(c) AND semantics(ck1)(am1)(c) = semantics(ck2)(am2)(c)

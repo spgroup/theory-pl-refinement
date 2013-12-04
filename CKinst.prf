@@ -112,39 +112,39 @@
         nil))
       nil))
     nil)
-   ((conditionsReplaceFeatureExp const-decl "bool" CK nil)
-    (syntaxReplaceFeatureExp const-decl "bool" CK nil)
-    (getExp const-decl "Formula_" ConfigurationKnowledge nil)
-    (getRS const-decl "finite_sets[AssetName].finite_set"
+   ((semantics const-decl "finite_sets[Asset].finite_set"
      ConfigurationKnowledge nil)
-    (Name type-decl nil Name nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (Configuration type-eq-decl nil Name nil)
-    (eval const-decl "finite_sets[AssetName].finite_set"
-          ConfigurationKnowledge nil)
-    (assetsCK const-decl "finite_sets[AssetName].finite_set"
-     ConfigurationKnowledge nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (member const-decl "bool" sets nil)
+    (add const-decl "(nonempty?)" sets nil)
+    (items const-decl "set[Item]" ConfigurationKnowledge nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (map const-decl "finite_sets[T].finite_set" maps nil)
-    (items const-decl "set[Item]" ConfigurationKnowledge nil)
-    (add const-decl "(nonempty?)" sets nil)
-    (member const-decl "bool" sets nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
-    (satisfies def-decl "boolean" FormulaTheory nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (set type-eq-decl nil sets nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil))
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
+          ConfigurationKnowledge nil)
+    (Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (getRS const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (getExp const-decl "Formula_" ConfigurationKnowledge nil)
+    (syntaxReplaceFeatureExp const-decl "bool" CK nil)
+    (conditionsReplaceFeatureExp const-decl "bool" CK nil))
    nil))
  (IMP_CK_simpleDeleteAsset_EqualCKeval_TCC1 0
   (IMP_CK_simpleDeleteAsset_EqualCKeval_TCC1-1 nil 3592823409
@@ -255,8 +255,651 @@
    nil))
  (IMP_CK_addMandatory_EqualCKeval_TCC1 0
   (IMP_CK_addMandatory_EqualCKeval_TCC1-1 nil 3595085864
-   ("" (mapped-axiom-tcc) nil nil) nil nil))
+   ("" (skolem 1 (fm1 fm2 am ck p f))
+    (("" (flatten)
+      (("" (expand syntaxAddMandatory)
+        (("" (flatten)
+          (("" (expand extend)
+            (("" (bddsimp)
+              (("" (skolem 2 c)
+                (("" (flatten)
+                  ((""
+                    (instantiate 2
+                     "IF (c(p)) THEN add(f,c) ELSE c ENDIF")
+                    (("" (case "c(p)")
+                      (("1" (assert)
+                        (("1"
+                          (expand* addMandatory semantics getFeatures
+                           map eval evalCK assetsCK satImpConsts
+                           satExpConsts add member)
+                          (("1" (flatten)
+                            (("1" (replace -5)
+                              (("1"
+                                (replace -6)
+                                (("1"
+                                  (assert)
+                                  (("1"
+                                    (bddsimp)
+                                    (("1"
+                                      (decompose-equality 2)
+                                      (("1"
+                                        (bddsimp)
+                                        (("1"
+                                          (skolem -1 an)
+                                          (("1"
+                                            (flatten)
+                                            (("1"
+                                              (instantiate 1 an)
+                                              (("1"
+                                                (assert)
+                                                (("1"
+                                                  (skolem -1 item)
+                                                  (("1"
+                                                    (flatten)
+                                                    (("1"
+                                                      (instantiate
+                                                       1
+                                                       item)
+                                                      (("1"
+                                                        (assert)
+                                                        (("1"
+                                                          (postpone)
+                                                          nil
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil)
+                                         ("2"
+                                          (skolem -1 an)
+                                          (("2"
+                                            (flatten)
+                                            (("2"
+                                              (instantiate 1 an)
+                                              (("2"
+                                                (assert)
+                                                (("2"
+                                                  (postpone)
+                                                  nil
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil)
+                                     ("2"
+                                      (skolem 2 f1)
+                                      (("2"
+                                        (flatten)
+                                        (("2"
+                                          (bddsimp)
+                                          (("1"
+                                            (replace -9 2 RL)
+                                            (("1"
+                                              (expand satisfies +)
+                                              (("1"
+                                                (expand satisfies +)
+                                                (("1"
+                                                  (flatten)
+                                                  (("1"
+                                                    (skolem -10 n1)
+                                                    (("1"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (postpone)
+                                                        nil
+                                                        nil)
+                                                       ("2"
+                                                        (instantiate
+                                                         -7
+                                                         f)
+                                                        (("2"
+                                                          (assert)
+                                                          nil
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("2" (postpone) nil nil)
+                                           ("3" (postpone) nil nil))
+                                          nil))
+                                        nil))
+                                      nil)
+                                     ("3" (postpone) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil)
+                       ("2" (assert)
+                        (("2"
+                          (expand* addMandatory semantics getFeatures)
+                          (("2" (expand* satImpConsts satExpConsts)
+                            (("2" (flatten)
+                              (("2"
+                                (replace -4)
+                                (("2"
+                                  (replace -5)
+                                  (("2"
+                                    (expand* add member)
+                                    (("2"
+                                      (expand* wfFM wfTree wfFormulae)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (skolem 3 f1)
+                                          (("1"
+                                            (flatten)
+                                            (("1"
+                                              (bddsimp)
+                                              (("1"
+                                                (replace -8)
+                                                (("1"
+                                                  (replace -8 3 RL)
+                                                  (("1"
+                                                    (expand
+                                                     satisfies
+                                                     +)
+                                                    (("1"
+                                                      (expand
+                                                       satisfies
+                                                       +)
+                                                      (("1"
+                                                        (flatten)
+                                                        (("1"
+                                                          (skolem
+                                                           -9
+                                                           n1)
+                                                          (("1"
+                                                            (instantiate
+                                                             -6
+                                                             f)
+                                                            (("1"
+                                                              (flatten)
+                                                              (("1"
+                                                                (assert)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil)
+                                               ("2"
+                                                (replace -8 3 RL)
+                                                (("2"
+                                                  (expand satisfies +)
+                                                  (("2"
+                                                    (postpone)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil)
+                                               ("3"
+                                                (instantiate -7 f1)
+                                                (("3"
+                                                  (assert)
+                                                  nil
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil)
+                                         ("2"
+                                          (skolem 3 n)
+                                          (("2"
+                                            (flatten)
+                                            (("2"
+                                              (instantiate -6 n)
+                                              (("2" (assert) nil nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil nil))
  (IMP_CK_addOptional_EqualCKeval_TCC1 0
   (IMP_CK_addOptional_EqualCKeval_TCC1-1 nil 3595085864
-   ("" (mapped-axiom-tcc) nil nil) nil nil)))
+   ("" (skolem 1 (fm1 fm2 am1 am2 ck1 ck2 p f its pairs))
+    (("" (expand syntaxAddOptional)
+      (("" (expand addOptional)
+        (("" (flatten)
+          (("" (expand extend)
+            (("" (bddsimp)
+              (("" (expand items)
+                (("" (skolem 3 c)
+                  (("" (flatten)
+                    (("" (bddsimp)
+                      (("1" (expand getFeatures)
+                        (("1" (expand itsFeature)
+                          (("1" (expand getExp)
+                            (("1" (expand genFE)
+                              (("1"
+                                (instantiate -10 c)
+                                (("1"
+                                  (expand semantics +)
+                                  (("1"
+                                    (expand* map eval evalCK assetsCK)
+                                    (("1"
+                                      (expand* union singleton member)
+                                      (("1"
+                                        (replace -7)
+                                        (("1"
+                                          (replace -8)
+                                          (("1"
+                                            (assert)
+                                            (("1"
+                                              (decompose-equality 3)
+                                              (("1"
+                                                (bddsimp)
+                                                (("1"
+                                                  (skolem -1 an)
+                                                  (("1"
+                                                    (flatten)
+                                                    (("1"
+                                                      (instantiate
+                                                       1
+                                                       an)
+                                                      (("1"
+                                                        (assert)
+                                                        (("1"
+                                                          (skolem
+                                                           -1
+                                                           item)
+                                                          (("1"
+                                                            (flatten)
+                                                            (("1"
+                                                              (instantiate
+                                                               1
+                                                               item)
+                                                              (("1"
+                                                                (assert)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (skolem -1 an)
+                                                  (("2"
+                                                    (flatten)
+                                                    (("2"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (instantiate
+                                                         1
+                                                         an)
+                                                        (("1"
+                                                          (assert)
+                                                          (("1"
+                                                            (skolem
+                                                             -1
+                                                             item)
+                                                            (("1"
+                                                              (bddsimp)
+                                                              (("1"
+                                                                (instantiate
+                                                                 1
+                                                                 item)
+                                                                (("1"
+                                                                  (assert)
+                                                                  nil
+                                                                  nil))
+                                                                nil)
+                                                               ("2"
+                                                                (instantiate
+                                                                 -13
+                                                                 item)
+                                                                (("2"
+                                                                  (assert)
+                                                                  (("2"
+                                                                    (expand
+                                                                     semantics
+                                                                     -14)
+                                                                    (("2"
+                                                                      (expand
+                                                                       satisfies
+                                                                       -13)
+                                                                      (("2"
+                                                                        (skolem
+                                                                         -13
+                                                                         n1)
+                                                                        (("2"
+                                                                          (expand
+                                                                           satImpConsts)
+                                                                          (("2"
+                                                                            (flatten)
+                                                                            (("2"
+                                                                              (instantiate
+                                                                               -15
+                                                                               f)
+                                                                              (("2"
+                                                                                (assert)
+                                                                                nil
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (expand wfCK)
+                                                        (("2"
+                                                          (flatten)
+                                                          (("2"
+                                                            (instantiate
+                                                             -3
+                                                             c)
+                                                            (("2"
+                                                              (assert)
+                                                              (("2"
+                                                                (expand
+                                                                 dom)
+                                                                (("2"
+                                                                  (instantiate
+                                                                   -11
+                                                                   an)
+                                                                  (("2"
+                                                                    (bddsimp)
+                                                                    (("1"
+                                                                      (expand*
+                                                                       subset?
+                                                                       member)
+                                                                      (("1"
+                                                                        (skolem
+                                                                         -1
+                                                                         item)
+                                                                        (("1"
+                                                                          (flatten)
+                                                                          (("1"
+                                                                            (expand
+                                                                             eval
+                                                                             -5)
+                                                                            (("1"
+                                                                              (expand
+                                                                               assetsCK)
+                                                                              (("1"
+                                                                                (expand
+                                                                                 evalCK)
+                                                                                (("1"
+                                                                                  (instantiate
+                                                                                   -5
+                                                                                   an)
+                                                                                  (("1"
+                                                                                    (bddsimp)
+                                                                                    (("1"
+                                                                                      (instantiate
+                                                                                       2
+                                                                                       item)
+                                                                                      (("1"
+                                                                                        (assert)
+                                                                                        nil
+                                                                                        nil))
+                                                                                      nil)
+                                                                                     ("2"
+                                                                                      (instantiate
+                                                                                       -12
+                                                                                       item)
+                                                                                      (("2"
+                                                                                        (assert)
+                                                                                        (("2"
+                                                                                          (expand
+                                                                                           satisfies
+                                                                                           -12)
+                                                                                          (("2"
+                                                                                            (skolem
+                                                                                             -12
+                                                                                             n1)
+                                                                                            (("2"
+                                                                                              (flatten)
+                                                                                              (("2"
+                                                                                                (expand
+                                                                                                 semantics)
+                                                                                                (("2"
+                                                                                                  (expand
+                                                                                                   satImpConsts)
+                                                                                                  (("2"
+                                                                                                    (flatten)
+                                                                                                    (("2"
+                                                                                                      (instantiate
+                                                                                                       -14
+                                                                                                       f)
+                                                                                                      (("2"
+                                                                                                        (assert)
+                                                                                                        nil
+                                                                                                        nil))
+                                                                                                      nil))
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil)
+                                                                     ("2"
+                                                                      (instantiate
+                                                                       3
+                                                                       x!1)
+                                                                      (("2"
+                                                                        (propax)
+                                                                        nil
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil)
+                       ("2" (expand semantics)
+                        (("2" (expand* satImpConsts satExpConsts)
+                          (("2" (flatten)
+                            (("2" (replace -4)
+                              (("2"
+                                (replace -6)
+                                (("2"
+                                  (expand* add member)
+                                  (("2"
+                                    (bddsimp)
+                                    (("1"
+                                      (skolem 3 f1)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (bddsimp)
+                                          (("1"
+                                            (expand getFeatures)
+                                            (("1"
+                                              (expand wfFM)
+                                              (("1"
+                                                (expand*
+                                                 wfTree
+                                                 wfFormulae)
+                                                (("1"
+                                                  (replace -13 3 RL)
+                                                  (("1"
+                                                    (expand
+                                                     satisfies
+                                                     3)
+                                                    (("1"
+                                                      (expand
+                                                       satisfies
+                                                       3)
+                                                      (("1"
+                                                        (flatten)
+                                                        (("1"
+                                                          (skolem
+                                                           -14
+                                                           n1)
+                                                          (("1"
+                                                            (flatten)
+                                                            (("1"
+                                                              (instantiate
+                                                               -11
+                                                               f)
+                                                              (("1"
+                                                                (assert)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("2"
+                                            (instantiate -12 f1)
+                                            (("2" (assert) nil nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil)
+                                     ("2"
+                                      (skolem 3 n)
+                                      (("2"
+                                        (flatten)
+                                        (("2"
+                                          (instantiate -11 n)
+                                          (("2" (assert) nil nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((syntaxAddOptional const-decl "bool" CK nil)
+    (itsFeature const-decl "bool" CK nil)
+    (genFE const-decl "Formula_" FeatureModelSemantics nil)
+    (Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (member const-decl "bool" sets nil)
+    (union const-decl "set" sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (subset? const-decl "bool" sets nil)
+    (dom const-decl "set[S]" maps nil)
+    (wfCK const-decl "bool" ConfigurationKnowledge nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
+          ConfigurationKnowledge nil)
+    (getExp const-decl "Formula_" ConfigurationKnowledge nil)
+    (getFeatures const-decl "set[Name]" FeatureModelSemantics nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (add const-decl "(nonempty?)" sets nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (wfTree const-decl "bool" FeatureModel nil)
+    (wfFormulae const-decl "boolean" FormulaTheory nil)
+    (items const-decl "set[Item]" ConfigurationKnowledge nil)
+    (extend const-decl "R" extend nil)
+    (addOptional const-decl "bool" FeatureModelSemantics nil))
+   nil)))
 
