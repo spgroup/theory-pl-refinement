@@ -13,14 +13,14 @@ FeatureModelSemantics: THEORY
   genFE(f:Name):Formula_ = NAME_FORMULA(f);
 
   % configuration only contain names from the feature model
-  satImpConsts(fm: WFM, c:Configuration): bool =
+  satImpConsts(fm: FM, c:Configuration): bool =
     FORALL (n: Name): c(n) => features(fm)(n)
 
-  satExpConsts(fm: WFM, c:Configuration): bool =
+  satExpConsts(fm: FM, c:Configuration): bool =
     FORALL (f: Formula_): formulae(fm)(f) => satisfies(f,c)
 
   % semantics of a feature model
-  semantics(fm: WFM): set[Configuration] =
+  semantics(fm: FM): set[Configuration] =
     {c:Configuration | satImpConsts(fm,c) AND satExpConsts(fm,c)}
 
   % refinement notion for feature models
