@@ -44,16 +44,6 @@ IMPORTING SPLrefinement
    % This lemma is useful for the transitivity theorem because we need to choose an arbitrary product and then instantiate this product
    % in a larger set of products.
      productBelongsToLargerSet: LEMMA FORALL (p:set[Asset]),(pl:PL),(s,t:set[Conf]) : subset?(s,t) =>  (prod(pl,s)(p) => prod(pl,t)(p))
-   % Lemma to establish relation between two relations. The first one is a particular case of the second one. 
-     particularCase: LEMMA FORALL f,pl1,pl2:  
-                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
-                                    => 
-                                    (strongPartialRefinement(pl1,pl2,d(f)) => weakPartialRefinement(pl1,pl2,f))
-
-     particularCase2: LEMMA FORALL f,pl1,pl2:  
-                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
-                                    => 
-                                    (weakPartialRefinement(pl1,pl2,f) => strongPartialRefinement(pl1,pl2,d(f)))  
 
    % THEOREMS
    % Theorem <refinementSameConfig is reflexive>
@@ -69,7 +59,7 @@ IMPORTING SPLrefinement
                                       )
 
 
-   % Theorem <refinementFun is reflexive>no
+   % Theorem <refinementFun is reflexive>
     weakPartRefReflexive: THEOREM (FORALL (x:PL),(f:[Conf -> Conf]) : (d(f) = r(f)) => weakPartialRefinement(x,x,f))
    % Theorem <refinementFun is transitive>
     weakPartRefTransitive: THEOREM (FORALL (pl1,pl2,pl3:PL), (f,g:[Conf->Conf]) : 
@@ -84,5 +74,15 @@ IMPORTING SPLrefinement
                                           )
                                           => weakPartialRefinement(pl1,pl3,g o f)
                                )
+   % Theorems to establish relation between two relations. The first one is a particular case of the second one. 
+     particularCase: LEMMA FORALL f,pl1,pl2:  
+                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
+                                    => 
+                                    (strongPartialRefinement(pl1,pl2,d(f)) => weakPartialRefinement(pl1,pl2,f))
+
+     particularCase2: LEMMA FORALL f,pl1,pl2:  
+                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
+                                    => 
+                                    (weakPartialRefinement(pl1,pl2,f) => strongPartialRefinement(pl1,pl2,d(f)))
 
 END SPLpartialrefinement
