@@ -96,14 +96,17 @@ IMPORTING SPLrefinement
 
      
    % Theorems to establish relation between two relations. The first one is a particular case of the second one. 
-     particularCase: THEOREM FORALL f,pl1,pl2:  
+     strongPartCaseWeak: THEOREM FORALL f,pl1,pl2:  
                                     (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
                                     => 
                                     (strongPartialRefinement(pl1,pl2,d(f)) => weakPartialRefinement(pl1,pl2,f))
-
-     particularCase2: THEOREM FORALL f,pl1,pl2:  
+      %obs.: this theorem is not proved yet, because it might not be true
+     strongPartCaseWeak2: THEOREM FORALL f,pl1,pl2:  
                                     (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
                                     => 
                                     (weakPartialRefinement(pl1,pl2,f) => strongPartialRefinement(pl1,pl2,d(f)))
+
+     eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t : 
+                                (s = {|F(pl1)|} AND t = {|F(pl2)|}) => (plRefinement(pl1,pl2) <=> weakPartialRefinementAlt(pl1,pl2,s,t)) 
 
 END SPLpartialrefinement
