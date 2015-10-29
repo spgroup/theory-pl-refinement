@@ -1,0 +1,88 @@
+SPLpartialrefinement: THEORY
+BEGIN
+
+IMPORTING SPLrefinement
+
+% Partial SPL Refinement
+
+   % VARIABLES
+    c: VAR Conf
+    f,g: VAR [Conf -> Conf]
+    s,t,u: VAR set[Conf]
+    fm: VAR FM
+    pl, pl1, pl2: VAR PL
+    p, p1, p2: VAR set[Asset]
+
+   % FUNCTIONS
+    prod(pl,c) : set[Asset] =  ( ([| K(pl) |] (A(pl))) (c) )
+    prod(pl,s) : set[set[Asset]] = {p | EXISTS c : ({|F(pl)|}(c)) AND member(c,s) AND  p = prod(pl,c)} 
+    
+    d(f) : set[Conf] = {c:domain(f) | true}
+    cd(f): set[Conf] = {c:range(f)  | true}
+    r(f) : set[Conf] = {c2:range(f)  | EXISTS (c:domain(f)) : f(c) = c2}
+   
+   % RELATIONS
+   % Partial Refinement Relation - this definition requires that the configuration does not change
+    strongPartialRefinement(pl1,pl2,s) : bool = 
+     FORALL c: (s)(c) =>
+	  (
+              prod(pl1,c)
+	      |- 
+	      prod(pl2,c)
+          )
+
+   % Partial Refinement Relation - this definition considers a function that maps configurations.
+    weakPartialRefinement(pl1,pl2:PL,f:{f | subset?(d(f),{|F(pl1)|}) AND subset?(r(f),{|F(pl2)|})}) : bool = 
+    	FORALL p1 : prod(pl1,d(f))(p1) => 
+            (
+               EXISTS p2 : prod(pl2,r(f))(p2) AND (p1 |- p2)
+            )        
+  
+   % LEMMAS 
+   % Lemma composite function domain
+     domainSetComposite: LEMMA FORALL f,g : d(f) = d(g o f)
+   % This lemma is useful for the transitivity theorem because we need to choose an arbitrary product and then instantiate this product
+   % in a larger set of products.
+     productBelongsToLargerSet: LEMMA FORALL (p:set[Asset]),(pl:PL),(s,t:set[Conf]) : subset?(s,t) =>  (prod(pl,s)(p) => prod(pl,t)(p))
+   % Lemma to establish relation between two relations. The first one is a particular case of the second one. 
+     particularCase: LEMMA FORALL f,pl1,pl2:  
+                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
+                                    => 
+                                    (strongPartialRefinement(pl1,pl2,d(f)) => weakPartialRefinement(pl1,pl2,f))
+
+     particularCase2: LEMMA FORALL f,pl1,pl2:  
+                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
+                                    => 
+                                    (weakPartialRefinement(pl1,pl2,f) => strongPartialRefinement(pl1,pl2,d(f)))  
+
+   % THEOREMS
+   % Theorem <refinementSameConfig is reflexive>
+    strongPartRefReflexive: THEOREM FORALL (x:PL),(s:set[Conf]): strongPartialRefinement(x,x,s)
+   % Theorem <refinementSameConfig is transitive>
+    strongPartRefTransitive: THEOREM (FORALL (pl1,pl2,pl3:PL),(s,t:set[Conf]) : 
+                                              (
+                                                 strongPartialRefinement(pl1,pl2,s) 
+                                                AND 
+                                                 strongPartialRefinement(pl2,pl3,t)
+                                              ) 
+                                              => strongPartialRefinement(pl1,pl3,intersection(s,t))
+                                      )
+
+
+   % Theorem <refinementFun is reflexive>no
+    weakPartRefReflexive: THEOREM (FORALL (x:PL),(f:[Conf -> Conf]) : (d(f) = r(f)) => weakPartialRefinement(x,x,f))
+   % Theorem <refinementFun is transitive>
+    weakPartRefTransitive: THEOREM (FORALL (pl1,pl2,pl3:PL), (f,g:[Conf->Conf]) : 
+                                         (
+                                            weakPartialRefinement(pl1,pl2,f) 
+                                           AND 
+                                            weakPartialRefinement(pl2,pl3,g) 
+                                           AND 
+                                            r(g) = r(g o f) 
+                                           AND 
+                                            subset?(r(f),d(g))
+                                          )
+                                          => weakPartialRefinement(pl1,pl3,g o f)
+                               )
+
+END SPLpartialrefinement
