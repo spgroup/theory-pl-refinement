@@ -36,7 +36,14 @@ IMPORTING SPLrefinement
     	FORALL p1 : prod(pl1,d(f))(p1) => 
             (
                EXISTS p2 : prod(pl2,r(f))(p2) AND (p1 |- p2)
-            )        
+            ) 
+
+    % Partial Refinement Relation - this definition has two indexes.
+    weakPartialRefinementAlt(pl1,pl2,s,t) : bool =  
+         FORALL p1 : prod(pl1,s)(p1) => 
+            (
+               EXISTS p2 : prod(pl2,t)(p2) AND (p1 |- p2)
+            )       
   
    % LEMMAS 
    % Lemma composite function domain
@@ -75,12 +82,12 @@ IMPORTING SPLrefinement
                                           => weakPartialRefinement(pl1,pl3,g o f)
                                )
    % Theorems to establish relation between two relations. The first one is a particular case of the second one. 
-     particularCase: LEMMA FORALL f,pl1,pl2:  
+     particularCase: THEOREM FORALL f,pl1,pl2:  
                                     (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
                                     => 
                                     (strongPartialRefinement(pl1,pl2,d(f)) => weakPartialRefinement(pl1,pl2,f))
 
-     particularCase2: LEMMA FORALL f,pl1,pl2:  
+     particularCase2: THEOREM FORALL f,pl1,pl2:  
                                     (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
                                     => 
                                     (weakPartialRefinement(pl1,pl2,f) => strongPartialRefinement(pl1,pl2,d(f)))
