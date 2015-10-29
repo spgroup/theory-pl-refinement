@@ -53,9 +53,9 @@ IMPORTING SPLrefinement
      productBelongsToLargerSet: LEMMA FORALL (p:set[Asset]),(pl:PL),(s,t:set[Conf]) : subset?(s,t) =>  (prod(pl,s)(p) => prod(pl,t)(p))
 
    % THEOREMS
-   % Theorem <refinementSameConfig is reflexive>
+   % Theorem <strong partial refinement is reflexive>
     strongPartRefReflexive: THEOREM FORALL (x:PL),(s:set[Conf]): strongPartialRefinement(x,x,s)
-   % Theorem <refinementSameConfig is transitive>
+   % Theorem <strong partial refinement is transitive>
     strongPartRefTransitive: THEOREM (FORALL (pl1,pl2,pl3:PL),(s,t:set[Conf]) : 
                                               (
                                                  strongPartialRefinement(pl1,pl2,s) 
@@ -66,9 +66,9 @@ IMPORTING SPLrefinement
                                       )
 
 
-   % Theorem <refinementFun is reflexive>
+   % Theorem <weak partial refinement is reflexive>
     weakPartRefReflexive: THEOREM (FORALL (x:PL),(f:[Conf -> Conf]) : (d(f) = r(f)) => weakPartialRefinement(x,x,f))
-   % Theorem <refinementFun is transitive>
+   % Theorem <weak partial refinement is transitive>
     weakPartRefTransitive: THEOREM (FORALL (pl1,pl2,pl3:PL), (f,g:[Conf->Conf]) : 
                                          (
                                             weakPartialRefinement(pl1,pl2,f) 
@@ -81,6 +81,20 @@ IMPORTING SPLrefinement
                                           )
                                           => weakPartialRefinement(pl1,pl3,g o f)
                                )
+
+    % Theorem <weak partial refinement is reflexive>
+    weakPartRefAltReflexive: THEOREM (FORALL (x:PL),(s:set[Conf]) : weakPartialRefinementAlt(x,x,s,s))
+   % Theorem <weak partial refinement is transitive>
+    weakPartRefAltTransitive: THEOREM (FORALL (pl1,pl2,pl3:PL), (s,t,u:set[Conf]) : 
+                                         (
+                                            weakPartialRefinementAlt(pl1,pl2,s,t) 
+                                           AND 
+                                            weakPartialRefinementAlt(pl2,pl3,t,u)  
+                                          )
+                                          => weakPartialRefinementAlt(pl1,pl3,s,u)
+                               )     
+
+     
    % Theorems to establish relation between two relations. The first one is a particular case of the second one. 
      particularCase: THEOREM FORALL f,pl1,pl2:  
                                     (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
