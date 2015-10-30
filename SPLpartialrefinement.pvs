@@ -5,7 +5,10 @@ IMPORTING SPLrefinement
 
 % Partial SPL Refinement
 
-   % VARIABLES
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+
     c: VAR Conf
     f,g: VAR [Conf -> Conf]
     s,t,u: VAR set[Conf]
@@ -13,7 +16,10 @@ IMPORTING SPLrefinement
     pl, pl1, pl2, pl3: VAR PL
     p, p1, p2: VAR finite_sets[Asset].finite_set
 
-   % FUNCTIONS
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------AUXILIAR FUNCTIONS--------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+
     prod(pl,c) : finite_sets[Asset].finite_set =  ( ([| K(pl) |] (A(pl))) (c) )
     prod(pl,s) : finite_sets[finite_sets[Asset].finite_set].finite_set  = 
                       {p | EXISTS c : ({|F(pl)|}(c)) AND member(c,s) AND  p = prod(pl,c)} 
@@ -22,7 +28,10 @@ IMPORTING SPLrefinement
     cd(f): set[Conf] = {c:range(f)  | true}
     r(f) : set[Conf] = {c2:range(f)  | EXISTS (c:domain(f)) : f(c) = c2}
    
-   % RELATIONS
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------RELATION DEF--------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+
    % Partial Refinement Relation - this definition requires that the configuration does not change
     strongPartialRefinement(pl1,pl2,s) : bool = 
      FORALL c: (s)(c) =>
@@ -46,7 +55,10 @@ IMPORTING SPLrefinement
                EXISTS p2 : prod(pl2,t)(p2) AND (p1 |- p2)
             )       
 
-   % THEOREMS
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------PROPERTIES----------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+   
    % Theorem <strong partial refinement is reflexive>
     strongPartRefReflexive: THEOREM FORALL pl,s: strongPartialRefinement(pl,pl,s)
    % Theorem <strong partial refinement is transitive>
@@ -61,7 +73,7 @@ IMPORTING SPLrefinement
 
 
    % Theorem <weak partial refinement is reflexive>
-    weakPartRefReflexive: THEOREM (FORALL pl,f : (d(f) = r(f)) => weakPartialRefinement(pl,pl,f))
+    weakPartRefReflexive: THEOREM (FORALL pl,f : (subset?(d(f),r(f))) => weakPartialRefinement(pl,pl,f))
    % Theorem <weak partial refinement is transitive>
     weakPartRefTransitive: THEOREM (FORALL pl1, pl2, pl3, f, g : 
                                          (
@@ -88,8 +100,28 @@ IMPORTING SPLrefinement
                                           => weakPartialRefinementAlt(pl1,pl3,s,u)
                                )     
 
-     
-    % Theorems to establish relation between the definitions previously declared.  
+    % Theorem <FM Equivalence compositionality>
+    fmEqCompWeakDef: THEOREM
+    FORALL(pl,fm,f):
+    ( 
+      (equivalentFMs(F,fm) AND subset?(d(f),r(f)))
+     => 
+        weakPartialRefinement(pl,pl2,f) AND wfPL(pl2)
+    )
+    WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
+
+    % Theorem <FM Refinement Compositionality>
+     fmRefCompWeakDef: THEOREM
+    FORALL(pl,fm,f):
+    ( 
+       ((F |= fm) AND subset?(d(f),r(f)))
+     => 
+        weakPartialRefinement(pl,pl2,f)
+    )
+    WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
+    
+
+    % Theorem <correspondence between strong partial ref and weak partial ref> 
     strongPartCaseWeak: THEOREM FORALL f,pl1,pl2:  
                                     (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
                                     => 
