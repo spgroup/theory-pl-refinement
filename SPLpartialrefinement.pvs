@@ -13,6 +13,8 @@ IMPORTING SPLrefinement
     f,g: VAR [Conf -> Conf]
     s,t,u: VAR set[Conf]
     fm: VAR FM
+    am: VAR AM
+    ck: VAR CK
     pl, pl1, pl2, pl3: VAR PL
     p, p1, p2: VAR finite_sets[Asset].finite_set
 
@@ -119,7 +121,26 @@ IMPORTING SPLrefinement
         weakPartialRefinement(pl,pl2,f)
     )
     WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
-    
+
+    % Theorem <AM Refinement Compositionality>
+     amRefCompWeakDef: THEOREM
+    FORALL(pl,am,f):
+    ( 
+      ( |>(A,am) and subset?(d(f),r(f)))
+      => 
+        weakPartialRefinement(pl,pl2,f) AND wfPL(pl2)
+    )
+    WHERE A=A(pl),pl2=(# F := F(pl), A := am, K := K(pl) #)
+
+    % Theorem <CK Equivalence Compositionality>
+    ckEqCompWeakDef: THEOREM
+    FORALL(pl,ck,f):
+    ( 
+      (equivalentCKs(K,ck) AND subset?(d(f),r(f)))
+     => 
+        weakPartialRefinement(pl,pl2,f) AND wfPL(pl2)
+    )
+    WHERE K=K(pl),pl2=(# F := F(pl), A := A(pl), K := ck #)
 
     % Theorem <correspondence between strong partial ref and weak partial ref> 
     strongPartCaseWeak: THEOREM FORALL f,pl1,pl2:  
