@@ -75,7 +75,7 @@ IMPORTING SPLrefinement
 
 
    % Theorem <weak partial refinement is reflexive>
-    weakPartRefReflexive: THEOREM (FORALL pl,f : (subset?(d(f),r(f))) => weakPartialRefinement(pl,pl,f))
+    weakPartRefReflexive: THEOREM (FORALL pl,f : subset?(d(f),r(f)) => weakPartialRefinement(pl,pl,f))
    % Theorem <weak partial refinement is transitive>
     weakPartRefTransitive: THEOREM (FORALL pl1, pl2, pl3, f, g : 
                                          (
@@ -102,7 +102,7 @@ IMPORTING SPLrefinement
                                           => weakPartialRefinementAlt(pl1,pl3,s,u)
                                )     
 
-    % Theorem <FM Equivalence compositionality>
+    % Theorem <FM Equivalence compositionality - weak definition>
     fmEqCompWeakDef: THEOREM
     FORALL(pl,fm,f):
     ( 
@@ -112,7 +112,17 @@ IMPORTING SPLrefinement
     )
     WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
 
-    % Theorem <FM Refinement Compositionality>
+    % Theorem <FM Equivalence compositionality - strong definition>
+    fmEqCompStrongDef: THEOREM
+    FORALL(pl,fm,s):
+    ( 
+      equivalentFMs(F,fm)
+     => 
+        strongPartialRefinement(pl,pl2,s) AND wfPL(pl2)
+    )
+    WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
+
+    % Theorem <FM Refinement Compositionality - Weak Definition>
      fmRefCompWeakDef: THEOREM
     FORALL(pl,fm,f):
     ( 
@@ -122,7 +132,17 @@ IMPORTING SPLrefinement
     )
     WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
 
-    % Theorem <AM Refinement Compositionality>
+   % Theorem <FM Refinement Compositionality - Strong Definition>
+     fmRefCompStrongDef: THEOREM
+    FORALL(pl,fm,s):
+    ( 
+       (F |= fm)
+     => 
+        strongPartialRefinement(pl,pl2,s)
+    )
+    WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
+
+    % Theorem <AM Refinement Compositionality - Weak Definition>
      amRefCompWeakDef: THEOREM
     FORALL(pl,am,f):
     ( 
@@ -132,7 +152,17 @@ IMPORTING SPLrefinement
     )
     WHERE A=A(pl),pl2=(# F := F(pl), A := am, K := K(pl) #)
 
-    % Theorem <CK Equivalence Compositionality>
+     % Theorem <AM Refinement Compositionality - Strong Definition>
+     amRefCompStrongDef: THEOREM
+    FORALL(pl,am,s):
+    ( 
+      ( |>(A,am) AND subset?(s,{|F(pl)|})) 
+      => 
+        strongPartialRefinement(pl,pl2,s) AND wfPL(pl2)
+    )
+    WHERE A=A(pl),pl2=(# F := F(pl), A := am, K := K(pl) #)
+    
+    % Theorem <CK Equivalence Compositionality - Weak Definition>
     ckEqCompWeakDef: THEOREM
     FORALL(pl,ck,f):
     ( 
@@ -142,6 +172,16 @@ IMPORTING SPLrefinement
     )
     WHERE K=K(pl),pl2=(# F := F(pl), A := A(pl), K := ck #)
 
+     % Theorem <CK Equivalence Compositionality - Strong Definition>
+    ckEqCompStrongDef: THEOREM
+    FORALL(pl,ck,s):
+    ( 
+      equivalentCKs(K,ck)
+     => 
+        strongPartialRefinement(pl,pl2,s) AND wfPL(pl2)
+    )
+    WHERE K=K(pl),pl2=(# F := F(pl), A := A(pl), K := ck #)
+   
     % Theorem <correspondence between strong partial ref and weak partial ref> 
     strongPartCaseWeak: THEOREM FORALL f,pl1,pl2:  
                                     (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
