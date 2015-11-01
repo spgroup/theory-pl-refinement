@@ -1,9 +1,6 @@
 (SPLpartialrefinement
  (prod_TCC1 0
   (prod_TCC1-1 nil 3655135094 ("" (subtype-tcc) nil nil) nil nil))
- (strongPartRefReflexive_TCC1 0
-  (strongPartRefReflexive_TCC1-1 nil 3655224963
-   ("" (subtype-tcc) nil nil) nil nil))
  (strongPartRefReflexive 0
   (strongPartRefReflexive-1 nil 3655065337
    ("" (skolem 1 (x s))
@@ -41,15 +38,6 @@
     (strongPartialRefinement const-decl "bool" SPLpartialrefinement
      nil))
    shostak))
- (strongPartRefTransitive_TCC1 0
-  (strongPartRefTransitive_TCC1-1 nil 3655224963
-   ("" (subtype-tcc) nil nil) nil nil))
- (strongPartRefTransitive_TCC2 0
-  (strongPartRefTransitive_TCC2-1 nil 3655224963
-   ("" (subtype-tcc) nil nil) nil nil))
- (strongPartRefTransitive_TCC3 0
-  (strongPartRefTransitive_TCC3-1 nil 3655224963
-   ("" (subtype-tcc) nil nil) nil nil))
  (strongPartRefTransitive 0
   (strongPartRefTransitive-1 nil 3655065416
    ("" (skolem 1 (pl1 pl2 pl3 s t))
@@ -363,6 +351,76 @@
     (transitive? const-decl "bool" relations nil)
     (assetRefinement formula-decl nil SPLrefinement nil))
    shostak))
+ (weakPartRefAltTransitive2 0
+  (weakPartRefAltTransitive2-1 nil 3655401731
+   ("" (skolem 1 (pl1 pl2 pl3 s t t2 u))
+    (("" (bddsimp)
+      (("" (expand* weakPartialRefinementAlt)
+        (("" (skolem 1 p1)
+          (("" (inst -1 p1)
+            (("" (bddsimp)
+              (("" (skolem -2 p2)
+                (("" (expand* subset?)
+                  (("" (inst -3 p2)
+                    (("" (bddsimp)
+                      (("1" (skolem -4 p3)
+                        (("1" (inst 1 p3)
+                          (("1" (use assetRefinement)
+                            (("1" (expand preorder?)
+                              (("1"
+                                (expand transitive?)
+                                (("1"
+                                  (flatten)
+                                  (("1"
+                                    (inst -2 p1 p2 p3)
+                                    (("1" (bddsimp) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil)
+                       ("2" (expand prod)
+                        (("2" (skolem -2 c2)
+                          (("2" (inst -4 c2)
+                            (("2" (expand member)
+                              (("2"
+                                (inst 1 c2)
+                                (("2" (bddsimp) nil nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((subset? const-decl "bool" sets nil)
+    (preorder? const-decl "bool" orders nil)
+    (transitive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (member const-decl "bool" sets nil)
+    (Conf type-decl nil SPLrefinement nil)
+    (prod const-decl
+     "finite_sets[finite_sets[Asset].finite_set].finite_set"
+     SPLpartialrefinement nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset type-decl nil SPLrefinement nil)
+    (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
+     nil))
+   shostak))
  (fmEqCompWeakDef_TCC1 0
   (fmEqCompWeakDef_TCC1-1 nil 3655204800 ("" (subtype-tcc) nil nil) nil
    nil))
@@ -443,9 +501,6 @@
    shostak))
  (fmEqCompStrongDef_TCC1 0
   (fmEqCompStrongDef_TCC1-1 nil 3655222563 ("" (subtype-tcc) nil nil)
-   nil nil))
- (fmEqCompStrongDef_TCC2 0
-  (fmEqCompStrongDef_TCC2-1 nil 3655224963 ("" (subtype-tcc) nil nil)
    nil nil))
  (fmEqCompStrongDef 0
   (fmEqCompStrongDef-1 nil 3655222564
@@ -593,9 +648,6 @@
    shostak))
  (fmRefCompStrongDef_TCC1 0
   (fmRefCompStrongDef_TCC1-1 nil 3655223412 ("" (subtype-tcc) nil nil)
-   nil nil))
- (fmRefCompStrongDef_TCC2 0
-  (fmRefCompStrongDef_TCC2-1 nil 3655224963 ("" (subtype-tcc) nil nil)
    nil nil))
  (fmRefCompStrongDef 0
   (fmRefCompStrongDef-1 nil 3655223413
@@ -773,9 +825,6 @@
  (amRefCompStrongDef_TCC1 0
   (amRefCompStrongDef_TCC1-1 nil 3655223727 ("" (subtype-tcc) nil nil)
    nil nil))
- (amRefCompStrongDef_TCC2 0
-  (amRefCompStrongDef_TCC2-1 nil 3655226219 ("" (subtype-tcc) nil nil)
-   nil nil))
  (amRefCompStrongDef 0
   (amRefCompStrongDef-1 nil 3655223728
    ("" (skolem 1 (pl am s))
@@ -952,9 +1001,6 @@
  (ckEqCompStrongDef_TCC1 0
   (ckEqCompStrongDef_TCC1-1 nil 3655226870 ("" (subtype-tcc) nil nil)
    nil nil))
- (ckEqCompStrongDef_TCC2 0
-  (ckEqCompStrongDef_TCC2-1 nil 3655226870 ("" (subtype-tcc) nil nil)
-   nil nil))
  (ckEqCompStrongDef 0
   (ckEqCompStrongDef-1 nil 3655226871
    ("" (skolem 1 (pl ck s))
@@ -1028,9 +1074,6 @@
    shostak))
  (strongPartCaseWeak_TCC1 0
   (strongPartCaseWeak_TCC1-1 nil 3655111808 ("" (subtype-tcc) nil nil)
-   nil nil))
- (strongPartCaseWeak_TCC2 0
-  (strongPartCaseWeak_TCC2-1 nil 3655226219 ("" (subtype-tcc) nil nil)
    nil nil))
  (strongPartCaseWeak 0
   (strongPartCaseWeak-1 nil 3655109962

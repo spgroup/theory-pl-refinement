@@ -102,6 +102,18 @@ IMPORTING SPLrefinement
                                           => weakPartialRefinementAlt(pl1,pl3,s,u)
                                )     
 
+     % Theorem <weak partial refinement is transitive - this theorem is more flexible than the one defined above>
+    weakPartRefAltTransitive2: THEOREM (FORALL pl1,pl2,pl3,(s,t,t2,u:set[Conf]) : 
+                                         (
+                                            weakPartialRefinementAlt(pl1,pl2,s,t) 
+                                           AND 
+                                            weakPartialRefinementAlt(pl2,pl3,t2,u)
+                                           AND 
+                                            subset?(t,t2)  
+                                          )
+                                          => weakPartialRefinementAlt(pl1,pl3,s,u)
+                               )     
+
     % Theorem <FM Equivalence compositionality - weak definition>
     fmEqCompWeakDef: THEOREM
     FORALL(pl,fm,f):
