@@ -1,20 +1,29 @@
 SPLpartialrefinement: THEORY
 BEGIN
 
-IMPORTING SPLrefinement
-
 % Partial SPL Refinement
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------VARIABLES-----------------------------------------------
-   % --------------------------------------------------------------------------------------------------------
-
+   % --------------------------------------------------------------------------------------------------------    
+    %TODO: find a more elegant solution for the importing problem!! (code replication)
+    IMPORTING maps
+    Conf:TYPE
+    FM: TYPE
+    {||} : [FM -> set[Conf]]
+    Asset:TYPE
+    AssetName:TYPE
+    AM:TYPE = maps[AssetName,Asset].mapping
+    CK:TYPE
+    [||] : [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
     c: VAR Conf
     f,g: VAR [Conf -> Conf]
     s,t,u: VAR set[Conf]
     fm: VAR FM
     am: VAR AM
     ck: VAR CK
+    IMPORTING SPLrefinement{{FM:=FM, Conf:=Conf, {||} := {||},
+	    CK:=CK, Asset:=Asset,AssetName:=AssetName,[||] := [||]}}
     pl, pl1, pl2, pl3: VAR PL
     p, p1, p2: VAR finite_sets[Asset].finite_set
 
@@ -29,7 +38,7 @@ IMPORTING SPLrefinement
     d(f) : set[Conf] = {c:domain(f) | true}
     cd(f): set[Conf] = {c:range(f)  | true}
     r(f) : set[Conf] = {c2:range(f)  | EXISTS (c:domain(f)) : f(c) = c2}
-   
+
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------RELATION DEF--------------------------------------------
    % --------------------------------------------------------------------------------------------------------
@@ -205,7 +214,7 @@ IMPORTING SPLrefinement
                                     => 
                                     (weakPartialRefinement(pl1,pl2,f) => strongPartialRefinement(pl1,pl2,d(f)))
 
-    eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t : 
+    eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t: 
                                 (s = {|F(pl1)|} AND t = {|F(pl2)|}) => (plRefinement(pl1,pl2) <=> weakPartialRefinementAlt(pl1,pl2,s,t))
 
     eqWeakAndWeakAlt: THEOREM FORALL pl1,pl2,f,s,t: 
