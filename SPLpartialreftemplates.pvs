@@ -8,7 +8,7 @@ aSet: VAR finite_sets[Asset].finite_set
 am1,am2,pairs: VAR AM
 a1,a2: VAR Asset
 an: VAR AssetName
-s: VAR set[Configuration]
+s,t: VAR set[Configuration]
 c: VAR Configuration
 
 IMPORTING SPLpartialrefinement{{FM:=WFM, Conf:=Configuration, {||} := semantics,
@@ -27,6 +27,8 @@ syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
       am2=union((an,a2),pairs) AND
       NOT (img(pairs)(a2)) 
 
+% Lemma <When an asset is changed, we do not check refinement over it. It is simply excluded and the refinement is checked for the rest
+%        and this is guaranteed in the definition>
 changedAssetNotIncluded: LEMMA  
     FORALL(pl,am2,pairs,a1,a2,an,s):
     (
@@ -38,6 +40,8 @@ changedAssetNotIncluded: LEMMA
         (FORALL c : s(c) => (NOT prod(pl,c)(a1) AND NOT eval(K(pl2),c)(an) AND NOT semantics(K(pl2))(am2)(c)(a2)))
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
+% Lemma <Since the only difference between "pairs" and "A(pl)" is the element "(an,a1)" and this asset is not included, the evaluation
+%        of A(pl) is the same as pairs.>
 sameEvalPairs: LEMMA 
 FORALL(pl,am2,pairs,a1,a2,an,s):
     (
@@ -49,7 +53,7 @@ FORALL(pl,am2,pairs,a1,a2,an,s):
         (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
-
+% Theorem <The products that do not contain the changed asset do not change> 
 changeAssetSameProducts: THEOREM   
     FORALL(pl,am2,pairs,a1,a2,an,s):
     (
@@ -61,6 +65,7 @@ changeAssetSameProducts: THEOREM
         (FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(am2)(c))))
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
+% Theorem <The change asset template represents a strong partial refinement>
 changeAssetStrong: THEOREM
     FORALL(pl,am2,pairs,a1,a2,an,s):
     (
@@ -71,5 +76,19 @@ changeAssetStrong: THEOREM
       =>
         strongPartialRefinement(pl,pl2,s)
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+% Theorem <The change asset template represents a weak partial refinement>
+changeAssetWeakAlt: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,s,t):
+                (
+                   (
+                      syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+                      s = <>(pl,singleton(a1)) AND
+                      s = t
+                   ) 
+                   => 
+                   (weakPartialRefinementAlt(pl,pl2,s,t))
+                )
+      WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 END SPLpartialreftemplates

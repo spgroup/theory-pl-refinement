@@ -2,10 +2,7 @@ SPLpartialrefinement: THEORY
 BEGIN
 
 % Partial SPL Refinement
-
-   % --------------------------------------------------------------------------------------------------------
-   % ------------------------------------------------VARIABLES-----------------------------------------------
-   % --------------------------------------------------------------------------------------------------------    
+   
     %TODO: find a more elegant solution for the importing problem!! (code replication)
     IMPORTING maps
     Conf:TYPE
@@ -16,6 +13,10 @@ BEGIN
     AM:TYPE = maps[AssetName,Asset].mapping
     CK:TYPE
     [||] : [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
     c: VAR Conf
     f,g: VAR [Conf -> Conf]
     s,t,u: VAR set[Conf]
@@ -53,7 +54,7 @@ BEGIN
           )
 
    % Partial Refinement Relation - this definition considers a function that maps configurations.
-    weakPartialRefinement(pl1,pl2:PL,f:{f | subset?(d(f),{|F(pl1)|}) AND subset?(r(f),{|F(pl2)|})}) : bool = 
+    weakPartialRefinement(pl1,pl2,(f:{f | subset?(d(f),{|F(pl1)|}) AND subset?(r(f),{|F(pl2)|})})) : bool = 
     	FORALL p1 : prod(pl1,d(f))(p1) => 
             (
                EXISTS p2 : prod(pl2,r(f))(p2) AND (p1 |- p2)
