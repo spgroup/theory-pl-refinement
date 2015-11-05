@@ -55,9 +55,11 @@ BEGIN
 
    % Partial Refinement Relation - this definition considers a function that maps configurations.
     weakPartialRefinement(pl1,pl2,(f:{f | subset?(d(f),{|F(pl1)|}) AND subset?(r(f),{|F(pl2)|})})) : bool = 
-    	FORALL p1 : prod(pl1,d(f))(p1) => 
+    	FORALL c : (d(f))(c) => 
             (
-               EXISTS p2 : prod(pl2,r(f))(p2) AND (p1 |- p2)
+               prod(pl1,c) 
+               |- 
+               prod(pl2,f(c))
             ) 
 
     % Partial Refinement Relation - this definition has two indexes.
@@ -71,6 +73,8 @@ BEGIN
    % ------------------------------------------------PROPERTIES----------------------------------------------
    % --------------------------------------------------------------------------------------------------------
    
+   %--------------------------------------------------PREORDER-----------------------------------------------
+
    % Theorem <strong partial refinement is reflexive>
     strongPartRefReflexive: THEOREM FORALL pl,s: strongPartialRefinement(pl,pl,s)
    % Theorem <strong partial refinement is transitive>
@@ -83,19 +87,14 @@ BEGIN
                                               => strongPartialRefinement(pl1,pl3,intersection(s,t))
                                       )
 
-
    % Theorem <weak partial refinement is reflexive>
-    weakPartRefReflexive: THEOREM (FORALL pl,f : subset?(d(f),r(f)) => weakPartialRefinement(pl,pl,f))
+    weakPartRefReflexive: THEOREM (FORALL pl,f : f = id  => weakPartialRefinement(pl,pl,f))
    % Theorem <weak partial refinement is transitive>
     weakPartRefTransitive: THEOREM (FORALL pl1, pl2, pl3, f, g : 
                                          (
                                             weakPartialRefinement(pl1,pl2,f) 
                                            AND 
                                             weakPartialRefinement(pl2,pl3,g) 
-                                           AND 
-                                            r(g) = r(g o f) 
-                                           AND 
-                                            subset?(r(f),d(g))
                                           )
                                           => weakPartialRefinement(pl1,pl3,g o f)
                                )
@@ -123,14 +122,28 @@ BEGIN
                                           )
                                           => weakPartialRefinementAlt(pl1,pl3,s,u)
                                )     
+    
+    %--------------------------------------------------COMPOSITIONALITY-----------------------------------------------    
+
+    %---------------FM EQUIVALENCE---------------
 
     % Theorem <FM Equivalence compositionality - weak definition>
     fmEqCompWeakDef: THEOREM
     FORALL(pl,fm,f):
     ( 
-      (equivalentFMs(F,fm) AND subset?(d(f),r(f)))
+      (equivalentFMs(F,fm) AND f = id)
      => 
         weakPartialRefinement(pl,pl2,f) AND wfPL(pl2)
+    )
+    WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
+
+    % Theorem <FM Equivalence compositionality - weak(alt) definition>
+    fmEqCompWeakAltDef: THEOREM
+    FORALL(pl,fm,s,t):
+    ( 
+      (equivalentFMs(F,fm) AND subset?(s,t))
+     => 
+        weakPartialRefinementAlt(pl,pl2,s,t) AND wfPL(pl2)
     )
     WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
 
@@ -144,13 +157,25 @@ BEGIN
     )
     WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
 
+    %---------------FM REFINEMENT---------------
+
     % Theorem <FM Refinement Compositionality - Weak Definition>
      fmRefCompWeakDef: THEOREM
     FORALL(pl,fm,f):
     ( 
-       ((F |= fm) AND subset?(d(f),r(f)))
+       ((F |= fm) AND f = id)
      => 
         weakPartialRefinement(pl,pl2,f)
+    )
+    WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
+
+     % Theorem <FM Refinement Compositionality - Weak Definition (alt)>
+     fmRefCompWeakAltDef: THEOREM
+    FORALL(pl,fm,s,t):
+    ( 
+       ((F |= fm) AND subset?(s,t))
+     => 
+        weakPartialRefinementAlt(pl,pl2,s,t)
     )
     WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
 
@@ -164,13 +189,25 @@ BEGIN
     )
     WHERE F=F(pl),pl2=(# F := fm, A := A(pl), K := K(pl) #)
 
+    %---------------AM REFINEMENT---------------
+
     % Theorem <AM Refinement Compositionality - Weak Definition>
      amRefCompWeakDef: THEOREM
     FORALL(pl,am,f):
     ( 
-      ( |>(A,am) and subset?(d(f),r(f)))
+      ( |>(A,am) AND subset?(d(f),{|F(pl)|}) AND  f = id)
       => 
         weakPartialRefinement(pl,pl2,f) AND wfPL(pl2)
+    )
+    WHERE A=A(pl),pl2=(# F := F(pl), A := am, K := K(pl) #)
+
+     % Theorem <AM Refinement Compositionality - Weak (alt) Definition>
+     amRefCompWeakAltDef: THEOREM
+    FORALL(pl,am,s,t):
+    ( 
+      ( |>(A,am) AND subset?(s,t))
+      => 
+        weakPartialRefinementAlt(pl,pl2,s,t) AND wfPL(pl2)
     )
     WHERE A=A(pl),pl2=(# F := F(pl), A := am, K := K(pl) #)
 
@@ -184,13 +221,25 @@ BEGIN
     )
     WHERE A=A(pl),pl2=(# F := F(pl), A := am, K := K(pl) #)
     
+    %---------------CK EQUIVALENCE---------------
+
     % Theorem <CK Equivalence Compositionality - Weak Definition>
     ckEqCompWeakDef: THEOREM
     FORALL(pl,ck,f):
     ( 
-      (equivalentCKs(K,ck) AND subset?(d(f),r(f)))
+      (equivalentCKs(K,ck) AND f = id)
      => 
         weakPartialRefinement(pl,pl2,f) AND wfPL(pl2)
+    )
+    WHERE K=K(pl),pl2=(# F := F(pl), A := A(pl), K := ck #)
+
+     % Theorem <CK Equivalence Compositionality - Weak (alt) Definition>
+    ckEqCompWeakAltDef: THEOREM
+    FORALL(pl,ck,s,t):
+    ( 
+      (equivalentCKs(K,ck) AND subset?(s,t))
+     => 
+        weakPartialRefinementAlt(pl,pl2,s,t) AND wfPL(pl2)
     )
     WHERE K=K(pl),pl2=(# F := F(pl), A := A(pl), K := ck #)
 
@@ -204,22 +253,17 @@ BEGIN
     )
     WHERE K=K(pl),pl2=(# F := F(pl), A := A(pl), K := ck #)
    
+    %--------------------------------------------------EQUIVALENCE BETWEEN DEFS-----------------------------------------------
+
     % Theorem <correspondence between strong partial ref and weak partial ref> 
     strongPartCaseWeak: THEOREM FORALL f,pl1,pl2:  
-                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
+                                    f = id   
                                     => 
-                                    (strongPartialRefinement(pl1,pl2,d(f)) => weakPartialRefinement(pl1,pl2,f))
-    %obs.: this theorem is not proved yet, because it might not be true
-    strongPartCaseWeak2: THEOREM FORALL f,pl1,pl2:  
-                                    (d(f) = r(f)  AND subset?(r(f),{|F(pl2)|}))  
-                                    => 
-                                    (weakPartialRefinement(pl1,pl2,f) => strongPartialRefinement(pl1,pl2,d(f)))
-
+                                    (strongPartialRefinement(pl1,pl2,d(f)) <=> weakPartialRefinement(pl1,pl2,f))
+   
+    % Theorem <Considering that s is the confs of PL1 and t is the set of confs from PL2, PL refinement is equivalent to WeakPartRef.> 
     eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t: 
                                 (s = {|F(pl1)|} AND t = {|F(pl2)|}) => (plRefinement(pl1,pl2) <=> weakPartialRefinementAlt(pl1,pl2,s,t))
-
-    eqWeakAndWeakAlt: THEOREM FORALL pl1,pl2,f,s,t: 
-                                (s = d(f) AND t = r(f)) => (weakPartialRefinementAlt(pl1,pl2,s,t) <=> weakPartialRefinement(pl1,pl2,f))
      
 
 END SPLpartialrefinement
