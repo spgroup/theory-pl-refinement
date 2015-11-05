@@ -15,11 +15,11 @@ IMPORTING SPLpartialrefinement{{FM:=WFM, Conf:=Configuration, {||} := semantics,
 	    CK:=CK, Asset:=Assets.Asset,AssetName:=Assets.AssetName,[||] := semantics}}
 pl,pl2,pl3: VAR PL
 
-% Restriction Operator
+% -------------Restriction Operator----------------
 <>(pl,aSet):set[Configuration] = {c | semantics(F(pl))(c) AND empty?(intersection(aSet, prod(pl,c)))}
 
 %---------------------------------------------------------------------------------------------------------------------------------------
-%---------------------------------------------CHANGE ASSET------------------------------------------------------------------------------
+%---------------------------------------------CHANGE ASSET TEMPLATE---------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
 syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
@@ -83,7 +83,7 @@ changeAssetWeakAlt: THEOREM
                 (
                    (
                       syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-                      s = <>(pl,singleton(a1)) AND
+                      s = <>(pl, singleton(a1)) AND
                       s = t
                    ) 
                    => 
