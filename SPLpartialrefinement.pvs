@@ -46,7 +46,7 @@ BEGIN
 
    % Partial Refinement Relation - this definition requires that the configuration does not change
     strongPartialRefinement(pl1,pl2,s) : bool = 
-     FORALL c: (s)(c) =>
+     FORALL c: s(c) =>
 	  (
               prod(pl1,c)
 	      |- 
@@ -54,8 +54,8 @@ BEGIN
           )
 
    % Partial Refinement Relation - this definition considers a function that maps configurations.
-    weakPartialRefinement(pl1,pl2,(f:{f | subset?(d(f),{|F(pl1)|}) AND subset?(r(f),{|F(pl2)|})})) : bool = 
-    	FORALL c : (d(f))(c) => 
+    weakPartialRefinement(pl1,pl2:PL,f:{func:[Conf -> Conf] | subset?(d(func),{||}(F(pl1))) AND subset?(r(func),{||}(F(pl2)))}) : bool = 
+    	FORALL c : d(f)(c)  => 
             (
                prod(pl1,c) 
                |- 
@@ -88,9 +88,9 @@ BEGIN
                                       )
 
    % Theorem <weak partial refinement is reflexive>
-    weakPartRefReflexive: THEOREM (FORALL pl,f : f = id  => weakPartialRefinement(pl,pl,f))
+    weakPartRefReflexive: THEOREM (FORALL pl,(f:[Conf -> Conf]) : f = id  => weakPartialRefinement(pl,pl,f))
    % Theorem <weak partial refinement is transitive>
-    weakPartRefTransitive: THEOREM (FORALL pl1, pl2, pl3, f, g : 
+    weakPartRefTransitive: THEOREM (FORALL pl1, pl2, pl3, (f,g:[Conf -> Conf]) : 
                                          (
                                             weakPartialRefinement(pl1,pl2,f) 
                                            AND 
@@ -129,7 +129,7 @@ BEGIN
 
     % Theorem <FM Equivalence compositionality - weak definition>
     fmEqCompWeakDef: THEOREM
-    FORALL(pl,fm,f):
+    FORALL(pl,fm,(f:[Conf -> Conf])):
     ( 
       (equivalentFMs(F,fm) AND f = id)
      => 
@@ -161,7 +161,7 @@ BEGIN
 
     % Theorem <FM Refinement Compositionality - Weak Definition>
      fmRefCompWeakDef: THEOREM
-    FORALL(pl,fm,f):
+    FORALL(pl,fm,(f: [Conf -> Conf])):
     ( 
        ((F |= fm) AND f = id)
      => 
@@ -193,7 +193,7 @@ BEGIN
 
     % Theorem <AM Refinement Compositionality - Weak Definition>
      amRefCompWeakDef: THEOREM
-    FORALL(pl,am,f):
+    FORALL(pl,am,(f:[Conf -> Conf])):
     ( 
       ( |>(A,am) AND subset?(d(f),{|F(pl)|}) AND  f = id)
       => 
@@ -225,7 +225,7 @@ BEGIN
 
     % Theorem <CK Equivalence Compositionality - Weak Definition>
     ckEqCompWeakDef: THEOREM
-    FORALL(pl,ck,f):
+    FORALL(pl,ck,(f:[Conf -> Conf])):
     ( 
       (equivalentCKs(K,ck) AND f = id)
      => 
@@ -256,7 +256,7 @@ BEGIN
     %--------------------------------------------------EQUIVALENCE BETWEEN DEFS-----------------------------------------------
 
     % Theorem <correspondence between strong partial ref and weak partial ref> 
-    strongPartCaseWeak: THEOREM FORALL f,pl1,pl2:  
+    strongPartCaseWeak: THEOREM FORALL (f:[Conf -> Conf]),pl1,pl2:  
                                     f = id   
                                     => 
                                     (strongPartialRefinement(pl1,pl2,d(f)) <=> weakPartialRefinement(pl1,pl2,f))

@@ -10,22 +10,30 @@ a1,a2: VAR Asset
 an: VAR AssetName
 s,t: VAR set[Configuration]
 c: VAR Configuration
+fm,fm1,fm2: VAR FM
+P,Q: VAR Name
+exp: VAR Formula_
+f: VAR [Configuration -> Configuration]
 
+% Importing SPLPartialRefinement theory and instantiating types. 
 IMPORTING SPLpartialrefinement{{FM:=WFM, Conf:=Configuration, {||} := semantics,
 	    CK:=CK, Asset:=Assets.Asset,AssetName:=Assets.AssetName,[||] := semantics}}
 pl,pl2,pl3: VAR PL
 
-% -------------Restriction Operator----------------
+% --------------------------------------------Restriction Operator---------------------------------------------------------------------
+% ----Filter configurations whose products do not contain aSet
 <>(pl,aSet):set[Configuration] = {c | semantics(F(pl))(c) AND empty?(intersection(aSet, prod(pl,c)))}
+% ----Filter configurations that satisfy an expression exp and belong to a feature model fm
+<>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------CHANGE ASSET TEMPLATE---------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
 syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
-      am1=union((an,a1),pairs) AND
-      am2=union((an,a2),pairs) AND
-      NOT (img(pairs)(a2)) 
+      am1=union(singleton(an,a1),pairs) AND
+      am2=union(singleton(an,a2),pairs) AND
+      NOT member(a2,img(pairs)) 
 
 % Lemma <When an asset is changed, we do not check refinement over it. It is simply excluded and the refinement is checked for the rest
 %        and this is guaranteed in the definition>
@@ -37,7 +45,7 @@ changedAssetNotIncluded: LEMMA
         s = <>(pl,singleton(a1))
       )
       =>
-        (FORALL c : s(c) => (NOT prod(pl,c)(a1) AND NOT eval(K(pl2),c)(an) AND NOT semantics(K(pl2))(am2)(c)(a2)))
+        (FORALL c : s(c) => (NOT prod(pl,c)(a1) AND NOT member(an,eval(K(pl2),c)) AND NOT member(a2,semantics(K(pl2))(am2)(c))))
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 % Lemma <Since the only difference between "pairs" and "A(pl)" is the element "(an,a1)" and this asset is not included, the evaluation
@@ -90,5 +98,48 @@ changeAssetWeakAlt: THEOREM
                    (weakPartialRefinementAlt(pl,pl2,s,t))
                 )
       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+% Theorem <The change asset template represents a strong partial refinement>
+changeAssetWeak: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,f):
+    (
+      (
+	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
+        d(f) = <>(pl,singleton(a1)) AND
+        f = id
+      ) 
+      => weakPartialRefinement(pl,pl2,f)
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+% Predicate that compares fm1 and fm2 for this template. The fms have the same features. However, their formulas are different
+% because Q is optional in fm1 and mandatory in fm2
+transfOptMand(fm1,fm2,P,Q): bool = 
+       features(fm1) = features(fm2) AND 
+       formulae(fm2) = union(formulae(fm1),IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)))
+
+% Template syntax. We need to make sure that the features belong to the feature models and that Q is optional in fm1. Otherwise
+% the change would not make sense
+syntaxTransfOptMand(fm1,fm2,P,Q): bool = 
+       transfOptMand(fm1,fm2,P,Q) AND
+       (features(fm1))(P) AND
+       (features(fm1))(Q) AND
+       (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)))  AND
+       NOT (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)))
+
+% Theorem <Transform optional to mandatory feature template represents a strong partial refinement>
+transOptMandPartRefStrong: THEOREM 
+            FORALL (pl,fm2,(s:set[Configuration]),P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 s = <>(F(pl),(IMPLIES_FORMULA (NAME_FORMULA(P),NAME_FORMULA(Q))))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
 
 END SPLpartialreftemplates
