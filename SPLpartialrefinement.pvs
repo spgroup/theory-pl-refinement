@@ -20,7 +20,7 @@ BEGIN
     c: VAR Conf
     f,g: VAR [Conf -> Conf]
     s,t,u: VAR set[Conf]
-    fm: VAR FM
+    fm,fm1,fm2: VAR FM
     am: VAR AM
     ck: VAR CK
     IMPORTING SPLrefinement{{FM:=FM, Conf:=Conf, {||} := {||},
@@ -68,6 +68,9 @@ BEGIN
             (
                EXISTS p2 : prod(pl2,t)(p2) AND (p1 |- p2)
             )       
+
+    fmPartialRefinement(fm1,fm2,s) : bool = 
+          FORALL c: s(c) => {||}(fm1)(c) AND {||}(fm2)(c)
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------PROPERTIES----------------------------------------------
@@ -123,7 +126,31 @@ BEGIN
                                           => weakPartialRefinementAlt(pl1,pl3,s,u)
                                )     
     
-    %--------------------------------------------------COMPOSITIONALITY-----------------------------------------------    
+    %-------------------------------------------------------COMPOSITIONALITY---------------------------------------------------
+    % Theorem <FM Equivalence compositionality - weak definition>
+    fmCompStrongDef: THEOREM
+    FORALL(pl,fm1,fm2,s,t):
+    ( 
+      subset?(s,t) AND fmPartialRefinement(fm1,fm2,t)
+     => 
+        strongPartialRefinement(pl,pl2,s) 
+    )
+    WHERE fm1=F(pl),pl2=(# F := fm2, A := A(pl), K := K(pl) #) 
+
+    %--------------------------------------------------EQUIVALENCE BETWEEN DEFS-----------------------------------------------
+
+    % Theorem <correspondence between strong partial ref and weak partial ref> 
+    strongPartCaseWeak: THEOREM FORALL (f:[Conf -> Conf]),pl1,pl2:  
+                                    f = id   
+                                    => 
+                                    (strongPartialRefinement(pl1,pl2,d(f)) <=> weakPartialRefinement(pl1,pl2,f))
+   
+    % Theorem <Considering that s is the confs of PL1 and t is the set of confs from PL2, PL refinement is equivalent to WeakPartRef.> 
+    eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t: 
+                                (s = {|F(pl1)|} AND t = {|F(pl2)|}) => (plRefinement(pl1,pl2) <=> weakPartialRefinementAlt(pl1,pl2,s,t))
+     
+
+    %--------------------------------------------------SANITY TESTS (compositional)-----------------------------------------------    
 
     %---------------FM EQUIVALENCE---------------
 
@@ -252,18 +279,5 @@ BEGIN
         strongPartialRefinement(pl,pl2,s) AND wfPL(pl2)
     )
     WHERE K=K(pl),pl2=(# F := F(pl), A := A(pl), K := ck #)
-   
-    %--------------------------------------------------EQUIVALENCE BETWEEN DEFS-----------------------------------------------
-
-    % Theorem <correspondence between strong partial ref and weak partial ref> 
-    strongPartCaseWeak: THEOREM FORALL (f:[Conf -> Conf]),pl1,pl2:  
-                                    f = id   
-                                    => 
-                                    (strongPartialRefinement(pl1,pl2,d(f)) <=> weakPartialRefinement(pl1,pl2,f))
-   
-    % Theorem <Considering that s is the confs of PL1 and t is the set of confs from PL2, PL refinement is equivalent to WeakPartRef.> 
-    eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t: 
-                                (s = {|F(pl1)|} AND t = {|F(pl2)|}) => (plRefinement(pl1,pl2) <=> weakPartialRefinementAlt(pl1,pl2,s,t))
-     
 
 END SPLpartialrefinement
