@@ -1,7 +1,7 @@
 maps[S:TYPE,T:TYPE]: THEORY
  BEGIN
   IMPORTING set_aux_lemmas
-  
+
   l,l1,l2: VAR S
   r,r1,r2: VAR T
   s: VAR finite_sets[[S,T]].finite_set
@@ -47,7 +47,7 @@ maps[S:TYPE,T:TYPE]: THEORY
     {r: T | EXISTS (l: S): ls(l) AND m(l,r)}
 
   getRight(m:mapping, l:{n:S | dom(m)(n)}): T = 
-    map(m,singleton(l))
+    map(m,singleton(l))  
 
   unmap(m, rs): finite_sets[S].finite_set =
     {l: S | EXISTS (r: T): rs(r) AND m(l,r)}
@@ -137,6 +137,9 @@ maps[S:TYPE,T:TYPE]: THEORY
     FORALL(m,ls):
       not(EXISTS(l:S): ls(l) and dom(m)(l)) => map(m,ls) = emptyset
 
+  getRightResult: LEMMA 
+     FORALL m,r,(l:{n:S | dom(m)(n)}): m(l,r) => getRight(m,l) = r
+  
  END maps
 
 % Theory for maps that have the same type for the domain and image
@@ -159,11 +162,16 @@ maps_composite[S:TYPE,T:TYPE,U:TYPE]: THEORY
   IMPORTING maps
   m: VAR maps[S,T].mapping
   n: VAR maps[T,U].mapping
+  q: VAR maps[S,U].mapping
   l: VAR S
   r: VAR U
 
   %If we know that e1 is associated to e1 in map1 and e2 is associated with e3 in map2, by transitivity
   % we can compose these maps and generate a new map map3 where e1 is directly associated with e3.
-  o(m,n):maps[S,U].mapping  = {(l,r) | domain(m)(l) AND r = getRight(n,(getRight(m,l)))}
+  composeMaps(m,n):maps[S,U].mapping  = {(l,r) | domain(m)(l) AND r = getRight(n,getRight(m,l))}
+ 
+  same_img: LEMMA FORALL m,n,q,l: domain(q)(l) AND q = composeMaps(m,n) => getRight(q,l) = getRight(n,getRight(m,l))
+ 
+  domCompos: LEMMA FORALL m,n: subset?(domain(composeMaps(m,n)),domain(m))
 
  END maps_composite

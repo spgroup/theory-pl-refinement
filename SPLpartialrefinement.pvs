@@ -20,7 +20,7 @@ BEGIN
    % -------------------------------------------------------------------------------------------------------- 
     c,c2: VAR Conf
     f,g: VAR [Conf -> Conf]
-    map,m,n: VAR CM
+    m,n: VAR CM
     s,t,u: VAR set[Conf]
     fm,fm1,fm2: VAR FM
     am: VAR AM
@@ -53,12 +53,12 @@ BEGIN
           )
 
    % Partial Refinement Relation - this definition considers a function that maps configurations.
-    weakPartialRefinement(pl1,pl2,map) : bool = 
-    	FORALL c : domain(map)(c)  => 
+    weakPartialRefinement(pl1,pl2,m) : bool = 
+    	FORALL c : domain(m)(c)  => 
             (
                prod(pl1,c) 
                |- 
-               prod(pl2,getRight(map,c))
+               prod(pl2,getRight(m,c))
             ) 
 
     % Partial Refinement Relation - this definition has two indexes.
@@ -90,7 +90,7 @@ BEGIN
                                       )
 
    % Theorem <weak partial refinement is reflexive>
-    weakPartRefReflexive: THEOREM (FORALL pl,map : identity?(map)  => weakPartialRefinement(pl,pl,map))
+    weakPartRefReflexive: THEOREM (FORALL pl,m : identity?(m)  => weakPartialRefinement(pl,pl,m))
    % Theorem <weak partial refinement is transitive>
     weakPartRefTransitive: THEOREM (FORALL pl1, pl2, pl3, (m,n,q:CM) : 
                                          (
@@ -100,7 +100,7 @@ BEGIN
                                            AND 
                                             image(m) = domain(n)
                                            AND
-                                            q = o(m,n)
+                                            q = composeMaps(m,n)
                                           )
                                           => weakPartialRefinement(pl1,pl3,q)
                                )
@@ -132,10 +132,10 @@ BEGIN
     %--------------------------------------------------EQUIVALENCE BETWEEN DEFS-----------------------------------------------
 
     % Theorem <correspondence between strong partial ref and weak partial ref> 
-    strongPartCaseWeak: THEOREM FORALL (map,pl1,pl2):  
-                                    identity?(map)   
+    strongPartCaseWeak: THEOREM FORALL (m,pl1,pl2):  
+                                    identity?(m)   
                                     => 
-                                    (strongPartialRefinement(pl1,pl2,domain(map)) <=> weakPartialRefinement(pl1,pl2,map))
+                                    (strongPartialRefinement(pl1,pl2,domain(m)) <=> weakPartialRefinement(pl1,pl2,m))
    
     % Theorem <Considering that s is the confs of PL1 and t is the set of confs from PL2, PL refinement is equivalent to WeakPartRef.> 
     eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t: 

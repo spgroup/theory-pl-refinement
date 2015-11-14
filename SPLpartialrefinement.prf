@@ -155,45 +155,323 @@
    shostak))
  (weakPartRefTransitive 0
   (weakPartRefTransitive-1 nil 3656329560
-   ("" (skolem 1 (pl1 pl2 pl3 m n))
+   ("" (skolem 1 (pl1 pl2 pl3 m n q))
     (("" (bddsimp)
       (("" (expand weakPartialRefinement)
         (("" (skolem 1 c)
           (("" (inst -1 c)
             (("" (inst -2 "getRight(m,c)")
-              (("1" (bddsimp)
-                (("1" (expand composeMap)
-                  (("1" (expand prod)
-                    (("1" (use assetRefinement)
-                      (("1" (expand preorder?)
-                        (("1" (flatten)
+              (("1" (lemma "maps_composite[Conf,Conf,Conf].same_img")
+                (("1" (inst -1 m n q c)
+                  (("1" (bddsimp)
+                    (("1" (replace -3 1)
+                      (("1" (use assetRefinement)
+                        (("1" (expand preorder?)
                           (("1" (expand transitive?)
-                            (("1"
-                              (inst -2 "([||](K(pl1))(A(pl1))(c))"
-                               "([||](K(pl2))(A(pl2))(getRight(m, c)))"
-                               "([||](K(pl3))(A(pl3))(getRight(n, getRight(m, c))))")
+                            (("1" (flatten)
                               (("1"
-                                (bddsimp)
-                                (("1" (postpone) nil nil))
+                                (inst
+                                 -2
+                                 "prod(pl1,c)"
+                                 "prod(pl2,getRight(m,c))"
+                                 "prod(pl3,getRight(n,getRight(m,c)))")
+                                (("1" (bddsimp) nil nil))
                                 nil))
                               nil))
                             nil))
                           nil))
                         nil))
+                      nil)
+                     ("2" (expand image)
+                      (("2" (expand domain)
+                        (("2" (decompose-equality -5)
+                          (("2" (inst -1 "getRight(m,c)")
+                            (("2" (bddsimp)
+                              (("2"
+                                (inst 1 c)
+                                (("2"
+                                  (skolem -1 c3)
+                                  (("2"
+                                    (inst 2 c3)
+                                    (("2"
+                                      (lemma
+                                       "maps[Conf,Conf].getRightResult")
+                                      (("2"
+                                        (inst -1 q c3 c)
+                                        (("2"
+                                          (bddsimp)
+                                          (("2"
+                                            (replace -2 -4)
+                                            (("2"
+                                              (expand composeMaps)
+                                              (("2"
+                                                (decompose-equality -3)
+                                                (("1"
+                                                  (inst -1 "(c,c3)")
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand domain)
+                                                      (("1"
+                                                        (skolem -2 c2)
+                                                        (("1"
+                                                          (lemma
+                                                           "maps[Conf,Conf].getRightResult")
+                                                          (("1"
+                                                            (inst
+                                                             -1
+                                                             m
+                                                             c2
+                                                             c)
+                                                            (("1"
+                                                              (bddsimp)
+                                                              (("1"
+                                                                (replace
+                                                                 -2
+                                                                 1)
+                                                                (("1"
+                                                                  (propax)
+                                                                  nil
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (expand domain)
+                                                  (("2"
+                                                    (skolem -4 c2)
+                                                    (("2"
+                                                      (lemma
+                                                       "maps[Conf,Conf].getRightResult")
+                                                      (("2"
+                                                        (inst
+                                                         -1
+                                                         m
+                                                         c2
+                                                         c)
+                                                        (("2"
+                                                          (bddsimp)
+                                                          (("2"
+                                                            (replace
+                                                             -2
+                                                             2)
+                                                            (("2"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("3"
+                                                  (expand domain)
+                                                  (("3"
+                                                    (skolem -4 c2)
+                                                    (("3"
+                                                      (lemma
+                                                       "maps[Conf,Conf].getRightResult")
+                                                      (("3"
+                                                        (inst
+                                                         -1
+                                                         m
+                                                         c2
+                                                         c)
+                                                        (("3"
+                                                          (bddsimp)
+                                                          (("3"
+                                                            (replace
+                                                             -2
+                                                             2)
+                                                            (("3"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil)
+                     ("3" (expand domain)
+                      (("3" (skolem -1 c3)
+                        (("3" (expand composeMaps)
+                          (("3" (decompose-equality)
+                            (("1" (inst -1 "(c,c3)")
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (lemma
+                                   "maps[Conf,Conf].getRightResult")
+                                  (("1"
+                                    (inst -1 q c3 c)
+                                    (("1"
+                                      (bddsimp)
+                                      (("1" (grind) nil nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil)
+                             ("2" (decompose-equality -6)
+                              (("1"
+                                (inst -1 "(c,c3)")
+                                (("1"
+                                  (bddsimp)
+                                  (("1"
+                                    (lemma
+                                     "maps[Conf,Conf].getRightResult")
+                                    (("1"
+                                      (inst -1 q c3 c)
+                                      (("1"
+                                        (bddsimp)
+                                        (("1" (grind) nil nil))
+                                        nil)
+                                       ("2" (grind) nil nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2" (grind) nil nil)
+                               ("3" (grind) nil nil))
+                              nil)
+                             ("3" (grind) nil nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil)
+                     ("4" (expand composeMaps)
+                      (("4" (decompose-equality)
+                        (("1" (expand domain)
+                          (("1" (skolem -2 c3)
+                            (("1" (inst -1 "(c,c3)")
+                              (("1" (bddsimp) nil nil)) nil))
+                            nil))
+                          nil)
+                         ("2" (grind) nil nil)
+                         ("3" (decompose-equality -5)
+                          (("1" (expand image)
+                            (("1" (decompose-equality -7)
+                              (("1"
+                                (inst -1 "getRight(m,c)")
+                                (("1" (grind) nil nil))
+                                nil))
+                              nil))
+                            nil)
+                           ("2" (grind) nil nil) ("3" (grind) nil nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil)
+               ("2" (bddsimp)
+                (("1" (expand composeMaps)
+                  (("1" (decompose-equality -3)
+                    (("1" (expand domain)
+                      (("1" (skolem -4 c3)
+                        (("1" (inst -1 "(c,c3)")
+                          (("1" (bddsimp) (("1" (grind) nil nil)) nil))
+                          nil))
+                        nil))
+                      nil)
+                     ("2" (grind) nil nil)
+                     ("3" (decompose-equality -6)
+                      (("1" (grind) nil nil) ("2" (grind) nil nil)
+                       ("3" (grind) nil nil))
                       nil))
                     nil))
                   nil)
-                 ("2" (postpone) nil nil) ("3" (postpone) nil nil)
-                 ("4" (postpone) nil nil))
-                nil)
-               ("2" (postpone) nil nil))
+                 ("2" (expand domain)
+                  (("2" (skolem -3 c3)
+                    (("2" (expand composeMaps)
+                      (("2" (decompose-equality -2)
+                        (("1" (inst -1 "(c,c3)")
+                          (("1" (bddsimp) (("1" (grind) nil nil)) nil))
+                          nil)
+                         ("2" (grind) nil nil) ("3" (grind) nil nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
               nil))
             nil))
           nil))
         nil))
       nil))
     nil)
-   nil shostak))
+   ((weakPartialRefinement const-decl "bool" SPLpartialrefinement nil)
+    (Conf type-decl nil SPLpartialrefinement nil)
+    (same_img formula-decl nil maps_composite nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (FM type-decl nil SPLpartialrefinement nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
+    (CK type-decl nil SPLpartialrefinement nil)
+    (Asset type-decl nil SPLpartialrefinement nil)
+    (AssetName type-decl nil SPLpartialrefinement nil)
+    (AM type-eq-decl nil SPLpartialrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLpartialrefinement nil)
+    (transitive? const-decl "bool" relations nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (composeMaps const-decl "maps[S, U].mapping" maps_composite nil)
+    (getRightResult formula-decl nil maps nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (image const-decl "finite_sets[T].finite_set" maps nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (extend const-decl "R" extend nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (member const-decl "bool" sets nil)
+    (singleton_elt const-decl "T" sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_extend application-judgement "finite_set[T]"
+     extend_set_props nil)
+    (nonempty_extend application-judgement "(nonempty?[T])"
+     extend_set_props nil)
+    (q skolem-const-decl "CM" SPLpartialrefinement nil)
+    (getRight const-decl "T" maps nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (dom const-decl "set[S]" maps nil)
+    (CM type-eq-decl nil SPLpartialrefinement nil)
+    (m skolem-const-decl "CM" SPLpartialrefinement nil)
+    (c skolem-const-decl "Conf" SPLpartialrefinement nil))
+   shostak))
  (weakPartRefAltReflexive 0
   (weakPartRefAltReflexive-1 nil 3655116425
    ("" (skolem 1 (x s))
