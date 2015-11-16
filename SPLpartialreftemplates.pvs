@@ -8,21 +8,27 @@ aSet: VAR finite_sets[Asset].finite_set
 am1,am2,pairs: VAR AM
 a1,a2: VAR Asset
 an: VAR AssetName
+anSet: VAR finite_sets[AssetName].finite_set
 s,t: VAR set[Configuration]
 c: VAR Configuration
 fm,fm1,fm2: VAR FM
 P,Q: VAR Name
 exp: VAR Formula_
-f: VAR [Configuration -> Configuration]
 
 % Importing SPLPartialRefinement theory and instantiating types. 
 IMPORTING SPLpartialrefinement{{FM:=WFM, Conf:=Configuration, {||} := semantics,
 	    CK:=CK, Asset:=Assets.Asset,AssetName:=Assets.AssetName,[||] := semantics}}
 pl,pl2,pl3: VAR PL
+map: VAR CM
 
 % --------------------------------------------Restriction Operator---------------------------------------------------------------------
-% ----Filter configurations whose products do not contain aSet
+% ----Filter configurations whose products do not contain anSet
+<>(pl,anSet):set[Configuration] = {c | semantics(F(pl))(c) AND 
+                                       (FORALL (i:Item) : evalCK(K(pl),c)(i) => empty?(intersection(getRS(i),anSet)))}
+
+% ----Filter configurations whose products do not contain aSet ****THIS DEFINITION MIGHT NOT BE USED ANYMORE****
 <>(pl,aSet):set[Configuration] = {c | semantics(F(pl))(c) AND empty?(intersection(aSet, prod(pl,c)))}
+
 % ----Filter configurations that satisfy an expression exp and belong to a feature model fm
 <>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
 
@@ -32,21 +38,7 @@ pl,pl2,pl3: VAR PL
 
 syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
       am1=union(singleton(an,a1),pairs) AND
-      am2=union(singleton(an,a2),pairs) AND
-      NOT member(a2,img(pairs)) 
-
-% Lemma <When an asset is changed, we do not check refinement over it. It is simply excluded and the refinement is checked for the rest
-%        and this is guaranteed in the definition>
-changedAssetNotIncluded: LEMMA  
-    FORALL(pl,am2,pairs,a1,a2,an,s):
-    (
-      (
-        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(a1))
-      )
-      =>
-        (FORALL c : s(c) => (NOT prod(pl,c)(a1) AND NOT member(an,eval(K(pl2),c)) AND NOT member(a2,semantics(K(pl2))(am2)(c))))
-    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+      am2=union(singleton(an,a2),pairs) 
 
 % Lemma <Since the only difference between "pairs" and "A(pl)" is the element "(an,a1)" and this asset is not included, the evaluation
 %        of A(pl) is the same as pairs.>
@@ -55,10 +47,21 @@ FORALL(pl,am2,pairs,a1,a2,an,s):
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(a1))
+        s = <>(pl,singleton(an))
       )
       =>
         (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+sameEvalPairs2: LEMMA 
+FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(pl,singleton(an))
+      )
+      =>
+        (FORALL c : s(c) => (semantics(K(pl))(am2)(c)) = semantics(K(pl2))(pairs)(c))
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 % Theorem <The products that do not contain the changed asset do not change> 
@@ -67,7 +70,7 @@ changeAssetSameProducts: THEOREM
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(a1))
+        s = <>(pl,singleton(an))
       )
       =>
         (FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(am2)(c))))
@@ -79,7 +82,7 @@ changeAssetStrong: THEOREM
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(a1))
+        s = <>(pl,singleton(an))
       )
       =>
         strongPartialRefinement(pl,pl2,s)
@@ -91,7 +94,7 @@ changeAssetWeakAlt: THEOREM
                 (
                    (
                       syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-                      s = <>(pl, singleton(a1)) AND
+                      s = <>(pl, singleton(an)) AND
                       s = t
                    ) 
                    => 
@@ -100,16 +103,16 @@ changeAssetWeakAlt: THEOREM
       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 % Theorem <The change asset template represents a strong partial refinement>
-changeAssetWeak: THEOREM
-    FORALL(pl,am2,pairs,a1,a2,an,f):
-    (
-      (
-	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
-        d(f) = <>(pl,singleton(a1)) AND
-        f = id
-      ) 
-      => weakPartialRefinement(pl,pl2,f)
-    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+%changeAssetWeak: THEOREM
+%    FORALL(pl,am2,pairs,a1,a2,an,map):
+%    (
+%      (
+%	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
+%        domain(map) = <>(pl,singleton(a1)) AND
+%        identity?(map)
+%      ) 
+%      => weakPartialRefinement(pl,pl2,map)
+%    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------
