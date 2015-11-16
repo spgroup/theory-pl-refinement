@@ -142,19 +142,6 @@ maps[S:TYPE,T:TYPE]: THEORY
   
  END maps
 
-% Theory for maps that have the same type for the domain and image
-maps_identity[S:TYPE]: THEORY
- BEGIN
-
-  IMPORTING maps
-  m: VAR maps[S,S].mapping
-
-  %Checks whether each element is associated with itself
-  identity?(m):bool = FORALL (l:S) : getRight(m, l) = l
-
- END maps_identity
-
-
 %Theory for composing maps.
 maps_composite[S:TYPE,T:TYPE,U:TYPE]: THEORY
  BEGIN
@@ -175,3 +162,19 @@ maps_composite[S:TYPE,T:TYPE,U:TYPE]: THEORY
   domCompos: LEMMA FORALL m,n: subset?(domain(composeMaps(m,n)),domain(m))
 
  END maps_composite
+
+% Theory for maps that have the same type for the domain and image
+maps_identity[S:TYPE]: THEORY
+ BEGIN
+
+  IMPORTING maps
+  IMPORTING maps_composite[S,S,S]
+
+  m: VAR maps[S,S].mapping
+
+  %Checks whether each element is associated with itself
+  identity?(m):bool = FORALL (l:S) : getRight(m, l) = l
+
+  composeIdResultsId: LEMMA FORALL m: identity?(m) => composeMaps(m,m) = m
+
+ END maps_identity
