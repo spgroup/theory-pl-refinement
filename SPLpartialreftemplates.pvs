@@ -103,16 +103,16 @@ changeAssetWeakAlt: THEOREM
       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 % Theorem <The change asset template represents a strong partial refinement>
-%changeAssetWeak: THEOREM
-%    FORALL(pl,am2,pairs,a1,a2,an,map):
-%    (
-%      (
-%	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
-%        domain(map) = <>(pl,singleton(a1)) AND
-%        identity?(map)
-%      ) 
-%      => weakPartialRefinement(pl,pl2,map)
-%    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+changeAssetWeak: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,map):
+    (
+      (
+	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
+        domain(map) = <>(pl,singleton(an)) AND
+        identity?(map)
+      ) 
+      => weakPartialRefinement(pl,pl2,map)
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------

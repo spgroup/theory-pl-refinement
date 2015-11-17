@@ -405,9 +405,6 @@
     (Formula_ type-decl nil Formula__adt nil)
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil))
    shostak))
- (changeAssetWeakAlt_TCC1 0
-  (changeAssetWeakAlt_TCC1-1 nil 3656675502 ("" (subtype-tcc) nil nil)
-   nil nil))
  (changeAssetWeakAlt 0
   (changeAssetWeakAlt-1 nil 3655632850
    ("" (skolem 1 (pl am2 pairs a1 a2 an s t))
@@ -656,28 +653,34 @@
  (changeAssetWeak 0
   (changeAssetWeak-1 nil 3655846829
    ("" (skolem 1 (pl am2 pairs a1 a2 an map))
-    (("" (use changeAssetSameProducts)
-      (("" (expand syntaxChangeAsset)
-        (("" (bddsimp)
-          (("" (expand weakPartialRefinement)
-            (("" (expand identity?)
-              (("" (skolem 2 c)
-                (("" (inst -5 c)
-                  (("" (inst -4 c)
-                    (("" (bddsimp)
-                      (("" (expand prod)
-                        (("" (replace -6 2)
-                          (("" (use SPLrefinement.assetRefinement)
-                            (("" (expand preorder?)
+    (("" (lemma changeAssetSameProducts)
+      (("" (inst -1 pl am2 pairs a1 a2 an "domain(map)")
+        (("" (expand syntaxChangeAsset)
+          (("" (bddsimp)
+            (("" (expand weakPartialRefinement)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (expand identity?)
+                    (("" (inst -5 c)
+                      (("" (replace -5 1)
+                        (("" (bddsimp)
+                          (("" (expand prod)
+                            (("" (replace -5 1)
                               ((""
-                                (expand reflexive?)
+                                (use SPLrefinement.assetRefinement)
                                 ((""
-                                  (flatten)
+                                  (expand preorder?)
                                   ((""
-                                    (inst
-                                     -1
-                                     "(semantics(K(pl))(A(pl))(c))")
-                                    (("" (grind) nil nil))
+                                    (flatten)
+                                    ((""
+                                      (expand reflexive?)
+                                      ((""
+                                        (inst
+                                         -1
+                                         "(semantics(K(pl))(am2)(c))")
+                                        nil
+                                        nil))
+                                      nil))
                                     nil))
                                   nil))
                                 nil))
@@ -697,6 +700,16 @@
     nil)
    ((changeAssetSameProducts formula-decl nil SPLpartialreftemplates
      nil)
+    (syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil)
+    (weakPartialRefinement const-decl "bool" SPLpartialrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil)
+    (identity? const-decl "bool" maps_identity nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (mapping type-eq-decl nil maps nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (semantics const-decl "finite_sets[Asset].finite_set"
@@ -719,37 +732,7 @@
     (boolean nonempty-type-decl nil booleans nil)
     (FM type-eq-decl nil FeatureModel nil)
     (Formula_ type-decl nil Formula__adt nil)
-    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
-    (mapping type-eq-decl nil maps nil)
-    (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (nonempty_singleton_finite application-judgement
-     "non_empty_finite_set" finite_sets nil)
-    (identity? const-decl "bool" maps_identity nil)
-    (preorder? const-decl "bool" orders nil)
-    (eval const-decl "finite_sets[AssetName].finite_set"
-          ConfigurationKnowledge nil)
-    (transitive? const-decl "bool" relations nil)
-    (img const-decl "set[T]" maps nil)
-    (member const-decl "bool" sets nil)
-    (dom const-decl "set[S]" maps nil)
-    (singleton const-decl "(singleton?)" sets nil)
-    (extend const-decl "R" extend nil)
-    (map const-decl "finite_sets[T].finite_set" maps nil)
-    (singleton_elt const-decl "T" sets nil)
-    (getRight const-decl "T" maps nil)
-    (finite_extend application-judgement "finite_set[T]"
-     extend_set_props nil)
-    (nonempty_extend application-judgement "(nonempty?[T])"
-     extend_set_props nil)
-    (finite_union application-judgement "finite_set" finite_sets nil)
-    (nonempty_finite_union1 application-judgement
-     "non_empty_finite_set" finite_sets nil)
-    (reflexive? const-decl "bool" relations nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (prod const-decl "finite_sets[Asset].finite_set"
-     SPLpartialrefinement nil)
-    (weakPartialRefinement const-decl "bool" SPLpartialrefinement nil)
-    (syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil))
+    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil))
    shostak))
  (transfOptMand_TCC1 0
   (transfOptMand_TCC1-1 nil 3655826326 ("" (subtype-tcc) nil nil) nil
