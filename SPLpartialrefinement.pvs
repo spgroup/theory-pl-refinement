@@ -92,18 +92,17 @@ BEGIN
    % Theorem <weak partial refinement is reflexive>
     weakPartRefReflexive: THEOREM (FORALL pl,m : identity?(m)  => weakPartialRefinement(pl,pl,m))
    % Theorem <weak partial refinement is transitive>
-    weakPartRefTransitive: THEOREM (FORALL pl1, pl2, pl3, (m,n,q:CM) : 
-                                         (
+    weakPartRefTransitive: THEOREM FORALL pl1, pl2, pl3, (m,n:CM) :
+                                     ( 
+                                          (
                                             weakPartialRefinement(pl1,pl2,m) 
                                            AND 
                                             weakPartialRefinement(pl2,pl3,n) 
                                            AND 
                                             image(m) = domain(n)
-                                           AND
-                                            q = composeMaps(m,n)
                                           )
                                           => weakPartialRefinement(pl1,pl3,q)
-                               )
+                                      ) WHERE q = composeMaps(m,n)
 
 
     % Theorem <weak partial refinement is reflexive>

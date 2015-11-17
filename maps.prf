@@ -54,9 +54,9 @@
                     (("1" (expand unique)
                       (("1"
                         (inst -2 l r "the(map(m,
-                extend[S, {n: S | dom(m)(n)}, bool, FALSE]
-                    (restrict[S, {n: S | dom(m)(n)}, boolean]
-                         (singleton(l)))))")
+extend[S, {n: S | dom(m)(n)}, bool, FALSE]
+(restrict[S, {n: S | dom(m)(n)}, boolean]
+(singleton(l)))))")
                         (("1" (bddsimp)
                           (("1" (expand map) (("1" (grind) nil nil))
                             nil))
@@ -74,9 +74,9 @@
                         (("1" (expand unique)
                           (("1"
                             (inst -2 l r "the(map(m,
-                extend[S, {n: S | dom(m)(n)}, bool, FALSE]
-                    (restrict[S, {n: S | dom(m)(n)}, boolean]
-                         (singleton(l)))))")
+extend[S, {n: S | dom(m)(n)}, bool, FALSE]
+(restrict[S, {n: S | dom(m)(n)}, boolean]
+(singleton(l)))))")
                             (("1" (bddsimp)
                               (("1"
                                 (expand map)
@@ -195,19 +195,15 @@
   (same_img_TCC3-1 nil 3656461330 ("" (subtype-tcc) nil nil) nil nil))
  (same_img 0
   (same_img-1 nil 3656415620
-   ("" (skolem 1 (m n q l))
-    (("" (flatten)
-      (("" (expand domain)
+   ("" (skolem 1 (m n l))
+    (("" (expand domain)
+      (("" (bddsimp)
         (("" (skolem -1 u)
           (("" (lemma "maps[S,U].getRightResult")
-            (("" (inst -1 q u l)
+            (("" (inst -1 "composeMaps(m,n)" u l)
               (("" (bddsimp)
                 (("" (replace -2 1)
-                  (("" (expand composeMaps)
-                    (("" (decompose-equality -3)
-                      (("" (inst -1 "(l,u)") (("" (bddsimp) nil nil))
-                        nil))
-                      nil))
+                  (("" (expand composeMaps) (("" (bddsimp) nil nil))
                     nil))
                   nil))
                 nil))
@@ -217,24 +213,20 @@
         nil))
       nil))
     nil)
-   ((boolean nonempty-type-decl nil booleans nil)
+   ((domain const-decl "finite_sets[S].finite_set" maps nil)
+    (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (set type-eq-decl nil sets nil)
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
     (mapping type-eq-decl nil maps nil)
-    (dom const-decl "set[S]" maps nil)
-    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
     (T formal-type-decl nil maps_composite nil)
-    (getRight const-decl "T" maps nil)
     (composeMaps const-decl "maps[S, U].mapping" maps_composite nil)
+    (dom const-decl "set[S]" maps nil)
     (getRightResult formula-decl nil maps nil)
     (S formal-type-decl nil maps_composite nil)
-    (U formal-type-decl nil maps_composite nil)
-    (domain const-decl "finite_sets[S].finite_set" maps nil))
+    (U formal-type-decl nil maps_composite nil))
    shostak))
  (domCompos 0
   (domCompos-1 nil 3656438852
@@ -345,34 +337,8 @@
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
     (mapping type-eq-decl nil maps nil)
-    (domain const-decl "finite_sets[S].finite_set" maps nil) nil
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
     (dom const-decl "set[S]" maps nil)
     (composeMaps const-decl "maps[S, U].mapping" maps_composite nil))
-   shostak))
- (teste 0
-  (teste-1 nil 3656626729
-   ("" (skolem 1 m)
-    (("" (bddsimp)
-      (("" (expand* composeMaps identity)
-        (("" (expand identity?)
-          (("" (skolem 1 l)
-            (("" (decompose-equality -1)
-              (("1" (inst -1 "(l,l)")
-                (("1" (bddsimp)
-                  (("1" (lemma "maps[S,S].getRightResult")
-                    (("1" (inst -1 m l l) (("1" (bddsimp) nil nil))
-                      nil))
-                    nil)
-                   ("2" (grind) (("2" (postpone) nil nil)) nil)
-                   ("3" (postpone) nil nil))
-                  nil))
-                nil)
-               ("2" (postpone) nil nil) ("3" (postpone) nil nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   nil shostak)))
+   shostak)))
 
