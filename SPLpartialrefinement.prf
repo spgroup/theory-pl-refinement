@@ -291,8 +291,6 @@
       nil))
     nil)
    ((weakPartialRefinement const-decl "bool" SPLpartialrefinement nil)
-    (c skolem-const-decl "Conf" SPLpartialrefinement nil)
-    (m skolem-const-decl "CM" SPLpartialrefinement nil)
     (CM type-eq-decl nil SPLpartialrefinement nil)
     (dom const-decl "set[S]" maps nil)
     (mapping type-eq-decl nil maps nil)
@@ -1153,6 +1151,34 @@
      SPLpartialrefinement nil)
     (Conf type-decl nil SPLpartialrefinement nil))
    shostak))
+ (amCompStrongDef_TCC1 0
+  (amCompStrongDef_TCC1-1 nil 3656842686 ("" (subtype-tcc) nil nil) nil
+   nil))
+ (amCompStrongDef 0
+  (amCompStrongDef-1 nil 3656842687
+   ("" (skolem 1 (pl am1 am2 anSet s))
+    (("" (expand amPartialRefinement)
+      (("" (bddsimp)
+        (("" (expand strongPartialRefinement)
+          (("" (skolem 1 c)
+            (("" (bddsimp)
+              (("" (expand prod)
+                (("" (expand subset?)
+                  (("" (expand member)
+                    (("" (typepred am1)
+                      (("" (expand unique) (("" (postpone) nil nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak))
  (strongPartCaseWeak 0
   (strongPartCaseWeak-1 nil 3655109962
    ("" (skolem 1 (map pl1 pl2))
@@ -1314,5 +1340,372 @@
      SPLpartialrefinement nil)
     (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
      nil))
+   shostak))
+ (confsStrongPartRef 0
+  (confsStrongPartRef-1 nil 3656781344
+   ("" (skolem 1 (pl1 pl2 s))
+    (("" (bddsimp)
+      (("" (skolem 1 c)
+        (("" (expand strongPartialRefinement)
+          (("" (inst -1 c)
+            (("" (expand prod)
+              (("" (bddsimp)
+                (("1" (grind) (("1" (postpone) nil nil)) nil)
+                 ("2" (postpone) nil nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak))
+ (fmPartRef 0
+  (fmPartRef-1 nil 3656842354
+   ("" (skolem 1 (fm1 fm2))
+    (("" (bddsimp)
+      (("1" (expand* "|=" fmPartialRefinement)
+        (("1" (skolem 1 c)
+          (("1" (expand subset?)
+            (("1" (inst -1 c)
+              (("1" (expand member) (("1" (bddsimp) nil nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil)
+       ("2" (expand* "|=" fmPartialRefinement)
+        (("2" (expand subset?)
+          (("2" (skolem 1 c)
+            (("2" (inst -1 c)
+              (("2" (expand member) (("2" (bddsimp) nil nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((Conf type-decl nil SPLpartialrefinement nil)
+    (member const-decl "bool" sets nil)
+    (subset? const-decl "bool" sets nil)
+    (\|= const-decl "bool" SPLrefinement nil)
+    (fmPartialRefinement const-decl "bool" SPLpartialrefinement nil))
+   shostak))
+ (commutativeDiagram 0
+  (commutativeDiagram-1 nil 3656777834
+   ("" (skolem 1 (pl1 pl2 pl3 s))
+    (("" (bddsimp)
+      (("" (expand weakPartialRefinementAlt)
+        (("" (skolem 1 p1)
+          (("" (bddsimp)
+            (("" (expand prod)
+              (("" (skolem -5 c)
+                (("" (flatten)
+                  (("" (expand member)
+                    (("" (expand plRefinement)
+                      (("" (inst -1 c)
+                        (("" (bddsimp)
+                          (("" (skolem -2 c2)
+                            (("" (bddsimp)
+                              ((""
+                                (expand strongPartialRefinement)
+                                ((""
+                                  (inst -4 c2)
+                                  ((""
+                                    (expand prod)
+                                    ((""
+                                      (inst
+                                       1
+                                       "([||](K(pl3))(A(pl3))(c2))")
+                                      ((""
+                                        (bddsimp)
+                                        (("1"
+                                          (use assetRefinement)
+                                          (("1"
+                                            (expand preorder?)
+                                            (("1"
+                                              (expand transitive?)
+                                              (("1"
+                                                (flatten)
+                                                (("1"
+                                                  (inst
+                                                   -2
+                                                   "([||](K(pl1))(A(pl1))(c))"
+                                                   "([||](K(pl2))(A(pl2))(c2))"
+                                                   "([||](K(pl3))(A(pl3))(c2))")
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (replace -10 1)
+                                                      (("1"
+                                                        (propax)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil)
+                                         ("2"
+                                          (inst 1 c2)
+                                          (("2"
+                                            (bddsimp)
+                                            (("2" (postpone) nil nil))
+                                            nil))
+                                          nil)
+                                         ("3" (postpone) nil nil)
+                                         ("4" (postpone) nil nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak))
+ (commutativeDiagram2 0
+  (commutativeDiagram2-2 nil 3656840004
+   ("" (skolem 1 (pl1 pl2 pl3 s))
+    (("" (bddsimp)
+      ((""
+        (expand* weakPartialRefinementAlt plRefinement
+         strongPartialRefinement)
+        (("" (skolem 1 p1)
+          (("" (bddsimp)
+            (("" (expand prod)
+              (("" (expand member)
+                (("" (expand prod)
+                  (("" (use assetRefinement)
+                    (("" (expand preorder?)
+                      (("" (flatten)
+                        (("" (expand transitive?)
+                          (("" (skolem -6 c)
+                            (("" (inst -3 c)
+                              ((""
+                                (inst -4 c)
+                                ((""
+                                  (bddsimp)
+                                  (("1"
+                                    (skolem -5 c2)
+                                    (("1"
+                                      (bddsimp)
+                                      (("1"
+                                        (inst
+                                         1
+                                         "([||](K(pl3))(A(pl3))(c2))")
+                                        (("1"
+                                          (bddsimp)
+                                          (("1"
+                                            (replace -9 1)
+                                            (("1"
+                                              (inst
+                                               -2
+                                               "([||](K(pl1))(A(pl1))(c))"
+                                               "([||](K(pl2))(A(pl2))(c))"
+                                               "([||](K(pl3))(A(pl3))(c2))")
+                                              (("1" (bddsimp) nil nil))
+                                              nil))
+                                            nil)
+                                           ("2"
+                                            (inst 1 c2)
+                                            (("2" (bddsimp) nil nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil)
+                                   ("2"
+                                    (expand subset?)
+                                    (("2"
+                                      (inst -5 c)
+                                      (("2"
+                                        (expand member)
+                                        (("2" (bddsimp) nil nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((plRefinement const-decl "bool" SPLrefinement nil)
+    (strongPartialRefinement const-decl "bool" SPLpartialrefinement
+     nil)
+    (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
+     nil)
+    (member const-decl "bool" sets nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (FM type-decl nil SPLpartialrefinement nil)
+    (Conf type-decl nil SPLpartialrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
+    (CK type-decl nil SPLpartialrefinement nil)
+    (Asset type-decl nil SPLpartialrefinement nil)
+    (AssetName type-decl nil SPLpartialrefinement nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil SPLpartialrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLpartialrefinement nil)
+    (subset? const-decl "bool" sets nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (transitive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil)
+    (prod const-decl
+     "finite_sets[finite_sets[Asset].finite_set].finite_set"
+     SPLpartialrefinement nil))
+   nil)
+  (commutativeDiagram2-1 nil 3656838781
+   ("" (skolem 1 (pl1 pl2 pl3 s))
+    (("" (bddsimp)
+      ((""
+        (expand* weakPartialRefinementAlt plRefinement
+         strongPartialRefinement)
+        (("" (skolem 1 p1)
+          (("" (bddsimp)
+            (("" (expand prod)
+              (("" (skolem -5 c)
+                (("" (inst -1 c)
+                  (("" (expand member)
+                    (("" (bddsimp)
+                      (("" (inst -3 c)
+                        (("" (bddsimp)
+                          (("1" (skolem -3 c2)
+                            (("1" (bddsimp)
+                              (("1"
+                                (inst 1 "([||](K(pl3))(A(pl3))(c2))")
+                                (("1"
+                                  (bddsimp)
+                                  (("1"
+                                    (expand prod)
+                                    (("1"
+                                      (use assetRefinement)
+                                      (("1"
+                                        (expand preorder?)
+                                        (("1"
+                                          (flatten)
+                                          (("1"
+                                            (expand transitive?)
+                                            (("1"
+                                              (inst
+                                               -2
+                                               "([||](K(pl1))(A(pl1))(c))"
+                                               "([||](K(pl2))(A(pl2))(c))"
+                                               "([||](K(pl3))(A(pl3))(c2))")
+                                              (("1"
+                                                (bddsimp)
+                                                (("1"
+                                                  (replace -10 1)
+                                                  (("1"
+                                                    (propax)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil)
+                                   ("2"
+                                    (inst 1 c2)
+                                    (("2"
+                                      (expand subset?)
+                                      (("2"
+                                        (expand prod)
+                                        (("2" (bddsimp) nil nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil)
+                           ("2" (expand subset?)
+                            (("2" (inst -3 c)
+                              (("2"
+                                (expand member)
+                                (("2" (bddsimp) nil nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((prod const-decl
+     "finite_sets[finite_sets[Asset].finite_set].finite_set"
+     SPLpartialrefinement nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil)
+    (Conf type-decl nil SPLpartialrefinement nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (transitive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil)
+    (subset? const-decl "bool" sets nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
+    (FM type-decl nil SPLpartialrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLpartialrefinement nil)
+    (AM type-eq-decl nil SPLpartialrefinement nil)
+    (unique const-decl "bool" maps nil)
+    (AssetName type-decl nil SPLpartialrefinement nil)
+    (CK type-decl nil SPLpartialrefinement nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset type-decl nil SPLpartialrefinement nil)
+    (member const-decl "bool" sets nil)
+    (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
+     nil)
+    (strongPartialRefinement const-decl "bool" SPLpartialrefinement
+     nil)
+    (plRefinement const-decl "bool" SPLrefinement nil))
    shostak)))
 

@@ -23,7 +23,10 @@ BEGIN
     m,n: VAR CM
     s,t,u: VAR set[Conf]
     fm,fm1,fm2: VAR FM
-    am: VAR AM
+    am,am1,am2: VAR AM
+    an: VAR AssetName
+    a1,a2: VAR Asset
+    anSet: VAR set[AssetName]
     ck: VAR CK
     IMPORTING maps_identity[Conf]
     IMPORTING maps_composite[Conf,Conf,Conf]
@@ -70,6 +73,11 @@ BEGIN
 
     fmPartialRefinement(fm1,fm2,s) : bool = 
           FORALL c: s(c) => {||}(fm1)(c) AND {||}(fm2)(c)
+
+    amPartialRefinement(am1,am2,anSet) : bool =
+          subset?(anSet,dom(am1)) AND subset?(anSet,dom(am2)) AND
+          (FORALL an: (anSet)(an) =>
+         EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2)) 
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------PROPERTIES----------------------------------------------
@@ -128,6 +136,7 @@ BEGIN
     )
     WHERE fm1=F(pl),pl2=(# F := fm2, A := A(pl), K := K(pl) #) 
 
+
     %--------------------------------------------------EQUIVALENCE BETWEEN DEFS-----------------------------------------------
 
     % Theorem <correspondence between strong partial ref and weak partial ref> 
@@ -140,5 +149,24 @@ BEGIN
     eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t: 
                                 (s = {|F(pl1)|} AND t = {|F(pl2)|}) => (plRefinement(pl1,pl2) <=> weakPartialRefinementAlt(pl1,pl2,s,t))
 
+    confsStrongPartRef: LEMMA FORALL pl1,pl2,s: strongPartialRefinement(pl1,pl2,s) => (FORALL c : {|F(pl1)|}(c) => {|F(pl2)|}(c))
+
+    fmPartRef: LEMMA FORALL fm1,fm2: (fm1 |= fm2) <=> fmPartialRefinement(fm1,fm2,{|fm1|})
+
+    % Theorem <commutative diagram> 
+    %this is not proved and the diagram might not be commutable
+    commutativeDiagram: THEOREM (FORALL pl1,pl2,pl3,s :
+                                         (plRefinement(pl1, pl2) AND strongPartialRefinement(pl2,pl3,s) AND 
+                                          subset?(s,{|F(pl2)|}) AND subset?(s,{|F(pl3)|})) => 
+                                         weakPartialRefinementAlt(pl1,pl3,s,{|F(pl3)|}))
+
+    %this is proved
+    commutativeDiagram2: THEOREM (FORALL pl1,pl2,pl3,s :
+                                         (strongPartialRefinement(pl1, pl2,s) AND plRefinement(pl2,pl3) AND 
+                                          subset?(s,{|F(pl2)|})) => 
+                                         weakPartialRefinementAlt(pl1,pl3,s,{|F(pl3)|}))
+
+    
+                                
 
 END SPLpartialrefinement
