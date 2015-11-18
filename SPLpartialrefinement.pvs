@@ -47,7 +47,7 @@ BEGIN
    % --------------------------------------------------------------------------------------------------------
     
    % Partial Refinement Relation - this definition requires that the configuration does not change
-    strongPartialRefinement(pl1,pl2,s) : bool = 
+    strongPartialRefinement(pl1,pl2:PL,s:{confs:set[Conf]| subset?(confs,{||}(F(pl1))) AND subset?(confs,{||}(F(pl2)))}) : bool = 
      FORALL c: s(c) =>
 	  (
               prod(pl1,c)
@@ -56,7 +56,7 @@ BEGIN
           )
 
    % Partial Refinement Relation - this definition considers a function that maps configurations.
-    weakPartialRefinement(pl1,pl2,m) : bool = 
+    weakPartialRefinement(pl1,pl2:PL,m:{pairs:CM | subset?(domain(pairs),{||}(F(pl1))) AND subset?(image(pairs),{||}(F(pl2)))}) : bool = 
     	FORALL c : domain(m)(c)  => 
             (
                prod(pl1,c) 
@@ -65,7 +65,9 @@ BEGIN
             ) 
 
     % Partial Refinement Relation - this definition has two indexes.
-    weakPartialRefinementAlt(pl1,pl2,s,t) : bool =  
+    weakPartialRefinementAlt(pl1,pl2:PL,
+                              s:{confs:set[Conf] | subset?(confs,{||}(F(pl1)))},t:{confs:set[Conf]| subset?(confs,{||}(F(pl2)))}
+                            ) : bool =  
          FORALL p1 : prod(pl1,s)(p1) => 
             (
                EXISTS p2 : prod(pl2,t)(p2) AND (p1 |- p2)
@@ -78,6 +80,7 @@ BEGIN
           subset?(anSet,dom(am1)) AND subset?(anSet,dom(am2)) AND
           (FORALL an: (anSet)(an) =>
          EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2)) 
+        
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------PROPERTIES----------------------------------------------
@@ -149,8 +152,6 @@ BEGIN
     eqPlRefPartWeakAlt: THEOREM FORALL pl1,pl2,s,t: 
                                 (s = {|F(pl1)|} AND t = {|F(pl2)|}) => (plRefinement(pl1,pl2) <=> weakPartialRefinementAlt(pl1,pl2,s,t))
 
-    confsStrongPartRef: LEMMA FORALL pl1,pl2,s: strongPartialRefinement(pl1,pl2,s) => (FORALL c : {|F(pl1)|}(c) => {|F(pl2)|}(c))
-
     fmPartRef: LEMMA FORALL fm1,fm2: (fm1 |= fm2) <=> fmPartialRefinement(fm1,fm2,{|fm1|})
 
     % Theorem <commutative diagram> 
@@ -165,8 +166,6 @@ BEGIN
                                          (strongPartialRefinement(pl1, pl2,s) AND plRefinement(pl2,pl3) AND 
                                           subset?(s,{|F(pl2)|})) => 
                                          weakPartialRefinementAlt(pl1,pl3,s,{|F(pl3)|}))
-
-    
                                 
 
 END SPLpartialrefinement

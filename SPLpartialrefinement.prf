@@ -1151,34 +1151,6 @@
      SPLpartialrefinement nil)
     (Conf type-decl nil SPLpartialrefinement nil))
    shostak))
- (amCompStrongDef_TCC1 0
-  (amCompStrongDef_TCC1-1 nil 3656842686 ("" (subtype-tcc) nil nil) nil
-   nil))
- (amCompStrongDef 0
-  (amCompStrongDef-1 nil 3656842687
-   ("" (skolem 1 (pl am1 am2 anSet s))
-    (("" (expand amPartialRefinement)
-      (("" (bddsimp)
-        (("" (expand strongPartialRefinement)
-          (("" (skolem 1 c)
-            (("" (bddsimp)
-              (("" (expand prod)
-                (("" (expand subset?)
-                  (("" (expand member)
-                    (("" (typepred am1)
-                      (("" (expand unique) (("" (postpone) nil nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   nil shostak))
  (strongPartCaseWeak 0
   (strongPartCaseWeak-1 nil 3655109962
    ("" (skolem 1 (map pl1 pl2))
@@ -1707,5 +1679,20 @@
     (strongPartialRefinement const-decl "bool" SPLpartialrefinement
      nil)
     (plRefinement const-decl "bool" SPLrefinement nil))
-   shostak)))
+   shostak))
+ (strongPartialOverRefinement 0
+  (strongPartialOverRefinement-1 nil 3656845517
+   ("" (skolem 1 (pl1 pl2 pl3 pl4 s))
+    (("" (bddsimp)
+      (("" (expand* strongPartialRefinement plRefinement)
+        (("" (skolem 1 c)
+          (("" (grind)
+            (("1" (postpone) nil nil) ("2" (postpone) nil nil)
+             ("3" (postpone) nil nil) ("4" (postpone) nil nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak)))
 
