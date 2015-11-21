@@ -1,0 +1,88 @@
+(SPLPartialRefTemplGen
+ (changeAssetStrong_TCC1 0
+  (changeAssetStrong_TCC1-1 nil 3657114361 ("" (subtype-tcc) nil nil)
+   nil nil))
+ (changeAssetStrong_TCC2 0
+  (changeAssetStrong_TCC2-1 nil 3657114361 ("" (subtype-tcc) nil nil)
+   nil nil))
+ (changeAssetStrong 0
+  (changeAssetStrong-1 nil 3657114379
+   ("" (skolem 1 (pl am2 pairs a1 a2 an s))
+    (("" (lemma sameEvalPairs)
+      (("" (lemma sameEvalPairs2)
+        (("" (inst -1 pl am2 pairs a1 a2 an s)
+          (("" (inst -2 pl am2 pairs a1 a2 an s)
+            (("" (expand syntaxChangeAsset)
+              (("" (bddsimp)
+                (("" (expand strongPartialRefinement)
+                  (("" (skolem 1 c)
+                    (("" (inst -4 c)
+                      (("" (inst -5 c)
+                        (("" (bddsimp)
+                          (("" (expand prod)
+                            (("" (replace -5 1)
+                              ((""
+                                (replace -6 1)
+                                ((""
+                                  (use assetRefinement)
+                                  ((""
+                                    (expand preorder?)
+                                    ((""
+                                      (flatten)
+                                      ((""
+                                        (expand reflexive?)
+                                        ((""
+                                          (inst
+                                           -1
+                                           "([||](K(pl))(pairs)(c))")
+                                          nil
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((sameEvalPairs formula-decl nil SPLPartialRefTemplGen nil)
+    (FM type-decl nil SPLpartialrefinement nil)
+    (Conf type-decl nil SPLpartialrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
+    (CK type-decl nil SPLpartialrefinement nil)
+    (Asset type-decl nil SPLpartialrefinement nil)
+    (AssetName type-decl nil SPLpartialrefinement nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil SPLpartialrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLpartialrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (syntaxChangeAsset const-decl "bool" SPLPartialRefTemplGen nil)
+    (strongPartialRefinement const-decl "bool" SPLpartialrefinement
+     nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (reflexive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil)
+    (sameEvalPairs2 formula-decl nil SPLPartialRefTemplGen nil))
+   shostak)))
+

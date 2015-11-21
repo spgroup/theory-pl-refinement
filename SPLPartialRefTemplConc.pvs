@@ -1,4 +1,4 @@
-SPLpartialreftemplates: THEORY
+SPLPartialRefTemplConc: THEORY
 BEGIN
 
 IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements
@@ -19,7 +19,7 @@ exp: VAR Formula_
 IMPORTING SPLpartialrefinement{{FM:=WFM, Conf:=Configuration, {||} := semantics,
 	    CK:=CK, Asset:=Assets.Asset,AssetName:=Assets.AssetName,[||] := semantics}}
 pl,pl2,pl3: VAR PL
-map: VAR CM
+m: VAR CM
 
 % --------------------------------------------Restriction Operator---------------------------------------------------------------------
 % ----Filter configurations whose products do not contain anSet
@@ -102,16 +102,16 @@ changeAssetWeakAlt: THEOREM
                 )
       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
-% Theorem <The change asset template represents a strong partial refinement>
+% Theorem <The change asset template represents a weak partial refinement>
 changeAssetWeak: THEOREM
-    FORALL(pl,am2,pairs,a1,a2,an,map):
+    FORALL(pl,am2,pairs,a1,a2,an,m):
     (
       (
 	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
-        domain(map) = <>(pl,singleton(an)) AND
-        identity?(map)
+        domain(m) = <>(pl,singleton(an)) AND
+        identity?(m)
       ) 
-      => weakPartialRefinement(pl,pl2,map)
+      => weakPartialRefinement(pl,pl2,m)
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
@@ -145,4 +145,19 @@ transOptMandPartRefStrong: THEOREM
             )
             WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
 
-END SPLpartialreftemplates
+% Theorem <Transform optional to mandatory feature template represents a weak partial refinement>
+transOptMandPartRefWeak: THEOREM 
+            FORALL (pl,fm2,m,P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 domain(m) = <>(F(pl),(IMPLIES_FORMULA (NAME_FORMULA(P),NAME_FORMULA(Q)))) AND
+                 identity?(m)
+               )
+               => weakPartialRefinement(pl,pl2,m)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+
+
+END SPLPartialRefTemplConc

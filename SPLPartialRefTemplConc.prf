@@ -1,4 +1,4 @@
-(SPLpartialreftemplates
+(SPLPartialRefTemplConc
  (sameEvalPairs 0
   (sameEvalPairs-1 nil 3655569386
    ("" (skolem 1 (pl am2 pairs a1 a2 an s))
@@ -111,7 +111,7 @@
         nil))
       nil))
     nil)
-   ((syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil)
+   ((syntaxChangeAsset const-decl "bool" SPLPartialRefTemplConc nil)
     (semantics const-decl "finite_sets[Asset].finite_set"
      ConfigurationKnowledge nil)
     (finite_intersection1 application-judgement "finite_set"
@@ -222,7 +222,7 @@
         nil))
       nil))
     nil)
-   ((syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil)
+   ((syntaxChangeAsset const-decl "bool" SPLPartialRefTemplConc nil)
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -302,7 +302,7 @@
         nil))
       nil))
     nil)
-   ((sameEvalPairs2 formula-decl nil SPLpartialreftemplates nil)
+   ((sameEvalPairs2 formula-decl nil SPLPartialRefTemplConc nil)
     (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
     (Formula_ type-decl nil Formula__adt nil)
     (FM type-eq-decl nil FeatureModel nil)
@@ -326,11 +326,14 @@
      ConfigurationKnowledge nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
-    (syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil)
-    (sameEvalPairs formula-decl nil SPLpartialreftemplates nil))
+    (syntaxChangeAsset const-decl "bool" SPLPartialRefTemplConc nil)
+    (sameEvalPairs formula-decl nil SPLPartialRefTemplConc nil))
    shostak))
  (changeAssetStrong_TCC1 0
   (changeAssetStrong_TCC1-1 nil 3655636131 ("" (subtype-tcc) nil nil)
+   nil nil))
+ (changeAssetStrong_TCC2 0
+  (changeAssetStrong_TCC2-1 nil 3656876548 ("" (subtype-tcc) nil nil)
    nil nil))
  (changeAssetStrong 0
   (changeAssetStrong-1 nil 3655416713
@@ -371,9 +374,9 @@
         nil))
       nil))
     nil)
-   ((changeAssetSameProducts formula-decl nil SPLpartialreftemplates
+   ((changeAssetSameProducts formula-decl nil SPLPartialRefTemplConc
      nil)
-    (syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil)
+    (syntaxChangeAsset const-decl "bool" SPLPartialRefTemplConc nil)
     (strongPartialRefinement const-decl "bool" SPLpartialrefinement
      nil)
     (prod const-decl "finite_sets[Asset].finite_set"
@@ -405,6 +408,12 @@
     (Formula_ type-decl nil Formula__adt nil)
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil))
    shostak))
+ (changeAssetWeakAlt_TCC1 0
+  (changeAssetWeakAlt_TCC1-1 nil 3656876548 ("" (subtype-tcc) nil nil)
+   nil nil))
+ (changeAssetWeakAlt_TCC2 0
+  (changeAssetWeakAlt_TCC2-1 nil 3656876548 ("" (subtype-tcc) nil nil)
+   nil nil))
  (changeAssetWeakAlt 0
   (changeAssetWeakAlt-1 nil 3655632850
    ("" (skolem 1 (pl am2 pairs a1 a2 an s t))
@@ -598,15 +607,15 @@
         nil))
       nil))
     nil)
-   ((syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil)
+   ((syntaxChangeAsset const-decl "bool" SPLPartialRefTemplConc nil)
     (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
      nil)
-    (changeAssetStrong formula-decl nil SPLpartialreftemplates nil)
+    (changeAssetStrong formula-decl nil SPLPartialRefTemplConc nil)
     (strongPartialRefinement const-decl "bool" SPLpartialrefinement
      nil)
     (prod const-decl "finite_sets[Asset].finite_set"
      SPLpartialrefinement nil)
-    (changeAssetSameProducts formula-decl nil SPLpartialreftemplates
+    (changeAssetSameProducts formula-decl nil SPLPartialRefTemplConc
      nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
@@ -649,6 +658,9 @@
    shostak))
  (changeAssetWeak_TCC1 0
   (changeAssetWeak_TCC1-1 nil 3655846816 ("" (subtype-tcc) nil nil) nil
+   nil))
+ (changeAssetWeak_TCC2 0
+  (changeAssetWeak_TCC2-1 nil 3656876548 ("" (subtype-tcc) nil nil) nil
    nil))
  (changeAssetWeak 0
   (changeAssetWeak-1 nil 3655846829
@@ -698,9 +710,9 @@
         nil))
       nil))
     nil)
-   ((changeAssetSameProducts formula-decl nil SPLpartialreftemplates
+   ((changeAssetSameProducts formula-decl nil SPLPartialRefTemplConc
      nil)
-    (syntaxChangeAsset const-decl "bool" SPLpartialreftemplates nil)
+    (syntaxChangeAsset const-decl "bool" SPLPartialRefTemplConc nil)
     (weakPartialRefinement const-decl "bool" SPLpartialrefinement nil)
     (preorder? const-decl "bool" orders nil)
     (reflexive? const-decl "bool" relations nil)
@@ -740,6 +752,9 @@
  (transOptMandPartRefStrong_TCC1 0
   (transOptMandPartRefStrong_TCC1-1 nil 3655832656
    ("" (subtype-tcc) nil nil) nil nil))
+ (transOptMandPartRefStrong_TCC2 0
+  (transOptMandPartRefStrong_TCC2-1 nil 3656876548
+   ("" (subtype-tcc) nil nil) nil nil))
  (transOptMandPartRefStrong 0
   (transOptMandPartRefStrong-1 nil 3655826327
    ("" (skolem 1 (pl fm2 s P Q))
@@ -771,7 +786,7 @@
         nil))
       nil))
     nil)
-   ((syntaxTransfOptMand const-decl "bool" SPLpartialreftemplates nil)
+   ((syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplConc nil)
     (strongPartialRefinement const-decl "bool" SPLpartialrefinement
      nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
@@ -814,5 +829,80 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil))
+   shostak))
+ (transOptMandPartRefWeak_TCC1 0
+  (transOptMandPartRefWeak_TCC1-1 nil 3656876548
+   ("" (subtype-tcc) nil nil) nil nil))
+ (transOptMandPartRefWeak_TCC2 0
+  (transOptMandPartRefWeak_TCC2-1 nil 3656876852
+   ("" (subtype-tcc) nil nil) nil nil))
+ (transOptMandPartRefWeak 0
+  (transOptMandPartRefWeak-1 nil 3656876549
+   ("" (skolem 1 (pl fm2 m P Q))
+    (("" (expand syntaxTransfOptMand)
+      (("" (bddsimp)
+        (("" (expand weakPartialRefinement)
+          (("" (skolem 2 c)
+            (("" (bddsimp)
+              (("" (expand prod)
+                (("" (expand identity?)
+                  (("" (inst -6 c)
+                    (("" (replace -6 2)
+                      (("" (use SPLrefinement.assetRefinement)
+                        (("" (expand preorder?)
+                          (("" (flatten)
+                            (("" (expand reflexive?)
+                              ((""
+                                (inst
+                                 -1
+                                 "(semantics(K(pl))(A(pl))(c))")
+                                nil
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplConc nil)
+    (weakPartialRefinement const-decl "bool" SPLpartialrefinement nil)
+    (identity? const-decl "bool" maps_identity nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (restrict const-decl "R" restrict nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (set type-eq-decl nil sets nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil))
    shostak)))
 
