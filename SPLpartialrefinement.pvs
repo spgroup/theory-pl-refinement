@@ -75,8 +75,7 @@ BEGIN
     fmPartialRefinement(fm1,fm2,s) : bool = 
           FORALL c: s(c) => {||}(fm1)(c) AND {||}(fm2)(c)
 
-    amPartialRefinement(am1,am2,anSet) : bool =
-          subset?(anSet,dom(am1)) AND subset?(anSet,dom(am2)) AND
+    amPartialRefinement(am1,am2:AM,anSet:{aNames:set[AssetName] | subset?(aNames,dom(am1)) AND subset?(aNames,dom(am2))}) : bool =
           (FORALL an: (anSet)(an) =>
          EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2))   
 

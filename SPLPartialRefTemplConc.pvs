@@ -12,6 +12,9 @@ anSet: VAR finite_sets[AssetName].finite_set
 s,t: VAR set[Configuration]
 c: VAR Configuration
 fm,fm1,fm2: VAR FM
+ck1,ck2,its: VAR CK
+item1,item2: VAR Item
+items: VAR set[Item]
 P,Q: VAR Name
 exp: VAR Formula_
 
@@ -157,6 +160,43 @@ transOptMandPartRefWeak: THEOREM
                => weakPartialRefinement(pl,pl2,m)
             )
             WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+           
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------CHANGE FEATURE EXPRESSION-----------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+syntaxChangeFeatureExp(ck1,ck2,item1,item2,items) : bool =
+            ck1 = union(item1,items) AND
+            ck2 = union(item2,items) AND
+            assets(item1)=assets(item2)
+
+conditionsChangeFeatureExp(fm,item1,item2) : bool = wt(fm,exp(item2)) 
+
+changeFeatureExpSameEvalCK: THEOREM
+            FORALL(pl,ck2,item1,item2,items,s):
+            (
+               (
+                 %wfCK(F(pl),A(pl),K(pl)) AND
+                 syntaxChangeFeatureExp(K(pl),ck2,item1,item2,items) AND
+                 conditionsChangeFeatureExp(F(pl),item1,item2)       AND
+                 s = <>(F(pl),AND_FORMULA(NOT_FORMULA(exp(item1)),NOT_FORMULA(exp(item2))))
+               )
+               =>
+              FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+changeFeatureExpStongPartRef: THEOREM
+            FORALL(pl,ck2,item1,item2,items,s):
+            (
+               (
+                 %wfCK(F(pl),A(pl),K(pl)) AND
+                 syntaxChangeFeatureExp(K(pl),ck2,item1,item2,items) AND
+                 conditionsChangeFeatureExp(F(pl),item1,item2)       AND
+                 s = <>(F(pl),AND_FORMULA(NOT_FORMULA(exp(item1)),NOT_FORMULA(exp(item2))))
+               )
+               =>
+              strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 
 
