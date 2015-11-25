@@ -2,6 +2,8 @@ FeatureModelRefinements: THEORY
  BEGIN
   IMPORTING Name, FeatureModel, FeatureModelSemantics
 
+  CONVERSION+ singleton
+
   % useful lemma
   wtFormAddNode: LEMMA
     FORALL(abs,con:FM, n1,n2:Name):
