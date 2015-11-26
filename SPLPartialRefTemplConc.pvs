@@ -220,9 +220,6 @@ syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
                                  features(fm1)(P) AND
                                  features(fm1)(Q) AND
                                  NOT (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q))) AND
-                                 %these two predicates below(subset?(pairs,am1) and subset?(its,ck1)) were not used during template proof.
-                                 subset?(pairs,am1) AND
-                                 subset?(its,ck1) AND
                                  am2 = difference(am1,pairs) AND
                                  ck2 = difference(ck1,its) 
                                 
