@@ -207,35 +207,38 @@ changeFeatureExpStrongPartRef: THEOREM
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
-removeOptionalFeature(fm1,fm2,P,Q):bool =  features(fm2) = remove(Q,features(fm1)) AND
+removeOptional(fm1,fm2,P,Q):bool =  features(fm2) = remove(Q,features(fm1)) AND
        formulae(fm2) = remove(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),formulae(fm1))
-%removeMandatoryFeature(fm1,fm2,P,Q):bool = features(fm1) = union(features(fm2),Q) AND
-%       formulae(fm1) = union(formulae(fm2),
-%                             union(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))))
 
-removeFeature(fm1,fm2,P,Q):bool = removeOptionalFeature(fm1,fm2,P,Q) %OR removeMandatoryFeature(fm1,fm2,P,Q)
+removeMandatory(fm1,fm2,P,Q):bool = features(fm1) = union(features(fm2),Q) AND
+       formulae(fm2) = difference(formulae(fm1),
+                                   union(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),
+                                         IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))
+                                        )   
+                                 )
+
+removeFeature(fm1,fm2,P,Q):bool = removeOptional(fm1,fm2,P,Q) OR removeMandatory(fm1,fm2,P,Q)
 
 syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
                                  removeFeature(fm1,fm2,P,Q) AND
                                  features(fm1)(P) AND
                                  features(fm1)(Q) AND
-                                 NOT (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q))) AND
+                                 NOT (formulae(fm2))(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q))) AND
                                  am2 = difference(am1,pairs) AND
-                                 ck2 = difference(ck1,its) 
+                                 ck2 = difference(ck1,its)    
                                 
 
 conditionsRemoveFeature(its,pairs,Q,ck) : bool = 
                                  (FORALL c : 
                                           FORALL exp : 
                                                     exps(ck)(exp) AND satisfies(exp,c) => 
-                                                       (exps(its)(exp) <=> satisfies(NAME_FORMULA(Q),c))) 
-                                                      %AND  (NOT exps(its)(exp) => satisfies(NOT_FORMULA(NAME_FORMULA(Q)),c)))  
+                                                       (exps(its)(exp) <=> satisfies(NAME_FORMULA(Q),c))
+                                 )   
                                  AND
                                  (FORALL (item:Item) : NOT its(item) => FORALL an: (assets(item))(an) => NOT dom(pairs)(an))
 
 
-
-itemsFilter: LEMMA
+itsNotIncluded: LEMMA
             FORALL (pl,pl2,s,its,pairs,P,Q):
             (
                (
@@ -246,7 +249,7 @@ itemsFilter: LEMMA
                => FORALL c: s(c) => FORALL (i:Item) : evalCK(K(pl),c)(i) => NOT its(i) 
             )
 
-assetsFilter: LEMMA
+pairsNotIncluded: LEMMA
              FORALL (pl,pl2,s,its,pairs,P,Q):
             (
                (
@@ -256,6 +259,7 @@ assetsFilter: LEMMA
                )
                => FORALL c: s(c) => FORALL an: eval(K(pl),c)(an) => NOT dom(pairs)(an) 
             )           
+
 
 removeFeatureSameProducts: THEOREM
             FORALL (pl,pl2,s,its,pairs,P,Q):
