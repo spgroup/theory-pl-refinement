@@ -208,7 +208,8 @@ changeFeatureExpStrongPartRef: THEOREM
 %---------------------------------------------------------------------------------------------------------------------------------------
 
 removeOptional(fm1,fm2,P,Q):bool =  features(fm2) = remove(Q,features(fm1)) AND
-       formulae(fm2) = remove(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),formulae(fm1))
+       formulae(fm2) = remove(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),formulae(fm1)) AND
+       NOT formulae(fm1)(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)))
 
 removeMandatory(fm1,fm2,P,Q):bool = features(fm1) = union(features(fm2),Q) AND
        formulae(fm2) = difference(formulae(fm1),
@@ -223,7 +224,6 @@ syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
                                  removeFeature(fm1,fm2,P,Q) AND
                                  features(fm1)(P) AND
                                  features(fm1)(Q) AND
-                                 NOT (formulae(fm2))(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q))) AND
                                  am2 = difference(am1,pairs) AND
                                  ck2 = difference(ck1,its)    
                                 

@@ -1503,6 +1503,102 @@
      nil))
    shostak))
  (itsNotIncluded 0
+  (itsNotIncluded-4 nil 3657555293
+   ("" (skolem 1 (pl pl2 s its pairs P Q))
+    (("" (bddsimp)
+      (("" (skolem 1 c)
+        (("" (expand "<>")
+          (("" (decompose-equality -3)
+            (("" (inst -1 c)
+              (("" (skolem 1 i)
+                (("" (expand conditionsRemoveFeature)
+                  (("" (flatten)
+                    (("" (inst -3 c)
+                      (("" (inst -3 "exp(i)")
+                        (("" (expand evalCK)
+                          (("" (bddsimp)
+                            (("1" (expand exps)
+                              (("1"
+                                (expand syntaxRemoveFeature)
+                                (("1"
+                                  (flatten)
+                                  (("1"
+                                    (expand difference)
+                                    (("1"
+                                      (expand member)
+                                      (("1"
+                                        (expand satisfies)
+                                        (("1"
+                                          (expand satisfies)
+                                          (("1" (propax) nil nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil)
+                             ("2" (expand exps)
+                              (("2" (inst 1 i) nil nil)) nil)
+                             ("3" (expand exps)
+                              (("3" (inst 1 i) nil nil)) nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((Name type-decl nil Name nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (Configuration type-eq-decl nil Name nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (set type-eq-decl nil sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (restrict const-decl "R" restrict nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
+    (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
+     Formula__adt nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplConc nil)
+    (difference const-decl "set" sets nil)
+    (member const-decl "bool" sets nil)
+    (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplConc
+     nil)
+    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil))
+   nil)
   (itsNotIncluded-3 nil 3657554425
    ("" (skolem 1 (pl pl2 s its pairs P Q))
     (("" (bddsimp)
@@ -1613,7 +1709,7 @@
      ConfigurationKnowledge nil)
     (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplConc
      nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil))
+    nil)
    nil)
   (itsNotIncluded-2 nil 3657553584
    ("" (skolem 1 (pl pl2 s its pairs P Q))
@@ -1725,7 +1821,7 @@
      ConfigurationKnowledge nil)
     (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplConc
      nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil))
+    nil)
    nil)
   (itsNotIncluded-1 nil 3657533313
    ("" (skolem 1 (pl pl2 s its pairs P Q))
@@ -1912,6 +2008,1187 @@
      ConfigurationKnowledge nil))
    shostak))
  (removeFeatureSameProducts 0
+  (removeFeatureSameProducts-9 nil 3657556116
+   ("" (skolem 1 (pl pl2 s its pairs p q))
+    (("" (lemma itsNotIncluded)
+      (("" (lemma pairsNotIncluded)
+        (("" (inst -1 pl pl2 s its pairs p q)
+          (("" (inst -2 pl pl2 s its pairs p q)
+            (("" (bddsimp)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (inst -5 c)
+                    (("" (bddsimp)
+                      (("" (expand prod)
+                        (("" (expand semantics)
+                          (("" (expand map)
+                            (("" (decompose-equality 1)
+                              ((""
+                                (bddsimp)
+                                (("1"
+                                  (skolem -1 an)
+                                  (("1"
+                                    (inst 1 an)
+                                    (("1"
+                                      (inst -6 an)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand eval)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand assetsCK)
+                                              (("1"
+                                                (skolem -1 i)
+                                                (("1"
+                                                  (inst -7 i)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand
+                                                       syntaxRemoveFeature)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           difference)
+                                                          (("1"
+                                                            (decompose-equality
+                                                             -7)
+                                                            (("1"
+                                                              (inst
+                                                               -1
+                                                               "(an,x!1)")
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     dom)
+                                                                    (("1"
+                                                                      (inst
+                                                                       2
+                                                                       "x!1")
+                                                                      nil
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("2"
+                                              (expand assetsCK)
+                                              (("2"
+                                                (skolem -1 i)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (inst -8 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           syntaxRemoveFeature)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (expand
+                                                               difference)
+                                                              (("2"
+                                                                (decompose-equality
+                                                                 -8)
+                                                                (("2"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("2"
+                                                                    (expand
+                                                                     member)
+                                                                    (("2"
+                                                                      (bddsimp)
+                                                                      (("1"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil)
+                                                                       ("2"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil)
+                                 ("2"
+                                  (skolem -1 an)
+                                  (("2"
+                                    (inst 1 an)
+                                    (("2"
+                                      (expand syntaxRemoveFeature)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (expand difference)
+                                          (("1"
+                                            (decompose-equality -6)
+                                            (("1"
+                                              (inst -1 "(an,x!1)")
+                                              (("1"
+                                                (expand member)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil)
+                                         ("2"
+                                          (expand eval)
+                                          (("2"
+                                            (expand assetsCK)
+                                            (("2"
+                                              (skolem -1 i)
+                                              (("2"
+                                                (inst 1 i)
+                                                (("2"
+                                                  (expand difference)
+                                                  (("2"
+                                                    (decompose-equality
+                                                     -7)
+                                                    (("2"
+                                                      (inst -1 i)
+                                                      (("2"
+                                                        (expand evalCK)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((pairsNotIncluded formula-decl nil SPLPartialRefTemplConc nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (member const-decl "bool" sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (dom const-decl "set[S]" maps nil)
+    (difference const-decl "set" sets nil)
+    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplConc nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
+          ConfigurationKnowledge nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (restrict const-decl "R" restrict nil)
+    (Configuration type-eq-decl nil Name nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
+    (itsNotIncluded formula-decl nil SPLPartialRefTemplConc nil))
+   nil)
+  (removeFeatureSameProducts-8 nil 3657555864
+   ("" (skolem 1 (pl pl2 s its pairs p q))
+    (("" (lemma itsNotIncluded)
+      (("" (lemma pairsNotIncluded)
+        (("" (inst -1 pl pl2 s its pairs p q)
+          (("" (inst -2 pl pl2 s its pairs p q)
+            (("" (bddsimp)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (inst -5 c)
+                    (("" (bddsimp)
+                      (("" (expand prod)
+                        (("" (expand semantics)
+                          (("" (expand map)
+                            (("" (decompose-equality 1)
+                              ((""
+                                (bddsimp)
+                                (("1"
+                                  (skolem -1 an)
+                                  (("1"
+                                    (inst 1 an)
+                                    (("1"
+                                      (inst -6 an)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand eval)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand assetsCK)
+                                              (("1"
+                                                (skolem -1 i)
+                                                (("1"
+                                                  (inst -7 i)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand
+                                                       syntaxRemoveFeature)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           difference)
+                                                          (("1"
+                                                            (decompose-equality
+                                                             -7)
+                                                            (("1"
+                                                              (inst
+                                                               -1
+                                                               "(an,x!1)")
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     dom)
+                                                                    (("1"
+                                                                      (inst
+                                                                       3
+                                                                       "x!1")
+                                                                      nil)))))))))))))))))))))))))
+                                             ("2"
+                                              (expand assetsCK)
+                                              (("2"
+                                                (skolem -1 i)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (inst -8 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           syntaxRemoveFeature)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (expand
+                                                               difference)
+                                                              (("2"
+                                                                (decompose-equality
+                                                                 -8)
+                                                                (("2"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("2"
+                                                                    (expand
+                                                                     member)
+                                                                    (("2"
+                                                                      (bddsimp)
+                                                                      (("1"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil)))
+                                                                       ("2"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil)))))))))))))))))))))))))))))))))))))))))
+                                 ("2"
+                                  (skolem -1 an)
+                                  (("2"
+                                    (inst 1 an)
+                                    (("2"
+                                      (expand syntaxRemoveFeature)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (expand difference)
+                                          (("1"
+                                            (decompose-equality -6)
+                                            (("1"
+                                              (inst -1 "(an,x!1)")
+                                              (("1"
+                                                (expand member)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil)))))))))
+                                         ("2"
+                                          (expand eval)
+                                          (("2"
+                                            (expand assetsCK)
+                                            (("2"
+                                              (skolem -1 i)
+                                              (("2"
+                                                (inst 1 i)
+                                                (("2"
+                                                  (expand difference)
+                                                  (("2"
+                                                    (decompose-equality
+                                                     -7)
+                                                    (("2"
+                                                      (inst -1 i)
+                                                      (("2"
+                                                        (expand evalCK)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    nil)
+   nil nil)
+  (removeFeatureSameProducts-7 nil 3657555685
+   ("" (skolem 1 (pl pl2 s its pairs p q))
+    (("" (lemma itsNotIncluded)
+      (("" (lemma pairsNotIncluded)
+        (("" (inst -1 pl pl2 s its pairs p q)
+          (("" (inst -2 pl pl2 s its pairs p q)
+            (("" (bddsimp)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (inst -5 c)
+                    (("" (bddsimp)
+                      (("" (expand prod)
+                        (("" (expand semantics)
+                          (("" (expand map)
+                            (("" (decompose-equality 1)
+                              ((""
+                                (bddsimp)
+                                (("1"
+                                  (skolem -1 an)
+                                  (("1"
+                                    (inst 1 an)
+                                    (("1"
+                                      (inst -6 an)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand eval)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand assetsCK)
+                                              (("1"
+                                                (skolem -1 i)
+                                                (("1"
+                                                  (inst -7 i)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand
+                                                       syntaxRemoveFeature)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           difference)
+                                                          (("1"
+                                                            (decompose-equality
+                                                             -6)
+                                                            (("1"
+                                                              (inst
+                                                               -1
+                                                               "(an,x!1)")
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     dom)
+                                                                    (("1"
+                                                                      (inst
+                                                                       3
+                                                                       "x!1")
+                                                                      nil)))))))))))))))))))))))))
+                                             ("2"
+                                              (expand assetsCK)
+                                              (("2"
+                                                (skolem -1 i)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (inst -8 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           syntaxRemoveFeature)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (expand
+                                                               difference)
+                                                              (("2"
+                                                                (decompose-equality
+                                                                 -7)
+                                                                (("2"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("2"
+                                                                    (expand
+                                                                     member)
+                                                                    (("2"
+                                                                      (bddsimp)
+                                                                      (("1"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil)))
+                                                                       ("2"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil)))))))))))))))))))))))))))))))))))))))))
+                                 ("2"
+                                  (skolem -1 an)
+                                  (("2"
+                                    (inst 1 an)
+                                    (("2"
+                                      (expand syntaxRemoveFeature)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (expand difference)
+                                          (("1"
+                                            (decompose-equality -6)
+                                            (("1"
+                                              (inst -1 "(an,x!1)")
+                                              (("1"
+                                                (expand member)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil)))))))))
+                                         ("2"
+                                          (expand eval)
+                                          (("2"
+                                            (expand assetsCK)
+                                            (("2"
+                                              (skolem -1 i)
+                                              (("2"
+                                                (inst 1 i)
+                                                (("2"
+                                                  (expand difference)
+                                                  (("2"
+                                                    (decompose-equality
+                                                     -7)
+                                                    (("2"
+                                                      (inst -1 i)
+                                                      (("2"
+                                                        (expand evalCK)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    nil)
+   nil nil)
+  (removeFeatureSameProducts-6 nil 3657555648
+   ("" (skolem 1 (pl pl2 s its pairs p q))
+    (("" (lemma itsNotIncluded)
+      (("" (lemma pairsNotIncluded)
+        (("" (inst -1 pl pl2 s its pairs p q)
+          (("" (inst -2 pl pl2 s its pairs p q)
+            (("" (bddsimp)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (inst -5 c)
+                    (("" (bddsimp)
+                      (("" (expand prod)
+                        (("" (expand semantics)
+                          (("" (expand map)
+                            (("" (decompose-equality 1)
+                              ((""
+                                (bddsimp)
+                                (("1"
+                                  (skolem -1 an)
+                                  (("1"
+                                    (inst 1 an)
+                                    (("1"
+                                      (inst -6 an)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand eval)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand assetsCK)
+                                              (("1"
+                                                (skolem -1 i)
+                                                (("1"
+                                                  (inst -7 i)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand
+                                                       syntaxRemoveFeature)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           difference)
+                                                          (("1"
+                                                            (decompose-equality
+                                                             -4)
+                                                            (("1"
+                                                              (inst
+                                                               -1
+                                                               "(an,x!1)")
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     dom)
+                                                                    (("1"
+                                                                      (inst
+                                                                       3
+                                                                       "x!1")
+                                                                      nil)))))))))))))))))))))))))
+                                             ("2"
+                                              (expand assetsCK)
+                                              (("2"
+                                                (skolem -1 i)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (inst -8 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           syntaxRemoveFeature)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (expand
+                                                               difference)
+                                                              (("2"
+                                                                (decompose-equality
+                                                                 -5)
+                                                                (("2"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("2"
+                                                                    (expand
+                                                                     member)
+                                                                    (("2"
+                                                                      (bddsimp)
+                                                                      (("1"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil)))
+                                                                       ("2"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil)))))))))))))))))))))))))))))))))))))))))
+                                 ("2"
+                                  (skolem -1 an)
+                                  (("2"
+                                    (inst 1 an)
+                                    (("2"
+                                      (expand syntaxRemoveFeature)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (expand difference)
+                                          (("1"
+                                            (decompose-equality -4)
+                                            (("1"
+                                              (inst -1 "(an,x!1)")
+                                              (("1"
+                                                (expand member)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil)))))))))
+                                         ("2"
+                                          (expand eval)
+                                          (("2"
+                                            (expand assetsCK)
+                                            (("2"
+                                              (skolem -1 i)
+                                              (("2"
+                                                (inst 1 i)
+                                                (("2"
+                                                  (expand difference)
+                                                  (("2"
+                                                    (decompose-equality
+                                                     -5)
+                                                    (("2"
+                                                      (inst -1 i)
+                                                      (("2"
+                                                        (expand evalCK)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    nil)
+   nil nil)
+  (removeFeatureSameProducts-5 nil 3657555612
+   ("" (skolem 1 (pl pl2 s its pairs p q))
+    (("" (lemma itsNotIncluded)
+      (("" (lemma pairsNotIncluded)
+        (("" (inst -1 pl pl2 s its pairs p q)
+          (("" (inst -2 pl pl2 s its pairs p q)
+            (("" (bddsimp)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (inst -5 c)
+                    (("" (bddsimp)
+                      (("" (expand prod)
+                        (("" (expand semantics)
+                          (("" (expand map)
+                            (("" (decompose-equality 1)
+                              ((""
+                                (bddsimp)
+                                (("1"
+                                  (skolem -1 an)
+                                  (("1"
+                                    (inst 1 an)
+                                    (("1"
+                                      (inst -6 an)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand eval)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand assetsCK)
+                                              (("1"
+                                                (skolem -1 i)
+                                                (("1"
+                                                  (inst -7 i)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand
+                                                       syntaxRemoveFeature)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           difference)
+                                                          (("1"
+                                                            (decompose-equality
+                                                             -5)
+                                                            (("1"
+                                                              (inst
+                                                               -1
+                                                               "(an,x!1)")
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     dom)
+                                                                    (("1"
+                                                                      (inst
+                                                                       3
+                                                                       "x!1")
+                                                                      nil)))))))))))))))))))))))))
+                                             ("2"
+                                              (expand assetsCK)
+                                              (("2"
+                                                (skolem -1 i)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (inst -8 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           syntaxRemoveFeature)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (expand
+                                                               difference)
+                                                              (("2"
+                                                                (decompose-equality
+                                                                 -6)
+                                                                (("2"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("2"
+                                                                    (expand
+                                                                     member)
+                                                                    (("2"
+                                                                      (bddsimp)
+                                                                      (("1"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil)))
+                                                                       ("2"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil)))))))))))))))))))))))))))))))))))))))))
+                                 ("2"
+                                  (skolem -1 an)
+                                  (("2"
+                                    (inst 1 an)
+                                    (("2"
+                                      (expand syntaxRemoveFeature)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (expand difference)
+                                          (("1"
+                                            (decompose-equality -5)
+                                            (("1"
+                                              (inst -1 "(an,x!1)")
+                                              (("1"
+                                                (expand member)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil)))))))))
+                                         ("2"
+                                          (expand eval)
+                                          (("2"
+                                            (expand assetsCK)
+                                            (("2"
+                                              (skolem -1 i)
+                                              (("2"
+                                                (inst 1 i)
+                                                (("2"
+                                                  (expand difference)
+                                                  (("2"
+                                                    (decompose-equality
+                                                     -6)
+                                                    (("2"
+                                                      (inst -1 i)
+                                                      (("2"
+                                                        (expand evalCK)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    nil)
+   nil nil)
+  (removeFeatureSameProducts-4 nil 3657555537
+   ("" (skolem 1 (pl pl2 s its pairs p q))
+    (("" (lemma itsNotIncluded)
+      (("" (lemma pairsNotIncluded)
+        (("" (inst -1 pl pl2 s its pairs p q)
+          (("" (inst -2 pl pl2 s its pairs p q)
+            (("" (bddsimp)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (inst -5 c)
+                    (("" (bddsimp)
+                      (("" (expand prod)
+                        (("" (expand semantics)
+                          (("" (expand map)
+                            (("" (decompose-equality 1)
+                              ((""
+                                (bddsimp)
+                                (("1"
+                                  (skolem -1 an)
+                                  (("1"
+                                    (inst 1 an)
+                                    (("1"
+                                      (inst -6 an)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand eval)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand assetsCK)
+                                              (("1"
+                                                (skolem -1 i)
+                                                (("1"
+                                                  (inst -7 i)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand
+                                                       syntaxRemoveFeature)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           difference)
+                                                          (("1"
+                                                            (decompose-equality
+                                                             -5)
+                                                            (("1"
+                                                              (inst
+                                                               -1
+                                                               "(an,x!1)")
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     dom)
+                                                                    (("1"
+                                                                      (inst
+                                                                       3
+                                                                       "x!1")
+                                                                      nil)))))))))))))))))))))))))
+                                             ("2"
+                                              (expand assetsCK)
+                                              (("2"
+                                                (skolem -1 i)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (inst -8 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           syntaxRemoveFeature)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (expand
+                                                               difference)
+                                                              (("2"
+                                                                (decompose-equality
+                                                                 -6)
+                                                                (("2"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("2"
+                                                                    (expand
+                                                                     member)
+                                                                    (("2"
+                                                                      (bddsimp)
+                                                                      (("1"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil)))
+                                                                       ("2"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil)))))))))))))))))))))))))))))))))))))))))
+                                 ("2"
+                                  (skolem -1 an)
+                                  (("2"
+                                    (inst 1 an)
+                                    (("2"
+                                      (expand syntaxRemoveFeature)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (expand difference)
+                                          (("1"
+                                            (decompose-equality -4)
+                                            (("1"
+                                              (inst -1 "(an,x!1)")
+                                              (("1"
+                                                (expand member)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil)))))))))
+                                         ("2"
+                                          (expand eval)
+                                          (("2"
+                                            (expand assetsCK)
+                                            (("2"
+                                              (skolem -1 i)
+                                              (("2"
+                                                (inst 1 i)
+                                                (("2"
+                                                  (expand difference)
+                                                  (("2"
+                                                    (decompose-equality
+                                                     -5)
+                                                    (("2"
+                                                      (inst -1 i)
+                                                      (("2"
+                                                        (expand evalCK)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    nil)
+   nil nil)
+  (removeFeatureSameProducts-3 nil 3657555381
+   ("" (skolem 1 (pl pl2 s its pairs p q))
+    (("" (lemma itsNotIncluded)
+      (("" (lemma pairsNotIncluded)
+        (("" (inst -1 pl pl2 s its pairs p q)
+          (("" (inst -2 pl pl2 s its pairs p q)
+            (("" (bddsimp)
+              (("" (skolem 1 c)
+                (("" (inst -4 c)
+                  (("" (inst -5 c)
+                    (("" (bddsimp)
+                      (("" (expand prod)
+                        (("" (expand semantics)
+                          (("" (expand map)
+                            (("" (decompose-equality 1)
+                              ((""
+                                (bddsimp)
+                                (("1"
+                                  (skolem -1 an)
+                                  (("1"
+                                    (inst 1 an)
+                                    (("1"
+                                      (inst -6 an)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand eval)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand assetsCK)
+                                              (("1"
+                                                (skolem -1 i)
+                                                (("1"
+                                                  (inst -7 i)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (expand
+                                                       syntaxRemoveFeature)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           difference)
+                                                          (("1"
+                                                            (decompose-equality
+                                                             -6)
+                                                            (("1"
+                                                              (inst
+                                                               -1
+                                                               "(an,x!1)")
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     dom)
+                                                                    (("1"
+                                                                      (inst
+                                                                       3
+                                                                       "x!1")
+                                                                      nil)))))))))))))))))))))))))
+                                             ("2"
+                                              (expand assetsCK)
+                                              (("2"
+                                                (skolem -1 i)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (inst -8 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           syntaxRemoveFeature)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (expand
+                                                               difference)
+                                                              (("2"
+                                                                (decompose-equality
+                                                                 -7)
+                                                                (("2"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("2"
+                                                                    (expand
+                                                                     member)
+                                                                    (("2"
+                                                                      (bddsimp)
+                                                                      (("1"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil)))
+                                                                       ("2"
+                                                                        (expand
+                                                                         evalCK)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil)))))))))))))))))))))))))))))))))))))))))
+                                 ("2"
+                                  (skolem -1 an)
+                                  (("2"
+                                    (inst 1 an)
+                                    (("2"
+                                      (expand syntaxRemoveFeature)
+                                      (("2"
+                                        (bddsimp)
+                                        (("1"
+                                          (expand difference)
+                                          (("1"
+                                            (decompose-equality -5)
+                                            (("1"
+                                              (inst -1 "(an,x!1)")
+                                              (("1"
+                                                (expand member)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil)))))))))
+                                         ("2"
+                                          (expand eval)
+                                          (("2"
+                                            (expand assetsCK)
+                                            (("2"
+                                              (skolem -1 i)
+                                              (("2"
+                                                (inst 1 i)
+                                                (("2"
+                                                  (expand difference)
+                                                  (("2"
+                                                    (decompose-equality
+                                                     -6)
+                                                    (("2"
+                                                      (inst -1 i)
+                                                      (("2"
+                                                        (expand evalCK)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    nil)
+   nil nil)
   (removeFeatureSameProducts-2 nil 3657553685
    ("" (skolem 1 (pl pl2 s its pairs p q))
     (("" (lemma itsNotIncluded)
