@@ -12,7 +12,7 @@ anSet: VAR finite_sets[AssetName].finite_set
 s,t: VAR set[Configuration]
 c: VAR Configuration
 fm,fm1,fm2: VAR FM
-ck1,ck2,its: VAR CK
+ck,ck1,ck2,its: VAR CK
 item1,item2: VAR Item
 items: VAR set[Item]
 P,Q: VAR Name
@@ -165,6 +165,7 @@ transOptMandPartRefWeak: THEOREM
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------CHANGE FEATURE EXPRESSION-----------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
+
 syntaxChangeFeatureExp(ck1,ck2,item1,item2,items) : bool =
             ck1 = union(item1,items) AND
             ck2 = union(item2,items) AND
@@ -172,7 +173,9 @@ syntaxChangeFeatureExp(ck1,ck2,item1,item2,items) : bool =
 
 conditionsChangeFeatureExp(fm,item1,item2) : bool = wt(fm,exp(item2)) 
 
-changeFeatureExpSameEvalCK: THEOREM
+% Lemma <Since the only difference between "K(pl)" and "ck2" "item1" and "item2" and these items are discarded by s, the evaluation
+%        of K(pl) is the same as ck2.>
+changeFeatureExpSameEvalCK: LEMMA
             FORALL(pl,ck2,item1,item2,items,s):
             (
                (
@@ -185,7 +188,8 @@ changeFeatureExpSameEvalCK: THEOREM
               FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
-changeFeatureExpStongPartRef: THEOREM
+% Theorem <Change feature expression template represents a strong partial refinement>
+changeFeatureExpStrongPartRef: THEOREM
             FORALL(pl,ck2,item1,item2,items,s):
             (
                (
@@ -199,5 +203,84 @@ changeFeatureExpStongPartRef: THEOREM
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+removeOptionalFeature(fm1,fm2,P,Q):bool =  features(fm2) = remove(Q,features(fm1)) AND
+       formulae(fm2) = remove(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),formulae(fm1))
+%removeMandatoryFeature(fm1,fm2,P,Q):bool = features(fm1) = union(features(fm2),Q) AND
+%       formulae(fm1) = union(formulae(fm2),
+%                             union(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))))
+
+removeFeature(fm1,fm2,P,Q):bool = removeOptionalFeature(fm1,fm2,P,Q) %OR removeMandatoryFeature(fm1,fm2,P,Q)
+
+syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
+                                 removeFeature(fm1,fm2,P,Q) AND
+                                 features(fm1)(P) AND
+                                 features(fm1)(Q) AND
+                                 NOT (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q))) AND
+                                 %these two predicates below(subset?(pairs,am1) and subset?(its,ck1)) were not used during template proof.
+                                 subset?(pairs,am1) AND
+                                 subset?(its,ck1) AND
+                                 am2 = difference(am1,pairs) AND
+                                 ck2 = difference(ck1,its) 
+                                
+
+conditionsRemoveFeature(its,pairs,Q,ck) : bool = 
+                                 (FORALL c : 
+                                          FORALL exp : 
+                                                    exps(ck)(exp) AND satisfies(exp,c) => 
+                                                       (exps(its)(exp) <=> satisfies(NAME_FORMULA(Q),c))) 
+                                                      %AND  (NOT exps(its)(exp) => satisfies(NOT_FORMULA(NAME_FORMULA(Q)),c)))  
+                                 AND
+                                 (FORALL (item:Item) : NOT its(item) => FORALL an: (assets(item))(an) => NOT dom(pairs)(an))
+
+
+
+itemsFilter: LEMMA
+            FORALL (pl,pl2,s,its,pairs,P,Q):
+            (
+               (
+                 syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,its,pairs) AND
+                 conditionsRemoveFeature(its,pairs,Q,K(pl)) AND
+                 s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q)))
+               )
+               => FORALL c: s(c) => FORALL (i:Item) : evalCK(K(pl),c)(i) => NOT its(i) 
+            )
+
+assetsFilter: LEMMA
+             FORALL (pl,pl2,s,its,pairs,P,Q):
+            (
+               (
+                 syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,its,pairs) AND
+                 conditionsRemoveFeature(its,pairs,Q,K(pl)) AND
+                 s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q)))
+               )
+               => FORALL c: s(c) => FORALL an: eval(K(pl),c)(an) => NOT dom(pairs)(an) 
+            )           
+
+removeFeatureSameProducts: THEOREM
+            FORALL (pl,pl2,s,its,pairs,P,Q):
+            (
+               (
+                 syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,its,pairs) AND
+                 conditionsRemoveFeature(its,pairs,Q,K(pl)) AND
+                 s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q)))
+               )
+               => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+            )
+
+% Theorem <Remove feature template represents a strong partial refinement>
+removeFeaturePartRefStrong: THEOREM
+            FORALL (pl,pl2,(s:set[Configuration]),its,pairs,P,Q):
+            (
+               (
+                 syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,its,pairs) AND
+                 conditionsRemoveFeature(its,pairs,Q,K(pl)) AND
+                 s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q)))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            )
 
 END SPLPartialRefTemplConc

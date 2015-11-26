@@ -15,14 +15,7 @@ c: VAR Conf
 
 
 % Restriction Operator
-<>: [PL, set[AssetName] -> set[Conf]]
-
-amPartRef: AXIOM FORALL pl,am2,s,anSet:
-                    ( 
-                      (amPartialRefinement(A(pl),am2,difference(dom(A(pl)),anSet)) AND s = <>(pl,anSet)) 
-                      => (FORALL c: s(c) => prod(pl,c) = prod(pl2,c))
-                    )
-                   WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #) 
+<>: [PL, set[AssetName] -> set[Conf]] 
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------CHANGE ASSET------------------------------------------------------------------------------
@@ -32,10 +25,16 @@ syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
       am1=union((an,a1),pairs) AND
       am2=union((an,a2),pairs) 
 
-changeAssetIsAmPartRef: LEMMA FORALL pl,am2,pairs,a1,a2,an: 
-                                             syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) 
-                                             => 
-                                             amPartialRefinement(A(pl),am2,difference(dom(A(pl)),singleton(an))) 
+sameEvalPairs: AXIOM
+	       FORALL pl,am2,pairs,a1,a2,an,s : (syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND s = (<>(pl, singleton(an))))
+	       =>
+		   FORALL c: s(c) => (([| K(pl) |] (A(pl))) (c)) = (([| K(pl) |] (pairs)) (c))
+
+sameEvalPairs2: AXIOM
+		FORALL pl,am2,pairs,a1,a2,an,s : (syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND s = (<>(pl, singleton(an))))
+		=>
+		FORALL c: s(c) => (([| K(pl) |] (am2)) (c)) = (([| K(pl) |] (pairs)) (c))
+ 
 
 changeAssetStrong: THEOREM
     FORALL(pl,am2,pairs,a1,a2,an,s):
