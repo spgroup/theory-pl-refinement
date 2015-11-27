@@ -285,16 +285,19 @@ removeFeaturePartRefWeak: THEOREM
             )
 
 %---------------------------------------------------------------------------------------------------------------------------------------
-%---------------------------------------------ADD ASSETS TEMPLATE-----------------------------------------------------------------------
+%---------------------------------------------ADD/REMOVE ASSETS TEMPLATE----------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
+% The FM does not change (therefore we are not adding features). Only AM and CK, that now have new lines corresponding to the new assets.
 syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
             am2 = union(am1,pairs) AND
             ck2 = union(ck1,its)   
 
+% It is necessary to make sure that all assets added in the CK are present in the new lines of the AM.
 conditionsAddAssets(pairs,its): bool = 
             FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs))
 
+% Theorem <When we add assets but filter the assets added the resulting products are equal>
 addAssetsSameProducts: THEOREM
            FORALL (pl,am2,ck2,s,its,pairs):
             (
@@ -313,6 +316,31 @@ addAssetsPartRefStrong: THEOREM
                (
                  s = <>(pl2,dom(pairs)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+                 conditionsAddAssets(pairs,its) 
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% The remove assets template is the same as the add assets but the inverse, so we are calling the same predicates. However, replacing 
+% A(pl) by am2 and K(pl) by ck2
+removeAssetsSameProducts: THEOREM
+            FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(pl,dom(pairs)) AND
+                 syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
+                 conditionsAddAssets(pairs,its) 
+               )
+               => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% Theorem <Remove assets template represents a strong partial refinement>
+removeAssetsPartRefStrong: THEOREM
+            FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(pl,dom(pairs)) AND
+                 syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
                  conditionsAddAssets(pairs,its) 
                )
                => strongPartialRefinement(pl,pl2,s)
