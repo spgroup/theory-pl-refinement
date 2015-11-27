@@ -288,5 +288,34 @@ removeFeaturePartRefWeak: THEOREM
 %---------------------------------------------ADD ASSETS TEMPLATE-----------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
+syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
+            am2 = union(am1,pairs) AND
+            ck2 = union(ck1,its)   
+
+conditionsAddAssets(pairs,its): bool = 
+            FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs))
+
+addAssetsSameProducts: THEOREM
+           FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(pl2,dom(pairs)) AND
+                 syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+                 conditionsAddAssets(pairs,its) 
+               )
+               => FORALL c : s(c) => prod(pl,c) = prod(pl2,c)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% Theorem <Add assets template represents a strong partial refinement>
+addAssetsPartRefStrong: THEOREM
+            FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(pl2,dom(pairs)) AND
+                 syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+                 conditionsAddAssets(pairs,its) 
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 END SPLPartialRefTemplConc
