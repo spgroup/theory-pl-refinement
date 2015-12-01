@@ -251,6 +251,156 @@ extend[S, {n: S | dom(m)(n)}, bool, FALSE]
     (member const-decl "bool" sets nil)
     (composeMaps const-decl "maps[S, U].mapping" maps_composite nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil))
+   shostak))
+ (imgCompos 0
+  (imgCompos-1 nil 3657975679
+   ("" (skolem 1 (m n))
+    (("" (bddsimp)
+      (("" (expand image)
+        (("" (expand domain)
+          (("" (decompose-equality -1)
+            (("" (decompose-equality 1)
+              (("" (bddsimp)
+                (("1" (skolem -1 l)
+                  (("1" (expand composeMaps)
+                    (("1" (bddsimp)
+                      (("1" (expand domain)
+                        (("1" (skolem -1 r)
+                          (("1" (inst 1 r)
+                            (("1" (inst -3 r)
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (skolem -3 r2)
+                                  (("1"
+                                    (skolem -4 r3)
+                                    (("1"
+                                      (lemma
+                                       "maps[S,T].getRightResult")
+                                      (("1"
+                                        (inst -1 m r l)
+                                        (("1"
+                                          (bddsimp)
+                                          (("1"
+                                            (replace -2 -3)
+                                            (("1"
+                                              (lemma
+                                               "maps[T,U].getRightResult")
+                                              (("1"
+                                                (inst -1 n r3 r)
+                                                (("1"
+                                                  (bddsimp)
+                                                  (("1"
+                                                    (replace -2 -5)
+                                                    (("1"
+                                                      (replace -5 1)
+                                                      (("1"
+                                                        (propax)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil)
+                                 ("2"
+                                  (lemma "maps[S,T].getRightResult")
+                                  (("2"
+                                    (inst -1 m r l)
+                                    (("2"
+                                      (bddsimp)
+                                      (("2" (inst 2 l) nil nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil)
+                 ("2" (skolem -1 l)
+                  (("2" (inst -2 l)
+                    (("2" (bddsimp)
+                      (("1" (skolem -2 l2)
+                        (("1" (skolem -3 l3)
+                          (("1" (expand composeMaps)
+                            (("1" (expand domain)
+                              (("1"
+                                (inst 1 l2)
+                                (("1"
+                                  (bddsimp)
+                                  (("1"
+                                    (lemma "maps[S,T].getRightResult")
+                                    (("1"
+                                      (inst -1 m l l2)
+                                      (("1"
+                                        (bddsimp)
+                                        (("1"
+                                          (replace -2 1)
+                                          (("1"
+                                            (lemma
+                                             "maps[T,U].getRightResult")
+                                            (("1"
+                                              (inst -1 n "x!1" l)
+                                              (("1"
+                                                (bddsimp)
+                                                (("1"
+                                                  (replace -2 1)
+                                                  (("1"
+                                                    (propax)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil)
+                                   ("2" (inst 1 l) nil nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil)
+                       ("2" (inst 3 "x!1") nil nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((domain const-decl "finite_sets[S].finite_set" maps nil)
+    (composeMaps const-decl "maps[S, U].mapping" maps_composite nil)
+    (getRightResult formula-decl nil maps nil)
+    (dom const-decl "set[S]" maps nil)
+    (U formal-type-decl nil maps_composite nil)
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (S formal-type-decl nil maps_composite nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (T formal-type-decl nil maps_composite nil)
+    (image const-decl "finite_sets[T].finite_set" maps nil))
    shostak)))
 (maps_identity
  (identity?_TCC1 0

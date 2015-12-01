@@ -160,6 +160,8 @@ maps_composite[S:TYPE,T:TYPE,U:TYPE]: THEORY
  
   domCompos: LEMMA FORALL m,n: subset?(domain(composeMaps(m,n)),domain(m))
 
+  imgCompos: LEMMA forall m,n: image(m) = domain(n) => image(composeMaps(m,n)) = image(n)
+
  END maps_composite
 
 % Theory for maps that have the same type for the domain and image

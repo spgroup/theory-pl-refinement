@@ -3,501 +3,11 @@
   (prod_TCC1-1 nil 3655135094 ("" (subtype-tcc) nil nil) nil nil))
  (weakPartialRefinement_TCC1 0
   (weakPartialRefinement_TCC1-1 nil 3656408682
-   ("" (subtype-tcc) nil nil) nil nil))
- (existsAM_TCC1 0
-  (existsAM_TCC1-1 nil 3657365795 ("" (subtype-tcc) nil nil) nil nil))
- (existsAM 0
-  (existsAM-1 nil 3657365796
-   ("" (skolem 1 (am1 am2 s anSet))
-    (("" (bddsimp)
-      ((""
-        (name "am3"
-              "{(x1:AssetName,x2:Asset) | member(x1,anSet) AND x2 = getRight(am1,x1)}")
-        (("1"
-          (name "am4"
-                "{(x1:AssetName,x2:Asset) | member(x1,anSet) AND x2 = getRight(am2,x1)}")
-          (("1" (inst 1 am3 am4)
-            (("1" (decompose-equality -1)
-              (("1" (decompose-equality -2)
-                (("1" (expand amPartialRefinement)
-                  (("1" (expand "|>")
-                    (("1" (bddsimp)
-                      (("1" (skolem 1 an)
-                        (("1" (inst -3 an)
-                          (("1" (bddsimp)
-                            (("1" (expand dom)
-                              (("1"
-                                (skolem -4 a)
-                                (("1"
-                                  (skolem -3 (a1 a2))
-                                  (("1"
-                                    (bddsimp)
-                                    (("1"
-                                      (inst -1 "(an,a)")
-                                      (("1"
-                                        (bddsimp)
-                                        (("1"
-                                          (expand member)
-                                          (("1"
-                                            (inst -4 "(an,a2)")
-                                            (("1"
-                                              (inst 1 a1 a2)
-                                              (("1"
-                                                (bddsimp)
-                                                (("1"
-                                                  (typepred am1)
-                                                  (("1"
-                                                    (expand unique)
-                                                    (("1"
-                                                      (lemma
-                                                       "maps[AssetName,Asset].getRightResult")
-                                                      (("1"
-                                                        (inst
-                                                         -1
-                                                         am1
-                                                         a1
-                                                         an)
-                                                        (("1"
-                                                          (bddsimp)
-                                                          (("1"
-                                                            (replace
-                                                             -2
-                                                             -6)
-                                                            (("1"
-                                                              (replace
-                                                               -6
-                                                               -7)
-                                                              (("1"
-                                                                (propax)
-                                                                nil
-                                                                nil))
-                                                              nil))
-                                                            nil))
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil)
-                                                 ("2"
-                                                  (lemma
-                                                   "maps[AssetName,Asset].getRightResult")
-                                                  (("2"
-                                                    (inst -1 am2 a2 an)
-                                                    (("2"
-                                                      (bddsimp)
-                                                      (("2"
-                                                        (replace -2 1)
-                                                        (("2"
-                                                          (propax)
-                                                          nil
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil)
-                             ("2" (expand dom)
-                              (("2"
-                                (skolem -3 a)
-                                (("2"
-                                  (inst -1 "(an,a)")
-                                  (("2"
-                                    (bddsimp)
-                                    (("2"
-                                      (expand member)
-                                      (("2" (propax) nil nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil)
-                       ("2" (expand dom)
-                        (("2" (decompose-equality 1)
-                          (("2" (bddsimp)
-                            (("1" (skolem -1 a)
-                              (("1"
-                                (inst -2 "(x!1,a)")
-                                (("1"
-                                  (bddsimp)
-                                  (("1"
-                                    (inst -5 "x!1")
-                                    (("1"
-                                      (bddsimp)
-                                      (("1"
-                                        (skolem -5 (a1 a2))
-                                        (("1"
-                                          (bddsimp)
-                                          (("1"
-                                            (inst 1 a2)
-                                            (("1"
-                                              (inst -4 "(x!1,a2)")
-                                              (("1"
-                                                (expand member)
-                                                (("1"
-                                                  (lemma
-                                                   "maps[AssetName,Asset].getRightResult")
-                                                  (("1"
-                                                    (inst
-                                                     -1
-                                                     am2
-                                                     a2
-                                                     "x!1")
-                                                    (("1"
-                                                      (bddsimp)
-                                                      (("1"
-                                                        (replace -2 2)
-                                                        (("1"
-                                                          (propax)
-                                                          nil
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil))
-                                        nil)
-                                       ("2"
-                                        (expand member)
-                                        (("2" (propax) nil nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil)
-                             ("2" (skolem -1 a)
-                              (("2"
-                                (inst -3 "(x!1,a)")
-                                (("2"
-                                  (bddsimp)
-                                  (("2"
-                                    (inst -5 "x!1")
-                                    (("2"
-                                      (expand member)
-                                      (("2"
-                                        (bddsimp)
-                                        (("2"
-                                          (skolem -5 (a1 a2))
-                                          (("2"
-                                            (inst 1 a1)
-                                            (("2"
-                                              (inst -2 "(x!1,a1)")
-                                              (("2"
-                                                (bddsimp)
-                                                (("2"
-                                                  (lemma
-                                                   "maps[AssetName,Asset].getRightResult")
-                                                  (("2"
-                                                    (inst
-                                                     -1
-                                                     am1
-                                                     a1
-                                                     "x!1")
-                                                    (("2"
-                                                      (bddsimp)
-                                                      (("2"
-                                                        (replace -2 2)
-                                                        (("2"
-                                                          (propax)
-                                                          nil
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil)
-                 ("2" (expand dom)
-                  (("2" (expand member)
-                    (("2" (expand "|>")
-                      (("2" (bddsimp)
-                        (("1" (expand amPartialRefinement)
-                          (("1" (inst -6 "x!1`1")
-                            (("1" (skolem 2 an)
-                              (("1"
-                                (bddsimp)
-                                (("1"
-                                  (skolem -6 (a1 a2))
-                                  (("1"
-                                    (bddsimp)
-                                    (("1"
-                                      (expand dom)
-                                      (("1"
-                                        (skolem -9 a3)
-                                        (("1"
-                                          (decompose-equality -5)
-                                          (("1"
-                                            (inst -1 "(an,a3)")
-                                            (("1"
-                                              (bddsimp)
-                                              (("1"
-                                                (inst 2 a1 a2)
-                                                (("1"
-                                                  (bddsimp)
-                                                  (("1"
-                                                    (inst -7 "(an,a2)")
-                                                    (("1"
-                                                      (bddsimp)
-                                                      (("1"
-                                                        (inst 1 "a1")
-                                                        nil
-                                                        nil))
-                                                      nil))
-                                                    nil)
-                                                   ("2"
-                                                    (inst 1 "a1")
-                                                    nil
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil)
-                                           ("2"
-                                            (inst 3 a1 a2)
-                                            (("2" (inst 2 a1) nil nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil)
-                         ("2" (expand amPartialRefinement)
-                          (("2" (inst -6 "x!1`1")
-                            (("2" (bddsimp)
-                              (("2"
-                                (skolem -6 (a1 a2))
-                                (("2"
-                                  (inst 1 a1)
-                                  (("2" (bddsimp) nil nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil)
-               ("2" (expand amPartialRefinement)
-                (("2" (inst -6 "x!1`1")
-                  (("2" (bddsimp)
-                    (("1" (skolem -6 (a1 a2))
-                      (("1" (expand dom)
-                        (("1" (inst 1 a2) (("1" (bddsimp) nil nil))
-                          nil))
-                        nil))
-                      nil)
-                     ("2" (expand member) (("2" (propax) nil nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil)
-             ("2" (bddsimp)
-              (("1" (expand unique)
-                (("1" (decompose-equality -1)
-                  (("1" (skolem 1 (an a1 a2))
-                    (("1" (inst -1 "(an,a1)")
-                      (("1" (expand member)
-                        (("1" (expand amPartialRefinement)
-                          (("1" (inst -3 an)
-                            (("1" (bddsimp)
-                              (("1"
-                                (lemma
-                                 "maps[AssetName,Asset].getRightResult")
-                                (("1"
-                                  (inst -1 am4 a2 an)
-                                  (("1"
-                                    (bddsimp)
-                                    (("1"
-                                      (lemma
-                                       "maps[AssetName,Asset].getRightResult")
-                                      (("1"
-                                        (inst -1 am4 a1 an)
-                                        (("1"
-                                          (bddsimp)
-                                          (("1"
-                                            (replace -2 -4)
-                                            (("1" (propax) nil nil))
-                                            nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil)
-                                   ("2"
-                                    (expand dom)
-                                    (("2" (inst 1 a1) nil nil))
-                                    nil)
-                                   ("3"
-                                    (lemma
-                                     "maps[AssetName,Asset].getRightResult")
-                                    (("3"
-                                      (bddsimp)
-                                      (("1"
-                                        (skolem -7 (a3 a4))
-                                        (("1"
-                                          (bddsimp)
-                                          (("1"
-                                            (expand singleton)
-                                            (("1"
-                                              (expand unique)
-                                              (("1"
-                                                (inst -1 am4 a1 an)
-                                                (("1"
-                                                  (bddsimp)
-                                                  (("1"
-                                                    (lemma
-                                                     "maps[AssetName,Asset].getRightResult")
-                                                    (("1"
-                                                      (inst
-                                                       -1
-                                                       am4
-                                                       a2
-                                                       an)
-                                                      (("1"
-                                                        (bddsimp)
-                                                        (("1"
-                                                          (replace
-                                                           -4
-                                                           -2)
-                                                          (("1"
-                                                            (propax)
-                                                            nil
-                                                            nil))
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil)
-                                                 ("2"
-                                                  (lemma
-                                                   "maps[AssetName,Asset].getRightResult")
-                                                  (("2"
-                                                    (expand dom)
-                                                    (("2"
-                                                      (inst 1 a1)
-                                                      nil
-                                                      nil))
-                                                    nil))
-                                                  nil)
-                                                 ("3"
-                                                  (lemma
-                                                   "maps[AssetName,Asset].getRightResult")
-                                                  (("3"
-                                                    (expand is_finite)
-                                                    (("3"
-                                                      (hide 2)
-                                                      (("3"
-                                                        (decompose-equality
-                                                         -6)
-                                                        (("1"
-                                                          (inst
-                                                           -1
-                                                           "(an,a3)")
-                                                          (("1"
-                                                            (bddsimp)
-                                                            (("1"
-                                                              (replace
-                                                               -5
-                                                               -6)
-                                                              (("1"
-                                                                (postpone)
-                                                                nil
-                                                                nil))
-                                                              nil)
-                                                             ("2"
-                                                              (postpone)
-                                                              nil
-                                                              nil)
-                                                             ("3"
-                                                              (postpone)
-                                                              nil
-                                                              nil)
-                                                             ("4"
-                                                              (postpone)
-                                                              nil
-                                                              nil))
-                                                            nil))
-                                                          nil)
-                                                         ("2"
-                                                          (postpone)
-                                                          nil
-                                                          nil)
-                                                         ("3"
-                                                          (postpone)
-                                                          nil
-                                                          nil))
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil))
-                                        nil)
-                                       ("2" (postpone) nil nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil)
-                   ("2" (postpone) nil nil))
-                  nil))
-                nil)
-               ("2" (postpone) nil nil))
-              nil)
-             ("3" (postpone) nil nil))
-            nil)
-           ("2" (postpone) nil nil))
-          nil)
-         ("2" (postpone) nil nil))
-        nil))
-      nil))
-    nil)
-   nil shostak))
- (strongPartRefReflexive_TCC1 0
-  (strongPartRefReflexive_TCC1-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
+   ("" (skolem 1 (pl1 pl2 m c))
+    (("" (expand* domain dom) (("" (bddsimp) nil nil)) nil)) nil)
+   ((dom const-decl "set[S]" maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil))
+   nil))
  (strongPartRefReflexive 0
   (strongPartRefReflexive-1 nil 3655065337
    ("" (skolem 1 (x s))
@@ -537,12 +47,6 @@
    shostak))
  (strongPartRefTransitive_TCC1 0
   (strongPartRefTransitive_TCC1-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
- (strongPartRefTransitive_TCC2 0
-  (strongPartRefTransitive_TCC2-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
- (strongPartRefTransitive_TCC3 0
-  (strongPartRefTransitive_TCC3-1 nil 3656875987
    ("" (subtype-tcc) nil nil) nil nil))
  (strongPartRefTransitive 0
   (strongPartRefTransitive-1 nil 3655065416
@@ -599,9 +103,6 @@
     (assetRefinement formula-decl nil SPLrefinement nil)
     (member const-decl "bool" sets nil))
    shostak))
- (weakPartRefReflexive_TCC1 0
-  (weakPartRefReflexive_TCC1-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
  (weakPartRefReflexive 0
   (weakPartRefReflexive-1 nil 3655065773
    ("" (skolem 1 (pl map))
@@ -661,13 +162,69 @@
    shostak))
  (weakPartRefTransitive_TCC1 0
   (weakPartRefTransitive_TCC1-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
- (weakPartRefTransitive_TCC2 0
-  (weakPartRefTransitive_TCC2-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
- (weakPartRefTransitive_TCC3 0
-  (weakPartRefTransitive_TCC3-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
+   ("" (skolem 1 (pl1 pl2 pl3 m n q))
+    (("" (bddsimp)
+      (("1" (lemma "maps_composite[Conf,Conf,Conf].imgCompos")
+        (("1" (inst -1 m n)
+          (("1" (bddsimp)
+            (("1" (typepred n)
+              (("1" (hide (-1 -2 -3))
+                (("1" (replace -3 -1 RL)
+                  (("1" (replace -6 -1 RL) (("1" (propax) nil nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil)
+       ("2" (lemma "maps_composite[Conf,Conf,Conf].domCompos")
+        (("2" (inst -1 m n)
+          (("2" (typepred m)
+            (("2" (hide (-1 -2 -4))
+              (("2" (replace -6 -2 RL)
+                (("2" (expand subset?)
+                  (("2" (skolem 1 c)
+                    (("2" (inst -2 c)
+                      (("2" (inst -1 c) (("2" (bddsimp) nil nil)) nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (CM type-eq-decl nil SPLpartialrefinement nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (subset? const-decl "bool" sets nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (FM type-decl nil SPLpartialrefinement nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
+    (CK type-decl nil SPLpartialrefinement nil)
+    (Asset type-decl nil SPLpartialrefinement nil)
+    (AssetName type-decl nil SPLpartialrefinement nil)
+    (AM type-eq-decl nil SPLpartialrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLpartialrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (image const-decl "finite_sets[T].finite_set" maps nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (imgCompos formula-decl nil maps_composite nil)
+    (Conf type-decl nil SPLpartialrefinement nil)
+    (domCompos formula-decl nil maps_composite nil))
+   nil))
  (weakPartRefTransitive 0
   (weakPartRefTransitive-4 nil 3656760663
    ("" (skolem 1 (pl1 pl2 pl3 m n))
@@ -1522,9 +1079,6 @@
     (dom const-decl "set[S]" maps nil)
     (CM type-eq-decl nil SPLpartialrefinement nil))
    shostak))
- (weakPartRefAltReflexive_TCC1 0
-  (weakPartRefAltReflexive_TCC1-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
  (weakPartRefAltReflexive 0
   (weakPartRefAltReflexive-1 nil 3655116425
    ("" (skolem 1 (x s))
@@ -1558,12 +1112,6 @@
     (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
      nil))
    shostak))
- (weakPartRefAltTransitive_TCC1 0
-  (weakPartRefAltTransitive_TCC1-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
- (weakPartRefAltTransitive_TCC2 0
-  (weakPartRefAltTransitive_TCC2-1 nil 3656875987
-   ("" (subtype-tcc) nil nil) nil nil))
  (weakPartRefAltTransitive 0
   (weakPartRefAltTransitive-1 nil 3655116623
    ("" (skolem 1 (pl1 pl2 pl3 s t u))
@@ -1617,7 +1165,47 @@
   (fmCompStrongDef_TCC1-1 nil 3656090730 ("" (subtype-tcc) nil nil) nil
    nil))
  (fmCompStrongDef_TCC2 0
-  (fmCompStrongDef_TCC2-1 nil 3656875987 ("" (subtype-tcc) nil nil) nil
+  (fmCompStrongDef_TCC2-1 nil 3656875987 ("" (subtype-tcc) nil nil)
+   ((fmPartialRefinement const-decl "bool" SPLpartialrefinement nil)
+    (subset? const-decl "bool" sets nil)
+    (member const-decl "bool" sets nil) nil nil
+    (real_ge_is_total_order name-judgement "(total_order?[real])"
+     real_props nil)
+    (number nonempty-type-decl nil numbers nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (>= const-decl "bool" reals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil) nil
+    (injective? const-decl "bool" functions nil)
+    (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
+     sets_lemmas nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLpartialrefinement nil)
+    (AM type-eq-decl nil SPLpartialrefinement nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (AssetName type-decl nil SPLpartialrefinement nil)
+    (Asset type-decl nil SPLpartialrefinement nil)
+    (CK type-decl nil SPLpartialrefinement nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
+    (set type-eq-decl nil sets nil)
+    (Conf type-decl nil SPLpartialrefinement nil)
+    (FM type-decl nil SPLpartialrefinement nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil))
    nil))
  (fmCompStrongDef 0
   (fmCompStrongDef-1 nil 3656090730
@@ -1634,8 +1222,23 @@
                       (("" (expand preorder?)
                         (("" (expand reflexive?)
                           (("" (flatten)
-                            (("" (inst -1 "([||](K(pl))(A(pl))(c))")
-                              nil nil))
+                            (("" (use assetRefinement)
+                              ((""
+                                (expand preorder?)
+                                ((""
+                                  (flatten)
+                                  ((""
+                                    (expand reflexive?)
+                                    ((""
+                                      (inst
+                                       -1
+                                       "([||](K(fm1))(A(fm1))(c))")
+                                      nil
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
                             nil))
                           nil))
                         nil))
@@ -1649,41 +1252,68 @@
         nil))
       nil))
     nil)
-   ((strongPartialRefinement const-decl "bool" SPLpartialrefinement
-     nil)
-    (fmPartialRefinement const-decl "bool" SPLpartialrefinement nil)
-    (subset? const-decl "bool" sets nil)
-    (member const-decl "bool" sets nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (FM type-decl nil SPLpartialrefinement nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
+   ((Conf type-decl nil SPLpartialrefinement nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (reflexive? const-decl "bool" relations nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLpartialrefinement nil)
+    (AM type-eq-decl nil SPLpartialrefinement nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (AssetName type-decl nil SPLpartialrefinement nil)
+    (Asset type-decl nil SPLpartialrefinement nil)
+    (CK type-decl nil SPLpartialrefinement nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
     (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (FM type-decl nil SPLpartialrefinement nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (member const-decl "bool" sets nil)
+    (subset? const-decl "bool" sets nil)
+    (fmPartialRefinement const-decl "bool" SPLpartialrefinement nil)
+    (strongPartialRefinement const-decl "bool" SPLpartialrefinement
+     nil))
+   shostak))
+ (strongPartCaseWeak_TCC1 0
+  (strongPartCaseWeak_TCC1-1 nil 3656875987
+   ("" (skolem 1 (pl1 pl2 m))
+    (("" (bddsimp)
+      (("1" (typepred m) (("1" (propax) nil nil)) nil)
+       ("2" (typepred m) (("2" (propax) nil nil)) nil))
+      nil))
+    nil)
+   ((boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (Conf type-decl nil SPLpartialrefinement nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (CM type-eq-decl nil SPLpartialrefinement nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (subset? const-decl "bool" sets nil)
+    (mapping type-eq-decl nil maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (FM type-decl nil SPLpartialrefinement nil)
     ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
     (CK type-decl nil SPLpartialrefinement nil)
     (Asset type-decl nil SPLpartialrefinement nil)
     (AssetName type-decl nil SPLpartialrefinement nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (unique const-decl "bool" maps nil)
     (AM type-eq-decl nil SPLpartialrefinement nil)
     ([\|\|] const-decl
      "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLpartialrefinement nil)
-    (reflexive? const-decl "bool" relations nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
-    (preorder? const-decl "bool" orders nil)
-    (prod const-decl "finite_sets[Asset].finite_set"
-     SPLpartialrefinement nil)
-    (Conf type-decl nil SPLpartialrefinement nil))
-   shostak))
- (strongPartCaseWeak_TCC1 0
-  (strongPartCaseWeak_TCC1-1 nil 3656875987 ("" (subtype-tcc) nil nil)
-   nil nil))
- (strongPartCaseWeak_TCC2 0
-  (strongPartCaseWeak_TCC2-1 nil 3656875987 ("" (subtype-tcc) nil nil)
-   nil nil))
+    (wfPL const-decl "bool" SPLrefinement nil))
+   nil))
  (strongPartCaseWeak 0
   (strongPartCaseWeak-1 nil 3655109962
    ("" (skolem 1 (map pl1 pl2))
@@ -1724,6 +1354,9 @@
    shostak))
  (eqPlRefPartWeakAlt_TCC1 0
   (eqPlRefPartWeakAlt_TCC1-1 nil 3656875987 ("" (subtype-tcc) nil nil)
+   nil nil))
+ (eqPlRefPartWeakAlt_TCC2 0
+  (eqPlRefPartWeakAlt_TCC2-1 nil 3657986402 ("" (subtype-tcc) nil nil)
    nil nil))
  (eqPlRefPartWeakAlt 0
   (eqPlRefPartWeakAlt-1 nil 3655677340
@@ -1849,6 +1482,8 @@
     (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
      nil))
    shostak))
+ (fmPartRef_TCC1 0
+  (fmPartRef_TCC1-1 nil 3657964693 ("" (subtype-tcc) nil nil) nil nil))
  (fmPartRef 0
   (fmPartRef-1 nil 3656842354
    ("" (skolem 1 (fm1 fm2))
@@ -1878,122 +1513,5 @@
     (subset? const-decl "bool" sets nil)
     (\|= const-decl "bool" SPLrefinement nil)
     (fmPartialRefinement const-decl "bool" SPLpartialrefinement nil))
-   shostak))
- (commutativeDiagram2_TCC1 0
-  (commutativeDiagram2_TCC1-1 nil 3656933340 ("" (subtype-tcc) nil nil)
-   nil nil))
- (commutativeDiagram2 0
-  (commutativeDiagram2-1 nil 3656933342
-   ("" (skolem 1 (pl1 pl2 pl3 s))
-    (("" (bddsimp)
-      (("" (expand weakPartialRefinementAlt)
-        (("" (expand strongPartialRefinement)
-          (("" (expand plRefinement)
-            (("" (skolem 1 p1)
-              (("" (expand subset?)
-                (("" (bddsimp)
-                  (("" (expand prod)
-                    (("" (skolem -4 c)
-                      (("" (inst -3 c)
-                        (("" (expand member)
-                          (("" (inst -1 c)
-                            (("" (inst -2 c)
-                              ((""
-                                (bddsimp)
-                                ((""
-                                  (skolem -4 c2)
-                                  ((""
-                                    (expand prod)
-                                    ((""
-                                      (inst
-                                       1
-                                       "([||](K(pl3))(A(pl3))(c2))")
-                                      ((""
-                                        (bddsimp)
-                                        (("1"
-                                          (use assetRefinement)
-                                          (("1"
-                                            (expand preorder?)
-                                            (("1"
-                                              (flatten)
-                                              (("1"
-                                                (expand transitive?)
-                                                (("1"
-                                                  (inst
-                                                   -2
-                                                   "([||](K(pl1))(A(pl1))(c))"
-                                                   "([||](K(pl2))(A(pl2))(c))"
-                                                   "([||](K(pl3))(A(pl3))(c2))")
-                                                  (("1"
-                                                    (bddsimp)
-                                                    (("1"
-                                                      (replace -9 1)
-                                                      (("1"
-                                                        (propax)
-                                                        nil
-                                                        nil))
-                                                      nil))
-                                                    nil))
-                                                  nil))
-                                                nil))
-                                              nil))
-                                            nil))
-                                          nil)
-                                         ("2"
-                                          (inst 1 c2)
-                                          (("2" (bddsimp) nil nil))
-                                          nil))
-                                        nil))
-                                      nil))
-                                    nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   ((strongPartialRefinement const-decl "bool" SPLpartialrefinement
-     nil)
-    (member const-decl "bool" sets nil)
-    (Asset type-decl nil SPLpartialrefinement nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (set type-eq-decl nil sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (CK type-decl nil SPLpartialrefinement nil)
-    (AssetName type-decl nil SPLpartialrefinement nil)
-    (unique const-decl "bool" maps nil)
-    (AM type-eq-decl nil SPLpartialrefinement nil)
-    ([\|\|] const-decl
-     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLpartialrefinement nil)
-    (FM type-decl nil SPLpartialrefinement nil)
-    ({\|\|} const-decl "[FM -> set[Conf]]" SPLpartialrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (transitive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (Conf type-decl nil SPLpartialrefinement nil)
-    (prod const-decl "finite_sets[Asset].finite_set"
-     SPLpartialrefinement nil)
-    (prod const-decl
-     "finite_sets[finite_sets[Asset].finite_set].finite_set"
-     SPLpartialrefinement nil)
-    (subset? const-decl "bool" sets nil)
-    (plRefinement const-decl "bool" SPLrefinement nil)
-    (weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
-     nil))
    shostak)))
 
