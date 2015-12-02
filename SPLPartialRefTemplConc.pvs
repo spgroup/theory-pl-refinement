@@ -132,15 +132,15 @@ transfOptMand(fm1,fm2,P,Q): bool =
 syntaxTransfOptMand(fm1,fm2,P,Q): bool = 
        transfOptMand(fm1,fm2,P,Q) AND
        (features(fm1))(P) AND
-       (features(fm1))(Q) AND
-       (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)))
+       (features(fm1))(Q) 
 
 conditionsTransfOptMand(fm1,P,Q): bool = FORALL c: 
-                                  (semantics(fm1))(c) => NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)),c)
+                                  (semantics(fm1))(c) => NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)),c) AND
+                                                             satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)),c)
 
 % Theorem <Transform optional to mandatory feature template represents a strong partial refinement>
 transOptMandPartRefStrong: THEOREM 
-            FORALL (pl,fm2,(s:set[Configuration]),P,Q): 
+            FORALL (pl,fm2,s,P,Q): 
             (
                (
                  syntaxTransfOptMand(F(pl),fm2,P,Q) AND

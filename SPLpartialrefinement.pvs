@@ -101,12 +101,12 @@ BEGIN
                                       )
 
    % Theorem <weak partial refinement is reflexive>
-    weakPartRefReflexive: THEOREM FORALL pl,(m:{pairs: CM | subset?(domain(pairs), {||}(F(pl))) AND subset?(image(pairs), {||}(F(pl)))}) : 
+    weakPartRefReflexive: THEOREM FORALL pl,(m:CM | subset?(domain(m), {||}(F(pl))) AND subset?(image(m), {||}(F(pl)))) : 
                                          identity?(m) => weakPartialRefinement(pl,pl,m)
    % Theorem <weak partial refinement is transitive>
     weakPartRefTransitive: THEOREM FORALL pl1, pl2, pl3, 
-                                            (m:{pairs: CM | subset?(domain(pairs), {||}(F(pl1))) AND subset?(image(pairs), {||}(F(pl2)))}),
-                                            (n:{pairs: CM | subset?(domain(pairs), {||}(F(pl2))) AND subset?(image(pairs), {||}(F(pl3)))}) :
+                                            (m:CM | subset?(domain(m), {||}(F(pl1))) AND subset?(image(m), {||}(F(pl2)))),
+                                            (n:CM | subset?(domain(n), {||}(F(pl2))) AND subset?(image(n), {||}(F(pl3)))) :
                                      ( 
                                           (
                                             weakPartialRefinement(pl1,pl2,m) 
@@ -120,13 +120,13 @@ BEGIN
 
 
     % Theorem <weak partial refinement is reflexive>
-    weakPartRefAltReflexive: THEOREM (FORALL pl,(s:{confs: finite_sets[Conf].finite_set | subset?(confs, {||}(F(pl)))}) : 
-                                                    weakPartialRefinementAlt(pl,pl,s,s))
+    weakPartRefAltReflexive: THEOREM FORALL pl,(s:set[Conf] | subset?(s, {||}(F(pl)))) : 
+                                                    weakPartialRefinementAlt(pl,pl,s,s)
     % Theorem <weak partial refinement is transitive>
     weakPartRefAltTransitive: THEOREM (FORALL pl1,pl2,pl3,
-                                              (s:{confs:finite_sets[Conf].finite_set | subset?(confs,{||}(F(pl1)))}),
-                                              (t:{confs:finite_sets[Conf].finite_set | subset?(confs,{||}(F(pl2)))}),
-                                              (u:{confs:finite_sets[Conf].finite_set | subset?(confs,{||}(F(pl3)))}) : 
+                                              (s:set[Conf] | subset?(s,{||}(F(pl1)))), 
+                                              (t:set[Conf] | subset?(t,{||}(F(pl2)))),
+                                              (u:set[Conf] | subset?(u,{||}(F(pl3)))) : 
                                          (
                                             weakPartialRefinementAlt(pl1,pl2,s,t) 
                                            AND 
@@ -138,7 +138,7 @@ BEGIN
     %-------------------------------------------------------COMPOSITIONALITY---------------------------------------------------
     % Theorem <FM Equivalence compositionality - weak definition>
     fmCompStrongDef: THEOREM
-    FORALL(pl:PL,fm1,fm2:FM,s:{confs:set[Conf]| subset?(confs,{||}(fm1)) AND subset?(confs,{||}(fm2))}):
+    FORALL(pl:PL,fm1,fm2:FM,(s:set[Conf]| subset?(s,{||}(fm1)) AND subset?(s,{||}(fm2)))):
     ( 
       subset?(s,t) AND fmPartialRefinement(fm1,fm2,t)
      => 
@@ -151,9 +151,9 @@ BEGIN
 
     % Theorem <correspondence between strong partial ref and weak partial ref> 
     strongPartCaseWeak: THEOREM FORALL (pl1,pl2:PL,
-                                       m:{pairs:CM | subset?(domain(pairs), {||}(F(pl1))) AND 
-                                                     subset?(domain(pairs), {||}(F(pl2))) AND
-                                                     subset?(image(pairs),  {||}(F(pl2)))}):  
+                                       (m:CM | subset?(domain(m), {||}(F(pl1))) AND 
+                                                     subset?(domain(m), {||}(F(pl2))) AND
+                                                     subset?(image(m),  {||}(F(pl2))))):  
                                     identity?(m)   
                                     => 
                                     (strongPartialRefinement(pl1,pl2,domain(m)) <=> weakPartialRefinement(pl1,pl2,m))
