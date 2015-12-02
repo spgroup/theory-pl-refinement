@@ -40,8 +40,8 @@ m: VAR CM
 %---------------------------------------------------------------------------------------------------------------------------------------
 
 syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
-      am1=union(singleton(an,a1),pairs) AND
-      am2=union(singleton(an,a2),pairs) 
+      am1=ow((an,a1),pairs) AND
+      am2=ow((an,a2),pairs) 
 
 % Lemma <Since the only difference between "pairs" and "A(pl)" is the element "(an,a1)" and this asset is not included, the evaluation
 %        of A(pl) is the same as pairs.>
@@ -90,20 +90,6 @@ changeAssetStrong: THEOREM
       =>
         strongPartialRefinement(pl,pl2,s)
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
-
-% Theorem <Change asset template represents a weak partial refinement>
-changeAssetWeakAlt: THEOREM
-    FORALL(pl,am2,pairs,a1,a2,an,s,t):
-                (
-                   (
-                      syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-                      s = <>(pl, singleton(an)) AND
-                      s = t
-                   ) 
-                   => 
-                   (weakPartialRefinementAlt(pl,pl2,s,t))
-                )
-      WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 % Theorem <Change asset template represents a weak partial refinement>
 changeAssetWeak: THEOREM
@@ -217,7 +203,7 @@ syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
                                  removeFeature(fm1,fm2,P,Q) AND
                                  features(fm1)(P) AND
                                  features(fm1)(Q) AND
-                                 am2 = difference(am1,pairs) AND
+                                 am1 = overw(pairs,am2) AND
                                  ck2 = difference(ck1,its)    
 
 conditionsOpt(fm1,P,Q):bool =  FORALL c: semantics(fm1)(c) =>  NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
@@ -291,7 +277,7 @@ removeFeaturePartRefWeak: THEOREM
 
 % The FM does not change (therefore we are not adding features). Only AM and CK, that now have new lines corresponding to the new assets.
 syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
-            am2 = union(am1,pairs) AND
+            am2 = overw(pairs,am1) AND
             ck2 = union(ck1,its)   
 
 % It is necessary to make sure that all assets added in the CK are present in the new lines of the AM.
