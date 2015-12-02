@@ -133,8 +133,10 @@ syntaxTransfOptMand(fm1,fm2,P,Q): bool =
        transfOptMand(fm1,fm2,P,Q) AND
        (features(fm1))(P) AND
        (features(fm1))(Q) AND
-       (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)))  AND
-       NOT (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)))
+       (formulae(fm1))(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)))
+
+conditionsTransfOptMand(fm1,P,Q): bool = FORALL c: 
+                                  (semantics(fm1))(c) => NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)),c)
 
 % Theorem <Transform optional to mandatory feature template represents a strong partial refinement>
 transOptMandPartRefStrong: THEOREM 
@@ -142,6 +144,7 @@ transOptMandPartRefStrong: THEOREM
             (
                (
                  syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) AND
                  s = <>(F(pl),(IMPLIES_FORMULA (NAME_FORMULA(P),NAME_FORMULA(Q))))
                )
                => strongPartialRefinement(pl,pl2,s)
@@ -154,6 +157,7 @@ transOptMandPartRefWeak: THEOREM
             (
                (
                  syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) AND
                  domain(m) = <>(F(pl),(IMPLIES_FORMULA (NAME_FORMULA(P),NAME_FORMULA(Q)))) AND
                  identity?(m)
                )
@@ -302,7 +306,7 @@ addAssetsSameProducts: THEOREM
            FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl2,dom(pairs)) AND
+                 s = <>(pl2,domain(pairs)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
                  conditionsAddAssets(pairs,its) 
                )
@@ -314,7 +318,7 @@ addAssetsPartRefStrong: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl2,dom(pairs)) AND
+                 s = <>(pl2,domain(pairs)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
                  conditionsAddAssets(pairs,its) 
                )
@@ -327,7 +331,7 @@ removeAssetsSameProducts: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl,dom(pairs)) AND
+                 s = <>(pl,domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
                  conditionsAddAssets(pairs,its) 
                )
@@ -339,7 +343,7 @@ removeAssetsPartRefStrong: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl,dom(pairs)) AND
+                 s = <>(pl,domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
                  conditionsAddAssets(pairs,its) 
                )

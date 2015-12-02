@@ -65,8 +65,8 @@ BEGIN
 
     % Partial Refinement Relation - this definition has two indexes.
     weakPartialRefinementAlt(pl1,pl2:PL,
-                              s:{confs:finite_sets[Conf].finite_set | subset?(confs,{||}(F(pl1)))},
-                              t:{confs:finite_sets[Conf].finite_set | subset?(confs,{||}(F(pl2)))}
+                              s:{confs:set[Conf] | subset?(confs,{||}(F(pl1)))},
+                              t:{confs:set[Conf] | subset?(confs,{||}(F(pl2)))}
                             ) : bool =  
          FORALL p1 : prod(pl1,s)(p1) => 
             (

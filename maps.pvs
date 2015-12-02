@@ -139,7 +139,7 @@ maps[S:TYPE,T:TYPE]: THEORY
 
   getRightResult: LEMMA 
      FORALL m,r,(l:{n:S | dom(m)(n)}): m(l,r) => getRight(m,l) = r
-  
+
  END maps
 
 %Theory for composing maps.
@@ -177,5 +177,7 @@ maps_identity[S:TYPE]: THEORY
   identity?(m):bool = FORALL (l:S) : getRight(m, l) = l
 
   composeIdResultsId: LEMMA FORALL m: identity?(m) => composeMaps(m,m) = m
+
+  sameDomImg: LEMMA FORALL m: identity?(m) => domain(m) = image(m) 
 
  END maps_identity
