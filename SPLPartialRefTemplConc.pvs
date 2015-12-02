@@ -205,21 +205,11 @@ changeFeatureExpStrongPartRef: THEOREM
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
-% Predicate for remove optional feature. FM2 has the same features of FM1 except the removed feature and one less formula that represents
-% the optional feature
-removeOptional(fm1,fm2,P,Q):bool =  features(fm2) = remove(Q,features(fm1)) AND
-       formulae(fm2) = remove(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),formulae(fm1)) AND
-       NOT formulae(fm1)(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)))
-
-removeMandatory(fm1,fm2,P,Q):bool = features(fm2) = remove(Q,features(fm1)) AND
-       formulae(fm2) = difference(formulae(fm1),
-                                   union(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),
-                                         IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))
-                                        )   
-                                 )
+filterFormulae(fm,Q): set[Formula_] = {form: Formula_ | formulae(fm)(form) AND NOT member(Q,names(form))}       
 
 % Removals can be of an optional or mandatory feature
-removeFeature(fm1,fm2,P,Q):bool = removeOptional(fm1,fm2,P,Q) OR removeMandatory(fm1,fm2,P,Q)
+removeFeature(fm1,fm2,P,Q):bool = formulae(fm2) = filterFormulae(fm1,Q) AND
+                                  features(fm2) = remove(Q,features(fm1))
 
 % The AMs differ only in pairs (set of pairs that have the assets that represent the removed feature) and the CKs in its 
 % (items that represent the removed feature)
@@ -229,11 +219,14 @@ syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
                                  features(fm1)(Q) AND
                                  am2 = difference(am1,pairs) AND
                                  ck2 = difference(ck1,its)    
+
+conditionsOpt(fm1,P,Q):bool =  FORALL c: semantics(fm1)(c) =>  NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
+conditionsMand(fm1,P,Q):bool = FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
                                 
 % We need to make sure that two conditions hold:
 % 1) Q HAS appear ONLY in an expression from its. Otherwise it would not be refinement
 % 2) The items that are not in its do not appear in pairs.
-conditionsRemoveFeature(its,pairs,Q,ck) : bool = 
+conditionsRemoveFeature(fm1,its,pairs,P,Q,ck) : bool = 
                                  (FORALL c : 
                                           FORALL exp : 
                                                     exps(ck)(exp) AND satisfies(exp,c) => 
@@ -241,10 +234,14 @@ conditionsRemoveFeature(its,pairs,Q,ck) : bool =
                                  )   
                                  AND
                                  (FORALL (item:Item) : NOT its(item) => FORALL an: (assets(item))(an) => NOT dom(pairs)(an))
+                                 AND
+                                 (FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),c))
+                                 AND
+                                 (conditionsOpt(fm1,P,Q) OR conditionsMand(fm1,P,Q))
 
 predRemoveFeature(pl,pl2,s,its,pairs,P,Q): bool = 
              (syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,its,pairs) AND
-             conditionsRemoveFeature(its,pairs,Q,K(pl)) AND
+             conditionsRemoveFeature(F(pl),its,pairs,P,Q,K(pl)) AND
              s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q))))
 
 % Lemma <Since s is filtering configurations that do not have the removed feature (Q) and all items from its have Q, we can conclude
@@ -283,7 +280,7 @@ removeFeaturePartRefWeak: THEOREM
             (
                (
                  identity?(m) AND
-                 predRemoveFeature(pl,pl2,dom(m),its,pairs,P,Q)
+                 predRemoveFeature(pl,pl2,domain(m),its,pairs,P,Q)
                )
                => weakPartialRefinement(pl,pl2,m)
             )
