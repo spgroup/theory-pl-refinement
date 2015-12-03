@@ -124,6 +124,17 @@ conditionsTransfOptMand(fm1,P,Q): bool = FORALL c:
                                   (semantics(fm1))(c) => NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)),c) AND
                                                              satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)),c)
 
+wfTransfOptMand: THEOREM 
+            FORALL (pl,fm2,P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) 
+               )
+               => wfFM(fm2) AND wfPL(pl2)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
 % Theorem <Transform optional to mandatory feature template represents a strong partial refinement>
 transOptMandPartRefStrong: THEOREM 
             FORALL (pl,fm2,s,P,Q): 
@@ -186,6 +197,12 @@ changeFeatureExpStrongPartRef: THEOREM
               predChangeFeatureExp(pl,ck2,item1,item2,items,s) => strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
+
+wfChangeFeatureExp: LEMMA 
+            FORALL(pl,ck2,item1,item2,items,s):
+            (
+              predChangeFeatureExp(pl,ck2,item1,item2,items,s) => wfPL(pl2)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
