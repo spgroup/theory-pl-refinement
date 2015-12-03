@@ -7,7 +7,7 @@ BEGIN
     IMPORTING maps
     Conf:TYPE
     FM: TYPE
-    {||} : [FM -> set[Conf]]
+    {||} : [FM -> finite_sets[Conf].finite_set]
     Asset:TYPE
     AssetName:TYPE
     AM:TYPE = maps[AssetName,Asset].mapping
@@ -140,7 +140,7 @@ BEGIN
     fmCompStrongDef: THEOREM
     FORALL(pl:PL,fm1,fm2:FM,(s:set[Conf]| subset?(s,{||}(fm1)) AND subset?(s,{||}(fm2)))):
     ( 
-      subset?(s,t) AND fmPartialRefinement(fm1,fm2,t)
+      subset?(s,t) AND fmPartialRefinement(fm1,fm2,t) AND wfPL(pl2)
      => 
         strongPartialRefinement(pl,pl2,s)  
     )
