@@ -73,6 +73,7 @@ BEGIN
                EXISTS p2 : prod(pl2,t)(p2) AND (p1 |- p2)
             )       
 
+
     fmPartialRefinement(fm1,fm2,s) : bool = 
           FORALL c: s(c) => {||}(fm1)(c) AND {||}(fm2)(c)
 
@@ -164,23 +165,22 @@ BEGIN
 
     fmPartRef: LEMMA FORALL fm1,fm2: (fm1 |= fm2) <=> fmPartialRefinement(fm1,fm2,{|fm1|})
 
-    % Theorem <commutative diagram> 
+   %--------------------------------------------------COMMUTABLE DIAGRAM------------------------------------------------------
 
-  %   commutativeDiagram: THEOREM FORALL pl1,pl4,s :
-  %                                       (EXISTS pl2: strongPartialRefinement(pl1, pl2,{|F(pl1)|}) AND strongPartialRefinement(pl2,pl4,s)) % 
- %                                        <=>
-  %                                       (EXISTS pl3: strongPartialRefinement(pl1, pl3,{|F(pl1)|}) AND strongPartialRefinement(pl3,pl4,s)) 
-                              
-    %this is not proved and the diagram might not be commutable
-  %  commutativeDiagram: THEOREM (FORALL pl1,pl2,pl3,s :
-  %                                       (plRefinement(pl1, pl2) AND strongPartialRefinement(pl2,pl3,s) AND 
-  %                                        subset?(s,{|F(pl2)|}) AND subset?(s,{|F(pl3)|})) => 
-  %                                       weakPartialRefinementAlt(pl1,pl3,s,{|F(pl3)|}))
+   % considering strongerPlRefinement definition
 
-    %this is proved
-   % commutativeDiagram2: THEOREM FORALL pl1,pl2,pl3,s :
-   %                                      (strongPartialRefinement(pl1, pl2,s) AND plRefinement(pl2,pl3) AND subset?(s,{||}(F(pl2))) => 
-   %                                      weakPartialRefinementAlt(pl1,pl3,s,{|F(pl3)|}))  
-                     
+   totalImpliesPartial: LEMMA FORALL pl1,pl2,(s:set[Conf] | subset?(s,{||}(F(pl1)))): 
+                            strongerPLrefinement(pl1,pl2) => strongPartialRefinement(pl1,pl2,s)
+   
+   partialImpliesTotal: LEMMA FORALL pl1,pl2,s: (s = {||}(F(pl1)) AND subset?(s,{||}(F(pl2))) AND strongPartialRefinement(pl1,pl2,s)) 
+                                                => strongerPLrefinement(pl1,pl2)
+
+
+   commutableDiagram1: THEOREM FORALL pl1,pl4: 
+                             (EXISTS pl2,(s:set[Conf] | subset?(s,{||}(F(pl1))) AND  subset?(s,{||}(F(pl2))) AND subset?(s,{||}(F(pl4)))): 
+                                      strongPartialRefinement(pl1,pl2,s) AND strongerPLrefinement(pl2,pl4)) <=>
+                               (EXISTS pl3,(t:set[Conf] | subset?(t,{||}(F(pl1))) AND subset?(t,{||}(F(pl3))) AND subset?(t,{||}(F(pl4)))):
+                                      strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,t)) 
+                         
 
 END SPLpartialrefinement

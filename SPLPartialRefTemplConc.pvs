@@ -197,13 +197,6 @@ changeFeatureExpStrongPartRef: THEOREM
               predChangeFeatureExp(pl,ck2,item1,item2,items,s) => strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
-
-wfChangeFeatureExp: LEMMA 
-            FORALL(pl,ck2,item1,item2,items,s):
-            (
-              predChangeFeatureExp(pl,ck2,item1,item2,items,s) => wfPL(pl2)
-            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
-
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
