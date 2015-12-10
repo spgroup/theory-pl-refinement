@@ -85,7 +85,8 @@ changeAssetStrong: THEOREM
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(an))
+        s = <>(pl,singleton(an)) AND
+        wfPL(pl2) 
       )
       =>
         strongPartialRefinement(pl,pl2,s)
@@ -98,7 +99,8 @@ changeAssetWeak: THEOREM
       (
 	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
         domain(m) = <>(pl,singleton(an)) AND
-        identity?(m)
+        identity?(m) AND
+        wfPL(pl2)
       ) 
       => weakPartialRefinement(pl,pl2,m)
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
@@ -187,14 +189,14 @@ predChangeFeatureExp(pl,ck2,item1,item2,items,s) : bool =
 changeFeatureExpSameEvalCK: LEMMA
             FORALL(pl,ck2,item1,item2,items,s):
             (
-               predChangeFeatureExp(pl,ck2,item1,item2,items,s) => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+               predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND wfPL(pl2) => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 % Theorem <Change feature expression template represents a strong partial refinement>
 changeFeatureExpStrongPartRef: THEOREM
             FORALL(pl,ck2,item1,item2,items,s):
             (
-              predChangeFeatureExp(pl,ck2,item1,item2,items,s) => strongPartialRefinement(pl,pl2,s)
+              predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND wfPL(pl2) => strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
@@ -292,7 +294,7 @@ syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
 
 % It is necessary to make sure that all assets added in the CK are present in the new lines of the AM.
 conditionsAddAssets(pairs,its): bool = 
-            FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs))
+            FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs)) 
 
 % Theorem <When we add assets but filter the assets added the resulting products are equal>
 addAssetsSameProducts: THEOREM
@@ -303,7 +305,7 @@ addAssetsSameProducts: THEOREM
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
                  conditionsAddAssets(pairs,its) 
                )
-               => FORALL c : s(c) => prod(pl,c) = prod(pl2,c)
+               => FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 % Theorem <Add assets template represents a strong partial refinement>
@@ -313,7 +315,8 @@ addAssetsPartRefStrong: THEOREM
                (
                  s = <>(pl2,domain(pairs)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
-                 conditionsAddAssets(pairs,its) 
+                 conditionsAddAssets(pairs,its) AND
+                 wfPL(pl2)
                )
                => strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
@@ -326,7 +329,8 @@ removeAssetsSameProducts: THEOREM
                (
                  s = <>(pl,domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
-                 conditionsAddAssets(pairs,its) 
+                 conditionsAddAssets(pairs,its) AND
+                 wfPL(pl2) 
                )
                => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
@@ -338,7 +342,8 @@ removeAssetsPartRefStrong: THEOREM
                (
                  s = <>(pl,domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
-                 conditionsAddAssets(pairs,its) 
+                 conditionsAddAssets(pairs,its) AND
+                 wfPL(pl2) 
                )
                => strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)

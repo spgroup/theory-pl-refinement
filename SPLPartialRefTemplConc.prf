@@ -420,88 +420,63 @@
    shostak))
  (changeAssetStrong_TCC1 0
   (changeAssetStrong_TCC1-1 nil 3655636131 ("" (subtype-tcc) nil nil)
-   nil nil))
- (changeAssetStrong_TCC2 0
-  (changeAssetStrong_TCC2-1 nil 3656876548
-   ("" (skolem 1 (pl am2 pairs a1 a2 an s pl2))
-    (("" (bddsimp)
-      (("1" (replace -3 1)
-        (("1" (expand semantics)
-          (("1" (expand "<>")
-            (("1" (decompose-equality -2)
-              (("1" (expand subset?)
-                (("1" (skolem 1 c)
-                  (("1" (inst -1 c)
-                    (("1" (expand member)
-                      (("1" (bddsimp)
-                        (("1" (expand semantics)
-                          (("1" (bddsimp) nil nil)) nil)
-                         ("2" (expand semantics)
-                          (("2" (bddsimp) nil nil)) nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil)
-       ("2" (expand "<>")
-        (("2" (decompose-equality -2)
-          (("2" (expand subset?)
-            (("2" (skolem 1 c)
-              (("2" (inst -1 c)
-                (("2" (expand member) (("2" (bddsimp) nil nil)) nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   ((semantics const-decl "set[Configuration]" FeatureModelSemantics
+   ((AM type-eq-decl nil SPLrefinement nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (>= const-decl "bool" reals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
      nil)
-    (Name type-decl nil Name nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (Configuration type-eq-decl nil Name nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (set type-eq-decl nil sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (restrict const-decl "R" restrict nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (unique const-decl "bool" maps nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (number nonempty-type-decl nil numbers nil)
+    (injective? const-decl "bool" functions nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (empty? const-decl "bool" sets nil)
-    (intersection const-decl "set" sets nil)
     (getRS const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil)
-    (singleton? const-decl "bool" sets nil)
     (singleton const-decl "(singleton?)" sets nil)
-    (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
-     sets_lemmas nil)
-    (member const-decl "bool" sets nil)
-    (subset? const-decl "bool" sets nil)
+    (intersection const-decl "set" sets nil)
+    (empty? const-decl "bool" sets nil)
     (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
     (finite_intersection1 application-judgement "finite_set"
-     finite_sets nil))
+     finite_sets nil)
+    (dom const-decl "set[S]" maps nil)
+    (syntaxChangeAsset const-decl "bool" SPLPartialRefTemplConc nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
+          ConfigurationKnowledge nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (restrict const-decl "R" restrict nil)
+    (Configuration type-eq-decl nil Name nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (member const-decl "bool" sets nil)
+    (subset? const-decl "bool" sets nil))
    nil))
  (changeAssetStrong 0
   (changeAssetStrong-1 nil 3655416713
@@ -577,25 +552,80 @@
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil))
    shostak))
  (changeAssetWeak_TCC1 0
-  (changeAssetWeak_TCC1-1 nil 3655846816 ("" (subtype-tcc) nil nil) nil
-   nil))
- (changeAssetWeak_TCC2 0
-  (changeAssetWeak_TCC2-1 nil 3656876548
+  (changeAssetWeak_TCC1-1 nil 3655846816
    ("" (skolem 1 (pl am2 pairs a1 a2 an m pl2))
-    (("" (expand subset?)
-      (("" (expand "<>")
-        (("" (bddsimp)
-          (("1" (skolem 1 c)
-            (("1" (expand member)
-              (("1" (lemma "maps_identity[Configuration].sameDomImg")
-                (("1" (inst -1 m)
-                  (("1" (bddsimp)
-                    (("1" (replace -2 -6 RL)
-                      (("1" (decompose-equality -4)
-                        (("1" (inst -1 c)
-                          (("1" (replace -5 1)
-                            (("1" (expand semantics)
-                              (("1" (bddsimp) nil nil)) nil))
+    (("" (bddsimp)
+      (("1" (expand subset?)
+        (("1" (skolem 1 c)
+          (("1" (expand member)
+            (("1" (expand image)
+              (("1" (replace -5 1)
+                (("1" (expand semantics)
+                  (("1" (expand "<>")
+                    (("1" (decompose-equality -2)
+                      (("1" (inst -1 c)
+                        (("1" (expand semantics)
+                          (("1" (expand domain)
+                            (("1" (bddsimp)
+                              (("1"
+                                (skolem -5 l)
+                                (("1"
+                                  (expand identity?)
+                                  (("1"
+                                    (inst -2 l)
+                                    (("1"
+                                      (lemma
+                                       "maps[Configuration,Configuration].getRightResult")
+                                      (("1"
+                                        (inst -1 m c l)
+                                        (("1"
+                                          (bddsimp)
+                                          (("1"
+                                            (replace -2 -4)
+                                            (("1"
+                                              (replace -4 -1 RL)
+                                              (("1"
+                                                (inst 1 c)
+                                                nil
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2"
+                                (skolem -5 l)
+                                (("2"
+                                  (expand identity?)
+                                  (("2"
+                                    (inst -2 l)
+                                    (("2"
+                                      (lemma
+                                       "maps[Configuration,Configuration].getRightResult")
+                                      (("2"
+                                        (inst -1 m c l)
+                                        (("2"
+                                          (bddsimp)
+                                          (("2"
+                                            (replace -2 -4)
+                                            (("2"
+                                              (replace -4 -1 RL)
+                                              (("2"
+                                                (inst 1 c)
+                                                nil
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
                             nil))
                           nil))
                         nil))
@@ -604,9 +634,13 @@
                   nil))
                 nil))
               nil))
-            nil)
-           ("2" (expand member)
-            (("2" (skolem 1 c)
+            nil))
+          nil))
+        nil)
+       ("2" (expand subset?)
+        (("2" (skolem 1 c)
+          (("2" (expand member)
+            (("2" (expand "<>")
               (("2" (decompose-equality -2)
                 (("2" (inst -1 c) (("2" (bddsimp) nil nil)) nil)) nil))
               nil))
@@ -615,48 +649,52 @@
         nil))
       nil))
     nil)
-   ((subset? const-decl "bool" sets nil)
-    (member const-decl "bool" sets nil) (set type-eq-decl nil sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (unique const-decl "bool" maps nil)
-    (mapping type-eq-decl nil maps nil)
-    (singleton const-decl "(singleton?)" sets nil)
-    (singleton? const-decl "bool" sets nil)
-    (getRS const-decl "finite_sets[AssetName].finite_set"
-     ConfigurationKnowledge nil)
-    (intersection const-decl "set" sets nil)
-    (empty? const-decl "bool" sets nil)
-    (evalCK const-decl "finite_sets[Item].finite_set"
-     ConfigurationKnowledge nil)
-    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (restrict const-decl "R" restrict nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
+   ((image const-decl "finite_sets[T].finite_set" maps nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (sameDomImg formula-decl nil maps_identity nil)
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (Configuration type-eq-decl nil Name nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (restrict const-decl "R" restrict nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (empty? const-decl "bool" sets nil)
+    (intersection const-decl "set" sets nil)
+    (getRS const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (singleton? const-decl "bool" sets nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (identity? const-decl "bool" maps_identity nil)
+    (getRightResult formula-decl nil maps nil)
+    (dom const-decl "set[S]" maps nil)
     (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (finite_intersection1 application-judgement "finite_set"
-     finite_sets nil))
+     finite_sets nil)
+    (member const-decl "bool" sets nil)
+    (subset? const-decl "bool" sets nil))
    nil))
  (changeAssetWeak 0
   (changeAssetWeak-1 nil 3655846829
@@ -1700,9 +1738,6 @@
   (conditionsChangeFeatureExp_TCC1-1 nil 3657447041
    ("" (subtype-tcc) nil nil)
    ((wfTree const-decl "bool" FeatureModel nil)) nil))
- (changeFeatureExpSameEvalCK_TCC1 0
-  (changeFeatureExpSameEvalCK_TCC1-1 nil 3657447639
-   ("" (subtype-tcc) nil nil) nil nil))
  (changeFeatureExpSameEvalCK 0
   (changeFeatureExpSameEvalCK-5 nil 3657620202
    ("" (skolem 1 (pl ck2 item1 item2 items s))
@@ -2407,32 +2442,9 @@
    shostak))
  (changeFeatureExpStrongPartRef_TCC1 0
   (changeFeatureExpStrongPartRef_TCC1-1 nil 3657448092
-   ("" (subtype-tcc) nil nil) nil nil))
- (changeFeatureExpStrongPartRef_TCC2 0
-  (changeFeatureExpStrongPartRef_TCC2-1 nil 3657448092
    ("" (subtype-tcc) nil nil)
-   ((boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
+   ((AM type-eq-decl nil SPLrefinement nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
-    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (Configuration type-eq-decl nil Name nil)
-    (restrict const-decl "R" restrict nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (unique const-decl "bool" maps nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
     (nat nonempty-type-eq-decl nil naturalnumbers nil)
     (int nonempty-type-eq-decl nil integers nil)
     (integer_pred const-decl "[rational -> boolean]" integers nil)
@@ -2447,8 +2459,6 @@
     (number nonempty-type-decl nil numbers nil)
     (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (injective? const-decl "bool" functions nil)
-    (eval const-decl "finite_sets[AssetName].finite_set"
-          ConfigurationKnowledge nil)
     (nonempty_union1 application-judgement "(nonempty?)" sets nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -2457,11 +2467,33 @@
     (conditionsChangeFeatureExp const-decl "bool"
      SPLPartialRefTemplConc nil)
     (predChangeFeatureExp const-decl "bool" SPLPartialRefTemplConc nil)
-    (member const-decl "bool" sets nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
+          ConfigurationKnowledge nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (restrict const-decl "R" restrict nil)
+    (Configuration type-eq-decl nil Name nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (member const-decl "bool" sets nil)
     (subset? const-decl "bool" sets nil))
    nil))
  (changeFeatureExpStrongPartRef 0
@@ -2474,19 +2506,20 @@
             (("" (expand prod)
               (("" (bddsimp)
                 (("" (skolem 1 c)
-                  (("" (inst -4 c)
-                    (("" (bddsimp)
-                      (("" (replace -5 1)
-                        (("" (use SPLrefinement.assetRefinement)
-                          (("" (expand preorder?)
-                            (("" (flatten)
+                  (("" (bddsimp)
+                    (("" (use SPLrefinement.assetRefinement)
+                      (("" (expand preorder?)
+                        (("" (flatten)
+                          (("" (expand reflexive?)
+                            (("" (inst -1 "(semantics(ck2)(A(pl))(c))")
                               ((""
-                                (expand reflexive?)
+                                (inst -7 c)
                                 ((""
-                                  (inst
-                                   -1
-                                   "(semantics(ck2)(A(pl))(c))")
-                                  nil
+                                  (bddsimp)
+                                  ((""
+                                    (replace -8 1)
+                                    (("" (propax) nil nil))
+                                    nil))
                                   nil))
                                 nil))
                               nil))
@@ -2604,41 +2637,6 @@
     (changeFeatureExpSameEvalCK formula-decl nil SPLPartialRefTemplConc
      nil))
    shostak))
- (wfChangeFeatureExp 0
-  (wfChangeFeatureExp-1 nil 3658093941
-   ("" (skolem 1 (pl ck2 item1 item2 items s))
-    (("" (expand wfPL)
-      (("" (bddsimp)
-        (("" (skolem 1 c)
-          (("" (expand predChangeFeatureExp)
-            (("" (bddsimp)
-              (("" (typepred pl)
-                (("" (expand wfPL)
-                  (("" (inst -1 c)
-                    (("" (expand conditionsChangeFeatureExp)
-                      (("" (expand syntaxChangeFeatureExp)
-                        (("" (flatten)
-                          (("" (expand union)
-                            (("" (lemma changeFeatureExpSameEvalCK)
-                              ((""
-                                (inst -1 pl ck2 item1 item2 items s)
-                                (("" (postpone) nil nil))
-                                nil))
-                              nil))
-                            nil))
-                          nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   nil shostak))
  (itsNotIncluded 0
   (itsNotIncluded-5 nil 3657619248
    ("" (skolem 1 (pl pl2 s its pairs P Q))
@@ -5872,6 +5870,482 @@
   (addAssetsSameProducts_TCC1-1 nil 3657621413
    ("" (subtype-tcc) nil nil) nil nil))
  (addAssetsSameProducts 0
+  (addAssetsSameProducts-3 nil 3658743157
+   ("" (skolem 1 (pl am2 ck2 s its pairs))
+    (("" (expand semantics)
+      (("" (bddsimp)
+        (("" (skolem 1 c)
+          (("" (expand "<>")
+            (("" (decompose-equality)
+              (("" (inst -1 c)
+                (("" (bddsimp)
+                  (("" (expand map)
+                    (("" (decompose-equality)
+                      (("" (bddsimp)
+                        (("1" (skolem -1 an)
+                          (("1" (inst 1 an)
+                            (("1" (expand syntaxAddAssets)
+                              (("1"
+                                (flatten)
+                                (("1"
+                                  (expand overw)
+                                  (("1"
+                                    (expand union)
+                                    (("1"
+                                      (decompose-equality)
+                                      (("1"
+                                        (inst -1 "(an,x!1)")
+                                        (("1"
+                                          (expand member)
+                                          (("1"
+                                            (expand
+                                             conditionsAddAssets)
+                                            (("1"
+                                              (bddsimp)
+                                              (("1"
+                                                (expand eval)
+                                                (("1"
+                                                  (expand assetsCK)
+                                                  (("1"
+                                                    (skolem -3 i)
+                                                    (("1"
+                                                      (inst 1 i)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (decompose-equality)
+                                                          (("1"
+                                                            (inst -1 i)
+                                                            (("1"
+                                                              (expand
+                                                               evalCK)
+                                                              (("1"
+                                                                (bddsimp)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil)
+                                               ("2"
+                                                (expand eval)
+                                                (("2"
+                                                  (expand assetsCK)
+                                                  (("2"
+                                                    (skolem -3 i)
+                                                    (("2"
+                                                      (inst 1 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           evalCK)
+                                                          (("2"
+                                                            (decompose-equality)
+                                                            (("2"
+                                                              (inst
+                                                               -1
+                                                               i)
+                                                              (("2"
+                                                                (bddsimp)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil)
+                                               ("3"
+                                                (expand remove)
+                                                (("3"
+                                                  (expand eval)
+                                                  (("3"
+                                                    (expand assetsCK)
+                                                    (("3"
+                                                      (skolem -1 i)
+                                                      (("3"
+                                                        (expand evalCK)
+                                                        (("3"
+                                                          (decompose-equality)
+                                                          (("3"
+                                                            (inst -1 i)
+                                                            (("3"
+                                                              (bddsimp)
+                                                              (("3"
+                                                                (expand*
+                                                                 empty?
+                                                                 intersection)
+                                                                (("3"
+                                                                  (expand
+                                                                   member)
+                                                                  (("3"
+                                                                    (expand
+                                                                     domain)
+                                                                    (("3"
+                                                                      (expand
+                                                                       getRS)
+                                                                      (("3"
+                                                                        (grind)
+                                                                        nil
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil)
+                         ("2" (skolem -1 an)
+                          (("2" (inst 1 an)
+                            (("2" (expand syntaxAddAssets)
+                              (("2"
+                                (flatten)
+                                (("2"
+                                  (expand overw)
+                                  (("2"
+                                    (expand union)
+                                    (("2"
+                                      (decompose-equality)
+                                      (("2"
+                                        (inst -1 "(an,x!1)")
+                                        (("2"
+                                          (expand member)
+                                          (("2"
+                                            (expand remove)
+                                            (("2"
+                                              (expand eval)
+                                              (("2"
+                                                (expand assetsCK)
+                                                (("2"
+                                                  (expand domain)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (skolem -3 i)
+                                                      (("1"
+                                                        (inst 1 i)
+                                                        (("1"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (expand
+                                                             evalCK)
+                                                            (("1"
+                                                              (bddsimp)
+                                                              (("1"
+                                                                (grind)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil)
+                                                     ("2"
+                                                      (grind)
+                                                      nil
+                                                      nil)
+                                                     ("3"
+                                                      (grind)
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((finite_intersection1 application-judgement "finite_set"
+     finite_sets nil)
+    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (union const-decl "set" sets nil)
+    (conditionsAddAssets const-decl "bool" SPLPartialRefTemplConc nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (dom const-decl "set[S]" maps nil)
+    (subset? const-decl "bool" sets nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil)
+    (member const-decl "bool" sets nil)
+    (remove const-decl "mapping" maps nil)
+    (overw const-decl "mapping" maps nil)
+    (syntaxAddAssets const-decl "bool" SPLPartialRefTemplConc nil)
+    (finite_intersection2 application-judgement "finite_set"
+     finite_sets nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
+          ConfigurationKnowledge nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (getRS const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (intersection const-decl "set" sets nil)
+    (empty? const-decl "bool" sets nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (restrict const-decl "R" restrict nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (set type-eq-decl nil sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil))
+   nil)
+  (addAssetsSameProducts-2 nil 3658743094
+   ("" (skolem 1 (pl am2 ck2 s its pairs))
+    (("" (bddsimp)
+      (("" (skolem 1 c)
+        (("" (expand "<>")
+          (("" (decompose-equality)
+            (("" (inst -1 c)
+              (("" (bddsimp)
+                (("" (expand semantics)
+                  (("" (expand map)
+                    (("" (decompose-equality)
+                      (("" (bddsimp)
+                        (("1" (skolem -1 an)
+                          (("1" (inst 1 an)
+                            (("1" (expand syntaxAddAssets)
+                              (("1"
+                                (flatten)
+                                (("1"
+                                  (expand overw)
+                                  (("1"
+                                    (expand union)
+                                    (("1"
+                                      (decompose-equality)
+                                      (("1"
+                                        (inst -1 "(an,x!1)")
+                                        (("1"
+                                          (expand member)
+                                          (("1"
+                                            (expand
+                                             conditionsAddAssets)
+                                            (("1"
+                                              (bddsimp)
+                                              (("1"
+                                                (expand eval)
+                                                (("1"
+                                                  (expand assetsCK)
+                                                  (("1"
+                                                    (skolem -3 i)
+                                                    (("1"
+                                                      (inst 1 i)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (decompose-equality)
+                                                          (("1"
+                                                            (inst -1 i)
+                                                            (("1"
+                                                              (expand
+                                                               evalCK)
+                                                              (("1"
+                                                                (bddsimp)
+                                                                nil)))))))))))))))))
+                                               ("2"
+                                                (expand eval)
+                                                (("2"
+                                                  (expand assetsCK)
+                                                  (("2"
+                                                    (skolem -3 i)
+                                                    (("2"
+                                                      (inst 1 i)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           evalCK)
+                                                          (("2"
+                                                            (decompose-equality)
+                                                            (("2"
+                                                              (inst
+                                                               -1
+                                                               i)
+                                                              (("2"
+                                                                (bddsimp)
+                                                                nil)))))))))))))))))
+                                               ("3"
+                                                (expand remove)
+                                                (("3"
+                                                  (expand eval)
+                                                  (("3"
+                                                    (expand assetsCK)
+                                                    (("3"
+                                                      (skolem -1 i)
+                                                      (("3"
+                                                        (inst -8 i)
+                                                        (("3"
+                                                          (inst -6 i)
+                                                          (("3"
+                                                            (expand
+                                                             evalCK)
+                                                            (("3"
+                                                              (decompose-equality)
+                                                              (("3"
+                                                                (inst
+                                                                 -1
+                                                                 i)
+                                                                (("3"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand*
+                                                                     empty?
+                                                                     intersection)
+                                                                    (("1"
+                                                                      (inst
+                                                                       -10
+                                                                       an)
+                                                                      (("1"
+                                                                        (expand
+                                                                         member)
+                                                                        (("1"
+                                                                          (expand
+                                                                           domain)
+                                                                          (("1"
+                                                                            (expand
+                                                                             getRS)
+                                                                            (("1"
+                                                                              (bddsimp)
+                                                                              nil)))))))))))
+                                                                   ("2"
+                                                                    (expand*
+                                                                     empty?
+                                                                     intersection)
+                                                                    (("2"
+                                                                      (inst
+                                                                       -10
+                                                                       an)
+                                                                      (("2"
+                                                                        (expand
+                                                                         member)
+                                                                        (("2"
+                                                                          (expand
+                                                                           getRS)
+                                                                          (("2"
+                                                                            (expand
+                                                                             domain)
+                                                                            (("2"
+                                                                              (bddsimp)
+                                                                              nil)))))))))))))))))))))))))))))))))))))))))))))))))))))
+                         ("2" (skolem -1 an)
+                          (("2" (inst 1 an)
+                            (("2" (expand syntaxAddAssets)
+                              (("2"
+                                (flatten)
+                                (("2"
+                                  (expand overw)
+                                  (("2"
+                                    (expand union)
+                                    (("2"
+                                      (decompose-equality)
+                                      (("2"
+                                        (inst -1 "(an,x!1)")
+                                        (("2"
+                                          (expand member)
+                                          (("2"
+                                            (expand remove)
+                                            (("2"
+                                              (expand eval)
+                                              (("2"
+                                                (expand assetsCK)
+                                                (("2"
+                                                  (expand domain)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("1"
+                                                      (skolem -3 i)
+                                                      (("1"
+                                                        (inst 1 i)
+                                                        (("1"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (expand
+                                                             evalCK)
+                                                            (("1"
+                                                              (inst
+                                                               -8
+                                                               i)
+                                                              (("1"
+                                                                (decompose-equality
+                                                                 -9)
+                                                                (("1"
+                                                                  (inst
+                                                                   -1
+                                                                   i)
+                                                                  (("1"
+                                                                    (bddsimp)
+                                                                    (("1"
+                                                                      (grind)
+                                                                      nil)))))))))))))))))
+                                                     ("2" (grind) nil)
+                                                     ("3"
+                                                      (grind)
+                                                      nil))))))))))))))))))))))))))))))))))))))))))))))))))
+    nil)
+   nil nil)
   (addAssetsSameProducts-1 nil 3657621414
    ("" (skolem 1 (pl am2 ck2 s its pairs))
     (("" (expand prod)
@@ -6223,28 +6697,25 @@
    ("" (skolem 1 (pl am2 ck2 s its pairs pl2))
     (("" (bddsimp)
       (("1" (expand subset?)
-        (("1" (expand "<>")
-          (("1" (decompose-equality -1)
-            (("1" (skolem 1 c)
-              (("1" (inst -1 c)
-                (("1" (expand member) (("1" (bddsimp) nil nil)) nil))
+        (("1" (skolem 1 c)
+          (("1" (expand member)
+            (("1" (bddsimp)
+              (("1" (expand "<>")
+                (("1" (decompose-equality)
+                  (("1" (inst -1 c) (("1" (bddsimp) nil nil)) nil))
+                  nil))
                 nil))
               nil))
             nil))
           nil))
         nil)
        ("2" (expand subset?)
-        (("2" (expand "<>")
-          (("2" (decompose-equality)
-            (("2" (skolem 1 c)
-              (("2" (inst -1 c)
-                (("2" (expand member)
-                  (("2" (replace -4 -1)
-                    (("2" (bddsimp)
-                      (("2" (expand semantics) (("2" (propax) nil nil))
-                        nil))
-                      nil))
-                    nil))
+        (("2" (skolem 1 c)
+          (("2" (expand member)
+            (("2" (replace -5 -1)
+              (("2" (expand "<>")
+                (("2" (decompose-equality)
+                  (("2" (inst -1 c) (("2" (bddsimp) nil nil)) nil))
                   nil))
                 nil))
               nil))
@@ -6253,40 +6724,46 @@
         nil))
       nil))
     nil)
-   ((finite_intersection1 application-judgement "finite_set"
-     finite_sets nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
-    (member const-decl "bool" sets nil)
-    (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (mapping type-eq-decl nil maps nil)
-    (getRS const-decl "finite_sets[AssetName].finite_set"
-     ConfigurationKnowledge nil)
-    (intersection const-decl "set" sets nil)
-    (empty? const-decl "bool" sets nil)
-    (evalCK const-decl "finite_sets[Item].finite_set"
-     ConfigurationKnowledge nil)
-    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (AssetName nonempty-type-decl nil Assets nil)
+   ((Name type-decl nil Name nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (Configuration type-eq-decl nil Name nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (set type-eq-decl nil sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (set type-eq-decl nil sets nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (Configuration type-eq-decl nil Name nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (Name type-decl nil Name nil) (subset? const-decl "bool" sets nil))
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (empty? const-decl "bool" sets nil)
+    (intersection const-decl "set" sets nil)
+    (getRS const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (mapping type-eq-decl nil maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
+    (finite_intersection1 application-judgement "finite_set"
+     finite_sets nil)
+    (member const-decl "bool" sets nil)
+    (subset? const-decl "bool" sets nil)
+    (restrict const-decl "R" restrict nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil))
    nil))
  (addAssetsPartRefStrong 0
   (addAssetsPartRefStrong-1 nil 3657626188
@@ -6296,17 +6773,20 @@
         (("" (expand strongPartialRefinement)
           (("" (bddsimp)
             (("" (skolem 1 c)
-              (("" (inst -4 c)
-                (("" (bddsimp)
-                  (("" (expand prod)
-                    (("" (replace -5 1)
-                      (("" (use SPLrefinement.assetRefinement)
-                        (("" (expand preorder?)
-                          (("" (flatten)
-                            (("" (expand reflexive?)
+              (("" (bddsimp)
+                (("" (expand prod)
+                  (("" (use SPLrefinement.assetRefinement)
+                    (("" (expand preorder?)
+                      (("" (flatten)
+                        (("" (expand reflexive?)
+                          (("" (inst -1 "(semantics(ck2)(am2)(c))")
+                            (("" (inst -7 c)
                               ((""
-                                (inst -1 "(semantics(ck2)(am2)(c))")
-                                nil
+                                (bddsimp)
+                                ((""
+                                  (replace -8 1)
+                                  (("" (propax) nil nil))
+                                  nil))
                                 nil))
                               nil))
                             nil))
@@ -6641,96 +7121,102 @@
         nil))
       nil))
     nil)
-   ((prod const-decl "finite_sets[Asset].finite_set"
-     SPLpartialrefinement nil)
-    (Name type-decl nil Name nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (Configuration type-eq-decl nil Name nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (set type-eq-decl nil sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (semantics const-decl "set[Configuration]" FeatureModelSemantics
-     nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (restrict const-decl "R" restrict nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (unique const-decl "bool" maps nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
-    (evalCK const-decl "finite_sets[Item].finite_set"
-     ConfigurationKnowledge nil)
-    (empty? const-decl "bool" sets nil)
-    (intersection const-decl "set" sets nil)
-    (getRS const-decl "finite_sets[AssetName].finite_set"
-     ConfigurationKnowledge nil)
-    (mapping type-eq-decl nil maps nil)
-    (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (map const-decl "finite_sets[T].finite_set" maps nil)
-    (assetsCK const-decl "finite_sets[AssetName].finite_set"
-     ConfigurationKnowledge nil)
-    (union const-decl "set" sets nil)
-    (conditionsAddAssets const-decl "bool" SPLPartialRefTemplConc nil)
-    (subset? const-decl "bool" sets nil)
-    (dom const-decl "set[S]" maps nil)
-    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (OR const-decl "[bool, bool -> bool]" booleans nil)
-    (member const-decl "bool" sets nil)
-    (remove const-decl "mapping" maps nil)
-    (overw const-decl "mapping" maps nil)
-    (syntaxAddAssets const-decl "bool" SPLPartialRefTemplConc nil)
-    (finite_intersection2 application-judgement "finite_set"
+   ((finite_intersection1 application-judgement "finite_set"
      finite_sets nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (finite_intersection1 application-judgement "finite_set"
-     finite_sets nil))
+    (finite_intersection2 application-judgement "finite_set"
+     finite_sets nil)
+    (syntaxAddAssets const-decl "bool" SPLPartialRefTemplConc nil)
+    (overw const-decl "mapping" maps nil)
+    (remove const-decl "mapping" maps nil)
+    (member const-decl "bool" sets nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (dom const-decl "set[S]" maps nil)
+    (subset? const-decl "bool" sets nil)
+    (conditionsAddAssets const-decl "bool" SPLPartialRefTemplConc nil)
+    (union const-decl "set" sets nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (getRS const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (intersection const-decl "set" sets nil)
+    (empty? const-decl "bool" sets nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (restrict const-decl "R" restrict nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (set type-eq-decl nil sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Name type-decl nil Name nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil))
    shostak))
  (removeAssetsPartRefStrong_TCC1 0
   (removeAssetsPartRefStrong_TCC1-1 nil 3657634542
    ("" (skolem 1 (pl am2 ck2 s its pairs pl2))
-    (("" (expand "<>")
-      (("" (expand subset?)
-        (("" (expand member)
-          (("" (bddsimp)
-            (("1" (skolem 1 c)
-              (("1" (replace -4 1)
+    (("" (bddsimp)
+      (("1" (expand subset?)
+        (("1" (skolem 1 c)
+          (("1" (expand member)
+            (("1" (bddsimp)
+              (("1" (expand "<>")
                 (("1" (decompose-equality)
                   (("1" (inst -1 c)
                     (("1" (bddsimp)
-                      (("1" (expand semantics) (("1" (propax) nil nil))
+                      (("1" (replace -7 1)
+                        (("1" (expand semantics)
+                          (("1" (propax) nil nil)) nil))
                         nil))
                       nil))
                     nil))
                   nil))
                 nil))
-              nil)
-             ("2" (skolem 1 c)
-              (("2" (decompose-equality)
-                (("2" (inst -1 c) (("2" (bddsimp) nil nil)) nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil)
+       ("2" (expand subset?)
+        (("2" (expand "<>")
+          (("2" (decompose-equality)
+            (("2" (skolem 1 c)
+              (("2" (inst -1 c)
+                (("2" (expand member) (("2" (bddsimp) nil nil)) nil))
+                nil))
               nil))
             nil))
           nil))
         nil))
       nil))
     nil)
-   ((finite_intersection1 application-judgement "finite_set"
-     finite_sets nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
-    (member const-decl "bool" sets nil) (Name type-decl nil Name nil)
+   ((Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (Configuration type-eq-decl nil Name nil)
@@ -6765,6 +7251,10 @@
      ConfigurationKnowledge nil)
     (mapping type-eq-decl nil maps nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
+    (finite_intersection1 application-judgement "finite_set"
+     finite_sets nil)
+    (member const-decl "bool" sets nil)
     (subset? const-decl "bool" sets nil))
    nil))
  (removeAssetsPartRefStrong 0
@@ -6777,17 +7267,20 @@
             (("" (expand prod)
               (("" (bddsimp)
                 (("" (skolem 1 c)
-                  (("" (inst -4 c)
-                    (("" (bddsimp)
-                      (("" (replace -5 1)
-                        (("" (use SPLrefinement.assetRefinement)
-                          (("" (expand preorder?)
-                            (("" (flatten)
+                  (("" (bddsimp)
+                    (("" (use SPLrefinement.assetRefinement)
+                      (("" (expand preorder?)
+                        (("" (flatten)
+                          (("" (expand reflexive?)
+                            (("" (inst -1 "(semantics(ck2)(am2)(c))")
                               ((""
-                                (expand reflexive?)
+                                (inst -7 c)
                                 ((""
-                                  (inst -1 "(semantics(ck2)(am2)(c))")
-                                  nil
+                                  (bddsimp)
+                                  ((""
+                                    (replace -8 1)
+                                    (("" (propax) nil nil))
+                                    nil))
                                   nil))
                                 nil))
                               nil))
@@ -6804,37 +7297,37 @@
         nil))
       nil))
     nil)
-   ((prod const-decl "finite_sets[Asset].finite_set"
-     SPLpartialrefinement nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (reflexive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (strongPartialRefinement const-decl "bool" SPLpartialrefinement
+   ((removeAssetsSameProducts formula-decl nil SPLPartialRefTemplConc
      nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (AssetName nonempty-type-decl nil Assets nil)
+    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (Configuration type-eq-decl nil Name nil)
+    (restrict const-decl "R" restrict nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
-    (restrict const-decl "R" restrict nil)
-    (Configuration type-eq-decl nil Name nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
-    (removeAssetsSameProducts formula-decl nil SPLPartialRefTemplConc
-     nil))
+    (AssetName nonempty-type-decl nil Assets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (strongPartialRefinement const-decl "bool" SPLpartialrefinement
+     nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil))
    shostak)))
 
