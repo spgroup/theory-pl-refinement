@@ -4,10 +4,14 @@ FeatureModel: THEORY
 
   % represents the model, flattened
   FM: TYPE = [# features:set[Name], formulae:set[Formula_] #]
+  
+  finite_fm(fm:FM): bool = is_finite(features(fm)) AND is_finite(formulae(fm))
 
+  FFM:TYPE = (finite_fm)
   % yields names for a given feature model
   names(fm: FM): set[Name] = {n:Name | features(fm)(n)}
 
   wfTree(fm: FM): bool = TRUE
 
- END FeatureModel
+ END FeatureModel 
+

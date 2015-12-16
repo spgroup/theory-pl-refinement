@@ -11,16 +11,24 @@ an: VAR AssetName
 anSet: VAR finite_sets[AssetName].finite_set
 s,t: VAR set[Configuration]
 c: VAR Configuration
-fm,fm1,fm2: VAR FM
+fm,fm1,fm2: VAR FFM
 ck,ck1,ck2,its: VAR CK
 item1,item2: VAR Item
 items: VAR set[Item]
 P,Q: VAR Name
 exp: VAR Formula_
 
+
 % Importing SPLPartialRefinement theory and instantiating types. 
-IMPORTING SPLpartialrefinement{{FM:=WFM, Conf:=Configuration, {||} := semantics,
-	    CK:=CK, Asset:=Assets.Asset,AssetName:=Assets.AssetName,[||] := semantics}}
+IMPORTING SPLpartialrefinement[Configuration,
+                               WFFM,
+                               FeatureModelSemantics.semantics,
+                               Assets.Asset,
+                               Assets.AssetName,
+                               CK,
+                               ConfigurationKnowledge.semantics]
+	                       
+                              
 pl,pl2,pl3: VAR PL
 m: VAR CM
 

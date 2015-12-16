@@ -1,0 +1,15 @@
+SPLRefBasicTypes: THEORY
+  BEGIN
+
+    Conf: TYPE
+    FM: TYPE
+    Asset: TYPE
+    AssetName: TYPE
+    CK: TYPE
+    
+    IMPORTING maps
+    AM: TYPE = maps[AssetName,Asset].mapping
+    {||}: [FM -> set[Conf]]
+    [||]: [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
+  
+  END SPLRefBasicTypes

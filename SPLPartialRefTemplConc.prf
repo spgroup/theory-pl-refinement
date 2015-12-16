@@ -1,7 +1,19 @@
 (SPLPartialRefTemplConc
  (IMP_SPLpartialrefinement_TCC1 0
   (IMP_SPLpartialrefinement_TCC1-1 nil 3658093940
-   ("" (subtype-tcc) nil nil) nil nil))
+   ("" (skolem 1 fm)
+    (("" (lemma finite_sem) (("" (inst -1 fm) nil nil)) nil)) nil)
+   ((finite_sem formula-decl nil FeatureModelSemantics nil)
+    (WFFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFFM const-decl "bool" FeatureModelSemantics nil)
+    (FFM type-eq-decl nil FeatureModel nil)
+    (finite_fm const-decl "bool" FeatureModel nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil))
+   nil))
  (sameEvalPairs 0
   (sameEvalPairs-1 nil 3655569386
    ("" (skolem 1 (pl am2 pairs a1 a2 an s))
@@ -442,7 +454,6 @@
     (singleton const-decl "(singleton?)" sets nil)
     (intersection const-decl "set" sets nil)
     (empty? const-decl "bool" sets nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (finite_intersection1 application-judgement "finite_set"
@@ -690,7 +701,6 @@
     (identity? const-decl "bool" maps_identity nil)
     (getRightResult formula-decl nil maps nil)
     (dom const-decl "set[S]" maps nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (finite_intersection1 application-judgement "finite_set"
      finite_sets nil)
     (member const-decl "bool" sets nil)
@@ -1440,8 +1450,7 @@
      nil)
     (conditionsTransfOptMand const-decl "bool" SPLPartialRefTemplConc
      nil)
-    (syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplConc nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil))
+    (syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplConc nil))
    nil))
  (transOptMandPartRefStrong 0
   (transOptMandPartRefStrong-1 nil 3655826327
@@ -1668,8 +1677,7 @@
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplConc nil)
-    (sameDomImg formula-decl nil maps_identity nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil))
+    (sameDomImg formula-decl nil maps_identity nil))
    nil))
  (transOptMandPartRefWeak 0
   (transOptMandPartRefWeak-1 nil 3656876549
@@ -2457,7 +2465,6 @@
     (number_field_pred const-decl "[number -> boolean]" number_fields
      nil)
     (number nonempty-type-decl nil numbers nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (injective? const-decl "bool" functions nil)
     (nonempty_union1 application-judgement "(nonempty?)" sets nil)
     (nonempty_singleton_finite application-judgement
@@ -5532,7 +5539,6 @@
     (removeFeature const-decl "bool" SPLPartialRefTemplConc nil)
     (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplConc nil)
     (subset? const-decl "bool" sets nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (predRemoveFeature const-decl "bool" SPLPartialRefTemplConc nil))
    nil))
  (removeFeaturePartRefStrong 0
@@ -5800,7 +5806,6 @@
      nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (subset? const-decl "bool" sets nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (sameDomImg formula-decl nil maps_identity nil)
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
@@ -6098,7 +6103,6 @@
     nil)
    ((finite_intersection1 application-judgement "finite_set"
      finite_sets nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (union const-decl "set" sets nil)
     (conditionsAddAssets const-decl "bool" SPLPartialRefTemplConc nil)
@@ -6754,7 +6758,6 @@
      ConfigurationKnowledge nil)
     (mapping type-eq-decl nil maps nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (finite_intersection1 application-judgement "finite_set"
      finite_sets nil)
     (member const-decl "bool" sets nil)
@@ -7251,7 +7254,6 @@
      ConfigurationKnowledge nil)
     (mapping type-eq-decl nil maps nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplConc nil)
     (finite_intersection1 application-judgement "finite_set"
      finite_sets nil)
     (member const-decl "bool" sets nil)

@@ -1,20 +1,28 @@
-SPLpartialrefinement: THEORY
+%SPLpartialrefinement[T: THEORY SPLrefinement]: THEORY
+SPLpartialrefinement[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE,
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
 BEGIN
 
 % Partial SPL Refinement
     %TODO: find a more elegant solution for the importing problem!! (code replication)
-    
     IMPORTING maps
-    Conf:TYPE
-    FM: TYPE
-    {||} : [FM -> finite_sets[Conf].finite_set]
-    Asset:TYPE
-    AssetName:TYPE
+  %  T: THEORY = SPLrefinement
+ %   IMPORTING SPLRefinementFiniteFM[T]
+ %   Conf:TYPE
+    %FM: TYPE
+    %{||} : [FM -> finite_sets[Conf].finite_set]
+    %Asset:TYPE
+    %AssetName:TYPE
     AM:TYPE = maps[AssetName,Asset].mapping
     CM:TYPE = maps[Conf,Conf].mapping
-    CK:TYPE
-    [||] : [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
-
+    %CK:TYPE
+    %[||] : [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
+     
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------VARIABLES-----------------------------------------------
    % -------------------------------------------------------------------------------------------------------- 
@@ -29,8 +37,8 @@ BEGIN
     ck: VAR CK
     IMPORTING maps_identity[Conf]
     IMPORTING maps_composite[Conf,Conf,Conf]
-    IMPORTING SPLrefinement{{FM:=FM, Conf:=Conf, {||} := {||},
-	    CK:=CK, Asset:=Asset,AssetName:=AssetName,[||] := [||]}}
+    IMPORTING SPLRefinementFiniteFM[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+    
     pl, pl1, pl2, pl3, pl4: VAR PL
     p, p1, p2: VAR finite_sets[Asset].finite_set
 
@@ -182,5 +190,16 @@ BEGIN
                                (EXISTS pl3,(t:set[Conf] | subset?(t,{||}(F(pl1))) AND subset?(t,{||}(F(pl3))) AND subset?(t,{||}(F(pl4)))):
                                       strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,t)) 
                          
+
+   % considering refinement parameterized with renaming function
+   plRefinementFun(pl1,pl2,(f:[Conf -> Conf])):bool = 
+                 FORALL c: {||}(F(pl1))(c) => {||}(F(pl2))(f(c)) AND (prod(pl1,c) |- prod(pl2,f(c)))
+
+   plRefImpliesRefFun: LEMMA FORALL pl1,pl2,(f:[Conf -> Conf]): f = id => (plRefinementFun(pl1,pl2,f) <=> strongerPLrefinement(pl1,pl2))
+
+   plRefFunTransitive: LEMMA FORALL pl1,pl2,pl3,(s:set[Conf] | subset?(s,{||}(F(pl1))) AND  subset?(s,{||}(F(pl2)))),(f:[Conf -> Conf]): 
+                       strongPartialRefinement(pl1,pl2,s) AND plRefinementFun(pl2,pl3,f) =>
+                               plRefinementFun(pl1,pl3,f)
+
 
 END SPLpartialrefinement

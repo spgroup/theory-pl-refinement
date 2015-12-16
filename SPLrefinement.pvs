@@ -1,4 +1,8 @@
-SPLrefinement: THEORY
+SPLrefinement[Conf:TYPE,
+              FM:TYPE,
+              Asset:TYPE,
+              AssetName:TYPE,CK:TYPE,{||}:[FM -> set[Conf]],
+              (IMPORTING maps[AssetName,Asset])[||]:[CK->[mapping->[Conf->finite_sets[Asset].finite_set]]]]: THEORY
 BEGIN
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6,9 +10,10 @@ BEGIN
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   % Assumption <Feature model semantics>
-  Conf: TYPE
-  FM: TYPE
-  {||} : [FM -> set[Conf]]
+ % Conf: TYPE
+  IMPORTING SPLRefBasicTypes{{Conf:=Conf,FM:=FM,Asset:=Asset,AssetName:=AssetName,CK:=CK,{||}:={||},[||]:=[||]}}
+%  FM: TYPE
+  %{||} : [FM -> set[Conf]]
   %permite FM vazio - que nao gera nenhum produto - eh um problema?
 
   fm,fm1,fm2: VAR FM
@@ -35,8 +40,8 @@ BEGIN
 
 % IMPORTING AssetMapping
 
-  Asset: TYPE
-  AssetName: TYPE
+ % Asset: TYPE
+ % AssetName: TYPE
 
   a1,a2: VAR Asset
   an,an1,an2: VAR AssetName
@@ -88,8 +93,8 @@ BEGIN
  %%%%%%%%%%%%%%%%%%%%%% CONFIGURATION KNOWLEDGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  CK: TYPE
-  [||] : [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
+  %CK: TYPE
+  %[||] : [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
 
   % Axiom over ck evaluation 
   amRef: AXIOM

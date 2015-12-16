@@ -1,4 +1,92 @@
 (FeatureModelSemantics
+ (finite_sem 0
+  (finite_sem-1 nil 3659192951
+   ("" (skolem 1 fm)
+    (("" (typepred fm)
+      (("" (expand finite_fm)
+        (("" (expand semantics)
+          (("" (bddsimp)
+            ((""
+              (lemma finite_sets[Configuration].finite_intersection2)
+              ((""
+                (inst -1 "{c: Configuration |
+                   satImpConsts(fm, c)}" "{c: Configuration |
+                   satExpConsts(fm, c)}")
+                (("1" (expand intersection)
+                  (("1" (expand member) (("1" (propax) nil nil)) nil))
+                  nil)
+                 ("2" (lemma finite_sets[Configuration].finite_subset)
+                  (("2"
+                    (case "subset?({c: Configuration | satImpConsts(fm, c)},powerset(features(fm)))")
+                    (("1"
+                      (inst -2 "powerset(features(fm))"
+                       "{c: Configuration | satImpConsts(fm, c)}")
+                      (("1" (bddsimp) nil nil)
+                       ("2"
+                        (lemma
+                         finite_sets_of_sets[Name].powerset_finite)
+                        (("2" (inst -1 "features(fm)") nil nil)) nil))
+                      nil)
+                     ("2" (expand subset?)
+                      (("2" (skolem 1 c)
+                        (("2" (expand member)
+                          (("2" (expand satImpConsts)
+                            (("2" (expand powerset)
+                              (("2"
+                                (bddsimp)
+                                (("2"
+                                  (expand subset?)
+                                  (("2"
+                                    (skolem 1 n)
+                                    (("2"
+                                      (expand member)
+                                      (("2" (inst -1 n) nil nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((FFM type-eq-decl nil FeatureModel nil)
+    (finite_fm const-decl "bool" FeatureModel nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (Configuration type-eq-decl nil Name nil)
+    (finite_intersection2 judgement-tcc nil finite_sets nil)
+    (finite_subset formula-decl nil finite_sets nil)
+    (powerset_finite judgement-tcc nil finite_sets_of_sets nil)
+    (powerset const-decl "setofsets" sets nil)
+    (setofsets type-eq-decl nil sets nil)
+    (setof type-eq-decl nil defined_types nil)
+    (subset? const-decl "bool" sets nil)
+    (nonempty_powerset application-judgement "(nonempty?[set[T]])"
+     sets_lemmas nil)
+    (intersection const-decl "set" sets nil)
+    (member const-decl "bool" sets nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (fm skolem-const-decl "FFM" FeatureModelSemantics nil))
+   shostak))
  (renameFeature3_TCC1 0
   (renameFeature3_TCC1-1 nil 3592754295
    ("" (lemma renameFeature_WF)
