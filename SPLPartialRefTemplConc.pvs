@@ -30,12 +30,16 @@ IMPORTING SPLpartialrefinement[Configuration,
 	                       
                               
 pl,pl2,pl3: VAR PL
+plA: VAR ArbitrarySPL
 m: VAR CM
 
 % --------------------------------------------Restriction Operator---------------------------------------------------------------------
 % ----Filter configurations whose products do not contain assets which were activated by any asset of anSet
-<>(pl,anSet):set[Configuration] = {c | semantics(F(pl))(c) AND 
-                                       (FORALL (i:Item) : evalCK(K(pl),c)(i) => empty?(intersection(getRS(i),anSet)))}
+
+<>(fm,ck,anSet): set[Configuration] = {c | semantics(fm)(c) AND 
+                                       (FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
+
+<>(pl,anSet):set[Configuration] = <>(F(pl),K(pl),anSet)
 
 % ----Filter configurations whose products do not contain aSet ****THIS DEFINITION MIGHT NOT BE USED ANYMORE****
 <>(pl,aSet):set[Configuration] = {c | semantics(F(pl))(c) AND empty?(intersection(aSet, prod(pl,c)))}
@@ -309,10 +313,10 @@ addAssetsSameProducts: THEOREM
            FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl2,domain(pairs)) AND
-                 syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
-                 conditionsAddAssets(pairs,its) 
-               )
+                   s = <>(F(pl2),K(pl2),domain(pairs)) AND
+                   syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+                   conditionsAddAssets(pairs,its) 
+                ) 
                => FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
@@ -321,7 +325,7 @@ addAssetsPartRefStrong: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl2,domain(pairs)) AND
+                 s = <>(F(pl2),K(pl2),domain(pairs)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
                  conditionsAddAssets(pairs,its) AND
                  wfPL(pl2)
