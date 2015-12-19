@@ -15,10 +15,7 @@ BEGIN
   a,a1,a2,a3: VAR Asset
   an,an1,an2: VAR AssetName
 
-  IMPORTING SPLrefinement{{ 
-  	    FM:=WFM, Conf:=Configuration, {||} := semantics,
-	    CK:=CK, [||] := semantics
-  }}
+  IMPORTING SPLrefinement[Configuration,WFM,Assets.Asset,Assets.AssetName,CK,semantics,semantics] 
 
   pl,pl1,pl2: VAR PL
 
@@ -121,7 +118,7 @@ BEGIN
       )
 
   conditionsSplitAssets(a1,a2,a3, an1,an2, items):bool =
-      (  |-(a1,union(singleton(a2),singleton(a3))) ) AND 
+      (  Assets.|-(a1,union(singleton(a2),singleton(a3))) ) AND 
       (FORALL item: items(item) => (NOT(assets(item)(an1)) AND NOT(assets(item)(an2))))
 
 

@@ -2,12 +2,66 @@
  (prod_TCC1 0
   (prod_TCC1-1 nil 3655135094
    ("" (skolem 1 (pl s))
-    (("" (expand member)
-      (("" (lemma finite_semantics)
-        (("" (inst -1 "F(pl)") (("" (postpone) nil nil)) nil)) nil))
+    (("" (typepred s)
+      (("" (expand member)
+        ((""
+          (case "Card(s) = Card({p | EXISTS c: ({||}(F(pl))(c)) AND s(c) AND p = prod(pl, c)})")
+          (("1" (expand Card) (("1" (postpone) nil nil)) nil)
+           ("2" (postpone) nil nil) ("3" (postpone) nil nil))
+          nil))
+        nil))
       nil))
     nil)
    nil nil))
+ (config_prod 0
+  (config_prod-1 nil 3659434467
+   ("" (skolem 1 (pl s))
+    (("" (skolem 1 p)
+      (("" (bddsimp)
+        (("" (expand member)
+          (("" (expand prod)
+            (("" (skolem -1 c)
+              (("" (inst 1 c)
+                (("" (expand prod)
+                  (("" (expand member) (("" (bddsimp) nil nil)) nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((member const-decl "bool" sets nil)
+    (Conf formal-type-decl nil SPLpartialrefinement nil)
+    (prod const-decl
+     "finite_sets[finite_sets[Asset].finite_set].finite_set"
+     SPLpartialrefinement nil)
+    (prod const-decl "finite_sets[Asset].finite_set"
+     SPLpartialrefinement nil))
+   shostak))
+ (finite_prods 0
+  (finite_prods-1 nil 3659433569
+   ("" (skolem 1 (s pl))
+    (("" (typepred s)
+      (("" (typepred pl)
+        (("" (expand wfPL)
+          ((""
+            (name "prods" "{p: set[Asset] |
+                   EXISTS (c: Conf): member(c, s) AND p = prod(pl, c)}")
+            (("" (hide -1)
+              ((""
+                (case "prod(pl,s) = {p: set[Asset] |
+                   EXISTS (c: Conf): member(c, s) AND p = prod(pl, c)}")
+                (("1" (postpone) nil nil) ("2" (postpone) nil nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak))
  (weakPartialRefinement_TCC1 0
   (weakPartialRefinement_TCC1-1 nil 3656408682
    ("" (skolem 1 (pl1 pl2 m c))
@@ -29,7 +83,9 @@
         nil))
       nil))
     nil)
-   ((wfPL const-decl "bool" SPLrefinement nil)
+   ((PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
@@ -38,9 +94,9 @@
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (is_finite const-decl "bool" finite_sets nil)
+    (CK formal-type-decl nil SPLpartialrefinement nil)
     (AssetName formal-type-decl nil SPLpartialrefinement nil)
     (Asset formal-type-decl nil SPLpartialrefinement nil)
-    (CK formal-type-decl nil SPLpartialrefinement nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]" SPLpartialrefinement
      nil)
     (FM formal-type-decl nil SPLpartialrefinement nil)
@@ -50,9 +106,6 @@
     (NOT const-decl "[bool -> bool]" booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (pl1 skolem-const-decl
-     "{x: [# A: AM[Conf], F: FM, K: CK #] | wfPL[Conf](x)}"
-     SPLpartialrefinement nil)
     (finite_subset formula-decl nil finite_sets nil)
     (finite_semantics formula-decl nil SPLRefinementFiniteFM nil))
    nil))
@@ -74,9 +127,6 @@
     nil)
    ((finite_semantics formula-decl nil SPLRefinementFiniteFM nil)
     (finite_subset formula-decl nil finite_sets nil)
-    (pl2 skolem-const-decl
-     "{x: [# A: AM[Conf], F: FM, K: CK #] | wfPL[Conf](x)}"
-     SPLpartialrefinement nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
@@ -86,9 +136,9 @@
     (FM formal-type-decl nil SPLpartialrefinement nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]" SPLpartialrefinement
      nil)
-    (CK formal-type-decl nil SPLpartialrefinement nil)
     (Asset formal-type-decl nil SPLpartialrefinement nil)
     (AssetName formal-type-decl nil SPLpartialrefinement nil)
+    (CK formal-type-decl nil SPLpartialrefinement nil)
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
@@ -97,7 +147,9 @@
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLpartialrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil))
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil))
    nil))
  (strongPartRefReflexive 0
   (strongPartRefReflexive-1 nil 3655065337
@@ -124,13 +176,10 @@
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (CK type-decl nil SPLrefinement nil)
-    (FM type-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (set type-eq-decl nil sets nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (Asset type-decl nil SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (strongPartialRefinement const-decl "bool" SPLpartialrefinement
      nil))
@@ -181,9 +230,9 @@
     (FM formal-type-decl nil SPLpartialrefinement nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]" SPLpartialrefinement
      nil)
-    (CK formal-type-decl nil SPLpartialrefinement nil)
     (Asset formal-type-decl nil SPLpartialrefinement nil)
     (AssetName formal-type-decl nil SPLpartialrefinement nil)
+    (CK formal-type-decl nil SPLpartialrefinement nil)
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
@@ -192,7 +241,9 @@
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLpartialrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil))
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil))
    nil))
  (strongPartRefTransitive 0
   (strongPartRefTransitive-1 nil 3655065416
@@ -238,13 +289,10 @@
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (CK type-decl nil SPLrefinement nil)
-    (FM type-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (set type-eq-decl nil sets nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (Asset type-decl nil SPLrefinement nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (member const-decl "bool" sets nil))
    shostak))
@@ -346,14 +394,16 @@
     (FM formal-type-decl nil SPLpartialrefinement nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]" SPLpartialrefinement
      nil)
-    (CK formal-type-decl nil SPLpartialrefinement nil)
     (Asset formal-type-decl nil SPLpartialrefinement nil)
     (AssetName formal-type-decl nil SPLpartialrefinement nil)
+    (CK formal-type-decl nil SPLpartialrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLpartialrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
     (image const-decl "finite_sets[T].finite_set" maps nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (imgCompos formula-decl nil maps_composite nil)
@@ -1215,8 +1265,7 @@
         nil))
       nil))
     nil)
-   ((Asset type-decl nil SPLrefinement nil)
-    (boolean nonempty-type-decl nil booleans nil)
+   ((boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (set type-eq-decl nil sets nil)
     (is_finite const-decl "bool" finite_sets nil)
@@ -1266,7 +1315,6 @@
     nil)
    ((weakPartialRefinementAlt const-decl "bool" SPLpartialrefinement
      nil)
-    (Asset type-decl nil SPLrefinement nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (set type-eq-decl nil sets nil)
@@ -1408,14 +1456,16 @@
     (FM formal-type-decl nil SPLpartialrefinement nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]" SPLpartialrefinement
      nil)
-    (CK formal-type-decl nil SPLpartialrefinement nil)
     (Asset formal-type-decl nil SPLpartialrefinement nil)
     (AssetName formal-type-decl nil SPLpartialrefinement nil)
+    (CK formal-type-decl nil SPLpartialrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLpartialrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
     (image const-decl "finite_sets[T].finite_set" maps nil))
    nil))
  (strongPartCaseWeak 0
@@ -1683,9 +1733,9 @@
     (FM formal-type-decl nil SPLpartialrefinement nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]" SPLpartialrefinement
      nil)
-    (CK formal-type-decl nil SPLpartialrefinement nil)
     (Asset formal-type-decl nil SPLpartialrefinement nil)
     (AssetName formal-type-decl nil SPLpartialrefinement nil)
+    (CK formal-type-decl nil SPLpartialrefinement nil)
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
@@ -1694,7 +1744,9 @@
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLpartialrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil))
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil))
    nil))
  (totalImpliesPartial 0
   (totalImpliesPartial-1 nil 3658524570
