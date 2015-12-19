@@ -1,0 +1,34 @@
+SPLPartialRefinement[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE,
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
+BEGIN
+
+% Partial SPL Refinement
+    IMPORTING SPLPartialRefinementStrong[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+    IMPORTING SPLPartialRefinementWeak[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+     
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+  
+    pl, pl1, pl2, pl3, pl4: VAR PL
+    m: VAR CM
+    p, p1, p2: VAR finite_sets[Asset].finite_set
+
+    %--------------------------------------------------EQUIVALENCE BETWEEN DEFS-----------------------------------------------
+
+    % Theorem <correspondence between strong partial ref and weak partial ref> 
+    strongPartCaseWeak: THEOREM FORALL (pl1,pl2:PL,
+                                       (m:CM | subset?(domain(m), {||}(F(pl1))) AND 
+                                                     subset?(domain(m), {||}(F(pl2))) AND
+                                                     subset?(image(m),  {||}(F(pl2))))):  
+                                    identity?(m)   
+                                    => 
+                                    (strongPartialRefinement(pl1,pl2,domain(m)) <=> weakPartialRefinement(pl1,pl2,m))
+
+
+END SPLPartialRefinement

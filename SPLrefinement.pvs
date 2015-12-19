@@ -176,6 +176,8 @@ BEGIN
   products(pl) : set[finite_sets[Asset].finite_set] = 
     { p |  EXISTS (c:Conf) : ({|F(pl)|}(c)) AND (p=( ([| K(pl) |] (A(pl))) (c))) }
 
+  prod(pl,c) : finite_sets[Asset].finite_set =  ( ([| K(pl) |] (A(pl))) (c) ) 
+
   plRefinementAlt(pl1,pl2) : bool =
     (FORALL p1: products(pl1)(p1) => 
     		(EXISTS p2: products(pl2)(p2) AND

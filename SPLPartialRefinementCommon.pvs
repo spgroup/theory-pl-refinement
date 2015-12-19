@@ -1,0 +1,42 @@
+SPLPartialRefinementCommon[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE,
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
+BEGIN
+
+    IMPORTING maps
+    AM:TYPE = maps[AssetName,Asset].mapping
+     
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+    c: VAR Conf
+    s: VAR finite_sets[Conf].finite_set
+    fm1,fm2: VAR FM
+    am,am1,am2: VAR AM
+    an: VAR AssetName
+    a1,a2: VAR Asset
+    anSet: VAR set[AssetName]
+
+    IMPORTING SPLRefinementFiniteFM[Conf,FM, {||}, Asset, AssetName, CK,[||]]    
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------FM PARTIAL REFINEMENT-----------------------------------
+   % --------------------------------------------------------------------------------------------------------      
+    fmPartialRefinement(fm1,fm2,s) : bool = 
+          FORALL c: s(c) => {||}(fm1)(c) AND {||}(fm2)(c)
+
+    fmPartRef: LEMMA FORALL fm1,fm2: (fm1 |= fm2) <=> fmPartialRefinement(fm1,fm2,{|fm1|})
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------AM PARTIAL REFINEMENT-----------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+    amPartialRefinement(am1,am2:AM,anSet:{aNames:set[AssetName] | subset?(aNames,dom(am1)) AND subset?(aNames,dom(am2))}) : bool =
+          (FORALL an: (anSet)(an) =>
+         EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2))   
+
+
+END SPLPartialRefinementCommon

@@ -1,4 +1,4 @@
-SPLPartialRefTemplConc: THEORY
+SPLPartialRefTemplates: THEORY
 BEGIN
 
 IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements
@@ -20,7 +20,7 @@ exp: VAR Formula_
 
 
 % Importing SPLPartialRefinement theory and instantiating types. 
-IMPORTING SPLpartialrefinement[Configuration,
+IMPORTING SPLPartialRefinement[Configuration,
                                WFFM,
                                FeatureModelSemantics.semantics,
                                Assets.Asset,
@@ -360,4 +360,4 @@ removeAssetsPartRefStrong: THEOREM
                => strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
-END SPLPartialRefTemplConc
+END SPLPartialRefTemplates

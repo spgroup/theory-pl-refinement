@@ -1,0 +1,95 @@
+SPLPartialRefinementStrong[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE,
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
+BEGIN
+
+% Partial SPL Strong Refinement 
+    
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+    c: VAR Conf
+    s,t: VAR finite_sets[Conf].finite_set
+    fm,fm1,fm2: VAR FM
+
+    IMPORTING SPLPartialRefinementCommon[Conf,FM,{||},Asset,AssetName,CK,[||]]
+
+    pl, pl1, pl2, pl3, pl4: VAR PL
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------RELATION DEF--------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+    
+   % Partial Refinement Relation - this definition requires that the configuration does not change
+    strongPartialRefinement(pl1,pl2:PL,s:{confs:set[Conf]| subset?(confs,{||}(F(pl1))) AND subset?(confs,{||}(F(pl2)))}) : bool = 
+     FORALL c: s(c) =>
+	  (
+              prod(pl1,c)
+	      |- 
+	      prod(pl2,c)
+          )  
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------PROPERTIES----------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+   
+   %--------------------------------------------------PREORDER-----------------------------------------------
+
+   % Theorem <strong partial refinement is reflexive>
+    strongPartRefReflexive: THEOREM FORALL pl,(s:set[Conf] | subset?(s,{||}(F(pl)))): strongPartialRefinement(pl,pl,s)
+   % Theorem <strong partial refinement is transitive>
+    strongPartRefTransitive: THEOREM (FORALL pl1,pl2,pl3,
+                                             (s:set[Conf] | subset?(s, {||}(F(pl1))) AND subset?(s, {||}(F(pl2)))),
+                                             (t:set[Conf] | subset?(t, {||}(F(pl2))) AND subset?(t, {||}(F(pl3)))): 
+                                              (
+                                                 strongPartialRefinement(pl1,pl2,s) 
+                                                AND 
+                                                 strongPartialRefinement(pl2,pl3,t)
+                                              ) 
+                                              => strongPartialRefinement(pl1,pl3,intersection(s,t))
+                                      )
+
+    %-------------------------------------------------------COMPOSITIONALITY---------------------------------------------------
+    % Theorem <FM Equivalence compositionality - weak definition>
+    fmCompStrongDef: THEOREM
+    FORALL(pl:PL,fm1,fm2:FM,(s:set[Conf]| subset?(s,{||}(fm1)) AND subset?(s,{||}(fm2)))):
+    ( 
+      subset?(s,t) AND fmPartialRefinement(fm1,fm2,t) AND wfPL(pl2)
+     => 
+        strongPartialRefinement(pl,pl2,s)  
+    )
+    WHERE fm1=F(pl),pl2=(# F := fm2, A := A(pl), K := K(pl) #) 
+
+   %--------------------------------------------------COMMUTABLE DIAGRAM------------------------------------------------------
+
+   % considering strongerPlRefinement definition
+
+   totalImpliesPartial: LEMMA FORALL pl1,pl2,(s:set[Conf] | subset?(s,{||}(F(pl1)))): 
+                            strongerPLrefinement(pl1,pl2) => strongPartialRefinement(pl1,pl2,s)
+   
+   partialImpliesTotal: LEMMA FORALL pl1,pl2,s: (s = {||}(F(pl1)) AND subset?(s,{||}(F(pl2))) AND strongPartialRefinement(pl1,pl2,s)) 
+                                              => strongerPLrefinement(pl1,pl2)
+
+   commutableDiagram1: THEOREM FORALL pl1,pl4: 
+                             (EXISTS pl2,(s:set[Conf] | subset?(s,{||}(F(pl1))) AND  subset?(s,{||}(F(pl2))) AND subset?(s,{||}(F(pl4)))): 
+                                      strongPartialRefinement(pl1,pl2,s) AND strongerPLrefinement(pl2,pl4)) <=>
+                               (EXISTS pl3,(t:set[Conf] | subset?(t,{||}(F(pl1))) AND subset?(t,{||}(F(pl3))) AND subset?(t,{||}(F(pl4)))):
+                                      strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,t)) 
+                         
+
+   % considering refinement parameterized with renaming function
+   plRefinementFun(pl1,pl2,(f:[Conf -> Conf])):bool = 
+                 FORALL c: {||}(F(pl1))(c) => {||}(F(pl2))(f(c)) AND (prod(pl1,c) |- prod(pl2,f(c)))
+
+   plRefImpliesRefFun: LEMMA FORALL pl1,pl2,(f:[Conf -> Conf]): f = id => (plRefinementFun(pl1,pl2,f) <=> strongerPLrefinement(pl1,pl2))
+
+   plRefFunTransitive: LEMMA FORALL pl1,pl2,pl3,(s:set[Conf] | subset?(s,{||}(F(pl1))) AND  subset?(s,{||}(F(pl2)))),(f:[Conf -> Conf]): 
+                       strongPartialRefinement(pl1,pl2,s) AND plRefinementFun(pl2,pl3,f) =>
+                               plRefinementFun(pl1,pl3,f)
+
+
+END SPLPartialRefinementStrong
