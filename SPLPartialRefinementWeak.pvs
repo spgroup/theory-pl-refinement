@@ -20,7 +20,7 @@ BEGIN
 
     IMPORTING maps_identity[Conf]
     IMPORTING maps_composite[Conf,Conf,Conf]
-    IMPORTING SPLRefinementFiniteFM[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+    IMPORTING SPLPartialRefinementCommon[Conf,FM, {||}, Asset, AssetName, CK,[||]]
     
     pl, pl1, pl2, pl3: VAR PL
 
