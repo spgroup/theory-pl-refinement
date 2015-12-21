@@ -135,8 +135,7 @@ syntaxTransfOptMand(fm1,fm2,P,Q): bool =
        (features(fm1))(Q) 
 
 conditionsTransfOptMand(fm1,P,Q): bool = FORALL c: 
-                                  (semantics(fm1))(c) => NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)),c) AND
-                                                             satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)),c)
+                                  (semantics(fm1))(c) => satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)),c)
 
 wfTransfOptMand: THEOREM 
             FORALL (pl,fm2,P,Q): 
