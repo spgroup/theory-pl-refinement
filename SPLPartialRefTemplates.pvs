@@ -22,11 +22,11 @@ exp: VAR Formula_
 % Importing SPLPartialRefinement theory and instantiating types. 
 IMPORTING SPLPartialRefinement[Configuration,
                                WFFM,
-                               FeatureModelSemantics.semantics,
+                               semantics,
                                Assets.Asset,
                                Assets.AssetName,
                                CK,
-                               ConfigurationKnowledge.semantics]
+                               semantics]
 	                       
                               
 pl,pl2,pl3: VAR PL
@@ -38,11 +38,6 @@ m: VAR CM
 
 <>(fm,ck,anSet): set[Configuration] = {c | semantics(fm)(c) AND 
                                        (FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
-
-<>(pl,anSet):set[Configuration] = <>(F(pl),K(pl),anSet)
-
-% ----Filter configurations whose products do not contain aSet ****THIS DEFINITION MIGHT NOT BE USED ANYMORE****
-<>(pl,aSet):set[Configuration] = {c | semantics(F(pl))(c) AND empty?(intersection(aSet, prod(pl,c)))}
 
 % ----Filter configurations that satisfy an expression exp and belong to a feature model fm
 <>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
@@ -62,7 +57,7 @@ FORALL(pl,am2,pairs,a1,a2,an,s):
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(an))
+        s = <>(F(pl),K(pl),singleton(an))
       )
       =>
         (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
@@ -73,7 +68,7 @@ FORALL(pl,am2,pairs,a1,a2,an,s):
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(an))
+        s = <>(F(pl),K(pl),singleton(an))
       )
       =>
         (FORALL c : s(c) => (semantics(K(pl))(am2)(c)) = semantics(K(pl2))(pairs)(c))
@@ -85,7 +80,7 @@ changeAssetSameProducts: THEOREM
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(an))
+        s = <>(F(pl),K(pl),singleton(an))
       )
       =>
         (FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(am2)(c))))
@@ -97,8 +92,8 @@ changeAssetStrong: THEOREM
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(pl,singleton(an)) AND
-        wfPL(pl2) 
+        s = <>(F(pl),K(pl),singleton(an)) AND
+        FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
       )
       =>
         strongPartialRefinement(pl,pl2,s)
@@ -110,9 +105,9 @@ changeAssetWeak: THEOREM
     (
       (
 	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
-        domain(m) = <>(pl,singleton(an)) AND
+        domain(m) = <>(F(pl),K(pl),singleton(an)) AND
         identity?(m) AND
-        wfPL(pl2)
+        FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
       ) 
       => weakPartialRefinement(pl,pl2,m)
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
@@ -200,14 +195,28 @@ predChangeFeatureExp(pl,ck2,item1,item2,items,s) : bool =
 changeFeatureExpSameEvalCK: LEMMA
             FORALL(pl,ck2,item1,item2,items,s):
             (
-               predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND wfPL(pl2) => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+               (predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND 
+               (FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))))
+               => FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 % Theorem <Change feature expression template represents a strong partial refinement>
 changeFeatureExpStrongPartRef: THEOREM
             FORALL(pl,ck2,item1,item2,items,s):
             (
-              predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND wfPL(pl2) => strongPartialRefinement(pl,pl2,s)
+              (predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND 
+              (FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))))
+              => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+% Theorem <Change feature expression template represents a weak partial refinement>
+changeFeatureExpWeakPartRef: THEOREM
+            FORALL(pl,ck2,item1,item2,items,m):
+            (
+              (predChangeFeatureExp(pl,ck2,item1,item2,items,domain(m)) AND 
+              (FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) AND
+               identity?(m))
+              => weakPartialRefinement(pl,pl2,m)
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
@@ -327,9 +336,23 @@ addAssetsPartRefStrong: THEOREM
                  s = <>(F(pl2),K(pl2),domain(pairs)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
                  conditionsAddAssets(pairs,its) AND
-                 wfPL(pl2)
+                 FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
                => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% Theorem <Add assets template represents a weak partial refinement>
+addAssetsPartRefWeak: THEOREM
+            FORALL (pl,am2,ck2,m,its,pairs):
+            (
+               (
+                 domain(m) = <>(F(pl2),K(pl2),domain(pairs)) AND
+                 syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+                 conditionsAddAssets(pairs,its) AND
+                 identity?(m) AND
+                 FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
+               )
+               => weakPartialRefinement(pl,pl2,m)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 % The remove assets template is the same as the add assets but the inverse, so we are calling the same predicates. However, replacing 
@@ -338,12 +361,13 @@ removeAssetsSameProducts: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl,domain(pairs)) AND
+                 s = <>(F(pl),K(pl),domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
                  conditionsAddAssets(pairs,its) AND
-                 wfPL(pl2) 
+                 FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
-               => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+                 
+               =>  FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 % Theorem <Remove assets template represents a strong partial refinement>
@@ -351,12 +375,26 @@ removeAssetsPartRefStrong: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(pl,domain(pairs)) AND
+                 s = <>(F(pl),K(pl),domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
                  conditionsAddAssets(pairs,its) AND
-                 wfPL(pl2) 
+                 FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
                => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% Theorem <Remove assets template represents a weak partial refinement>
+removeAssetsPartRefWeak: THEOREM
+            FORALL (pl,am2,ck2,m,its,pairs):
+            (
+               (
+                 domain(m) = <>(F(pl),K(pl),domain(pairs)) AND
+                 syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
+                 conditionsAddAssets(pairs,its) AND
+                 identity?(m) AND
+                 FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
+               )
+               => weakPartialRefinement(pl,pl2,m)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 END SPLPartialRefTemplates
