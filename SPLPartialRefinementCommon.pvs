@@ -14,14 +14,14 @@ BEGIN
    % ------------------------------------------------VARIABLES-----------------------------------------------
    % -------------------------------------------------------------------------------------------------------- 
     c: VAR Conf
-    s: VAR finite_sets[Conf].finite_set
+    s: VAR set[Conf]
     fm1,fm2: VAR FM
     am,am1,am2: VAR AM
     an: VAR AssetName
     a1,a2: VAR Asset
     anSet: VAR set[AssetName]
 
-    IMPORTING SPLRefinementFiniteFM[Conf,FM, {||}, Asset, AssetName, CK,[||]]    
+    IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK,{||},[||]]    
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------FM PARTIAL REFINEMENT-----------------------------------

@@ -11,7 +11,7 @@ an: VAR AssetName
 anSet: VAR finite_sets[AssetName].finite_set
 s,t: VAR set[Configuration]
 c: VAR Configuration
-fm,fm1,fm2: VAR FFM
+fm,fm1,fm2: VAR FM
 ck,ck1,ck2,its: VAR CK
 item1,item2: VAR Item
 items: VAR set[Item]
@@ -21,7 +21,7 @@ exp: VAR Formula_
 
 % Importing SPLPartialRefinement theory and instantiating types. 
 IMPORTING SPLPartialRefinement[Configuration,
-                               WFFM,
+                               WFM,
                                semantics,
                                Assets.Asset,
                                Assets.AssetName,
@@ -35,7 +35,6 @@ m: VAR CM
 
 % --------------------------------------------Restriction Operator---------------------------------------------------------------------
 % ----Filter configurations whose products do not contain assets which were activated by any asset of anSet
-
 <>(fm,ck,anSet): set[Configuration] = {c | semantics(fm)(c) AND 
                                        (FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
 

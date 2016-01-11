@@ -13,7 +13,7 @@ BEGIN
    % ------------------------------------------------VARIABLES-----------------------------------------------
    % -------------------------------------------------------------------------------------------------------- 
     c: VAR Conf
-    s,t: VAR finite_sets[Conf].finite_set
+    s,t: VAR set[Conf]
     fm,fm1,fm2: VAR FM
 
     IMPORTING SPLPartialRefinementCommon[Conf,FM,{||},Asset,AssetName,CK,[||]]
