@@ -30,7 +30,6 @@ IMPORTING SPLPartialRefinement[Configuration,
 	                       
                               
 pl,pl2,pl3: VAR PL
-plA: VAR ArbitrarySPL
 m: VAR CM
 
 % --------------------------------------------Restriction Operator---------------------------------------------------------------------
@@ -62,6 +61,7 @@ FORALL(pl,am2,pairs,a1,a2,an,s):
         (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
     )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
+% Lemma <the same is true for am2>
 sameEvalPairs2: LEMMA 
 FORALL(pl,am2,pairs,a1,a2,an,s):
     (
@@ -121,16 +121,17 @@ transfOptMand(fm1,fm2,P,Q): bool =
        features(fm1) = features(fm2) AND 
        formulae(fm2) = union(formulae(fm1),IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)))
 
-% Template syntax. We need to make sure that the features belong to the feature models and that Q is optional in fm1. Otherwise
-% the change would not make sense
+% Template syntax. We need to make sure that the features P and Q belong to the feature models.
 syntaxTransfOptMand(fm1,fm2,P,Q): bool = 
        transfOptMand(fm1,fm2,P,Q) AND
        (features(fm1))(P) AND
        (features(fm1))(Q) 
 
+% The initial feature model must satisfy the formula Q => P because the feature Q is supposed to be optional
 conditionsTransfOptMand(fm1,P,Q): bool = FORALL c: 
                                   (semantics(fm1))(c) => satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)),c)
 
+% Theorem <Transforming an optional feature into mandatory, results in a wf FM and a wf PL>
 wfTransfOptMand: THEOREM 
             FORALL (pl,fm2,P,Q): 
             (
@@ -174,14 +175,14 @@ transOptMandPartRefWeak: THEOREM
 %---------------------------------------------CHANGE FEATURE EXPRESSION-----------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
-% Predicate that represents syntax for change feature expression. Basically, cks differ in only one line and in a feature expression.
+% Predicate that represents syntax for change feature expression. Basically, cks differ in only in a feature expression.
 syntaxChangeFeatureExp(ck1,ck2,item1,item2,items) : bool =
             ck1 = union(item1,items) AND
             ck2 = union(item2,items) AND
             assets(item1)=assets(item2)
 
-% Predicate that represents conditions for change feature expression. We are only making sure that the new item is well formed according 
-% to the fm.
+% Predicate that represents conditions for change feature expression. We are only making sure that the new expression is 
+% well formed according to the fm.
 conditionsChangeFeatureExp(fm,item1,item2) : bool = wt(fm,exp(item2)) 
 
 predChangeFeatureExp(pl,ck2,item1,item2,items,s) : bool = 
@@ -189,7 +190,7 @@ predChangeFeatureExp(pl,ck2,item1,item2,items,s) : bool =
             conditionsChangeFeatureExp(F(pl),item1,item2)       AND
             s = <>(F(pl),AND_FORMULA(NOT_FORMULA(exp(item1)),NOT_FORMULA(exp(item2)))))
 
-% Lemma <Since the only difference between "K(pl)" and "ck2" "item1" and "item2" and these items are discarded by s, the evaluation
+% Lemma <Since the only difference between "K(pl)" and "ck2" is "item1" and "item2" and these items are discarded by s, the evaluation
 %        of K(pl) is the same as ck2.>
 changeFeatureExpSameEvalCK: LEMMA
             FORALL(pl,ck2,item1,item2,items,s):
@@ -222,9 +223,10 @@ changeFeatureExpWeakPartRef: THEOREM
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
+% This function filters formulas from an FM that do not have Q
 filterFormulae(fm,Q): set[Formula_] = {form: Formula_ | formulae(fm)(form) AND NOT member(Q,names(form))}       
 
-% Removals can be of an optional or mandatory feature
+% The formulas of the new FM must not have the removed feature 
 removeFeature(fm1,fm2,P,Q):bool = formulae(fm2) = filterFormulae(fm1,Q) AND
                                   features(fm2) = remove(Q,features(fm1))
 
@@ -237,12 +239,16 @@ syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
                                  am1 = overw(pairs,am2) AND
                                  ck2 = difference(ck1,its)    
 
+% If the feature to be removed is optional, then the initial FM should not satisfy P => Q
 conditionsOpt(fm1,P,Q):bool =  FORALL c: semantics(fm1)(c) =>  NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
+% If the feature to be removed is mandatory, then the initial FM should satisfy P => Q
 conditionsMand(fm1,P,Q):bool = FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
                                 
-% We need to make sure that two conditions hold:
+% We need to make sure that the following conditions hold:
 % 1) Q HAS appear ONLY in an expression from its. Otherwise it would not be refinement
 % 2) The items that are not in its do not appear in pairs.
+% 3) fm1 |= (Q => P)
+% 4) The feature to be removed needs to be optional or mandatory
 conditionsRemoveFeature(fm1,its,pairs,P,Q,ck) : bool = 
                                  (FORALL c : 
                                           FORALL exp : 
@@ -277,7 +283,7 @@ pairsNotIncluded: LEMMA
                predRemoveFeature(pl,pl2,s,its,pairs,P,Q) => FORALL c: s(c) => FORALL an: eval(K(pl),c)(an) => NOT dom(pairs)(an) 
             )           
 
-% Theorem <Remove feature template represents a strong partial refinement>
+% Theorem <If we filter the removed feature, the remaining products are equal>
 removeFeatureSameProducts: THEOREM
             FORALL (pl,pl2,s,its,pairs,P,Q):
             (
