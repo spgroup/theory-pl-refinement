@@ -1,0 +1,5 @@
+(set_aux_lemmas
+ (singletonEqual_TCC1 0
+  (singletonEqual_TCC1-1 nil 3661768396 ("" (subtype-tcc) nil nil)
+   ((singleton const-decl "(singleton?)" sets nil)) nil)))
+
