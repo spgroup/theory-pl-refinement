@@ -35,7 +35,7 @@ BEGIN
   CK: TYPE
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -69,6 +69,8 @@ BEGIN
   notshowupItem(it,an): bool
   showupItem(it,an): bool
 
+  notshowupItems(it,anSet) : bool = FORALL an: anSet(an) => notshowupItem(it,an)
+
   notshowup(ck,an): bool =
   	FORALL it: items(ck)(it) => notshowupItem(it,an)
   showup(ck,an): bool =
@@ -77,13 +79,13 @@ BEGIN
   itsFeature(its,f): bool = 
     (FORALL c : FORALL it : its(it) AND sat(getExp(it),c) => sat(genFeatureExpression(f),c))
 
-  %evalCK(ck,c): set[Item]
+  %evalCK: [CK,Configuration -> set[Item]]
 
   % ----Filter configurations whose products do not contain assets which were activated by any asset of anSet
-   %<>(fm,ck,anSet): set[Configuration] = {c | ([|fm|])(c) AND 
-   %                                    (FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
-
- 
+  <>:[FMi,CK,set[AssetName] -> set[Configuration]] 
+  %<>(fm,ck,anSet) : set[Configuration] = {c | ([|fm|])(c) AND 
+                                      %   (FORALL (i:Item) : evalCK(ck,c)(i) => notshowupItems(i,anSet))}
+                                       %(FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -241,19 +243,68 @@ BEGIN
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHANGE ASSET %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  %syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
-  %    am1=ow((an,a1),pairs) AND
-  %    am2=ow((an,a2),pairs)
+  syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
+      am1=ow((an,a1),pairs) AND
+      am2=ow((an,a2),pairs)
 
-  %sameEvalPairs: AXIOM 
-%FORALL(pl,am2,pairs,a1,a2,an,s):
- %   (
- %     (
- %       syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
- %       s = <>(F(pl),K(pl),singleton(an))
- %     )
- %     =>
- %       (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
- %   )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+  sameEvalPairs: AXIOM 
+    FORALL(fm,am,ck,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(am,am2,pairs,a1,a2,an) AND
+        s = <>(fm,ck,singleton(an))
+      )
+      =>
+        (FORALL c : s(c) => (semantics(ck)(am)(c)) = semantics(ck)(pairs)(c))
+    ) 
+
+   sameEvalPairs2: AXIOM 
+    FORALL(fm,am,ck,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(am,am2,pairs,a1,a2,an) AND
+        s = <>(fm,ck,singleton(an))
+      )
+      =>
+        (FORALL c : s(c) => (semantics(ck)(am2)(c)) = semantics(ck)(pairs)(c))
+    ) 
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD/REMOVE ASSETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  % The FM does not change (therefore we are not adding features). Only AM and CK, that now have new lines corresponding to the new assets.
+  syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
+            am2 = overw(pairs,am1) AND
+            items(ck2) = union(items(ck1),its)
+
+  % It is necessary to make sure that all assets added in the CK are present in the new lines of the AM.
+  conditionsAddAssets(pairs,its): bool = 
+            FORALL (item:Item) : its(item) => FORALL an : showupItem(item,an) => dom(pairs)(an) 
+            %FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs))
+            
+  addAssetsSameProducts: AXIOM
+           FORALL (fm,am,ck,am2,ck2,s,its,pairs):
+            (
+               (
+                   s = <>(fm,ck2,domain(pairs)) AND
+                   syntaxAddAssets(am,am2,ck,ck2,pairs,its) AND
+                   conditionsAddAssets(pairs,its) 
+                ) 
+               => FORALL c : s(c) => ((semantics(ck)(am)(c)) = (semantics(ck2)(am2)(c)))
+            )
+  
+  removeAssetsSameProducts: AXIOM
+            FORALL (fm,am,ck,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(fm,ck,domain(pairs)) AND
+                 syntaxAddAssets(am2,am,ck2,ck,pairs,its) AND
+                 conditionsAddAssets(pairs,its) 
+               )
+                 
+               =>  FORALL c : s(c) => ((semantics(ck)(am)(c)) = (semantics(ck2)(am2)(c)))
+            ) 
+    
 
 End CK
