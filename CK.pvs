@@ -45,7 +45,7 @@ BEGIN
   anSet: VAR finite_sets[AssetName].finite_set
   aSet,S1,S2: VAR finite_sets[Asset].finite_set
   pair: VAR [AssetName,Asset]
-%  pairs: VAR finite_sets[[AssetName,Asset]].finite_set
+  %pairs: VAR finite_sets[[AssetName,Asset]].finite_set
   fm,fm1,fm2: VAR FMi
   ck,ck1,ck2: VAR CK
   item,it,item1,item2: VAR Item
@@ -54,6 +54,7 @@ BEGIN
   e,e1,e2: VAR FeatureExpression
   f,f1,f2: VAR Feature
   p,p1,p2: VAR Feature
+  s: VAR set[Configuration]
 
   exps(ck) : set[FeatureExpression]
   items(ck) : set[Item]
@@ -76,6 +77,14 @@ BEGIN
   itsFeature(its,f): bool = 
     (FORALL c : FORALL it : its(it) AND sat(getExp(it),c) => sat(genFeatureExpression(f),c))
 
+  %evalCK(ck,c): set[Item]
+
+  % ----Filter configurations whose products do not contain assets which were activated by any asset of anSet
+   %<>(fm,ck,anSet): set[Configuration] = {c | ([|fm|])(c) AND 
+   %                                    (FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
+
+ 
+
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% REPLACE FEATURE EXPRESSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,8 +95,11 @@ BEGIN
     items(ck2) = add(item2,its) AND                        
     getRS(item1) = getRS(item2);
 
+  conditionsReplaceFeatureExpPartial(fm,item2) : bool =
+    wt(fm,getExp(item2))
+
   conditionsReplaceFeatureExp(fm,item1,item2) : bool =
-    wt(fm,getExp(item2)) AND
+    conditionsReplaceFeatureExpPartial(fm,item2) AND
     FORALL c: [||](fm)(c) => (sat(getExp(item1),c)<=>sat(getExp(item2),c))
   
   % When two CKs differ only by an equivalent feature expression of 
@@ -102,7 +114,20 @@ BEGIN
       )
       =>
         FORALL c: [||](fm)(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
-    )  
+    )   
+ 
+  replaceFeatureExpPartial_EqualCKeval: AXIOM
+     FORALL(fm,am,ck1,ck2,item1,item2,its,s):
+    (
+      (
+      wfCK(fm,am,ck1) AND
+      s = intersection(<>(fm,getExp(item1)),<>(fm,getExp(item2))) AND
+      syntaxReplaceFeatureExp(ck1,ck2,item1,item2,its) AND
+      conditionsReplaceFeatureExpPartial(fm,item2)
+      )
+      =>
+        FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+    ) 
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -212,6 +237,23 @@ BEGIN
         FORALL c: [||](fm1)(c) => [||](fm2)(c) AND semantics(ck1)(am1)(c) = semantics(ck2)(am2)(c)
     )  
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHANGE ASSET %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+  %syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
+  %    am1=ow((an,a1),pairs) AND
+  %    am2=ow((an,a2),pairs)
+
+  %sameEvalPairs: AXIOM 
+%FORALL(pl,am2,pairs,a1,a2,an,s):
+ %   (
+ %     (
+ %       syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+ %       s = <>(F(pl),K(pl),singleton(an))
+ %     )
+ %     =>
+ %       (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
+ %   )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
 End CK

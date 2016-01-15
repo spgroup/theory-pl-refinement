@@ -248,7 +248,7 @@ conditionsMand(fm1,P,Q):bool = FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES
 % 1) Q HAS appear ONLY in an expression from its. Otherwise it would not be refinement
 % 2) The items that are not in its do not appear in pairs.
 % 3) fm1 |= (Q => P)
-% 4) The feature to be removed needs to be optional or mandatory
+% 4) The feature to be removed needs to be either optional or mandatory
 conditionsRemoveFeature(fm1,its,pairs,P,Q,ck) : bool = 
                                  (FORALL c : 
                                           FORALL exp : 

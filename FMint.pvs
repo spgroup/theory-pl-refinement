@@ -15,6 +15,9 @@ BEGIN
   Feature : TYPE
   [||] : [FMi -> set[Configuration]]
 
+  % ----Filter configurations that do not satisfy an expression exp and belong to a feature model fm
+  <>(fm:FMi,e:FeatureExpression):set[Configuration]  = {c:Configuration | ([||](fm))(c) AND NOT sat(e,c)}
+
   wf(fm:FMi):boolean
   wt(fm:FMi, f:FeatureExpression):boolean
   genFeatureExpression(f:Feature):FeatureExpression
