@@ -6,11 +6,7 @@ FeatureModelSemantics: THEORY
   wfFM(fm: FM): bool = 
     wfTree(fm) AND wfFormulae(fm)                 
 
-  wfFFM(fm: FFM): bool = wfFM(fm)
-
   WFM : TYPE = (wfFM)
-
-  WFFM : TYPE = (wfFFM)
 
   getFeatures(fm:FM): set[Name] = features(fm);
 
