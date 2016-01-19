@@ -1,0 +1,109 @@
+SPLStrongPartRefInt [Configuration:TYPE, 
+   FeatureExpression:TYPE,
+   sat: [FeatureExpression,Configuration -> boolean],
+   FMi:TYPE, 
+   Feature:TYPE, 
+   [||] : [FMi -> set[Configuration]],
+   wf: [FMi -> boolean],
+   wt: [FMi, FeatureExpression -> boolean],
+   genFeatureExpression: [Feature -> FeatureExpression],
+   getFeatures: [FMi -> set[Feature]],
+   addMandatory: [FMi, FMi, Feature, Feature -> bool],
+   addOptional: [FMi, FMi, Feature, Feature -> bool]]: THEORY
+BEGIN
+
+IMPORTING CK[Configuration, 
+   FeatureExpression, 
+   sat,
+   FMi, 
+   Feature, 
+   [||],
+   wf,
+   wt,
+   genFeatureExpression,
+   getFeatures,
+   addMandatory,
+   addOptional]
+
+   IMPORTING AssetMapping
+  
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+   
+   fm: VAR FMi
+   am,am2,pairs: VAR AM
+   a1,a2: VAR Asset
+   an: VAR AssetName
+   ck1,ck2: VAR CK
+   item1,item2: VAR Item
+   its: VAR set[Item]
+   c: VAR Configuration
+   s: VAR set[Configuration]
+
+   IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,semantics]
+   
+   pl,pl2: VAR PL
+   
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------REPLACE FEATURE EXP-------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+
+   replaceFeatureExpStrongPartialRef: THEOREM
+     FORALL(pl,ck2,item1,item2,its,s):
+    (
+      (
+      wfCK(F(pl),A(pl),K(pl)) AND
+      s = intersection(<>(F(pl),getExp(item1)),<>(F(pl),getExp(item2))) AND
+      syntaxReplaceFeatureExp(K(pl),K(pl2),item1,item2,its) AND
+      conditionsReplaceFeatureExpPartial(F(pl),item2)
+      )
+      =>
+      strongPartialRefinement(pl,pl2,s)
+    ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------CHANGE ASSET--------------------------------------------
+   % --------------------------------------------------------------------------------------------------------  
+
+   changeAssetStrongPartialRef: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(F(pl),K(pl),singleton(an))
+      )
+      =>
+        strongPartialRefinement(pl,pl2,s)
+    ) WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------ADD/REMOVE----------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+
+   addAssetsStrongPartialRef: THEOREM
+    FORALL (pl,am2,ck2,s,its,pairs):
+     (
+       (
+         s = <>(F(pl2),K(pl2),domain(pairs)) AND
+         syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+         conditionsAddAssets(pairs,its) AND
+         FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
+       )
+       => strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+   removeAssetsStrongPartialRef: THEOREM
+    FORALL (pl,am2,ck2,s,its,pairs):
+     (
+       (
+         s = <>(F(pl),K(pl),domain(pairs)) AND
+         syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
+         conditionsAddAssets(pairs,its) AND
+         FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
+       )
+       => strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+
+END SPLStrongPartRefInt
