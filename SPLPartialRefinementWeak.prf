@@ -955,7 +955,7 @@
      nil)
     (same_img formula-decl nil maps_composite nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
-    (transitive? const-decl "bool" relations nil) nil
+    (transitive? const-decl "bool" relations nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (preorder? const-decl "bool" orders nil)
