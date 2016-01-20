@@ -23,8 +23,6 @@ FeatureModelSemantics: THEORY
   semantics(fm: FM): set[Configuration] =
     {c:Configuration | satImpConsts(fm,c) AND satExpConsts(fm,c)}
 
-  finite_sem: LEMMA FORALL (fm:FFM): is_finite(semantics(fm))
-
   % refinement notion for feature models
   refines(abs,con: WFM): bool = subset?(semantics(abs),semantics(con))
 
