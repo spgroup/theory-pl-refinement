@@ -1,4 +1,4 @@
-(SPLStrongPartRefInt
+(SPLStrongPartRefTemplInt
  (replaceFeatureExpStrongPartialRef_TCC1 0
   (replaceFeatureExpStrongPartialRef_TCC1-1 nil 3662219262
    ("" (subtype-tcc) nil nil) nil nil))
@@ -56,33 +56,33 @@
     (is_finite const-decl "bool" finite_sets nil)
     (CK type-decl nil CK nil)
     (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefInt nil)
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
     (AssetName nonempty-type-decl nil Assets nil)
     (Asset nonempty-type-decl nil Assets nil)
     (<> const-decl "set[Configuration]" FMint nil)
     (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt nil)
     ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefInt nil)
-    (Feature formal-type-decl nil SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
-     SPLStrongPartRefInt nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (set type-eq-decl nil sets nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefInt nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (intersection const-decl "set" sets nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
@@ -145,29 +145,29 @@
     (reflexive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil)
     (replaceFeatureExpPartial_EqualCKeval formula-decl nil CK nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefInt nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefInt nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (boolean nonempty-type-decl nil booleans nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
-     SPLStrongPartRefInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefInt nil)
-    (Feature formal-type-decl nil SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (set type-eq-decl nil sets nil)
     ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt nil)
     (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefInt nil)
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
     (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil))
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil))
    shostak))
  (changeAssetStrongPartialRef_TCC1 0
   (changeAssetStrongPartialRef_TCC1-1 nil 3662220175
@@ -234,28 +234,28 @@
    ((strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
     (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefInt nil)
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
     (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt nil)
     ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (set type-eq-decl nil sets nil)
     (bool nonempty-type-eq-decl nil booleans nil)
-    (Feature formal-type-decl nil SPLStrongPartRefInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefInt nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (sameEvalPairs formula-decl nil CK nil)
     (preorder? const-decl "bool" orders nil)
     (reflexive? const-decl "bool" relations nil)
@@ -321,28 +321,28 @@
    ((strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
     (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefInt nil)
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
     (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt nil)
     ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (set type-eq-decl nil sets nil)
     (bool nonempty-type-eq-decl nil booleans nil)
-    (Feature formal-type-decl nil SPLStrongPartRefInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefInt nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (addAssetsSameProducts formula-decl nil CK nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
@@ -407,28 +407,28 @@
    ((strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
     (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefInt nil)
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt nil)
     (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefInt nil)
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
     (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt nil)
     ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (set type-eq-decl nil sets nil)
     (bool nonempty-type-eq-decl nil booleans nil)
-    (Feature formal-type-decl nil SPLStrongPartRefInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
-     SPLStrongPartRefInt nil)
+     SPLStrongPartRefTemplInt nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefInt nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
     (removeAssetsSameProducts formula-decl nil CK nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)

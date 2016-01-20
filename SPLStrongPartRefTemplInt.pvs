@@ -1,4 +1,4 @@
-SPLStrongPartRefInt [Configuration:TYPE, 
+SPLStrongPartRefTemplInt [Configuration:TYPE, 
    FeatureExpression:TYPE,
    sat: [FeatureExpression,Configuration -> boolean],
    FMi:TYPE, 
@@ -106,4 +106,4 @@ IMPORTING CK[Configuration,
       ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 
-END SPLStrongPartRefInt
+END SPLStrongPartRefTemplInt
