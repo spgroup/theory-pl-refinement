@@ -1,7 +1,13 @@
-Population: THEORY
+Population[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE,
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]]: THEORY
 BEGIN
 
-  IMPORTING SPLrefinement
+  IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK,{||},[||]]    
 
   pl,pl1,pl2: VAR PL
 
