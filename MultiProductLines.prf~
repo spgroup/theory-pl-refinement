@@ -967,7 +967,7 @@
      "non_empty_finite_set" finite_sets nil))
    51825 60 t shostak))
  (plRefPCe 0
-  (plRefPCe-1 nil 3584722150 3584961712
+  (plRefPCe-1 nil 3584722150 3584971621
    ("" (skolem 1 mpl)
     (("" (skolem 1 pcs)
       (("" (flatten)
@@ -1047,8 +1047,30 @@
                                                                     (replace
                                                                      -1)
                                                                     (("1"
-                                                                      (postpone)
-                                                                      nil
+                                                                      (lemma
+                                                                       "epsilons[Conf].epsilon_ax")
+                                                                      (("1"
+                                                                        (instantiate
+                                                                         -1
+                                                                         "LAMBDA(c:Conf): {||}(F(l2))(c) AND ([||](K(l1))(A(l1))(conf) |- [||](K(l2))(A(l2))(c))")
+                                                                        (("1"
+                                                                          (bddsimp
+                                                                           -1)
+                                                                          (("1"
+                                                                            (propax)
+                                                                            nil
+                                                                            nil)
+                                                                           ("2"
+                                                                            (instantiate
+                                                                             -10
+                                                                             conf)
+                                                                            (("2"
+                                                                              (assert)
+                                                                              nil
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
                                                                       nil))
                                                                     nil)
                                                                    ("2"
@@ -1079,8 +1101,67 @@
                                                                          ("2"
                                                                           (assert)
                                                                           (("2"
-                                                                            (postpone)
-                                                                            nil
+                                                                            (lemma
+                                                                             "epsilons[Conf].epsilon_ax")
+                                                                            (("2"
+                                                                              (instantiate
+                                                                               -1
+                                                                               "LAMBDA(c:Conf): {||}(F(l2))(c)")
+                                                                              (("2"
+                                                                                (bddsimp
+                                                                                 -1)
+                                                                                (("1"
+                                                                                  (assert)
+                                                                                  (("1"
+                                                                                    (lemma
+                                                                                     "epsilons[Conf].epsilon_ax")
+                                                                                    (("1"
+                                                                                      (instantiate
+                                                                                       -1
+                                                                                       "LAMBDA(c:Conf): {||}(F(l2))(c) AND
+                    ([||](K(l1))(A(l1))(conf) |- [||](K(l2))(A(l2))(c))")
+                                                                                      (("1"
+                                                                                        (bddsimp
+                                                                                         -1)
+                                                                                        (("1"
+                                                                                          (propax)
+                                                                                          nil
+                                                                                          nil)
+                                                                                         ("2"
+                                                                                          (instantiate
+                                                                                           -11
+                                                                                           conf)
+                                                                                          (("2"
+                                                                                            (assert)
+                                                                                            nil
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil)
+                                                                                 ("2"
+                                                                                  (instantiate
+                                                                                   -10
+                                                                                   conf)
+                                                                                  (("2"
+                                                                                    (assert)
+                                                                                    (("2"
+                                                                                      (skosimp)
+                                                                                      (("2"
+                                                                                        (instantiate
+                                                                                         1
+                                                                                         c2!1)
+                                                                                        (("2"
+                                                                                          (propax)
+                                                                                          nil
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
                                                                             nil))
                                                                           nil)
                                                                          ("3"
@@ -1243,7 +1324,55 @@
         nil))
       nil))
     nil)
-   unfinished nil 266 160 t shostak))
+   proved
+   ((plRefinement const-decl "bool" SPLrefinement nil)
+    (empty? const-decl "bool" sets nil)
+    (pc skolem-const-decl "PC" MultiProductLines nil)
+    ([\|\|] const-decl
+     "[CK -> [AM -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLrefinement nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (AssetName type-decl nil SPLrefinement nil)
+    (\|- const-decl "[set[Asset], set[Asset] -> bool]" SPLrefinement
+     nil)
+    (Asset type-decl nil SPLrefinement nil)
+    (member const-decl "bool" sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (choose const-decl "(p)" sets nil)
+    (nonempty? const-decl "bool" sets nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (product const-decl "finite_sets[Asset].finite_set"
+     MultiProductLines nil)
+    (singleton? const-decl "bool" sets nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (conf skolem-const-decl "Conf" MultiProductLines nil)
+    (l1 skolem-const-decl "PL" MultiProductLines nil)
+    (l2 skolem-const-decl "PL" MultiProductLines nil)
+    (epsilon_ax formula-decl nil epsilons nil)
+    (TRUE const-decl "bool" booleans nil)
+    (epsilon const-decl "T" epsilons nil)
+    (pred type-eq-decl nil defined_types nil)
+    (prod const-decl "finite_sets[Asset].finite_set" MultiProductLines
+     nil)
+    (replace const-decl "PC" MultiProductLines nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (CK type-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (FM type-decl nil SPLrefinement nil)
+    (Conf type-decl nil SPLrefinement nil)
+    (set type-eq-decl nil sets nil)
+    ({\|\|} const-decl "[FM -> set[Conf]]" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (PC type-eq-decl nil MultiProductLines nil))
+   227987 510 t shostak))
  (plRefPC 0
   (plRefPC-1 nil 3584204789 3584961712
    ("" (lemma plRefPCe)
@@ -3668,7 +3797,7 @@
     (plPCS formula-decl nil MultiProductLines nil)
     (confsAdd formula-decl nil MultiProductLines nil)
     (confsRem formula-decl nil MultiProductLines nil))
-   8894 1340 nil nil)
+   8894 1340 t nil)
   (strongCompMPLeq_TCC1-1 nil 3584721417 3584961713
    ("" (skolem 1 (l1 l2 s cs mpl))
     (("" (flatten)

@@ -1,6 +1,6 @@
 (maps
  (mappingUnique 0
-  (mappingUnique-1 nil 3498485067 3499765223
+  (mappingUnique-1 nil 3498485067
    ("" (skolem 1 (A an))
     (("" (typepred A)
       (("" (expand unique)
@@ -24,7 +24,6 @@
         nil))
       nil))
     nil)
-   unchecked
    ((mapping type-eq-decl nil maps nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
@@ -36,22 +35,24 @@
     (boolean nonempty-type-decl nil booleans nil)
     (singleton? const-decl "bool" sets nil)
     (member const-decl "bool" sets nil)
+    (x skolem-const-decl "T" maps nil)
+    (an skolem-const-decl "S" maps nil)
+    (A skolem-const-decl "mapping" maps nil)
     (empty? const-decl "bool" sets nil))
-   35 10 t shostak))
+   shostak))
  (inDom 0
-  (inDom-1 nil 3498485387 3499765223
+  (inDom-1 nil 3498485387
    ("" (skolem 1 (m l r))
     (("" (expand dom)
       (("" (flatten)
         (("" (instantiate 1 r) (("" (propax) nil nil)) nil)) nil))
       nil))
     nil)
-   unchecked
    ((dom const-decl "set[S]" maps nil)
     (T formal-type-decl nil maps nil))
-   60 10 t shostak))
+   shostak))
  (map_TCC1 0
-  (map_TCC1-2 nil 3499765259 3499765264
+  (map_TCC1-2 nil 3499765259
    ("" (skolem 1 ("A" "_"))
     ((""
       (use "measure_induction[finite_sets[S].finite_set,nat, finite_sets[S].Card, <]")
@@ -346,77 +347,78 @@
        ("2" (lemma wf_nat) (("2" (grind) nil nil)) nil))
       nil))
     nil)
-   unchecked
-   ((wf_nat formula-decl nil naturalnumbers nil)
-    (lemmaUnionRemove formula-decl nil set_aux_lemmas nil)
-    (singleton const-decl "(singleton?)" sets nil)
-    (OR const-decl "[bool, bool -> bool]" booleans nil)
-    (finite_union judgement-tcc nil finite_sets nil)
-    (mappingUnique formula-decl nil maps nil)
-    (the const-decl "(p)" sets nil)
-    (nonempty_finite_union2 application-judgement
-     "non_empty_finite_set" finite_sets nil)
-    (finite_union application-judgement "finite_set" finite_sets nil)
-    (nonempty_singleton_finite application-judgement
-     "non_empty_finite_set" finite_sets nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (singleton_elt const-decl "T" sets nil)
-    (singleton? const-decl "bool" sets nil)
-    (finite_singleton judgement-tcc nil finite_sets nil)
-    (union const-decl "set" sets nil)
-    (int_minus_int_is_int application-judgement "int" integers nil)
-    (card_remove formula-decl nil finite_sets nil)
-    (remove const-decl "set" sets nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (finite_remove application-judgement "finite_set" finite_sets nil)
-    (emptyset_is_empty? formula-decl nil sets_lemmas nil)
-    (finite_emptyset name-judgement "finite_set" finite_sets nil)
-    (emptyset const-decl "set" sets nil)
-    (member const-decl "bool" sets nil)
-    (empty? const-decl "bool" sets nil)
-    (mapping type-eq-decl nil maps nil)
-    (unique const-decl "bool" maps nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (T formal-type-decl nil maps nil) (< const-decl "bool" reals nil)
-    (restrict const-decl "R" restrict nil)
-    (Card const-decl "nat" finite_sets nil)
-    (nat nonempty-type-eq-decl nil naturalnumbers nil)
-    (>= const-decl "bool" reals nil)
-    (int nonempty-type-eq-decl nil integers nil)
-    (integer_pred const-decl "[rational -> boolean]" integers nil)
-    (rational nonempty-type-from-decl nil rationals nil)
-    (rational_pred const-decl "[real -> boolean]" rationals nil)
-    (real nonempty-type-from-decl nil reals nil)
-    (real_pred const-decl "[number_field -> boolean]" reals nil)
-    (number_field nonempty-type-from-decl nil number_fields nil)
-    (number_field_pred const-decl "[number -> boolean]" number_fields
-     nil)
-    (number nonempty-type-decl nil numbers nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (set type-eq-decl nil sets nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (S formal-type-decl nil maps nil)
-    (measure_induction formula-decl nil measure_induction nil)
-    (irreflexive_restrict application-judgement "(irreflexive?[S])"
-     restrict_order_props nil)
-    (antisymmetric_restrict application-judgement "(antisymmetric?[S])"
-     restrict_order_props nil)
-    (transitive_restrict application-judgement "(transitive?[S])"
+   ((pred type-eq-decl nil defined_types nil)
+    (well_founded? const-decl "bool" orders nil)
+    (real_lt_is_strict_total_order name-judgement
+     "(strict_total_order?[real])" real_props nil)
+    (strict_total_order_restrict application-judgement
+     "(strict_total_order?[S])" restrict_order_props nil)
+    (trichotomous_restrict application-judgement "(trichotomous?[S])"
      restrict_order_props nil)
     (strict_order_restrict application-judgement "(strict_order?[S])"
      restrict_order_props nil)
-    (trichotomous_restrict application-judgement "(trichotomous?[S])"
+    (transitive_restrict application-judgement "(transitive?[S])"
      restrict_order_props nil)
-    (strict_total_order_restrict application-judgement
-     "(strict_total_order?[S])" restrict_order_props nil)
-    (real_lt_is_strict_total_order name-judgement
-     "(strict_total_order?[real])" real_props nil)
-    (well_founded? const-decl "bool" orders nil)
-    (pred type-eq-decl nil defined_types nil))
-   4478 580 nil nil)
-  (map_TCC1-1 nil 3498485950 3499765224
+    (antisymmetric_restrict application-judgement "(antisymmetric?[S])"
+     restrict_order_props nil)
+    (irreflexive_restrict application-judgement "(irreflexive?[S])"
+     restrict_order_props nil)
+    (measure_induction formula-decl nil measure_induction nil)
+    (S formal-type-decl nil maps nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (number nonempty-type-decl nil numbers nil)
+    (number_field_pred const-decl "[number -> boolean]" number_fields
+     nil)
+    (number_field nonempty-type-from-decl nil number_fields nil)
+    (real_pred const-decl "[number_field -> boolean]" reals nil)
+    (real nonempty-type-from-decl nil reals nil)
+    (rational_pred const-decl "[real -> boolean]" rationals nil)
+    (rational nonempty-type-from-decl nil rationals nil)
+    (integer_pred const-decl "[rational -> boolean]" integers nil)
+    (int nonempty-type-eq-decl nil integers nil)
+    (>= const-decl "bool" reals nil)
+    (nat nonempty-type-eq-decl nil naturalnumbers nil)
+    (Card const-decl "nat" finite_sets nil)
+    (restrict const-decl "R" restrict nil)
+    (< const-decl "bool" reals nil) (T formal-type-decl nil maps nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (unique const-decl "bool" maps nil)
+    (mapping type-eq-decl nil maps nil)
+    (empty? const-decl "bool" sets nil)
+    (member const-decl "bool" sets nil)
+    (emptyset const-decl "set" sets nil)
+    (finite_emptyset name-judgement "finite_set" finite_sets nil)
+    (emptyset_is_empty? formula-decl nil sets_lemmas nil)
+    (finite_remove application-judgement "finite_set" finite_sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (remove const-decl "set" sets nil)
+    (card_remove formula-decl nil finite_sets nil)
+    (int_minus_int_is_int application-judgement "int" integers nil)
+    (union const-decl "set" sets nil)
+    (finite_singleton judgement-tcc nil finite_sets nil)
+    (singleton? const-decl "bool" sets nil)
+    (singleton_elt const-decl "T" sets nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (nonempty_finite_union2 application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (the const-decl "(p)" sets nil)
+    (mappingUnique formula-decl nil maps nil)
+    (item skolem-const-decl "S" maps nil)
+    (A skolem-const-decl "mapping" maps nil)
+    (finite_union judgement-tcc nil finite_sets nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (lemmaUnionRemove formula-decl nil set_aux_lemmas nil)
+    (wf_nat formula-decl nil naturalnumbers nil))
+   nil)
+  (map_TCC1-1 nil 3498485950
    ("" (skolem 1 ("A" "_"))
     ((""
       (use "measure_induction[finite_sets[S].finite_set,nat, finite_sets[S].Card, <]")
@@ -710,7 +712,6 @@
        ("2" (lemma wf_nat) (("2" (grind) nil nil)) nil))
       nil))
     nil)
-   unfinished
    ((pred type-eq-decl nil defined_types nil)
     (well_founded? const-decl "bool" orders nil)
     (real_lt_is_strict_total_order name-judgement
@@ -778,9 +779,9 @@
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (singleton const-decl "(singleton?)" sets nil)
     (wf_nat formula-decl nil naturalnumbers nil))
-   726 410 t nil))
+   nil))
  (unionMap 0
-  (unionMap-1 nil 3498486026 3499765224
+  (unionMap-1 nil 3498486026
    ("" (skolem 1 (m X Y))
     (("" (decompose-equality 1)
       (("" (expand* union map member)
@@ -807,7 +808,6 @@
         nil))
       nil))
     nil)
-   unchecked
    ((finite_union application-judgement "finite_set" finite_sets nil)
     (S formal-type-decl nil maps nil)
     (is_finite const-decl "bool" finite_sets nil)
@@ -820,9 +820,9 @@
     (boolean nonempty-type-decl nil booleans nil)
     (T formal-type-decl nil maps nil)
     (member const-decl "bool" sets nil))
-   74 30 t shostak))
+   shostak))
  (existsMap 0
-  (existsMap-1 nil 3499011771 3499765224
+  (existsMap-1 nil 3499011771
    ("" (skolem 1 (m l r))
     (("" (flatten)
       (("" (decompose-equality 1)
@@ -846,7 +846,6 @@
         nil))
       nil))
     nil)
-   unchecked
    ((NOT const-decl "[bool -> bool]" booleans nil)
     (T formal-type-decl nil maps nil)
     (boolean nonempty-type-decl nil booleans nil)
@@ -862,9 +861,9 @@
     (S formal-type-decl nil maps nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil))
-   57 30 t shostak))
+   shostak))
  (mapUnion 0
-  (mapUnion-1 nil 3498486106 3499765224
+  (mapUnion-1 nil 3498486106
    ("" (skolem 1 (m ls1 ls2 a))
     (("" (flatten)
       (("" (expand* union map member)
@@ -879,13 +878,12 @@
         nil))
       nil))
     nil)
-   unchecked
    ((S formal-type-decl nil maps nil) (union const-decl "set" sets nil)
     (member const-decl "bool" sets nil)
     (map const-decl "finite_sets[T].finite_set" maps nil))
-   30 20 t shostak))
+   shostak))
  (mapAM 0
-  (mapAM-1 nil 3498486157 3499765224
+  (mapAM-1 nil 3498486157
    ("" (skolem 1 (m l ls))
     (("" (lemma mapUnion)
       (("" (expand* dom map union singleton member)
@@ -949,7 +947,6 @@
         nil))
       nil))
     nil)
-   unchecked
    ((mapUnion formula-decl nil maps nil)
     (S formal-type-decl nil maps nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -972,9 +969,9 @@
     (member const-decl "bool" sets nil)
     (singleton const-decl "(singleton?)" sets nil)
     (map const-decl "finite_sets[T].finite_set" maps nil))
-   118 70 t shostak))
+   shostak))
  (notExists 0
-  (notExists-1 nil 3498486465 3499765224
+  (notExists-1 nil 3498486465
    ("" (skolem 1 (m ls))
     (("" (flatten)
       (("" (expand* map emptyset dom)
@@ -993,7 +990,6 @@
         nil))
       nil))
     nil)
-   unchecked
    ((S formal-type-decl nil maps nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
@@ -1008,9 +1004,9 @@
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (dom const-decl "set[S]" maps nil)
     (emptyset const-decl "set" sets nil))
-   34 30 t shostak))
+   shostak))
  (uniqueUnion 0
-  (uniqueUnion-1 nil 3499771133 3499771530
+  (uniqueUnion-1 nil 3499771133
    ("" (skolem 1 (m1 m2))
     (("" (flatten)
       (("" (typepred m1)
@@ -1061,7 +1057,6 @@
         nil))
       nil))
     nil)
-   proved
    ((dom const-decl "set[S]" maps nil)
     (member const-decl "bool" sets nil)
     (union const-decl "set" sets nil)
@@ -1074,5 +1069,5 @@
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
     (mapping type-eq-decl nil maps nil))
-   106175 60 t shostak)))
+   shostak)))
 

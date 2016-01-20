@@ -1,5 +1,6 @@
 set_aux_lemmas [T: TYPE]: THEORY
  BEGIN
+  CONVERSION+ singleton 
 
   cardUnion: LEMMA
     FORALL(an:T,anSet:finite_sets[T].finite_set):

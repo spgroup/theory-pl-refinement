@@ -1,6 +1,6 @@
 (set_aux_lemmas
  (cardUnion 0
-  (cardUnion-1 nil 3499762383 3499762390
+  (cardUnion-1 nil 3499762383
    ("" (lemma finite_sets[T].card_add)
     (("" (lemma sets_lemmas[T].add_as_union)
       (("" (lemma sets_lemmas[T].union_commutative)
@@ -17,7 +17,6 @@
         nil))
       nil))
     nil)
-   unfinished
    ((add_as_union formula-decl nil sets_lemmas nil)
     (singleton const-decl "(singleton?)" sets nil)
     (singleton? const-decl "bool" sets nil)
@@ -43,9 +42,9 @@
     (union_commutative formula-decl nil sets_lemmas nil)
     (card_add formula-decl nil finite_sets nil)
     (T formal-type-decl nil set_aux_lemmas nil))
-   6783 60 t shostak))
+   shostak))
  (setMember 0
-  (setMember-1 nil 3499762394 3499762415
+  (setMember-1 nil 3499762394
    ("" (skolem 1 (ans an))
     (("" (expand member)
       (("" (flatten)
@@ -96,7 +95,6 @@
         nil))
       nil))
     nil)
-   unfinished
    ((member const-decl "bool" sets nil)
     (finite_remove application-judgement "finite_set" finite_sets nil)
     (add_remove_member formula-decl nil sets_lemmas nil)
@@ -124,9 +122,9 @@
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (remove const-decl "set" sets nil))
-   20164 90 t shostak))
+   shostak))
  (lemmaUnionRemove 0
-  (lemmaUnionRemove-1 nil 3499762425 3499762547
+  (lemmaUnionRemove-1 nil 3499762425
    ("" (skolem 1 (x y item))
     (("" (flatten)
       (("" (expand member)
@@ -147,7 +145,6 @@
         nil))
       nil))
     nil)
-   unfinished
    ((T formal-type-decl nil set_aux_lemmas nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -166,9 +163,9 @@
     (singleton? const-decl "bool" sets nil)
     (singleton const-decl "(singleton?)" sets nil)
     (member const-decl "bool" sets nil))
-   122906 70 t shostak))
+   shostak))
  (lemmaUnionRemove2 0
-  (lemmaUnionRemove2-1 nil 3501581874 3501581993
+  (lemmaUnionRemove2-1 nil 3501581874
    ("" (skolem 1 (X i))
     (("" (flatten)
       (("" (expand* union singleton remove member)
@@ -181,7 +178,6 @@
         nil))
       nil))
     nil)
-   unchecked
    ((bool nonempty-type-eq-decl nil booleans nil)
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
@@ -196,9 +192,9 @@
     (remove const-decl "set" sets nil)
     (member const-decl "bool" sets nil)
     (singleton const-decl "(singleton?)" sets nil))
-   35435 20 t shostak))
+   shostak))
  (lemmaUnionRemove3 0
-  (lemmaUnionRemove3-1 nil 3501582074 3501582110
+  (lemmaUnionRemove3-1 nil 3501582074
    ("" (skolem 1 (X it1 it2))
     (("" (expand* union singleton remove member)
       (("" (flatten)
@@ -215,7 +211,6 @@
         nil))
       nil))
     nil)
-   proved
    ((singleton const-decl "(singleton?)" sets nil)
     (member const-decl "bool" sets nil)
     (remove const-decl "set" sets nil)
@@ -230,16 +225,14 @@
     (finite_set type-eq-decl nil finite_sets nil)
     (T formal-type-decl nil set_aux_lemmas nil)
     (boolean nonempty-type-decl nil booleans nil))
-   36370 50 t shostak))
+   shostak))
  (finiteIntersection 0
-  (finiteIntersection-1 nil 3499762553 3499762555 ("" (grind) nil nil)
-   unfinished
+  (finiteIntersection-1 nil 3499762553 ("" (grind) nil nil)
    ((finite_intersection2 application-judgement "finite_set"
      finite_sets nil))
-   1763 10 t shostak))
+   shostak))
  (finiteComprehension 0
-  (finiteComprehension-1 nil 3499762559 3499762561 ("" (grind) nil nil)
-   unfinished
+  (finiteComprehension-1 nil 3499762559 ("" (grind) nil nil)
    ((boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
@@ -264,9 +257,9 @@
      real_props nil)
     (injective? const-decl "bool" functions nil)
     (is_finite const-decl "bool" finite_sets nil))
-   1775 90 t shostak))
+   shostak))
  (finiteUnion 0
-  (finiteUnion-1 nil 3499762571 3499762592
+  (finiteUnion-1 nil 3499762571
    ("" (lemma finite_sets[T].finite_union)
     (("" (skolem 1 (x y))
       (("" (flatten)
@@ -277,25 +270,25 @@
         nil))
       nil))
     nil)
-   unfinished
    ((boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (set type-eq-decl nil sets nil)
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
+    (y skolem-const-decl "set[T]" set_aux_lemmas nil)
+    (x skolem-const-decl "set[T]" set_aux_lemmas nil)
     (finite_union judgement-tcc nil finite_sets nil)
     (T formal-type-decl nil set_aux_lemmas nil))
-   20962 10 t shostak))
+   shostak))
  (singletonMember 0
-  (singletonMember-1 nil 3499762599 3499762607
+  (singletonMember-1 nil 3499762599
    ("" (skolem 1 (x y))
     (("" (flatten)
       (("" (expand singleton) (("" (assert) nil nil)) nil)) nil))
     nil)
-   unfinished ((singleton const-decl "(singleton?)" sets nil)) 8076 10
-   t shostak))
+   ((singleton const-decl "(singleton?)" sets nil)) shostak))
  (memberUnion 0
-  (memberUnion-1 nil 3499762616 3499762618
+  (memberUnion-1 nil 3499762616
    ("" (skolem 1 (x y s))
     (("" (flatten)
       (("" (expand union)
@@ -304,9 +297,8 @@
         nil))
       nil))
     nil)
-   unfinished
    ((singleton const-decl "(singleton?)" sets nil)
     (member const-decl "bool" sets nil)
     (union const-decl "set" sets nil))
-   1504 10 t shostak)))
+   shostak)))
 
