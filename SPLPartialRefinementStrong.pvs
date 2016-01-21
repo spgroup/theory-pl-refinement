@@ -25,7 +25,9 @@ BEGIN
    % --------------------------------------------------------------------------------------------------------
     
    % Partial Refinement Relation - this definition requires that the configuration does not change
-    strongPartialRefinement(pl1,pl2:PL,s:{confs:set[Conf]| subset?(confs,{||}(F(pl1))) AND subset?(confs,{||}(F(pl2)))}) : bool = 
+    strongPartialRefinement(pl1,pl2,s) : bool = 
+     subset?(s,{||}(F(pl1))) AND 
+     subset?(s,{||}(F(pl2))) AND 
      FORALL c: s(c) =>
 	  (
               prod(pl1,c)
@@ -40,11 +42,9 @@ BEGIN
    %--------------------------------------------------PREORDER-----------------------------------------------
 
    % Theorem <strong partial refinement is reflexive>
-    strongPartRefReflexive: THEOREM FORALL pl,(s:set[Conf] | subset?(s,{||}(F(pl)))): strongPartialRefinement(pl,pl,s)
+    strongPartRefReflexive: THEOREM FORALL pl,s: strongPartialRefinement(pl,pl,s)
    % Theorem <strong partial refinement is transitive>
-    strongPartRefTransitive: THEOREM (FORALL pl1,pl2,pl3,
-                                             (s:set[Conf] | subset?(s, {||}(F(pl1))) AND subset?(s, {||}(F(pl2)))),
-                                             (t:set[Conf] | subset?(t, {||}(F(pl2))) AND subset?(t, {||}(F(pl3)))): 
+    strongPartRefTransitive: THEOREM (FORALL pl1,pl2,pl3,s,t: 
                                               (
                                                  strongPartialRefinement(pl1,pl2,s) 
                                                 AND 
@@ -56,7 +56,7 @@ BEGIN
     %-------------------------------------------------------COMPOSITIONALITY---------------------------------------------------
     % Theorem <FM Equivalence compositionality - weak definition>
     fmCompStrongDef: THEOREM
-    FORALL(pl:PL,fm1,fm2:FM,(s:set[Conf]| subset?(s,{||}(fm1)) AND subset?(s,{||}(fm2)))):
+    FORALL(pl,fm1,fm2,s,t):
     ( 
       subset?(s,t) AND fmPartialRefinement(fm1,fm2,t) AND wfPL(pl2)
      => 
@@ -83,44 +83,39 @@ BEGIN
    totalImpliesPartial: LEMMA FORALL pl1,pl2,(s:set[Conf] | subset?(s,{||}(F(pl1)))): 
                             strongerPLrefinement(pl1,pl2) => strongPartialRefinement(pl1,pl2,s)
    
-   partialImpliesTotal: LEMMA FORALL pl1,pl2,s: (s = {||}(F(pl1)) AND subset?(s,{||}(F(pl2))) AND strongPartialRefinement(pl1,pl2,s)) 
+   partialImpliesTotal: LEMMA FORALL pl1,pl2,s: (s = {||}(F(pl1)) AND strongPartialRefinement(pl1,pl2,s)) 
                                               => strongerPLrefinement(pl1,pl2)
 
-   commutableDiagram1: THEOREM FORALL pl1,pl4,
-                                      pl3,(s:set[Conf] | subset?(s,{||}(F(pl1))) AND subset?(s,{||}(F(pl3))) AND subset?(s,{||}(F(pl4)))):
+   commutableDiagram: THEOREM FORALL pl1,pl3,
+                                      pl4,(s:set[Conf] | subset?(s,{||}(F(pl1)))):
                               (strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,s)) => 
-                             (EXISTS pl2,(t:set[Conf] | subset?(t,{||}(F(pl1))) AND  subset?(t,{||}(F(pl2))) AND subset?(t,{||}(F(pl4)))): 
-                                      strongPartialRefinement(pl1,pl2,t) AND strongerPLrefinement(pl2,pl4))
+                             (EXISTS pl2: 
+                                      strongPartialRefinement(pl1,pl2,s) AND strongerPLrefinement(pl2,pl4))
 
    %--------------------------------------------------TRANSITIVITY MIXING DEFS-------------------------------------------------
    %------ STRONG TOTAL AND STRONG PARTIAL
-   partPlusTotalStrongerImpliesPart: THEOREM FORALL pl1,pl2,pl3,(s:set[Conf] | subset?(s,{||}(F(pl1))) AND subset?(s,{||}(F(pl2)))): 
+   partPlusTotalStrongerImpliesPart: THEOREM FORALL pl1,pl2,pl3,s: 
                                                 strongPartialRefinement(pl1,pl2,s) AND strongerPLrefinement(pl2,pl3)
                                                                    => strongPartialRefinement(pl1,pl3,s)
 
-   totalStrongerPlusPartImpliesPart: THEOREM FORALL pl1,pl2,pl3,
-                                         (s:set[Conf] | subset?(s,{||}(F(pl1))) AND subset?(s,{||}(F(pl2))) AND subset?(s,{||}(F(pl3)))): 
+   totalStrongerPlusPartImpliesPart: THEOREM FORALL pl1,pl2,pl3,s: 
                                                 strongerPLrefinement(pl1,pl2) AND strongPartialRefinement(pl2,pl3,s)
                                                                    => strongPartialRefinement(pl1,pl3,s)
    %------ TOTAL AND STRONG PARTIAL
-   partPlusTotalImpliesPartRel: THEOREM FORALL pl1,pl2,pl3,
-                                         (s:set[Conf] | subset?(s,{||}(F(pl1))) AND subset?(s,{||}(F(pl2)))): 
+   partPlusTotalImpliesPartRel: THEOREM FORALL pl1,pl2,pl3,s: 
                                                  strongPartialRefinement(pl1,pl2,s) AND plRefinement(pl2,pl3) =>
                                                          partRefRel(pl1,pl3,s) 
 
-  totalPlusPartImpliesPartRef: THEOREM FORALL pl1,pl2,pl3,
-                               (s:set[Conf] | subset?(s,{||}(F(pl2))) AND subset?(s,{||}(F(pl3)))): 
+  totalPlusPartImpliesPartRef: THEOREM FORALL pl1,pl2,pl3,s: 
                                plRefinement(pl1,pl2) AND strongPartialRefinement(pl2,pl3,s) =>
                                partRefRel(pl1,pl3,{c:Conf | {||}(F(pl1))(c) AND EXISTS (c2:Conf) : s(c2) AND (prod(pl1,c) |- prod(pl2,c2))})             
 
    %------ TOTAL FUN AND STRONG PARTIAL
-   partPlusTotalFunImpliesPartFun: THEOREM FORALL pl1,pl2,pl3,(s:set[Conf] | subset?(s,{||}(F(pl1))) AND subset?(s,{||}(F(pl2)))),
-                                                             (f:[Conf -> Conf]):
+   partPlusTotalFunImpliesPartFun: THEOREM FORALL pl1,pl2,pl3,s,(f:[Conf -> Conf]):
                                                  strongPartialRefinement(pl1,pl2,s) AND plRefinementFun(pl2,pl3,f) =>
                                                          partRefFun(pl1,pl3,s,f)   
 
-   totalFunPlusPartImpliesPartFun:  THEOREM FORALL pl1,pl2,pl3,(s:set[Conf] | subset?(s,{||}(F(pl2))) AND subset?(s,{||}(F(pl3)))),
-                                                             (f:[Conf -> Conf]):
+   totalFunPlusPartImpliesPartFun:  THEOREM FORALL pl1,pl2,pl3,s,(f:[Conf -> Conf]):
                                     plRefinementFun(pl1,pl2,f) AND strongPartialRefinement(pl2,pl3,s) =>
                                     partRefFun(pl1,pl3,
                                              {c:Conf | {||}(F(pl1))(c) AND s(f(c)) AND (prod(pl1,c) |- prod(pl2,f(c)))},
