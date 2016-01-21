@@ -517,8 +517,7 @@ extend[S, {n: S | dom(m)(n)}, bool, FALSE]
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
     (mapping type-eq-decl nil maps nil)
-    (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (m skolem-const-decl "maps[S, S].mapping" maps_identity nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil) nil
     (dom const-decl "set[S]" maps nil)
     (composeMaps const-decl "maps[S, U].mapping" maps_composite nil))
    shostak))

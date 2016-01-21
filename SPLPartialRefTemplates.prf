@@ -8450,16 +8450,12 @@
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
     (restrict const-decl "R" restrict nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (WFFM type-eq-decl nil FeatureModelSemantics nil)
-    (wfFFM const-decl "bool" FeatureModelSemantics nil)
+    (Asset nonempty-type-decl nil Assets nil) nil nil
     (CK type-eq-decl nil ConfigurationKnowledge nil)
     (is_finite const-decl "bool" finite_sets nil)
     (Item type-eq-decl nil ConfigurationKnowledge nil)
     (finite_set type-eq-decl nil finite_sets nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (FFM type-eq-decl nil FeatureModel nil)
-    (finite_fm const-decl "bool" FeatureModel nil)
+    (AssetName nonempty-type-decl nil Assets nil) nil nil
     (FM type-eq-decl nil FeatureModel nil)
     (Formula_ type-decl nil Formula__adt nil)
     (set type-eq-decl nil sets nil)

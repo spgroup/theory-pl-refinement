@@ -1,11 +1,21 @@
 MultiProductLines: THEORY
 BEGIN
 
-  IMPORTING SPLrefinement
+  Conf: TYPE
+  FM: TYPE
+  {||}: [FM -> set[Conf]]
+  Asset: TYPE
+  AssetName: TYPE
+  CK: TYPE
+  IMPORTING maps[AssetName,Asset] 
+  [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]
 
   c,c1,c2,c3: VAR Conf
-  pl,pl1,pl2: VAR PL
   p,p1,p2: VAR finite_sets[Asset].finite_set
+
+  IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK, {||}, [||] ]    
+
+  pl,pl1,pl2: VAR PL
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%% MULTI PRODUCT LINES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -28,7 +38,7 @@ BEGIN
   remove(pl,pcs): finite_sets[PC].finite_set = 
     {pc | pl/=pl(pc) AND pcs(pc)}
 
-  prod(pc): finite_sets[Asset].finite_set = ([| K(pl(pc)) |] (A(pl(pc))))(conf(pc));
+  prod(pc): finite_sets[Asset].finite_set = ( [| K(pl(pc)) |] (A(pl(pc))))(conf(pc));
   product(pcs) : finite_sets[Asset].finite_set = 
     { p:Asset | EXISTS (pc) : pcs(pc) AND prod(pc)(p) }
 

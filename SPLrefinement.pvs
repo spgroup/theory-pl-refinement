@@ -13,6 +13,7 @@ BEGIN
 
   % Assumption <Feature model semantics>
 %  Conf: TYPE
+
   
 %  FM: TYPE
 %  {||} : [FM -> set[Conf]]

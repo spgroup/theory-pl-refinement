@@ -19,7 +19,7 @@ P,Q: VAR Name
 exp: VAR Formula_
 
 
-% Importing SPLPartialRefinement theory and instantiating types. 
+% Importing SPLPartialRefinement theory and instantiating types.
 IMPORTING SPLPartialRefinement[Configuration,
                                WFM,
                                semantics,
