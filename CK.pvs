@@ -83,9 +83,8 @@ BEGIN
 
   % ----Filter configurations whose products do not contain assets which were activated by any asset of anSet
   <>:[FMi,CK,set[AssetName] -> set[Configuration]] 
-  %<>(fm,ck,anSet) : set[Configuration] = {c | ([|fm|])(c) AND 
-                                      %   (FORALL (i:Item) : evalCK(ck,c)(i) => notshowupItems(i,anSet))}
-                                       %(FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
+  
+  filteredConfigurations: AXIOM FORALL s,fm,ck,anSet: subset?(s,<>(fm,ck,anSet)) => subset?(s,[||](fm))
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
