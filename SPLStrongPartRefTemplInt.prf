@@ -115,32 +115,32 @@
    ("" (skolem 1 (pl am2 pairs a1 a2 an s))
     (("" (expand strongPartialRefinement)
       (("" (bddsimp)
-        (("" (lemma sameEvalPairs)
-          (("" (inst -1 "F(pl)" "A(pl)" "K(pl)" am2 pairs a1 a2 an s)
-            (("" (bddsimp)
-              (("" (lemma sameEvalPairs2)
-                ((""
+        (("1" (lemma sameEvalPairs)
+          (("1" (inst -1 "F(pl)" "A(pl)" "K(pl)" am2 pairs a1 a2 an s)
+            (("1" (bddsimp)
+              (("1" (lemma sameEvalPairs2)
+                (("1"
                   (inst -1 "F(pl)" "A(pl)" "K(pl)" am2 pairs a1 a2 an
                    s)
-                  (("" (bddsimp)
-                    (("" (skolem 1 c)
-                      (("" (inst -3 c)
-                        (("" (inst -4 c)
-                          (("" (expand prod)
-                            (("" (bddsimp)
-                              ((""
+                  (("1" (bddsimp)
+                    (("1" (skolem 1 c)
+                      (("1" (inst -3 c)
+                        (("1" (inst -4 c)
+                          (("1" (expand prod)
+                            (("1" (bddsimp)
+                              (("1"
                                 (replace -4 1)
-                                ((""
+                                (("1"
                                   (replace -5 1)
-                                  ((""
+                                  (("1"
                                     (use SPLrefinement.assetRefinement)
-                                    ((""
+                                    (("1"
                                       (expand preorder?)
-                                      ((""
+                                      (("1"
                                         (flatten)
-                                        ((""
+                                        (("1"
                                           (expand reflexive?)
-                                          ((""
+                                          (("1"
                                             (inst
                                              -1
                                              "semantics(K(pl))(pairs)(c)")
@@ -162,57 +162,74 @@
                 nil))
               nil))
             nil))
+          nil)
+         ("2" (lemma filteredConfigurations)
+          (("2" (inst -1 s "F(pl)" "K(pl)" "singleton(an)")
+            (("2" (bddsimp)
+              (("2" (replace -2 1)
+                (("2" (expand subset?)
+                  (("2" (skolem 1 c) (("2" (bddsimp) nil nil)) nil))
+                  nil))
+                nil))
+              nil))
+            nil))
           nil))
         nil))
       nil))
     nil)
-   ((strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil)
-    (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+   ((Asset nonempty-type-decl nil Assets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (CK type-decl nil CK nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (semantics const-decl "finite_sets[Asset].finite_set" CK nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (sameEvalPairs2 formula-decl nil CK nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (reflexive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil)
+    (sameEvalPairs formula-decl nil CK nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt
      nil)
-    (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
-     nil)
-    (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefTemplInt nil)
-    (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
-    (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefTemplInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt
-     nil)
-    ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefTemplInt nil)
-    (set type-eq-decl nil sets nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (boolean nonempty-type-decl nil booleans nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
      SPLStrongPartRefTemplInt nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt
      nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
-    (sameEvalPairs formula-decl nil CK nil)
-    (preorder? const-decl "bool" orders nil)
-    (reflexive? const-decl "bool" relations nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (sameEvalPairs2 formula-decl nil CK nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (semantics const-decl "finite_sets[Asset].finite_set" CK nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-decl nil CK nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (Asset nonempty-type-decl nil Assets nil))
+    (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
+     SPLStrongPartRefTemplInt nil)
+    (genFeatureExpression formal-const-decl
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
+    (getFeatures formal-const-decl "[FMi -> set[Feature]]"
+     SPLStrongPartRefTemplInt nil)
+    (addMandatory formal-const-decl
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+     nil)
+    (addOptional formal-const-decl
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+     nil)
+    (nonempty_singleton_finite application-judgement
+     "non_empty_finite_set" finite_sets nil)
+    (singleton? const-decl "bool" sets nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (subset? const-decl "bool" sets nil)
+    (filteredConfigurations formula-decl nil CK nil)
+    (strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil))
    shostak))
  (addAssetsStrongPartialRef_TCC1 0
   (addAssetsStrongPartialRef_TCC1-1 nil 3662221649
@@ -222,20 +239,20 @@
    ("" (skolem 1 (pl am2 ck2 s its pairs))
     (("" (expand strongPartialRefinement)
       (("" (bddsimp)
-        (("" (lemma addAssetsSameProducts)
-          (("" (inst -1 "F(pl)" "A(pl)" "K(pl)" am2 ck2 s its pairs)
-            (("" (bddsimp)
-              (("" (expand prod)
-                (("" (skolem 1 c)
-                  (("" (inst -4 c)
-                    (("" (bddsimp)
-                      (("" (replace -5 1)
-                        (("" (use SPLrefinement.assetRefinement)
-                          (("" (expand preorder?)
-                            (("" (flatten)
-                              ((""
+        (("1" (lemma addAssetsSameProducts)
+          (("1" (inst -1 "F(pl)" "A(pl)" "K(pl)" am2 ck2 s its pairs)
+            (("1" (bddsimp)
+              (("1" (expand prod)
+                (("1" (skolem 1 c)
+                  (("1" (inst -4 c)
+                    (("1" (bddsimp)
+                      (("1" (replace -5 1)
+                        (("1" (use SPLrefinement.assetRefinement)
+                          (("1" (expand preorder?)
+                            (("1" (flatten)
+                              (("1"
                                 (expand reflexive?)
-                                ((""
+                                (("1"
                                   (inst -1 "(semantics(ck2)(am2)(c))")
                                   nil
                                   nil))
@@ -250,56 +267,71 @@
                 nil))
               nil))
             nil))
+          nil)
+         ("2" (lemma filteredConfigurations)
+          (("2" (inst -1 s "F(pl)" ck2 "domain(pairs)")
+            (("2" (bddsimp)
+              (("2" (replace -1 1)
+                (("2" (expand subset?)
+                  (("2" (skolem 1 c) (("2" (bddsimp) nil nil)) nil))
+                  nil))
+                nil))
+              nil))
+            nil))
           nil))
         nil))
       nil))
     nil)
-   ((strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil)
-    (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+   ((Asset nonempty-type-decl nil Assets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (CK type-decl nil CK nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (semantics const-decl "finite_sets[Asset].finite_set" CK nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil) (Item type-decl nil CK nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (addAssetsSameProducts formula-decl nil CK nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt
      nil)
-    (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
-     nil)
-    (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefTemplInt nil)
-    (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
-    (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefTemplInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt
-     nil)
-    ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefTemplInt nil)
-    (set type-eq-decl nil sets nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (boolean nonempty-type-decl nil booleans nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
      SPLStrongPartRefTemplInt nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt
      nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
-    (addAssetsSameProducts formula-decl nil CK nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (reflexive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (Item type-decl nil CK nil) (PL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (semantics const-decl "finite_sets[Asset].finite_set" CK nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-decl nil CK nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (Asset nonempty-type-decl nil Assets nil))
+    (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
+     SPLStrongPartRefTemplInt nil)
+    (genFeatureExpression formal-const-decl
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
+    (getFeatures formal-const-decl "[FMi -> set[Feature]]"
+     SPLStrongPartRefTemplInt nil)
+    (addMandatory formal-const-decl
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+     nil)
+    (addOptional formal-const-decl
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+     nil)
+    (mapping type-eq-decl nil maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (subset? const-decl "bool" sets nil)
+    (filteredConfigurations formula-decl nil CK nil)
+    (strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil))
    shostak))
  (removeAssetsStrongPartialRef_TCC1 0
   (removeAssetsStrongPartialRef_TCC1-1 nil 3662222145
@@ -309,20 +341,20 @@
    ("" (skolem 1 (pl am2 ck2 s its pairs))
     (("" (expand strongPartialRefinement)
       (("" (bddsimp)
-        (("" (lemma removeAssetsSameProducts)
-          (("" (inst -1 "F(pl)" "A(pl)" "K(pl)" am2 ck2 s its pairs)
-            (("" (bddsimp)
-              (("" (expand prod)
-                (("" (skolem 1 c)
-                  (("" (inst -4 c)
-                    (("" (bddsimp)
-                      (("" (replace -5 1)
-                        (("" (use SPLrefinement.assetRefinement)
-                          (("" (expand preorder?)
-                            (("" (flatten)
-                              ((""
+        (("1" (lemma removeAssetsSameProducts)
+          (("1" (inst -1 "F(pl)" "A(pl)" "K(pl)" am2 ck2 s its pairs)
+            (("1" (bddsimp)
+              (("1" (expand prod)
+                (("1" (skolem 1 c)
+                  (("1" (inst -4 c)
+                    (("1" (bddsimp)
+                      (("1" (replace -5 1)
+                        (("1" (use SPLrefinement.assetRefinement)
+                          (("1" (expand preorder?)
+                            (("1" (flatten)
+                              (("1"
                                 (expand reflexive?)
-                                ((""
+                                (("1"
                                   (inst -1 "(semantics(ck2)(am2)(c))")
                                   nil
                                   nil))
@@ -337,55 +369,70 @@
                 nil))
               nil))
             nil))
+          nil)
+         ("2" (lemma filteredConfigurations)
+          (("2" (inst -1 s "F(pl)" "K(pl)" "domain(pairs)")
+            (("2" (bddsimp)
+              (("2" (replace -1 1)
+                (("2" (expand subset?)
+                  (("2" (skolem 1 c) (("2" (bddsimp) nil nil)) nil))
+                  nil))
+                nil))
+              nil))
+            nil))
           nil))
         nil))
       nil))
     nil)
-   ((strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil)
-    (addOptional formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+   ((Asset nonempty-type-decl nil Assets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (CK type-decl nil CK nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (semantics const-decl "finite_sets[Asset].finite_set" CK nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil) (Item type-decl nil CK nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (removeAssetsSameProducts formula-decl nil CK nil)
+    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt
      nil)
-    (addMandatory formal-const-decl
-     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
-     nil)
-    (getFeatures formal-const-decl "[FMi -> set[Feature]]"
-     SPLStrongPartRefTemplInt nil)
-    (genFeatureExpression formal-const-decl
-     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
-    (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
-     SPLStrongPartRefTemplInt nil)
-    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt
-     nil)
-    ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
-     SPLStrongPartRefTemplInt nil)
-    (set type-eq-decl nil sets nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
-    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (boolean nonempty-type-decl nil booleans nil)
     (sat formal-const-decl
      "[FeatureExpression, Configuration -> boolean]"
      SPLStrongPartRefTemplInt nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (FeatureExpression formal-type-decl nil SPLStrongPartRefTemplInt
+    (FMi formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (Feature formal-type-decl nil SPLStrongPartRefTemplInt nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    ([\|\|] formal-const-decl "[FMi -> set[Configuration]]"
+     SPLStrongPartRefTemplInt nil)
+    (wf formal-const-decl "[FMi -> boolean]" SPLStrongPartRefTemplInt
      nil)
-    (Configuration formal-type-decl nil SPLStrongPartRefTemplInt nil)
-    (removeAssetsSameProducts formula-decl nil CK nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (reflexive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (Item type-decl nil CK nil) (PL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (semantics const-decl "finite_sets[Asset].finite_set" CK nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-decl nil CK nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (Asset nonempty-type-decl nil Assets nil))
+    (wt formal-const-decl "[FMi, FeatureExpression -> boolean]"
+     SPLStrongPartRefTemplInt nil)
+    (genFeatureExpression formal-const-decl
+     "[Feature -> FeatureExpression]" SPLStrongPartRefTemplInt nil)
+    (getFeatures formal-const-decl "[FMi -> set[Feature]]"
+     SPLStrongPartRefTemplInt nil)
+    (addMandatory formal-const-decl
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+     nil)
+    (addOptional formal-const-decl
+     "[FMi, FMi, Feature, Feature -> bool]" SPLStrongPartRefTemplInt
+     nil)
+    (mapping type-eq-decl nil maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (subset? const-decl "bool" sets nil)
+    (filteredConfigurations formula-decl nil CK nil)
+    (strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil))
    shostak)))
 
