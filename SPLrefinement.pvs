@@ -222,6 +222,17 @@ BEGIN
     FORALL(pl1,pl2): (strongerPLrefinement(pl1,pl2)) => (subset?({|F(pl1)|},{|F(pl2)|}))
 
 
+  plRefinementFun(pl1,pl2:PL,f:[Conf -> Conf]): bool = 
+                           (FORALL c : {||}(F(pl1))(c) => 
+                             (
+                               ({||}(F(pl2)))(f(c)) AND 
+                               (prod(pl1,c) |- prod(pl2,f(c)))
+                             )
+                           )
+
+  totalRefIFFExistsFun: LEMMA FORALL pl1,pl2: plRefinement(pl1,pl2) <=> 
+                         EXISTS (f:[({||}(F(pl1))) -> ({||}(F(pl2)))]) : plRefinementFun(pl1,pl2,f)
+
  % PL Refinement compositionality
   weakFMcompositionality: THEOREM
     FORALL(pl,fm):
