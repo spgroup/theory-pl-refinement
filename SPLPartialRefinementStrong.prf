@@ -243,34 +243,34 @@
         nil))
       nil))
     nil)
-   ((subset? const-decl "bool" sets nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
+   ((strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil)
+    (strongerPLrefinement const-decl "bool" SPLrefinement nil)
+    (member const-decl "bool" sets nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (set type-eq-decl nil sets nil)
+    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+     SPLPartialRefinementStrong nil)
+    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
+    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (mapping type-eq-decl nil maps nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLPartialRefinementStrong nil)
-    (mapping type-eq-decl nil maps nil)
-    (unique const-decl "bool" maps nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
-    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementStrong nil)
-    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    (set type-eq-decl nil sets nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (member const-decl "bool" sets nil)
-    (strongerPLrefinement const-decl "bool" SPLrefinement nil)
-    (strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil))
+    (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
+    (subset? const-decl "bool" sets nil))
    shostak))
  (partialImpliesTotal 0
   (partialImpliesTotal-1 nil 3658524796
@@ -302,13 +302,13 @@
         nil))
       nil))
     nil)
-   ((subset? const-decl "bool" sets nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (member const-decl "bool" sets nil)
+   ((strongerPLrefinement const-decl "bool" SPLrefinement nil)
     (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
-    (strongerPLrefinement const-decl "bool" SPLrefinement nil))
+    (member const-decl "bool" sets nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
+    (subset? const-decl "bool" sets nil))
    shostak))
  (commutableDiagram 0
   (commutableDiagram-1 nil 3662367893
@@ -431,30 +431,24 @@
               (("" (bddsimp)
                 (("1" (skolem 1 c)
                   (("1" (inst -1 c)
-                    (("1" (typepred s)
-                      (("1" (inst -4 c)
-                        (("1" (expand subset?)
-                          (("1" (inst -1 c)
-                            (("1" (inst -2 c)
+                    (("1" (inst -4 c)
+                      (("1" (inst -2 c)
+                        (("1" (use assetRefinement)
+                          (("1" (expand preorder?)
+                            (("1" (flatten)
                               (("1"
-                                (expand member)
+                                (expand transitive?)
                                 (("1"
-                                  (use assetRefinement)
+                                  (inst
+                                   -2
+                                   "([||](K(pl1))(A(pl1))(c))"
+                                   "([||](K(pl2))(A(pl2))(c))"
+                                   "([||](K(pl3))(A(pl3))(c))")
                                   (("1"
-                                    (expand preorder?)
+                                    (bddsimp)
                                     (("1"
-                                      (flatten)
-                                      (("1"
-                                        (expand transitive?)
-                                        (("1"
-                                          (inst
-                                           -2
-                                           "([||](K(pl1))(A(pl1))(c))"
-                                           "([||](K(pl2))(A(pl2))(c))"
-                                           "([||](K(pl3))(A(pl3))(c))")
-                                          (("1" (bddsimp) nil nil))
-                                          nil))
-                                        nil))
+                                      (inst -6 c)
+                                      (("1" (bddsimp) nil nil))
                                       nil))
                                     nil))
                                   nil))
@@ -467,18 +461,10 @@
                     nil))
                   nil)
                  ("2" (skolem 1 c)
-                  (("2" (typepred s)
-                    (("2" (inst -4 c)
-                      (("2" (expand subset?)
-                        (("2" (inst -2 c)
-                          (("2" (inst -3 c)
-                            (("2" (inst -1 c)
-                              (("2"
-                                (expand member)
-                                (("2" (bddsimp) nil nil))
-                                nil))
-                              nil))
-                            nil))
+                  (("2" (inst -4 c)
+                    (("2" (inst -2 c)
+                      (("2" (inst -3 c)
+                        (("2" (inst -1 c) (("2" (bddsimp) nil nil))
                           nil))
                         nil))
                       nil))
@@ -491,12 +477,17 @@
         nil))
       nil))
     nil)
-   ((subset? const-decl "bool" sets nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+   ((strongerPLrefinement const-decl "bool" SPLrefinement nil)
+    (strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil)
+    (member const-decl "bool" sets nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
+    (preorder? const-decl "bool" orders nil)
+    (transitive? const-decl "bool" relations nil)
     (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLPartialRefinementStrong nil)
@@ -504,25 +495,18 @@
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (is_finite const-decl "bool" finite_sets nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+     SPLPartialRefinementStrong nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
     (CK formal-type-decl nil SPLPartialRefinementStrong nil)
     (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
     (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementStrong nil)
     (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (set type-eq-decl nil sets nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
-    (transitive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (member const-decl "bool" sets nil)
-    (strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil)
-    (strongerPLrefinement const-decl "bool" SPLrefinement nil))
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (subset? const-decl "bool" sets nil))
    shostak))
  (totalStrongerPlusPartImpliesPart 0
   (totalStrongerPlusPartImpliesPart-1 nil 3661521415
@@ -548,72 +532,68 @@
         nil))
       nil))
     nil)
-   ((Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
-    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (set type-eq-decl nil sets nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+   ((totalImpliesPartial formula-decl nil SPLPartialRefinementStrong
+     nil)
+    (intersection_idempotent formula-decl nil sets_lemmas nil)
+    (strongPartRefTransitive formula-decl nil
      SPLPartialRefinementStrong nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (unique const-decl "bool" maps nil)
-    (mapping type-eq-decl nil maps nil)
+    (subset? const-decl "bool" sets nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLPartialRefinementStrong nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (subset? const-decl "bool" sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (strongPartRefTransitive formula-decl nil
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
      SPLPartialRefinementStrong nil)
-    (intersection_idempotent formula-decl nil sets_lemmas nil)
-    (totalImpliesPartial formula-decl nil SPLPartialRefinementStrong
-     nil))
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
+    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil))
    shostak))
+ (partPlusTotalImpliesPartRel_TCC1 0
+  (partPlusTotalImpliesPartRel_TCC1-1 nil 3662712526
+   ("" (subtype-tcc) nil nil) nil nil))
  (partPlusTotalImpliesPartRel 0
   (partPlusTotalImpliesPartRel-2 nil 3661529386
    ("" (skolem 1 (pl1 pl2 pl3 s))
     (("" (bddsimp)
       (("" (expand* strongPartialRefinement plRefinement partRefRel)
         (("" (skolem 1 c)
-          (("" (inst -1 c)
-            (("" (inst -2 c)
-              (("" (typepred s)
-                (("" (expand subset?)
-                  (("" (inst -1 c)
-                    (("" (inst -2 c)
-                      (("" (expand member)
-                        (("" (bddsimp)
-                          (("" (expand prod)
-                            (("" (use assetRefinement)
-                              ((""
-                                (expand preorder?)
-                                ((""
-                                  (flatten)
-                                  ((""
-                                    (expand transitive?)
-                                    ((""
-                                      (skolem -7 c2)
-                                      ((""
-                                        (inst 1 c2)
-                                        ((""
-                                          (bddsimp)
-                                          ((""
-                                            (inst
-                                             -2
-                                             "([||](K(pl1))(A(pl1))(c))"
-                                             "([||](K(pl2))(A(pl2))(c))"
-                                             "([||](K(pl3))(A(pl3))(c2))")
-                                            (("" (bddsimp) nil nil))
-                                            nil))
-                                          nil))
+          (("" (inst -2 c)
+            (("" (expand subset?)
+              (("" (expand member)
+                (("" (bddsimp)
+                  (("1" (expand prod)
+                    (("1" (use assetRefinement)
+                      (("1" (expand preorder?)
+                        (("1" (flatten)
+                          (("1" (expand transitive?)
+                            (("1" (skolem -6 c2)
+                              (("1"
+                                (inst 1 c2)
+                                (("1"
+                                  (bddsimp)
+                                  (("1"
+                                    (inst -5 c)
+                                    (("1"
+                                      (bddsimp)
+                                      (("1"
+                                        (inst
+                                         -2
+                                         "([||](K(pl1))(A(pl1))(c))"
+                                         "([||](K(pl2))(A(pl2))(c))"
+                                         "([||](K(pl3))(A(pl3))(c2))")
+                                        (("1" (bddsimp) nil nil))
                                         nil))
                                       nil))
                                     nil))
@@ -624,7 +604,8 @@
                           nil))
                         nil))
                       nil))
-                    nil))
+                    nil)
+                   ("2" (inst -2 c) (("2" (bddsimp) nil nil)) nil))
                   nil))
                 nil))
               nil))
@@ -633,39 +614,37 @@
         nil))
       nil))
     nil)
-   ((assetRefinement formula-decl nil SPLrefinement nil)
-    (transitive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (member const-decl "bool" sets nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (set type-eq-decl nil sets nil)
-    (subset? const-decl "bool" sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+   ((plRefinement const-decl "bool" SPLrefinement nil)
+    (partRefRel const-decl "bool" SPLPartialRefinementStrong nil)
+    (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
-    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
-    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (unique const-decl "bool" maps nil)
-    (mapping type-eq-decl nil maps nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
+    (member const-decl "bool" sets nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (transitive? const-decl "bool" relations nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLPartialRefinementStrong nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (strongPartialRefinement const-decl "bool"
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
      SPLPartialRefinementStrong nil)
-    (partRefRel const-decl "bool" SPLPartialRefinementStrong nil)
-    (plRefinement const-decl "bool" SPLrefinement nil))
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
+    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (subset? const-decl "bool" sets nil))
    nil)
   (partPlusTotalImpliesPartRel-1 nil 3661524217
    ("" (skolem 1 (pl1 pl2 pl3 s))
@@ -791,20 +770,22 @@
   (totalPlusPartImpliesPartRef-1 nil 3661548317
    ("" (skolem 1 (pl1 pl2 pl3 s))
     (("" (bddsimp)
-      (("" (expand* plRefinement strongPartialRefinement partRefRel)
-        (("" (skolem 1 c1)
-          (("" (inst -1 c1)
-            (("" (bddsimp)
-              (("" (skolem -4 c2)
-                (("" (inst -3 c2)
-                  (("" (bddsimp)
-                    (("" (inst 1 c2)
-                      (("" (typepred s)
-                        (("" (expand subset?)
-                          (("" (inst -2 c2)
-                            (("" (expand member)
+      ((""
+        (inst 1
+         "{c:Conf | {||}(F(pl1))(c) AND EXISTS (c2:Conf) : s(c2) AND (prod(pl1,c) |- prod(pl2,c2))}")
+        (("" (expand* plRefinement strongPartialRefinement partRefRel)
+          (("" (skolem 1 c1)
+            (("" (inst -1 c1)
+              (("" (bddsimp)
+                (("" (skolem -6 c2)
+                  (("" (inst 1 c2)
+                    (("" (expand subset?)
+                      (("" (inst -4 c2)
+                        (("" (expand member)
+                          (("" (flatten)
+                            (("" (expand prod)
                               ((""
-                                (bddsimp)
+                                (inst -5 c2)
                                 ((""
                                   (use assetRefinement)
                                   ((""
@@ -816,9 +797,9 @@
                                         ((""
                                           (inst
                                            -2
-                                           "prod(pl1,c1)"
-                                           "prod(pl2,c2)"
-                                           "prod(pl3,c2)")
+                                           "([||](K(pl1))(A(pl1))(c1))"
+                                           "([||](K(pl2))(A(pl2))(c2))"
+                                           "([||](K(pl3))(A(pl3))(c2))")
                                           (("" (bddsimp) nil nil))
                                           nil))
                                         nil))
@@ -840,67 +821,97 @@
         nil))
       nil))
     nil)
-   ((member const-decl "bool" sets nil)
+   ((strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil)
+    (partRefRel const-decl "bool" SPLPartialRefinementStrong nil)
+    (plRefinement const-decl "bool" SPLrefinement nil)
+    (subset? const-decl "bool" sets nil)
+    (member const-decl "bool" sets nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (transitive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (set type-eq-decl nil sets nil)
-    (subset? const-decl "bool" sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementStrong nil)
-    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
-    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (unique const-decl "bool" maps nil)
-    (mapping type-eq-decl nil maps nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (\|- const-decl "[set[Asset], set[Asset] -> bool]" SPLrefinement
+     nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
      SPLPartialRefinementStrong nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (plRefinement const-decl "bool" SPLrefinement nil)
-    (partRefRel const-decl "bool" SPLPartialRefinementStrong nil)
-    (strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil))
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+     SPLPartialRefinementStrong nil)
+    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil))
    shostak))
- (partPlusTotalFunImpliesPartFun 0
-  (partPlusTotalFunImpliesPartFun-1 nil 3661526923
-   ("" (skolem 1 (pl1 pl2 pl3 s f))
+ (partPlusTotalImpliesPartFun 0
+  (partPlusTotalImpliesPartFun-1 nil 3662731307
+   ("" (skolem 1 (pl1 pl2 pl3 s))
     (("" (bddsimp)
-      (("" (expand* strongPartialRefinement plRefinementFun partRefFun)
-        (("" (skolem 1 c)
-          (("" (inst -1 c)
-            (("" (inst -2 c)
-              (("" (typepred s)
-                (("" (expand subset?)
-                  (("" (inst -1 c)
-                    (("" (inst -2 c)
-                      (("" (expand member)
-                        (("" (bddsimp)
-                          (("" (use assetRefinement)
-                            (("" (expand preorder?)
-                              ((""
-                                (flatten)
-                                ((""
-                                  (expand transitive?)
-                                  ((""
-                                    (inst
-                                     -2
-                                     "prod(pl1,c)"
-                                     "prod(pl2,c)"
-                                     "prod(pl3,f(c))")
-                                    (("" (bddsimp) nil nil))
+      (("" (lemma totalRefIFFExistsFun)
+        (("" (inst -1 pl2 pl3)
+          (("" (bddsimp)
+            (("" (skolem -2 f)
+              ((""
+                (inst 1
+                 "restrict[({||}(F(pl2))),(s),({||}(F(pl3)))](f)")
+                (("1" (expand partRefFun)
+                  (("1" (skolem 1 c)
+                    (("1" (expand plRefinementFun)
+                      (("1" (expand strongPartialRefinement)
+                        (("1" (bddsimp)
+                          (("1" (expand restrict)
+                            (("1" (inst -2 c)
+                              (("1"
+                                (inst -5 c)
+                                (("1"
+                                  (use assetRefinement)
+                                  (("1"
+                                    (typepred "f(c)")
+                                    (("1"
+                                      (expand preorder?)
+                                      (("1"
+                                        (flatten)
+                                        (("1"
+                                          (expand transitive?)
+                                          (("1"
+                                            (typepred c)
+                                            (("1"
+                                              (inst
+                                               -4
+                                               "prod(pl1,c)"
+                                               "prod(pl2,c)"
+                                               "prod(pl3,f(c))")
+                                              (("1"
+                                                (expand subset?)
+                                                (("1"
+                                                  (inst -8 c)
+                                                  (("1"
+                                                    (expand member)
+                                                    (("1"
+                                                      (bddsimp)
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
                                     nil))
                                   nil))
                                 nil))
@@ -910,110 +921,14 @@
                         nil))
                       nil))
                     nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   ((preorder? const-decl "bool" orders nil)
-    (transitive? const-decl "bool" relations nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
-    (member const-decl "bool" sets nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (set type-eq-decl nil sets nil)
-    (subset? const-decl "bool" sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementStrong nil)
-    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
-    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (unique const-decl "bool" maps nil)
-    (mapping type-eq-decl nil maps nil)
-    ([\|\|] formal-const-decl
-     "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLPartialRefinementStrong nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil)
-    (partRefFun const-decl "bool" SPLPartialRefinementStrong nil)
-    (plRefinementFun const-decl "bool" SPLPartialRefinementStrong nil))
-   shostak))
- (totalFunPlusPartImpliesPartFun_TCC1 0
-  (totalFunPlusPartImpliesPartFun_TCC1-1 nil 3661551775
-   ("" (subtype-tcc) nil nil)
-   ((NOT const-decl "[bool -> bool]" booleans nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    ([\|\|] formal-const-decl
-     "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLPartialRefinementStrong nil)
-    (mapping type-eq-decl nil maps nil)
-    (unique const-decl "bool" maps nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementStrong nil)
-    (set type-eq-decl nil sets nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
-    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (plRefinementFun const-decl "bool" SPLPartialRefinementStrong nil)
-    (strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil)
-    (member const-decl "bool" sets nil)
-    (subset? const-decl "bool" sets nil))
-   nil))
- (totalFunPlusPartImpliesPartFun 0
-  (totalFunPlusPartImpliesPartFun-1 nil 3661551776
-   ("" (skolem 1 (pl1 pl2 pl3 s f))
-    (("" (bddsimp)
-      (("" (expand* plRefinementFun strongPartialRefinement partRefFun)
-        (("" (skolem 1 c1)
-          (("" (inst -1 c1)
-            (("" (inst -2 "f(c1)")
-              (("" (typepred s)
-                (("" (expand subset?)
-                  (("" (inst -2 "f(c1)")
-                    (("" (expand member)
-                      (("" (bddsimp)
-                        (("" (use assetRefinement)
-                          (("" (expand preorder?)
-                            (("" (flatten)
-                              ((""
-                                (expand transitive?)
-                                ((""
-                                  (inst
-                                   -2
-                                   "prod(pl1,c1)"
-                                   "prod(pl2,f(c1))"
-                                   "prod(pl3,f(c1))")
-                                  (("" (assert) nil nil))
-                                  nil))
-                                nil))
-                              nil))
-                            nil))
+                  nil)
+                 ("2" (expand strongPartialRefinement)
+                  (("2" (flatten)
+                    (("2" (skolem 1 c)
+                      (("2" (expand subset?)
+                        (("2" (inst -4 c)
+                          (("2" (expand member)
+                            (("2" (propax) nil nil)) nil))
                           nil))
                         nil))
                       nil))
@@ -1026,38 +941,44 @@
         nil))
       nil))
     nil)
-   ((member const-decl "bool" sets nil)
-    (assetRefinement formula-decl nil SPLrefinement nil)
+   (([\|\|] formal-const-decl
+     "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLPartialRefinementStrong nil)
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+     SPLPartialRefinementStrong nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
+    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
+    (totalRefIFFExistsFun formula-decl nil SPLrefinement nil)
+    (pl2 skolem-const-decl
+     "PL[Conf, FM, Asset, AssetName, CK, {||}, [||]]"
+     SPLPartialRefinementStrong nil)
+    (s skolem-const-decl "set[Conf]" SPLPartialRefinementStrong nil)
+    (restrict const-decl "R" restrict nil)
+    (strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (subset? const-decl "bool" sets nil)
+    (member const-decl "bool" sets nil)
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (transitive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (NOT const-decl "[bool -> bool]" booleans nil)
-    (set type-eq-decl nil sets nil)
-    (subset? const-decl "bool" sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementStrong nil)
-    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
-    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (unique const-decl "bool" maps nil)
-    (mapping type-eq-decl nil maps nil)
-    ([\|\|] formal-const-decl
-     "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLPartialRefinementStrong nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (plRefinementFun const-decl "bool" SPLPartialRefinementStrong nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (domain type-eq-decl nil functions nil)
+    (plRefinementFun const-decl "bool" SPLrefinement nil)
     (partRefFun const-decl "bool" SPLPartialRefinementStrong nil)
-    (strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil))
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil))
    shostak)))
 
