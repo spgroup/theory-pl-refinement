@@ -1,0 +1,28 @@
+FMIntFormula[
+              Configuration:TYPE,
+              FeatureExpression:TYPE,
+              sat: [FeatureExpression,Configuration -> boolean],
+              FMi: TYPE,
+              Feature:TYPE,
+              [||]: [FMi -> set[Configuration]],
+              wf: [FMi -> boolean],
+              wt: [FMi, FeatureExpression -> boolean],
+              getFeatures: [FMi -> set[Feature]],
+              addMandatory: [FMi, FMi, Feature, Feature -> bool],
+              addOptional: [FMi, FMi, Feature, Feature -> bool]
+]: THEORY
+BEGIN
+  IMPORTING FMint[Configuration,FeatureExpression,sat]{{ 
+    FMi:=FMi,
+    Feature:=Feature,
+    [||]:=[||],
+    wf:=wf,
+    wt:=wt,
+    getFeatures:=getFeatures,
+    addMandatory:=addMandatory,
+    addOptional:=addOptional
+  }}
+  
+  getFeatureExps(fm:FMi): set[FeatureExpression] 
+
+END FMIntFormula 

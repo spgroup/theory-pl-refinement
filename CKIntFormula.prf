@@ -1,0 +1,18 @@
+(CKIntFormula
+ (transfOptMand_TCC1 0
+  (transfOptMand_TCC1-1 nil 3662818356
+   ("" (skolem 1 (fm1 fm2 p f))
+    (("" (bddsimp)
+      (("" (skolem 1 x)
+        (("" (expand singleton) (("" (grind) nil nil)) nil)) nil))
+      nil))
+    nil)
+   ((singleton const-decl "(singleton?)" sets nil)) nil))
+ (transfOptMand_EqualCKeval 0
+  (transfOptMand_EqualCKeval-1 nil 3662819318
+   ("" (skolem 1 (fm1 fm2 am ck p f s))
+    (("" (bddsimp) (("" (skolem 1 c) (("" (propax) nil nil)) nil))
+      nil))
+    nil)
+   nil shostak)))
+

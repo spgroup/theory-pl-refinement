@@ -1,0 +1,69 @@
+CKIntFormula[Configuration:TYPE, 
+   (IMPORTING Formula_) sat: [Formula_,Configuration -> boolean],
+   FMi:TYPE, 
+   Feature:TYPE, 
+   [||] : [FMi -> set[Configuration]],
+   wf: [FMi -> boolean],
+   wt: [FMi, Formula_ -> boolean],
+   genFeatureExpression: [Feature -> Formula_],
+   getFeatures: [FMi -> set[Feature]],
+   addMandatory: [FMi, FMi, Feature, Feature -> bool],
+   addOptional: [FMi, FMi, Feature, Feature -> bool]
+   ]: THEORY
+BEGIN
+   
+   IMPORTING CK[Configuration,Formula_,sat,FMi,Feature,[||],wf,wt,genFeatureExpression,getFeatures,addMandatory,addOptional]
+   IMPORTING FMIntFormula[Configuration,Formula_,sat,FMi,Feature,[||],wf,wt,getFeatures,addMandatory,addOptional]
+   IMPORTING AssetMapping
+
+   %------------------------------------------------------------------------------------------------------------------------------------
+   %----------------------------------------------------------VARIABLES-----------------------------------------------------------------
+   %------------------------------------------------------------------------------------------------------------------------------------
+   p,f: VAR Feature
+   fm,fm1,fm2: VAR FMi
+   c: VAR Configuration
+   am: VAR AM
+   ck: VAR CK
+   s: VAR set[Configuration]
+
+   %------------------------------------------------------------------------------------------------------------------------------------
+   %---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE--------------------------------------------------
+   %------------------------------------------------------------------------------------------------------------------------------------
+
+   % Predicate that compares fm1 and fm2 for this template. The fms have the same features. However, their formulas are different
+   % because f is optional in fm1 and mandatory in fm2
+   transfOptMand(fm1,fm2,p,f): bool = 
+       getFeatures(fm1) = getFeatures(fm2) AND 
+       getFeatureExps(fm2) = union(getFeatureExps(fm1),IMPLIES_FORMULA(genFeatureExpression(p), genFeatureExpression(f)))
+
+   % Template syntax. We need to make sure that the features p and f belong to the feature models.
+   syntaxTransfOptMand(fm1,fm2,p,f): bool = 
+       transfOptMand(fm1,fm2,p,f) AND
+       (getFeatures(fm1))(p) AND
+       (getFeatures(fm1))(f) 
+
+   % The initial feature model must satisfy the formula Q => P because the feature Q is supposed to be optional
+   conditionsTransfOptMand(fm1,p,f): bool = FORALL c: 
+                                  ([||](fm1))(c) => sat(IMPLIES_FORMULA(genFeatureExpression(f),genFeatureExpression(p)),c)
+
+   transfOptMand_EqualCKeval: THEOREM
+     FORALL(fm1,fm2,am,ck,p,f,s):
+    (
+      (
+      wfCK(fm1,am,ck) AND
+      s = <>((IMPLIES_FORMULA (genFeatureExpression(p),genFeatureExpression(f))),fm1) AND
+      syntaxTransfOptMand(fm1,fm2,p,f) AND
+      conditionsTransfOptMand(fm1,p,f)
+      )
+      =>
+        FORALL c: s(c) => semantics(ck)(am)(c) = semantics(ck)(am)(c)
+    ) 
+
+   %------------------------------------------------------------------------------------------------------------------------------------
+   %--------------------------------------------------REMOVE FEATURE TEMPLATE-----------------------------------------------------------
+   %------------------------------------------------------------------------------------------------------------------------------------
+
+   % This function filters formulas from an FM that do not have Q
+  %filterFormulae(fm,f): set[Formula_] = {form: Formula_ | getFeatureExps(fm)(form) AND NOT member(f,names(form))}
+
+END CKIntFormula
