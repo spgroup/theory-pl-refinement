@@ -92,18 +92,16 @@ BEGIN
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   falseExpMakesNoDiff: AXIOM
-    FORALL(fm,am,ck1,ck2,commonIts,diffIts,s):
+    FORALL(fm,am,ck1,ck2,s):
     (
       (
-       subset?(commonIts,items(ck1)) AND
-       subset?(commonIts,items(ck2)) AND
        FORALL c: s(c) => (
                             FORALL item : diffIts(item) => NOT sat(getExp(item),c)
                          )
       )
       =>
         FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
-    )
+    ) WHERE diffIts = symmetric_difference(items(ck1),items(ck2))
 
   syntaxChangeCKLine(ck1,ck2,item1,item2,its) : bool =
     items(ck1) = add(item1,its) AND                        
