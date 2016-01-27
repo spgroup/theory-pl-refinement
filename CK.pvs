@@ -49,7 +49,7 @@ BEGIN
   fm,fm1,fm2: VAR FMi
   ck,ck1,ck2: VAR CK
   item,it,item1,item2: VAR Item
-  its,its1,its2: VAR set[Item]
+  its,its1,its2,commonIts,diffIts: VAR set[Item]
   c,c1,c2: VAR Configuration
   e,e1,e2: VAR FeatureExpression
   f,f1,f2: VAR Feature
@@ -88,19 +88,49 @@ BEGIN
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHANGE CK LINE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  falseExpMakesNoDiff: AXIOM
+    FORALL(fm,am,ck1,ck2,commonIts,diffIts,s):
+    (
+      (
+       subset?(commonIts,items(ck1)) AND
+       subset?(commonIts,items(ck2)) AND
+       FORALL c: s(c) => (
+                            FORALL item : diffIts(item) => NOT sat(getExp(item),c)
+                         )
+      )
+      =>
+        FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+    )
+
+  syntaxChangeCKLine(ck1,ck2,item1,item2,its) : bool =
+    items(ck1) = add(item1,its) AND                        
+    items(ck2) = add(item2,its)  
+
+  changeCKLine_EqualCKeval: AXIOM
+     FORALL(fm,am,ck1,ck2,item1,item2,its,s):
+    (
+      (
+       wfCK(fm,am,ck1) AND
+       s = intersection(<>(fm,getExp(item1)),<>(fm,getExp(item2))) AND
+       syntaxChangeCKLine(ck1,ck2,item1,item2,its) 
+      )
+      =>
+        FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+    )
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% REPLACE FEATURE EXPRESSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   syntaxReplaceFeatureExp(ck1,ck2,item1,item2,its) : bool =
-    items(ck1) = add(item1,its) AND                        
-    items(ck2) = add(item2,its) AND                        
+    syntaxChangeCKLine(ck1,ck2,item1,item2,its) AND                        
     getRS(item1) = getRS(item2);
 
-  conditionsReplaceFeatureExpPartial(fm,item2) : bool =
-    wt(fm,getExp(item2))
-
   conditionsReplaceFeatureExp(fm,item1,item2) : bool =
-    conditionsReplaceFeatureExpPartial(fm,item2) AND
+    wt(fm,getExp(item2)) AND
     FORALL c: [||](fm)(c) => (sat(getExp(item1),c)<=>sat(getExp(item2),c))
   
   % When two CKs differ only by an equivalent feature expression of 
@@ -115,20 +145,7 @@ BEGIN
       )
       =>
         FORALL c: [||](fm)(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
-    )   
- 
-  replaceFeatureExpPartial_EqualCKeval: AXIOM
-     FORALL(fm,am,ck1,ck2,item1,item2,its,s):
-    (
-      (
-      wfCK(fm,am,ck1) AND
-      s = intersection(<>(fm,getExp(item1)),<>(fm,getExp(item2))) AND
-      syntaxReplaceFeatureExp(ck1,ck2,item1,item2,its) AND
-      conditionsReplaceFeatureExpPartial(fm,item2)
-      )
-      =>
-        FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
-    ) 
+    )    
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

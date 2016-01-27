@@ -18,6 +18,8 @@ BEGIN
   % ----Filter configurations that do not satisfy an expression exp and belong to a feature model fm
   <>(fm:FMi,e:FeatureExpression):set[Configuration]  = {c:Configuration | ([||](fm))(c) AND NOT sat(e,c)}
   <>(e:FeatureExpression,fm:FMi):set[Configuration] = {c: Configuration | ([||](fm))(c) AND sat(e,c)}
+  <>(fm:FMi, exps:set[FeatureExpression]):set[Configuration] = 
+            {c: Configuration | ([||](fm))(c) AND FORALL (e:FeatureExpression): exps(e) => NOT sat(e,c)}
 
   wf(fm:FMi):boolean
   wt(fm:FMi, f:FeatureExpression):boolean
