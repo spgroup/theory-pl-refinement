@@ -1928,20 +1928,20 @@
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil))
    shostak))
- (conditionsChangeFeatureExp_TCC1 0
-  (conditionsChangeFeatureExp_TCC1-1 nil 3657447041
+ (conditionsChangeCKLine_TCC1 0
+  (conditionsChangeCKLine_TCC1-1 nil 3657447041
    ("" (subtype-tcc) nil nil)
    ((wfTree const-decl "bool" FeatureModel nil)) nil))
- (changeFeatureExpSameEvalCK 0
-  (changeFeatureExpSameEvalCK-5 nil 3657620202
+ (changeCKLineSameEvalCK 0
+  (changeCKLineSameEvalCK-5 nil 3657620202
    ("" (skolem 1 (pl ck2 item1 item2 items s))
-    (("" (expand predChangeFeatureExp)
+    (("" (expand predChangeCKLine)
       (("" (bddsimp)
         (("" (skolem 1 c)
           (("" (expand "<>")
             (("" (decompose-equality -3)
               (("" (inst -1 c)
-                (("" (expand syntaxChangeFeatureExp)
+                (("" (expand syntaxChangeCKLine)
                   (("" (flatten)
                     (("" (expand union)
                       (("" (decompose-equality -2)
@@ -2063,7 +2063,7 @@
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (conditionsChangeFeatureExp const-decl "bool"
+    (conditionsChangeCKLine const-decl "bool"
      SPLPartialRefTemplates nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -2075,7 +2075,7 @@
      ConfigurationKnowledge nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (union const-decl "set" sets nil)
-    (syntaxChangeFeatureExp const-decl "bool" SPLPartialRefTemplates
+    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates
      nil)
     (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
      Formula__adt nil)
@@ -2112,10 +2112,10 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (predChangeFeatureExp const-decl "bool" SPLPartialRefTemplates
+    (predChangeCKLine const-decl "bool" SPLPartialRefTemplates
      nil))
    nil)
-  (changeFeatureExpSameEvalCK-4 nil 3657448045
+  (changeCKLineSameEvalCK-4 nil 3657448045
    ("" (skolem 1 (pl ck2 item1 item2 items s))
     (("" (expand prod)
       (("" (bddsimp)
@@ -2123,7 +2123,7 @@
           (("" (expand "<>")
             (("" (decompose-equality -3)
               (("" (inst -1 c)
-                (("" (expand syntaxChangeFeatureExp)
+                (("" (expand syntaxChangeCKLine)
                   (("" (flatten)
                     (("" (expand union)
                       (("" (decompose-equality -2)
@@ -2244,7 +2244,7 @@
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (conditionsChangeFeatureExp const-decl "bool"
+    (conditionsChangeCKLine const-decl "bool"
      SPLPartialRefTemplates nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -2256,7 +2256,7 @@
      ConfigurationKnowledge nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (union const-decl "set" sets nil)
-    (syntaxChangeFeatureExp const-decl "bool" SPLPartialRefTemplates
+    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates
      nil)
     (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
      Formula__adt nil)
@@ -2292,7 +2292,7 @@
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil))
    nil)
-  (changeFeatureExpSameEvalCK-3 nil 3657447915
+  (changeCKLineSameEvalCK-3 nil 3657447915
    ("" (skolem 1 (pl ck2 item1 item2 items s))
     (("" (expand strongPartialRefinement)
       (("" (expand prod)
@@ -2301,7 +2301,7 @@
             (("" (expand "<>")
               (("" (decompose-equality -3)
                 (("" (inst -1 c)
-                  (("" (expand syntaxChangeFeatureExp)
+                  (("" (expand syntaxChangeCKLine)
                     (("" (flatten)
                       (("" (expand union)
                         (("" (decompose-equality -2)
@@ -2376,7 +2376,7 @@
                                                                 nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     nil)
    nil nil)
-  (changeFeatureExpSameEvalCK-2 nil 3657447658
+  (changeCKLineSameEvalCK-2 nil 3657447658
    ("" (skolem 1 (pl ck2 item1 item2 items s))
     (("" (expand strongPartialRefinement)
       (("" (bddsimp)
@@ -2384,7 +2384,7 @@
           (("" (expand "<>")
             (("" (decompose-equality -3)
               (("" (inst -1 c)
-                (("" (expand syntaxChangeFeatureExp)
+                (("" (expand syntaxChangeCKLine)
                   (("" (flatten)
                     (("" (expand union)
                       (("" (decompose-equality -2)
@@ -2457,14 +2457,14 @@
                                                               nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     nil)
    nil nil)
-  (changeFeatureExpSameEvalCK-1 nil 3657447042
+  (changeCKLineSameEvalCK-1 nil 3657447042
    ("" (skolem 1 (pl ck2 item1 item2 items s))
     (("" (bddsimp)
       (("" (skolem 1 c)
         (("" (expand "<>")
           (("" (decompose-equality -3)
             (("" (inst -1 c)
-              (("" (expand syntaxChangeFeatureExp)
+              (("" (expand syntaxChangeCKLine)
                 (("" (flatten)
                   (("" (expand union)
                     (("" (decompose-equality -2)
@@ -2582,7 +2582,7 @@
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (conditionsChangeFeatureExp const-decl "bool"
+    (conditionsChangeCKLine const-decl "bool"
      SPLPartialRefTemplates nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -2594,7 +2594,7 @@
      ConfigurationKnowledge nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (union const-decl "set" sets nil)
-    (syntaxChangeFeatureExp const-decl "bool" SPLPartialRefTemplates
+    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates
      nil)
     (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
      Formula__adt nil)
@@ -2630,8 +2630,8 @@
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil))
    shostak))
- (changeFeatureExpStrongPartRef_TCC1 0
-  (changeFeatureExpStrongPartRef_TCC1-1 nil 3657448092
+ (changeCKLineStrongPartRef_TCC1 0
+  (changeCKLineStrongPartRef_TCC1-1 nil 3657448092
    ("" (skolem 1 (pl ck2 item1 item2 items s pl2))
     (("" (bddsimp)
       (("" (typepred pl)
@@ -2640,10 +2640,10 @@
             (("" (inst -1 c)
               (("" (replace -4 1)
                 (("" (expand semantics)
-                  (("" (lemma changeFeatureExpSameEvalCK)
+                  (("" (lemma changeCKLineSameEvalCK)
                     (("" (inst -1 pl ck2 item1 item2 items s)
                       (("" (bddsimp)
-                        (("" (expand predChangeFeatureExp)
+                        (("" (expand predChangeCKLine)
                           (("" (bddsimp)
                             (("1" (inst -4 c)
                               (("1"
@@ -2689,10 +2689,10 @@
         nil))
       nil))
     nil)
-   ((predChangeFeatureExp const-decl "bool" SPLPartialRefTemplates nil)
-    (syntaxChangeFeatureExp const-decl "bool" SPLPartialRefTemplates
+   ((predChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates
      nil)
-    (conditionsChangeFeatureExp const-decl "bool"
+    (conditionsChangeCKLine const-decl "bool"
      SPLPartialRefTemplates nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
@@ -2701,7 +2701,7 @@
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (nonempty_union1 application-judgement "(nonempty?)" sets nil)
-    (changeFeatureExpSameEvalCK formula-decl nil SPLPartialRefTemplates
+    (changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
      nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -2731,10 +2731,10 @@
     (wfPL const-decl "bool" SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil))
    nil))
- (changeFeatureExpStrongPartRef 0
-  (changeFeatureExpStrongPartRef-2 nil 3657620296
-   ("" (lemma changeFeatureExpSameEvalCK)
-    (("" (expand predChangeFeatureExp)
+ (changeCKLineStrongPartRef 0
+  (changeCKLineStrongPartRef-2 nil 3657620296
+   ("" (lemma changeCKLineSameEvalCK)
+    (("" (expand predChangeCKLine)
       (("" (skolem 1 (pl ck2 item1 item2 items s))
         (("" (inst -1 pl ck2 item1 item2 items s)
           (("" (expand strongPartialRefinement)
@@ -2784,7 +2784,7 @@
         nil))
       nil))
     nil)
-   ((changeFeatureExpSameEvalCK formula-decl nil SPLPartialRefTemplates
+   ((changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
      nil)
     (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
@@ -2832,11 +2832,11 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (predChangeFeatureExp const-decl "bool" SPLPartialRefTemplates
+    (predChangeCKLine const-decl "bool" SPLPartialRefTemplates
      nil))
    nil)
-  (changeFeatureExpStrongPartRef-1 nil 3657448093
-   ("" (lemma changeFeatureExpSameEvalCK)
+  (changeCKLineStrongPartRef-1 nil 3657448093
+   ("" (lemma changeCKLineSameEvalCK)
     (("" (skolem 1 (pl ck2 item1 item2 items s))
       (("" (inst -1 pl ck2 item1 item2 items s)
         (("" (expand strongPartialRefinement)
@@ -2894,11 +2894,11 @@
     (FM type-eq-decl nil FeatureModel nil)
     (Formula_ type-decl nil Formula__adt nil)
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
-    (changeFeatureExpSameEvalCK formula-decl nil SPLPartialRefTemplates
+    (changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
      nil))
    shostak))
- (changeFeatureExpWeakPartRef_TCC1 0
-  (changeFeatureExpWeakPartRef_TCC1-1 nil 3659802432
+ (changeCKLineWeakPartRef_TCC1 0
+  (changeCKLineWeakPartRef_TCC1-1 nil 3659802432
    ("" (skolem 1 (pl ck2 item1 item2 items m pl2))
     (("" (bddsimp)
       (("" (typepred pl)
@@ -2907,9 +2907,9 @@
             (("" (inst -1 c)
               (("" (replace -5 1)
                 (("" (expand semantics)
-                  (("" (lemma changeFeatureExpSameEvalCK)
+                  (("" (lemma changeCKLineSameEvalCK)
                     (("" (inst -1 pl ck2 item1 item2 items "domain(m)")
-                      (("" (expand predChangeFeatureExp)
+                      (("" (expand predChangeCKLine)
                         (("" (bddsimp)
                           (("1" (inst -4 c)
                             (("1" (bddsimp)
@@ -2970,12 +2970,12 @@
           ConfigurationKnowledge nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (conditionsChangeFeatureExp const-decl "bool"
+    (conditionsChangeCKLine const-decl "bool"
      SPLPartialRefTemplates nil)
-    (syntaxChangeFeatureExp const-decl "bool" SPLPartialRefTemplates
+    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates
      nil)
-    (predChangeFeatureExp const-decl "bool" SPLPartialRefTemplates nil)
-    (changeFeatureExpSameEvalCK formula-decl nil SPLPartialRefTemplates
+    (predChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
+    (changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
      nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -3005,10 +3005,10 @@
     (wfPL const-decl "bool" SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil))
    nil))
- (changeFeatureExpWeakPartRef 0
+ (changeCKLineWeakPartRef 0
   (no "" 3659802795
    ("" (skolem 1 (pl ck2 item1 item2 items m))
-    (("" (lemma changeFeatureExpStrongPartRef)
+    (("" (lemma changeCKLineStrongPartRef)
       (("" (inst -1 pl ck2 item1 item2 items "domain(m)")
         (("" (expand* strongPartialRefinement weakPartialRefinement)
           (("" (bddsimp)
@@ -3034,7 +3034,7 @@
         nil))
       nil))
     nil)
-   ((changeFeatureExpStrongPartRef formula-decl nil
+   ((changeCKLineStrongPartRef formula-decl nil
      SPLPartialRefTemplates nil)
     (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
      nil)
@@ -3072,11 +3072,11 @@
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil))
    shostak)
-  (changeFeatureExpWeakPartRef-1 nil 3659802433
-   ("" (lemma changeFeatureExpSameEvalCK)
+  (changeCKLineWeakPartRef-1 nil 3659802433
+   ("" (lemma changeCKLineSameEvalCK)
     (("" (skolem 1 (s pl ck2 item1 item2 items m))
       (("" (inst -1 pl ck2 item1 item2 items "domain(m)")
-        (("" (expand predChangeFeatureExp)
+        (("" (expand predChangeCKLine)
           (("" (bddsimp)
             (("1" (expand weakPartialRefinement)
               (("1" (skolem 1 c)

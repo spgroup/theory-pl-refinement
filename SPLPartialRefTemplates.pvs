@@ -172,48 +172,47 @@ transOptMandPartRefWeak: THEOREM
            
 
 %---------------------------------------------------------------------------------------------------------------------------------------
-%---------------------------------------------CHANGE FEATURE EXPRESSION-----------------------------------------------------------------
+%----------------------------------------------------CHANGE CK LINE---------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
-% Predicate that represents syntax for change feature expression. Basically, cks differ in only in a feature expression.
-syntaxChangeFeatureExp(ck1,ck2,item1,item2,items) : bool =
+% Predicate that represents syntax for change ck line. Basically, cks differ in only in a feature expression and its assets.
+syntaxChangeCKLine(ck1,ck2,item1,item2,items) : bool =
             ck1 = union(item1,items) AND
-            ck2 = union(item2,items) AND
-            assets(item1)=assets(item2)
+            ck2 = union(item2,items) 
 
-% Predicate that represents conditions for change feature expression. We are only making sure that the new expression is 
+% Predicate that represents conditions for change ck line. We are only making sure that the new expression is 
 % well formed according to the fm.
-conditionsChangeFeatureExp(fm,item1,item2) : bool = wt(fm,exp(item2)) 
+conditionsChangeCKLine(fm,item1,item2) : bool = wt(fm,exp(item2)) 
 
-predChangeFeatureExp(pl,ck2,item1,item2,items,s) : bool = 
-           (syntaxChangeFeatureExp(K(pl),ck2,item1,item2,items) AND
-            conditionsChangeFeatureExp(F(pl),item1,item2)       AND
+predChangeCKLine(pl,ck2,item1,item2,items,s) : bool = 
+           (syntaxChangeCKLine(K(pl),ck2,item1,item2,items) AND
+            conditionsChangeCKLine(F(pl),item1,item2)       AND
             s = <>(F(pl),AND_FORMULA(NOT_FORMULA(exp(item1)),NOT_FORMULA(exp(item2)))))
 
 % Lemma <Since the only difference between "K(pl)" and "ck2" is "item1" and "item2" and these items are discarded by s, the evaluation
 %        of K(pl) is the same as ck2.>
-changeFeatureExpSameEvalCK: LEMMA
+changeCKLineSameEvalCK: LEMMA
             FORALL(pl,ck2,item1,item2,items,s):
             (
-               (predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND 
+               (predChangeCKLine(pl,ck2,item1,item2,items,s) AND 
                (FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))))
                => FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
-% Theorem <Change feature expression template represents a strong partial refinement>
-changeFeatureExpStrongPartRef: THEOREM
+% Theorem <Change ck line template represents a strong partial refinement>
+changeCKLineStrongPartRef: THEOREM
             FORALL(pl,ck2,item1,item2,items,s):
             (
-              (predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND 
+              (predChangeCKLine(pl,ck2,item1,item2,items,s) AND 
               (FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))))
               => strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
-% Theorem <Change feature expression template represents a weak partial refinement>
-changeFeatureExpWeakPartRef: THEOREM
+% Theorem <Change ck line template represents a weak partial refinement>
+changeCKLineWeakPartRef: THEOREM
             FORALL(pl,ck2,item1,item2,items,m):
             (
-              (predChangeFeatureExp(pl,ck2,item1,item2,items,domain(m)) AND 
+              (predChangeCKLine(pl,ck2,item1,item2,items,domain(m)) AND 
               (FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) AND
                identity?(m))
               => weakPartialRefinement(pl,pl2,m)
