@@ -86,38 +86,37 @@ BEGIN
   
   filteredConfigurations: AXIOM FORALL s,fm,ck,anSet: subset?(s,<>(fm,ck,anSet)) => subset?(s,[||](fm))
 
+  falseExpMakesNoDiff: AXIOM
+    FORALL(fm,am,ck1,ck2,s):
+    (
+       FORALL c: s(c) => 
+                         ( 
+                            (FORALL item : diffIts(item) => NOT sat(getExp(item),c))
+                            => 
+                            (semantics(ck1)(am)(c) = semantics(ck2)(am)(c))
+                         )
+      
+    ) WHERE diffIts = symmetric_difference(items(ck1),items(ck2))
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHANGE CK LINE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  falseExpMakesNoDiff: AXIOM
-    FORALL(fm,am,ck1,ck2,s):
-    (
-      (
-       FORALL c: s(c) => (
-                            FORALL item : diffIts(item) => NOT sat(getExp(item),c)
-                         )
-      )
-      =>
-        FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
-    ) WHERE diffIts = symmetric_difference(items(ck1),items(ck2))
-
   syntaxChangeCKLine(ck1,ck2,item1,item2,its) : bool =
     items(ck1) = add(item1,its) AND                        
     items(ck2) = add(item2,its)  
 
-  changeCKLine_EqualCKeval: AXIOM
-     FORALL(fm,am,ck1,ck2,item1,item2,its,s):
-    (
-      (
-       wfCK(fm,am,ck1) AND
-       s = intersection(<>(fm,getExp(item1)),<>(fm,getExp(item2))) AND
-       syntaxChangeCKLine(ck1,ck2,item1,item2,its) 
-      )
-      =>
-        FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
-    )
+  %changeCKLine_EqualCKeval: AXIOM
+  %   FORALL(fm,am,ck1,ck2,item1,item2,its,s):
+  %  (
+  %    (
+  %     wfCK(fm,am,ck1) AND
+  %     s = intersection(<>(fm,getExp(item1)),<>(fm,getExp(item2))) AND
+  %     syntaxChangeCKLine(ck1,ck2,item1,item2,its) 
+  %    )
+  %    =>
+  %      FORALL c: s(c) => semantics(ck1)(am)(c) = semantics(ck2)(am)(c)
+  %  )
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% REPLACE FEATURE EXPRESSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,6 +259,12 @@ BEGIN
   syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
       am1=ow((an,a1),pairs) AND
       am2=ow((an,a2),pairs)
+
+  %filteredAssetsSameEvalCK: AXIOM
+  %   FORALL (fm,am,ck,am2) :
+  %   (   
+  %     FORALL c: s(c) => semantics(ck)(am)(c) = semantics(ck)(am2)(c)
+  %   ) WHERE pairs = symmetric_difference(am,am2) , s = <>(fm,ck,dom(pairs))
 
   sameEvalPairs: AXIOM 
     FORALL(fm,am,ck,am2,pairs,a1,a2,an,s):

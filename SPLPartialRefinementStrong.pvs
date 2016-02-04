@@ -87,6 +87,12 @@ BEGIN
                               (strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,s)) => 
                              (EXISTS pl2: 
                                       strongPartialRefinement(pl1,pl2,s) AND strongerPLrefinement(pl2,pl4))
+
+   commutableDiagram2: THEOREM FORALL pl1,pl2,
+                                      pl4,s:
+                              (strongPartialRefinement(pl1,pl2,s) AND strongerPLrefinement(pl2,pl4)) => 
+                             (EXISTS pl3: 
+                                      strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,s))
    
 
    %--------------------------------------------------TRANSITIVITY MIXING DEFS-------------------------------------------------

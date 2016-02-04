@@ -420,6 +420,85 @@
     (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil))
    shostak))
+ (commutableDiagram2 0
+  (commutableDiagram2-1 nil 3663579766
+   ("" (skolem 1 (pl1 pl2 pl4 s))
+    (("" (bddsimp)
+      (("" (inst 1 pl1)
+        (("" (bddsimp)
+          (("1" (lemma totalImpliesPartial)
+            (("1" (inst -1 pl2 pl4 s)
+              (("1" (bddsimp)
+                (("1" (lemma strongPartRefTransitive)
+                  (("1" (inst -1 pl1 pl2 pl4 s s)
+                    (("1" (bddsimp)
+                      (("1"
+                        (lemma
+                         "sets_lemmas[Conf].intersection_idempotent")
+                        (("1" (inst -1 s)
+                          (("1" (replace -1 -4)
+                            (("1" (propax) nil nil)) nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil)
+               ("2" (expand strongPartialRefinement)
+                (("2" (bddsimp) nil nil)) nil))
+              nil))
+            nil)
+           ("2" (lemma strongerPLref)
+            (("2" (expand preorder?)
+              (("2" (flatten)
+                (("2" (expand reflexive?) (("2" (inst -1 pl1) nil nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((subset_is_partial_order name-judgement "(partial_order?[set[T]])"
+     sets_lemmas nil)
+    (pl2 skolem-const-decl
+     "PL[Conf, FM, Asset, AssetName, CK, {||}, [||]]"
+     SPLPartialRefinementStrong nil)
+    (s skolem-const-decl "set[Conf]" SPLPartialRefinementStrong nil)
+    (subset? const-decl "bool" sets nil)
+    (strongPartRefTransitive formula-decl nil
+     SPLPartialRefinementStrong nil)
+    (intersection_idempotent formula-decl nil sets_lemmas nil)
+    (strongPartialRefinement const-decl "bool"
+     SPLPartialRefinementStrong nil)
+    (totalImpliesPartial formula-decl nil SPLPartialRefinementStrong
+     nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (strongerPLref formula-decl nil SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    ([\|\|] formal-const-decl
+     "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
+     SPLPartialRefinementStrong nil)
+    (mapping type-eq-decl nil maps nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+     SPLPartialRefinementStrong nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
+    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil))
+   shostak))
  (partPlusTotalStrongerImpliesPart 0
   (partPlusTotalStrongerImpliesPart-1 nil 3661521775
    ("" (skolem 1 (pl1 pl2 pl3 s))
@@ -958,11 +1037,7 @@
     (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
     (FM formal-type-decl nil SPLPartialRefinementStrong nil)
     (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
-    (totalRefIFFExistsFun formula-decl nil SPLrefinement nil)
-    (pl2 skolem-const-decl
-     "PL[Conf, FM, Asset, AssetName, CK, {||}, [||]]"
-     SPLPartialRefinementStrong nil)
-    (s skolem-const-decl "set[Conf]" SPLPartialRefinementStrong nil)
+    (totalRefIFFExistsFun formula-decl nil SPLrefinement nil) nil nil
     (restrict const-decl "R" restrict nil)
     (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
