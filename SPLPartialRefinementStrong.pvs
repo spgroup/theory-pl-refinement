@@ -42,8 +42,10 @@ BEGIN
    %--------------------------------------------------PREORDER-----------------------------------------------
 
    % Theorem <strong partial refinement is reflexive>
-    strongPartRefReflexive: THEOREM FORALL pl,s: strongPartialRefinement(pl,pl,s)
-   % Theorem <strong partial refinement is transitive>
+    strongPartRefReflexive: THEOREM FORALL pl,s: subset?(s,{||}(F(pl))) => strongPartialRefinement(pl,pl,s)
+   
+
+    % Theorem <strong partial refinement is transitive>
     strongPartRefTransitive: THEOREM (FORALL pl1,pl2,pl3,s,t: 
                                               (
                                                  strongPartialRefinement(pl1,pl2,s) 
@@ -55,10 +57,19 @@ BEGIN
 
     %-------------------------------------------------------COMPOSITIONALITY---------------------------------------------------
     % Theorem <FM Equivalence compositionality - weak definition>
+    %fmCompStrongDef: THEOREM
+    %FORALL(pl,fm1,fm2,s,t):
+    %( 
+    %  subset?(s,t) AND fmPartialRefinement(fm1,fm2,t) AND wfPL(pl2)
+    % => 
+    %    strongPartialRefinement(pl,pl2,s)  
+    %)
+    %WHERE fm1=F(pl),pl2=(# F := fm2, A := A(pl), K := K(pl) #) 
+
     fmCompStrongDef: THEOREM
-    FORALL(pl,fm1,fm2,s,t):
+    FORALL(pl,fm2,s):
     ( 
-      subset?(s,t) AND fmPartialRefinement(fm1,fm2,t) AND wfPL(pl2)
+      fmPartialRefinement(F(pl),fm2,s) AND wfPL(pl2)
      => 
         strongPartialRefinement(pl,pl2,s)  
     )
@@ -94,6 +105,10 @@ BEGIN
                              (EXISTS pl3: 
                                       strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,s))
    
+   commutableDiagramAlt: THEOREM FORALL pl1,pl4,(s:set[Conf] | subset?(s,{||}(F(pl1)))): 
+                               (EXISTS pl2: strongPartialRefinement(pl1,pl2,s) AND strongerPLrefinement(pl2,pl4)) <=>
+                               (EXISTS pl3: strongerPLrefinement(pl1,pl3) AND strongPartialRefinement(pl3,pl4,s))
+   
 
    %--------------------------------------------------TRANSITIVITY MIXING DEFS-------------------------------------------------
 
@@ -112,11 +127,15 @@ BEGIN
 
    totalPlusPartImpliesPartRef: THEOREM FORALL pl1,pl2,pl3,s: 
                                plRefinement(pl1,pl2) AND strongPartialRefinement(pl2,pl3,s) => 
-                               (EXISTS (t:set[Conf]) : partRefRel(pl1,pl3,t))            
+                               (EXISTS (t:set[Conf]) : partRefRel(pl1,pl3,t))
+
+   partRefExistsFunId: LEMMA FORALL pl1,pl2,s: strongPartialRefinement(pl1,pl2,s) => 
+                   (EXISTS (f:[(s) -> (s)])  :  (FORALL c : s(c) => ({||}(F(pl2))(f(c))) and (prod(pl1,c) |- prod(pl2,f(c)))))           
 
    partPlusTotalImpliesPartFun: THEOREM FORALL pl1,pl2,pl3,s: 
                                                  strongPartialRefinement(pl1,pl2,s) AND plRefinement(pl2,pl3) =>
-                                                         (EXISTS (f:[(s) -> ({||}(F(pl3)))]) : partRefFun(pl1,pl3,s,f))
+                                                         (EXISTS (f:[(s) -> ({||}(F(pl3)))]) : 
+                                                         (FORALL c : s(c) => ({||}(F(pl3))(f(c)) AND (prod(pl1,c) |- prod(pl3,f(c))))))
 
    %------ TOTAL FUN AND STRONG PARTIAL
    %partPlusTotalFunImpliesPartFun: THEOREM FORALL pl1,pl2,pl3,s,(f: [(s) -> ({||}(F(pl3)))]):
