@@ -79,6 +79,18 @@ IMPORTING CK[Configuration,
       strongPartialRefinement(pl,pl2,s)
     ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
+    removeCKLinesStrongPartialRef: THEOREM
+     FORALL(pl,ck2,its,s):
+    (
+      (
+      wfCK(F(pl),A(pl),K(pl)) AND
+      s = <>(F(pl),{exp | EXISTS item: its(item) AND exp = getExp(item)}) AND
+      items(K(pl)) = union(its,items(ck2))
+      )
+      =>
+      strongPartialRefinement(pl,pl2,s)
+    ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------CHANGE ASSET--------------------------------------------
    % --------------------------------------------------------------------------------------------------------  
