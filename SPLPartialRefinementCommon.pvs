@@ -6,9 +6,6 @@ SPLPartialRefinementCommon[Conf: TYPE,
                      CK: TYPE,
                      (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
 BEGIN
-
-    IMPORTING maps
-    AM:TYPE = maps[AssetName,Asset].mapping
      
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------VARIABLES-----------------------------------------------
@@ -16,12 +13,13 @@ BEGIN
     c: VAR Conf
     s: VAR set[Conf]
     fm1,fm2: VAR FM
-    am,am1,am2: VAR AM
     an: VAR AssetName
     a1,a2: VAR Asset
     anSet: VAR set[AssetName]
+    ck1,ck2: VAR CK
 
-    IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK,{||},[||]]    
+    IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK,{||},[||]]  
+    am,am1,am2: VAR AM  
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------FM PARTIAL REFINEMENT-----------------------------------
@@ -34,9 +32,16 @@ BEGIN
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------AM PARTIAL REFINEMENT-----------------------------------
    % -------------------------------------------------------------------------------------------------------- 
-    amPartialRefinement(am1,am2:AM,anSet:{aNames:set[AssetName] | subset?(aNames,dom(am1)) AND subset?(aNames,dom(am2))}) : bool =
+    amPartialRef(am1,am2,anSet) : bool =
           (FORALL an: (anSet)(an) =>
          EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2))   
 
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------CK WEAKER EQUIVALENCE-----------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+    ckWeakerEq(ck1,ck2,s) : bool = 
+          FORALL am,c : s(c) => ([|ck1|](am))(c) = ([|ck2|](am))(c)   
+
+    amPartRefFilter: LEMMA FORALL am1,am2,anSet : amPartialRef(am1,am2,anSet) => |>(filter(anSet,am1),filter(anSet,am2)) 
 
 END SPLPartialRefinementCommon

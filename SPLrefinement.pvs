@@ -46,7 +46,7 @@ BEGIN
 %  Asset: TYPE
 %  AssetName: TYPE
 
-  a1,a2: VAR Asset
+  a,a1,a2: VAR Asset
   an,an1,an2: VAR AssetName
   aSet, S1,S2: VAR set[Asset]
   anSet: VAR finite_sets[AssetName].finite_set
@@ -66,8 +66,7 @@ BEGIN
   asRefCompositional: AXIOM
     FORALL(S1,S2,aSet):
       ( S1 |- S2 ) and wfProduct( union(S1,aSet) ) =>
-        wfProduct( union(S2,aSet) ) and ((union(S1,aSet)) |- (union(S2,aSet)))
-
+        wfProduct( union(S2,aSet) ) and ((union(S1,aSet)) |- (union(S2,aSet))) 
 
   IMPORTING maps
   AM: TYPE = maps[AssetName,Asset].mapping
@@ -96,8 +95,11 @@ BEGIN
  %%%%%%%%%%%%%%%%%%%%%% CONFIGURATION KNOWLEDGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+  ck,ck1,ck2,ck3: VAR CK
+
 %  CK: TYPE
-%  [||] : [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
+  %eval(ck,c) : set[AssetName] 
+  %[||](ck)(am)(c) : finite_sets[Asset].finite_set = map(am,eval(ck,c)) 
 
   % Axiom over ck evaluation 
   amRef: AXIOM
@@ -106,8 +108,6 @@ BEGIN
       	 wfProduct(([| K |](am1))(c)) 
       => wfProduct(([| K |](am2))(c)) AND
       	    (([| K |](am1))(c) |- ([| K |](am2))(c) ) 
-  
-  ck,ck1,ck2,ck3: VAR CK
 
   % Definition <CK equivalence>
   equivalentCKs(ck1,ck2): bool =
@@ -152,6 +152,8 @@ BEGIN
   PL : TYPE = (wfPL)
   pl,pl1,pl2: VAR PL
 
+   % ----Filter configurations whose products contain assets which were activated by any asset of anSet
+  ^^(fm,am,ck,anSet) : set[Conf] = {c:Conf | ({||}(fm))(c) AND subset?(unmap(am,[|ck|](am)(c)),anSet)}  
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %%%%%%%%%%%%%%%%% PL REFINEMENT DEFINITION AND PROPERTIES %%%%%%%%%%%%%%%%%%%%
