@@ -4,7 +4,7 @@ SPLrefinement[Conf:TYPE,
               AssetName:TYPE,
               CK:TYPE,
               {||}:[FM -> set[Conf]],
-              (IMPORTING maps[AssetName,Asset])[||]:[CK->[mapping->[Conf->finite_sets[Asset].finite_set]]]]: THEORY
+              (IMPORTING maps[AssetName,Asset])eval:[CK->[mapping->[Conf->mapping]]]]: THEORY
 BEGIN
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -100,7 +100,8 @@ BEGIN
 %  CK: TYPE
   %eval(ck,c) : set[AssetName] 
   %[||](ck)(am)(c) : finite_sets[Asset].finite_set = map(am,eval(ck,c)) 
-
+  [||](ck)(am)(c) : finite_sets[Asset].finite_set = image((eval)(ck)(am)(c))
+  
   % Axiom over ck evaluation 
   amRef: AXIOM
     FORALL(am1,am2): |>(am1,am2) =>
@@ -153,7 +154,7 @@ BEGIN
   pl,pl1,pl2: VAR PL
 
    % ----Filter configurations whose products contain assets which were activated by any asset of anSet
-  ^^(fm,am,ck,anSet) : set[Conf] = {c:Conf | ({||}(fm))(c) AND subset?(unmap(am,[|ck|](am)(c)),anSet)}  
+  ^^(fm,am,ck,anSet) : set[Conf] = {c:Conf | ({||}(fm))(c) AND subset?(dom(eval(ck)(am)(c)),anSet)} 
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %%%%%%%%%%%%%%%%% PL REFINEMENT DEFINITION AND PROPERTIES %%%%%%%%%%%%%%%%%%%%

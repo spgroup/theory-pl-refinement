@@ -4,7 +4,7 @@ SPLPartialRefinementCommon[Conf: TYPE,
                      Asset: TYPE,
                      AssetName: TYPE,
                      CK: TYPE,
-                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
+                     (IMPORTING maps[AssetName,Asset]) eval: [CK -> [mapping -> [Conf -> mapping]]] ]: THEORY
 BEGIN
      
    % --------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ BEGIN
     anSet: VAR set[AssetName]
     ck1,ck2: VAR CK
 
-    IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK,{||},[||]]  
+    IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK,{||},eval]  
     am,am1,am2: VAR AM  
 
    % --------------------------------------------------------------------------------------------------------
@@ -33,15 +33,15 @@ BEGIN
    % ------------------------------------------------AM PARTIAL REFINEMENT-----------------------------------
    % -------------------------------------------------------------------------------------------------------- 
     amPartialRef(am1,am2,anSet) : bool =
-          (FORALL an: (anSet)(an) =>
-         EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2))   
+          |>(filter(anSet,am1),filter(anSet,am2))
+     %     (FORALL an: (anSet)(an) =>
+     %    EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2))  
+            
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------CK WEAKER EQUIVALENCE-----------------------------------
    % -------------------------------------------------------------------------------------------------------- 
     ckWeakerEq(ck1,ck2,s) : bool = 
           FORALL am,c : s(c) => ([|ck1|](am))(c) = ([|ck2|](am))(c)   
-
-    amPartRefFilter: LEMMA FORALL am1,am2,anSet : amPartialRef(am1,am2,anSet) => |>(filter(anSet,am1),filter(anSet,am2)) 
 
 END SPLPartialRefinementCommon
