@@ -34,7 +34,7 @@ IMPORTING CK[Configuration,
    fm: VAR FMi
    am,am2,pairs: VAR AM
    a1,a2: VAR Asset
-   an: VAR AssetName
+   an,an2: VAR AssetName
    ck1,ck2: VAR CK
    item,item1,item2: VAR Item
    its: VAR set[Item]
@@ -42,7 +42,7 @@ IMPORTING CK[Configuration,
    s: VAR set[Configuration]
    exp: VAR FeatureExpression
 
-   IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,semantics]
+   IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,evaluate]
    
    pl,pl2: VAR PL
    
@@ -95,16 +95,26 @@ IMPORTING CK[Configuration,
    % ------------------------------------------------CHANGE ASSET--------------------------------------------
    % --------------------------------------------------------------------------------------------------------  
 
+   symmDiffChangeAsset: LEMMA
+    FORALL(am,am2,pairs,a1,a2,an):
+    (
+      (
+        syntaxChangeAsset(am,am2,pairs,a1,a2,an) 
+      )
+      =>
+       FORALL an2: (dom(symmetric_difference(am,am2)))(an2) => an2 = an 
+    )
+
    changeAssetStrongPartialRef: THEOREM
     FORALL(pl,am2,pairs,a1,a2,an,s):
     (
       (
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(F(pl),K(pl),singleton(an))
+         s = <>(F(pl),A(pl),K(pl),singleton(an))
       )
       =>
         strongPartialRefinement(pl,pl2,s)
-    ) WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+    ) WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #) 
 
    % --------------------------------------------------------------------------------------------------------
    % ------------------------------------------------ADD/REMOVE----------------------------------------------
@@ -114,7 +124,7 @@ IMPORTING CK[Configuration,
     FORALL (pl,am2,ck2,s,its,pairs):
      (
        (
-         s = <>(F(pl2),K(pl2),domain(pairs)) AND
+         s = <>(F(pl2),am2,K(pl2),domain(pairs)) AND
          syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
          conditionsAddAssets(pairs,its) AND
          FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
@@ -126,7 +136,7 @@ IMPORTING CK[Configuration,
     FORALL (pl,am2,ck2,s,its,pairs):
      (
        (
-         s = <>(F(pl),K(pl),domain(pairs)) AND
+         s = <>(F(pl),A(pl),K(pl),domain(pairs)) AND
          syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
          conditionsAddAssets(pairs,its) AND
          FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
