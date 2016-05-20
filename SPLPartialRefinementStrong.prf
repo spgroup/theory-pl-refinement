@@ -1751,5 +1751,754 @@
     (NOT const-decl "[bool -> bool]" booleans nil)
     (partRefExistsFunId formula-decl nil SPLPartialRefinementStrong
      nil))
-   shostak)))
+   shostak))
+ (changeAssetLeadsToAMRef 0
+  (changeAssetLeadsToAMRef-1 nil 3672486982
+   ("" (skolem 1 (am1 am2 pairs a1 a2 an))
+    (("" (bddsimp)
+      (("" (expand amPartialRef)
+        (("" (expand syntaxChangeAsset)
+          (("" (flatten)
+            (("" (expand ow)
+              (("" (expand "|>")
+                (("" (bddsimp)
+                  (("1" (skolem 1 an2)
+                    (("1" (bddsimp)
+                      (("1" (decompose-equality)
+                        (("1" (decompose-equality)
+                          (("1" (expand dom)
+                            (("1" (skolem -3 a3)
+                              (("1"
+                                (expand filter)
+                                (("1"
+                                  (flatten)
+                                  (("1"
+                                    (skolem -4 a4)
+                                    (("1"
+                                      (inst -2 "(an2,a4)")
+                                      (("1"
+                                        (inst -1 "(an2,a4)")
+                                        (("1"
+                                          (inst 1 a4 a4)
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (use assetRefinement)
+                                              (("1"
+                                                (expand preorder?)
+                                                (("1"
+                                                  (flatten)
+                                                  (("1"
+                                                    (expand reflexive?)
+                                                    (("1"
+                                                      (inst
+                                                       -1
+                                                       "singleton[Asset](a4)")
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("2" (inst 1 a4) nil nil)
+                                             ("3"
+                                              (expand union)
+                                              (("3"
+                                                (expand member)
+                                                (("3"
+                                                  (expand singleton)
+                                                  (("3"
+                                                    (bddsimp)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("4"
+                                              (use assetRefinement)
+                                              (("4"
+                                                (expand preorder?)
+                                                (("4"
+                                                  (flatten)
+                                                  (("4"
+                                                    (expand reflexive?)
+                                                    (("4"
+                                                      (inst
+                                                       -1
+                                                       "singleton[Asset](a4)")
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("5" (inst 2 a4) nil nil)
+                                             ("6"
+                                              (expand union)
+                                              (("6"
+                                                (expand member)
+                                                (("6"
+                                                  (bddsimp)
+                                                  (("6"
+                                                    (expand singleton)
+                                                    (("6"
+                                                      (bddsimp)
+                                                      (("6"
+                                                        (expand rm)
+                                                        (("6"
+                                                          (bddsimp)
+                                                          (("6"
+                                                            (expand
+                                                             remove)
+                                                            (("6"
+                                                              (bddsimp)
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (propax)
+                                                                  nil
+                                                                  nil))
+                                                                nil)
+                                                               ("2"
+                                                                (expand
+                                                                 member)
+                                                                (("2"
+                                                                  (propax)
+                                                                  nil
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("7"
+                                              (expand union)
+                                              (("7"
+                                                (expand member)
+                                                (("7"
+                                                  (expand singleton)
+                                                  (("7"
+                                                    (bddsimp)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("8"
+                                              (expand union)
+                                              (("8"
+                                                (expand member)
+                                                (("8"
+                                                  (expand singleton)
+                                                  (("8"
+                                                    (bddsimp)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("9"
+                                              (expand rm)
+                                              (("9"
+                                                (bddsimp)
+                                                (("1"
+                                                  (expand dom)
+                                                  (("1"
+                                                    (propax)
+                                                    nil
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (expand union)
+                                                  (("2"
+                                                    (expand member)
+                                                    (("2"
+                                                      (expand
+                                                       singleton)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil)
+                                             ("10"
+                                              (expand rm)
+                                              (("10"
+                                                (expand union)
+                                                (("10"
+                                                  (expand member)
+                                                  (("10"
+                                                    (expand singleton)
+                                                    (("10"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (expand dom)
+                                                        (("1"
+                                                          (propax)
+                                                          nil
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (expand dom)
+                                                        (("2"
+                                                          (propax)
+                                                          nil
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (expand dom)
+                    (("2" (decompose-equality)
+                      (("2" (decompose-equality)
+                        (("2" (decompose-equality)
+                          (("1" (bddsimp)
+                            (("1" (skolem -1 a3)
+                              (("1"
+                                (expand filter)
+                                (("1"
+                                  (bddsimp)
+                                  (("1"
+                                    (skolem -2 a4)
+                                    (("1"
+                                      (inst 1 a4)
+                                      (("1"
+                                        (inst -3 "(x!1,a4)")
+                                        (("1"
+                                          (bddsimp)
+                                          (("1" (inst 1 a4) nil nil)
+                                           ("2" (inst 1 a4) nil nil)
+                                           ("3"
+                                            (expand union)
+                                            (("3"
+                                              (expand member)
+                                              (("3"
+                                                (expand singleton)
+                                                (("3"
+                                                  (bddsimp)
+                                                  nil
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("4"
+                                            (expand union)
+                                            (("4"
+                                              (expand member)
+                                              (("4"
+                                                (expand singleton)
+                                                (("4"
+                                                  (bddsimp)
+                                                  (("1"
+                                                    (expand rm)
+                                                    (("1"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (expand remove)
+                                                        (("1"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (expand
+                                                             member)
+                                                            (("1"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil)
+                                                           ("2"
+                                                            (expand
+                                                             member)
+                                                            (("2"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil)
+                                                   ("2"
+                                                    (expand rm)
+                                                    (("2"
+                                                      (bddsimp)
+                                                      (("2"
+                                                        (expand remove)
+                                                        (("2"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (expand
+                                                             member)
+                                                            (("1"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil)
+                                                           ("2"
+                                                            (expand
+                                                             member)
+                                                            (("2"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil)
+                             ("2" (skolem -1 a3)
+                              (("2"
+                                (expand filter)
+                                (("2"
+                                  (bddsimp)
+                                  (("2"
+                                    (skolem -2 a4)
+                                    (("2"
+                                      (inst -4 "(x!1,a4)")
+                                      (("2"
+                                        (inst 1 a4)
+                                        (("2"
+                                          (expand union)
+                                          (("2"
+                                            (expand singleton)
+                                            (("2"
+                                              (expand member)
+                                              (("2"
+                                                (expand rm)
+                                                (("2"
+                                                  (expand remove)
+                                                  (("2"
+                                                    (expand member)
+                                                    (("2"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (inst 1 a4)
+                                                        (("1"
+                                                          (bddsimp)
+                                                          nil
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (inst 1 a4)
+                                                        (("2"
+                                                          (bddsimp)
+                                                          nil
+                                                          nil))
+                                                        nil)
+                                                       ("3"
+                                                        (inst 1 a4)
+                                                        (("3"
+                                                          (bddsimp)
+                                                          nil
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil)
+                           ("2" (skolem 1 (name asset))
+                            (("2" (typepred pairs)
+                              (("2"
+                                (lemma
+                                 finite_sets[AssetName].finite_subset)
+                                (("2"
+                                  (inst
+                                   -1
+                                   "domain(pairs)"
+                                   "{l: AssetName | EXISTS (r: Asset): rm[AssetName, Asset](an, pairs)(l, r)}")
+                                  (("2"
+                                    (bddsimp)
+                                    (("2"
+                                      (expand subset?)
+                                      (("2"
+                                        (skolem 1 an3)
+                                        (("2"
+                                          (expand member)
+                                          (("2"
+                                            (bddsimp)
+                                            (("2"
+                                              (skolem -1 a3)
+                                              (("2"
+                                                (expand domain)
+                                                (("2"
+                                                  (inst 1 a3)
+                                                  (("2"
+                                                    (expand rm)
+                                                    (("2"
+                                                      (bddsimp)
+                                                      (("2"
+                                                        (expand remove)
+                                                        (("2"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (expand
+                                                             member)
+                                                            (("1"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil)
+                                                           ("2"
+                                                            (expand
+                                                             member)
+                                                            (("2"
+                                                              (propax)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((syntaxChangeAsset const-decl "bool" SPLPartialRefinementStrong
+     nil)
+    (ow const-decl "mapping" maps nil)
+    (remove const-decl "set" sets nil)
+    (member const-decl "bool" sets nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (reflexive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil)
+    (filter const-decl "mapping" maps nil)
+    (rm const-decl "mapping" maps nil)
+    (singleton const-decl "(singleton?)" sets nil)
+    (singleton? const-decl "bool" sets nil)
+    (union const-decl "set" sets nil)
+    (dom const-decl "set[S]" maps nil)
+    (IF const-decl "[boolean, T, T -> T]" if_def nil)
+    (non_empty_finite_set type-eq-decl nil finite_sets nil)
+    (empty? const-decl "bool" sets nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (eval formal-const-decl "[CK -> [mapping -> [Conf -> mapping]]]"
+          SPLPartialRefinementStrong nil)
+    (mapping type-eq-decl nil maps nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]"
+     SPLPartialRefinementStrong nil)
+    (CK formal-type-decl nil SPLPartialRefinementStrong nil)
+    (FM formal-type-decl nil SPLPartialRefinementStrong nil)
+    (Conf formal-type-decl nil SPLPartialRefinementStrong nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset formal-type-decl nil SPLPartialRefinementStrong nil)
+    (AssetName formal-type-decl nil SPLPartialRefinementStrong nil) nil
+    nil (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (subset? const-decl "bool" sets nil)
+    (finite_subset formula-decl nil finite_sets nil)
+    (\|> const-decl "bool" SPLrefinement nil)
+    (amPartialRef const-decl "bool" SPLPartialRefinementCommon nil))
+   shostak))
+ (changeAssetAMRef 0
+  (changeAssetAMRef-1 nil 3672528344
+   ("" (skolem 1 (am1 am2 pairs a1 a2 an))
+    (("" (bddsimp)
+      (("" (expand amPartialRef)
+        (("" (expand syntaxChangeAsset)
+          (("" (flatten)
+            (("" (expand filter)
+              (("" (expand "|>")
+                (("" (bddsimp)
+                  (("1" (skolem 1 an2)
+                    (("1" (expand ow)
+                      (("1" (bddsimp)
+                        (("1" (expand dom)
+                          (("1" (skolem -3 a3)
+                            (("1" (flatten)
+                              (("1"
+                                (skolem -4 a4)
+                                (("1"
+                                  (decompose-equality)
+                                  (("1"
+                                    (decompose-equality)
+                                    (("1"
+                                      (inst -1 "(an2,a4)")
+                                      (("1"
+                                        (inst -2 "(an2,a4)")
+                                        (("1"
+                                          (bddsimp)
+                                          (("1"
+                                            (expand union)
+                                            (("1"
+                                              (expand member)
+                                              (("1"
+                                                (expand singleton)
+                                                (("1"
+                                                  (bddsimp)
+                                                  (("1"
+                                                    (inst 1 a4 a4)
+                                                    (("1"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (use
+                                                         assetRefinement)
+                                                        (("1"
+                                                          (expand
+                                                           preorder?)
+                                                          (("1"
+                                                            (flatten)
+                                                            (("1"
+                                                              (expand
+                                                               reflexive?)
+                                                              (("1"
+                                                                (inst
+                                                                 -1
+                                                                 "({y: Asset | y = a4})")
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (inst 1 a4)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil)
+                                                   ("2"
+                                                    (inst 1 a4 a4)
+                                                    (("2"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (use
+                                                         assetRefinement)
+                                                        (("1"
+                                                          (expand
+                                                           preorder?)
+                                                          (("1"
+                                                            (flatten)
+                                                            (("1"
+                                                              (expand
+                                                               reflexive?)
+                                                              (("1"
+                                                                (inst
+                                                                 -1
+                                                                 "({y: Asset | y = a4})")
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (inst 1 a4)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("2"
+                                            (expand union)
+                                            (("2"
+                                              (expand singleton)
+                                              (("2"
+                                                (expand member)
+                                                (("2"
+                                                  (bddsimp)
+                                                  (("2"
+                                                    (expand rm)
+                                                    (("2"
+                                                      (bddsimp)
+                                                      (("2"
+                                                        (expand remove)
+                                                        (("2"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (postpone)
+                                                            nil
+                                                            nil)
+                                                           ("2"
+                                                            (postpone)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("3" (postpone) nil nil)
+                                           ("4" (postpone) nil nil)
+                                           ("5" (postpone) nil nil)
+                                           ("6" (postpone) nil nil)
+                                           ("7" (postpone) nil nil)
+                                           ("8" (postpone) nil nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (postpone) nil nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak))
+ (changeAssetPartialRefStrong_TCC1 0
+  (changeAssetPartialRefStrong_TCC1-1 nil 3672475297
+   ("" (subtype-tcc) nil nil) nil nil))
+ (changeAssetPartialRefStrong 0
+  (changeAssetPartialRefStrong-1 nil 3672475298
+   ("" (lemma changeAssetLeadsToAMRef)
+    (("" (skolem 1 (pl am2 pairs a1 a2 an s))
+      (("" (inst -1 "A(pl)" am2 pairs a1 a2 an)
+        (("" (expand strongPartialRefinement)
+          (("" (bddsimp)
+            (("1" (expand amPartialRef)
+              (("1" (lemma amRef)
+                (("1" (skolem 1 c)
+                  (("1" (bddsimp)
+                    (("1" (expand prod)
+                      (("1"
+                        (inst -1 "filter(dom(rm(an, pairs)), A(pl))"
+                         "filter(dom(rm(an, pairs)), am2)")
+                        (("1" (bddsimp)
+                          (("1" (inst -2 "K(pl)" c)
+                            (("1" (bddsimp)
+                              (("1"
+                                (lemma unusedAssets)
+                                (("1"
+                                  (copy -1)
+                                  (("1"
+                                    (inst
+                                     -1
+                                     "A(pl)"
+                                     "K(pl)"
+                                     "dom(rm(an, pairs))"
+                                     c)
+                                    (("1"
+                                      (inst
+                                       -2
+                                       "am2"
+                                       "K(pl)"
+                                       "dom(rm(an, pairs))"
+                                       c)
+                                      (("1"
+                                        (bddsimp)
+                                        (("1"
+                                          (replace -1 1)
+                                          (("1"
+                                            (replace -2 1)
+                                            (("1" (propax) nil nil))
+                                            nil))
+                                          nil)
+                                         ("2"
+                                          (lemma evalPreservesDomain)
+                                          (("2"
+                                            (inst -1 "K(pl)" "am2" c)
+                                            (("2" (postpone) nil nil))
+                                            nil))
+                                          nil)
+                                         ("3" (postpone) nil nil)
+                                         ("4" (postpone) nil nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2" (postpone) nil nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("2" (postpone) nil nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak)))
 

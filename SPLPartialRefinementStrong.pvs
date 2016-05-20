@@ -22,7 +22,7 @@ BEGIN
     pair: VAR [AssetName,Asset]
 
     IMPORTING SPLPartialRefinementCommon[Conf,FM,{||},Asset,AssetName,CK,eval]
-    am,am2: VAR AM
+    am,am1,am2,pairs: VAR AM
     pl, pl1, pl2, pl3, pl4: VAR PL
 
    % --------------------------------------------------------------------------------------------------------
@@ -124,9 +124,6 @@ BEGIN
      )
      WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=^^(F(pl),A(pl),K(pl),anSet)
 
-   %--------ALTERNATIVE-------%
-    
-
    %--------------------------------------------------COMMUTABLE DIAGRAM------------------------------------------------------
    partCaseStrongerPLRef: THEOREM FORALL pl1,pl2,s: s = {||}(F(pl1)) => (strongPartialRefinement(pl1,pl2,s) <=> strongerPLrefinement(pl1,pl2))
 
@@ -204,6 +201,8 @@ BEGIN
    %                                 partRefFun(pl1,pl3,
    %                                          {c:Conf | {||}(F(pl1))(c) AND s(f(c)) AND (prod(pl1,c) |- prod(pl2,f(c)))},
    %                                           f)
+     
 
+   
 
 END SPLPartialRefinementStrong

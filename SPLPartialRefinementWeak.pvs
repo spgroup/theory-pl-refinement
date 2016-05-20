@@ -4,7 +4,7 @@ SPLPartialRefinementWeak[Conf: TYPE,
                      Asset: TYPE,
                      AssetName: TYPE,
                      CK: TYPE,
-                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
+                     (IMPORTING maps[AssetName,Asset]) eval: [CK -> [mapping -> [Conf -> mapping]]] ]: THEORY
 BEGIN
 
 % Partial SPL Refinement
@@ -20,7 +20,7 @@ BEGIN
 
     IMPORTING maps_identity[Conf]
     IMPORTING maps_composite[Conf,Conf,Conf]
-    IMPORTING SPLPartialRefinementCommon[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+    IMPORTING SPLPartialRefinementCommon[Conf,FM, {||}, Asset, AssetName, CK,eval]
     
     pl, pl1, pl2, pl3: VAR PL
 
