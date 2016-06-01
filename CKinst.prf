@@ -1,43 +1,54 @@
 (CKinst
  (IMP_CK_falseExpMakesNoDiff_TCC1 0
   (IMP_CK_falseExpMakesNoDiff_TCC1-2 nil 3662907973
-   ("" (skolem 1 (fm am ck1 ck2 s))
-    (("" (expand semantics)
-      (("" (skolem 1 c)
-        (("" (bddsimp)
+   ("" (skolem 1 (am ck1 ck2 s))
+    (("" (skolem 1 c)
+      (("" (bddsimp)
+        (("" (expand semantics)
           (("" (expand map)
-            (("" (decompose-equality 1)
+            (("" (decompose-equality)
               (("" (bddsimp)
                 (("1" (skolem -1 an)
                   (("1" (inst 1 an)
                     (("1" (bddsimp)
                       (("1" (expand eval)
-                        (("1" (expand symmetric_difference)
-                          (("1" (expand union)
-                            (("1" (expand assetsCK)
+                        (("1" (expand evalCK)
+                          (("1" (expand assetsCK)
+                            (("1" (skolem -1 i)
                               (("1"
-                                (expand evalCK)
+                                (inst 1 i)
                                 (("1"
-                                  (expand member)
+                                  (bddsimp)
                                   (("1"
-                                    (expand difference)
+                                    (inst -6 i)
                                     (("1"
-                                      (expand member)
-                                      (("1"
-                                        (expand items)
-                                        (("1"
-                                          (expand getExp)
-                                          (("1"
-                                            (skolem -1 i)
-                                            (("1"
-                                              (inst 1 i)
-                                              (("1"
-                                                (bddsimp)
-                                                (("1"
-                                                  (inst -6 i)
+                                      (bddsimp)
+                                      (("1" (grind) nil nil)
+                                       ("2"
+                                        (expand symmetric_difference)
+                                        (("2"
+                                          (expand union)
+                                          (("2"
+                                            (expand member)
+                                            (("2"
+                                              (expand difference)
+                                              (("2"
+                                                (expand member)
+                                                (("2"
+                                                  (bddsimp)
                                                   (("1"
-                                                    (bddsimp)
-                                                    nil
+                                                    (expand items)
+                                                    (("1"
+                                                      (propax)
+                                                      nil
+                                                      nil))
+                                                    nil)
+                                                   ("2"
+                                                    (expand items)
+                                                    (("2"
+                                                      (propax)
+                                                      nil
+                                                      nil))
                                                     nil))
                                                   nil))
                                                 nil))
@@ -64,10 +75,17 @@
                           (("2" (skolem -2 i)
                             (("2" (inst 1 i)
                               (("2"
-                                (bddsimp)
+                                (inst -4 i)
                                 (("2"
-                                  (expand evalCK)
-                                  (("2"
+                                  (bddsimp)
+                                  (("1"
+                                    (expand getExp)
+                                    (("1"
+                                      (expand evalCK)
+                                      (("1" (bddsimp) nil nil))
+                                      nil))
+                                    nil)
+                                   ("2"
                                     (expand symmetric_difference)
                                     (("2"
                                       (expand union)
@@ -79,14 +97,18 @@
                                             (expand items)
                                             (("2"
                                               (bddsimp)
-                                              (("2"
-                                                (expand getExp)
+                                              (("1"
+                                                (expand evalCK)
+                                                (("1"
+                                                  (bddsimp)
+                                                  nil
+                                                  nil))
+                                                nil)
+                                               ("2"
+                                                (expand evalCK)
                                                 (("2"
-                                                  (inst -6 i)
-                                                  (("2"
-                                                    (bddsimp)
-                                                    nil
-                                                    nil))
+                                                  (bddsimp)
+                                                  nil
                                                   nil))
                                                 nil))
                                               nil))
@@ -111,36 +133,36 @@
         nil))
       nil))
     nil)
-   ((map const-decl "finite_sets[T].finite_set" maps nil)
-    (union const-decl "set" sets nil)
-    (evalCK const-decl "finite_sets[Item].finite_set"
+   ((semantics const-decl "finite_sets[Asset].finite_set"
      ConfigurationKnowledge nil)
-    (difference const-decl "set" sets nil)
-    (items const-decl "set[Item]" ConfigurationKnowledge nil)
-    (getExp const-decl "Formula_" ConfigurationKnowledge nil)
-    (member const-decl "bool" sets nil)
-    (assetsCK const-decl "finite_sets[AssetName].finite_set"
-     ConfigurationKnowledge nil)
-    (symmetric_difference const-decl "set" sets nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (Name type-decl nil Name nil)
+    (Configuration type-eq-decl nil Name nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (Configuration type-eq-decl nil Name nil)
-    (Name type-decl nil Name nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (set type-eq-decl nil sets nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
-     ConfigurationKnowledge nil))
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (evalCK const-decl "finite_sets[Item].finite_set"
+     ConfigurationKnowledge nil)
+    (getExp const-decl "Formula_" ConfigurationKnowledge nil)
+    (union const-decl "set" sets nil)
+    (difference const-decl "set" sets nil)
+    (items const-decl "set[Item]" ConfigurationKnowledge nil)
+    (member const-decl "bool" sets nil)
+    (symmetric_difference const-decl "set" sets nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set"
+     ConfigurationKnowledge nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil))
    nil)
   (IMP_CK_falseExpMakesNoDiff_TCC1-1 nil 3662907492
    ("" (skolem 1 (fm am ck1 ck2 common diff s))
@@ -309,9 +331,6 @@
     (union const-decl "set" sets nil)
     (map const-decl "finite_sets[T].finite_set" maps nil))
    nil))
- (IMP_CK_changeCKLine_EqualCKeval_TCC1 0
-  (IMP_CK_changeCKLine_EqualCKeval_TCC1-1 nil 3662907492
-   ("" (mapped-axiom-tcc) nil nil) nil nil))
  (IMP_CK_replaceFeatureExp_EqualCKeval_TCC1 0
   (IMP_CK_replaceFeatureExp_EqualCKeval_TCC1-1 nil 3592823409
    ("" (skolem 1 (fm am ck1 ck2 it1 it2 its))
