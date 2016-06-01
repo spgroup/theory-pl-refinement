@@ -4,7 +4,7 @@ SPLPartialRefinementStrong[Conf: TYPE,
                      Asset: TYPE,
                      AssetName: TYPE,
                      CK: TYPE,
-                     (IMPORTING maps[AssetName,Asset]) eval: [CK -> [mapping -> [Conf -> mapping]]] ]: THEORY
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
 BEGIN
 
 % Partial SPL Strong Refinement 
@@ -13,7 +13,7 @@ BEGIN
    % ------------------------------------------------VARIABLES-----------------------------------------------
    % -------------------------------------------------------------------------------------------------------- 
     c,c2: VAR Conf
-    s,t: VAR set[Conf]
+    s,t,u: VAR set[Conf]
     fm,fm1,fm2: VAR FM
     ck,ck2: VAR CK
     a,a1,a2: VAR Asset
@@ -21,7 +21,7 @@ BEGIN
     anSet: VAR set[AssetName]
     pair: VAR [AssetName,Asset]
 
-    IMPORTING SPLPartialRefinementCommon[Conf,FM,{||},Asset,AssetName,CK,eval]
+    IMPORTING SPLPartialRefinementCommon[Conf,FM,{||},Asset,AssetName,CK,[||]]
     am,am1,am2,pairs: VAR AM
     pl, pl1, pl2, pl3, pl4: VAR PL
 
@@ -89,20 +89,6 @@ BEGIN
     )
     WHERE fm1=F(pl),pl2=(# F := fm2, A := A(pl), K := K(pl) #)
 
-    unusedAssets:  AXIOM FORALL am,ck,anSet,c: 
-                         subset?(dom(eval(ck)(am)(c)),anSet) 
-                         => 
-                         ([||](ck)(am)(c) = [||](ck)(filter(anSet,am))(c))  
-
-    amPartialRefStrongDef: THEOREM
-      FORALL (pl,am2,anSet):
-     (
-       amPartialRef(am1,am2,anSet)
-       =>
-       strongPartialRefinement(pl,pl2,s)
-     )
-     WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
-
     ckWeakerEqStrongDef: THEOREM
      FORALL (pl,ck2,s):
      (
@@ -111,18 +97,6 @@ BEGIN
        strongPartialRefinement(pl,pl2,s)
      )
      WHERE ck1=K(pl),pl2=(# F:= F(pl), A := A(pl), K := ck2 #)
-
-    fullCompStrongDef: THEOREM
-      FORALL (pl,fm2,am2,ck2,anSet,s):
-     (
-       fmPartialRefinement(F(pl),fm2,s) AND 
-       amPartialRef(A(pl),am2,anSet) AND 
-       ckWeakerEq(K(pl),ck2,s) AND
-       wfPL((# F:= F(pl), A:= A(pl), K:= ck2  #))
-       =>
-       strongPartialRefinement(pl,pl2,intersection(s,t))
-     )
-     WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=^^(F(pl),A(pl),K(pl),anSet)
 
    %--------------------------------------------------COMMUTABLE DIAGRAM------------------------------------------------------
    partCaseStrongerPLRef: THEOREM FORALL pl1,pl2,s: s = {||}(F(pl1)) => (strongPartialRefinement(pl1,pl2,s) <=> strongerPLrefinement(pl1,pl2))

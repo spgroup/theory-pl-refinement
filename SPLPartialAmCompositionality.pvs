@@ -1,0 +1,59 @@
+SPLPartialAMCompositionality[Conf:TYPE,
+                             FM:TYPE,
+                             {||}:[FM->set[Conf]],
+                             Asset:TYPE,
+                             AssetName:TYPE,
+                             CK:TYPE] : THEORY
+
+ BEGIN
+
+  IMPORTING maps
+  %depois tentar solucao melhor para isso
+  AM: TYPE = maps[AssetName,Asset].mapping
+
+  fm,fm2: VAR FM
+  c: VAR Conf
+  am,am2: VAR AM
+  ck,ck2: VAR CK
+  anSet: VAR finite_sets[AssetName].finite_set
+  s, t, u: VAR set[Conf]
+
+  eval(ck)(am)(c): AM
+
+  [||](ck)(am)(c): finite_sets[Asset].finite_set = image((eval)(ck)(am)(c))
+
+  IMPORTING SPLPartialRefinementStrong[Conf,FM,{||},Asset,AssetName,CK,[||]]
+
+  pl: VAR PL
+
+  ^^(fm,am,ck,anSet): set[Conf] = {c:Conf | ({||}(fm))(c) AND subset?(domain(eval(ck)(am)(c)),anSet)}
+
+  unusedAssets: AXIOM FORALL am,ck,anSet,c: 
+                         subset?(domain(eval(ck)(am)(c)),anSet) 
+                         => 
+                         ([||](ck)(am)(c) = [||](ck)(filter(anSet,am))(c))  
+
+  amPartialRefStrongDef: THEOREM
+      FORALL (pl,am2,anSet):
+     (
+       amPartialRef(am1,am2,anSet)
+       =>
+       strongPartialRefinement(pl,pl2,s)
+     )
+     WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
+
+
+  fullCompStrongDef: THEOREM
+      FORALL (pl,fm2,am2,ck2,anSet,s,u):
+     (
+       fmPartialRefinement(F(pl),fm2,s) AND 
+       amPartialRef(A(pl),am2,anSet) AND 
+       ckWeakerEq(K(pl),ck2,u) AND
+       subset?(u,{||}(F(pl))) AND subset?(u,{||}(F(pl2))) AND
+       wfPL((# F:= F(pl), A:= am2, K:= K(pl)  #))
+       =>
+       strongPartialRefinement(pl,pl2,intersection(u,intersection(s,t)))
+     )
+     WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
+
+END SPLPartialAMCompositionality

@@ -146,3 +146,52 @@ IMPORTING CK[Configuration,
 
 
 END SPLStrongPartRefTemplInt
+
+
+SPLStrongPartRefTemplIntForm [Configuration:TYPE, 
+   (IMPORTING Formula_) sat: [Formula_,Configuration -> boolean],
+   FMi:TYPE, 
+   Feature:TYPE, 
+   [||] : [FMi -> set[Configuration]],
+   wf: [FMi -> boolean],
+   wt: [FMi, Formula_ -> boolean],
+   genFeatureExpression: [Feature -> Formula_],
+   getFeatures: [FMi -> set[Feature]],
+   addMandatory: [FMi, FMi, Feature, Feature -> bool],
+   addOptional: [FMi, FMi, Feature, Feature -> bool]]: THEORY
+BEGIN
+
+IMPORTING CKIntFormula[Configuration,  
+   sat,
+   FMi, 
+   Feature, 
+   [||],
+   wf,
+   wt,
+   genFeatureExpression,
+   getFeatures,
+   addMandatory,
+   addOptional]
+
+  fm2: VAR FMi
+  p,f: VAR Feature
+  s: VAR set[Configuration]
+
+  IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,evaluate]
+ 
+  pl,pl2: VAR PL
+
+   transfOptMand: THEOREM
+     FORALL(pl,fm2,p,f,s):
+    (
+      (
+       s = <>((IMPLIES_FORMULA (genFeatureExpression(p),genFeatureExpression(f))),F(pl)) AND
+       syntaxTransfOptMand(F(pl),fm2,p,f) AND
+       conditionsTransfOptMand(F(pl),p,f)
+      )
+      =>
+        strongPartialRefinement(pl,pl2,s)
+    ) WHERE pl2 = (# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+
+END SPLStrongPartRefTemplIntForm

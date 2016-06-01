@@ -164,6 +164,6 @@ BEGIN
       wfCK(fm,am,ck)
     )
     =>
-      (FORALL exp: exps(ck)(exp) => NOT(names(exp)(opt)) )
+      (FORALL exp: exps(ck)(exp) => NOT(names(exp)(opt)) ) 
 
 End ConfigurationKnowledge
