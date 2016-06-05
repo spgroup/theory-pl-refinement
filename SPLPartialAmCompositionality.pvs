@@ -13,9 +13,11 @@ SPLPartialAMCompositionality[Conf:TYPE,
 
   fm,fm2: VAR FM
   c: VAR Conf
-  am,am2: VAR AM
+  am,am1,am2,pairs: VAR AM
   ck,ck2: VAR CK
   anSet: VAR finite_sets[AssetName].finite_set
+  a1,a2: VAR Asset
+  an: VAR AssetName
   s, t, u: VAR set[Conf]
 
   eval(ck)(am)(c): AM
@@ -27,11 +29,17 @@ SPLPartialAMCompositionality[Conf:TYPE,
   pl: VAR PL
 
   ^^(fm,am,ck,anSet): set[Conf] = {c:Conf | ({||}(fm))(c) AND subset?(domain(eval(ck)(am)(c)),anSet)}
+  <>(fm,am,ck,anSet) : set[Conf] = {c:Conf | ({||}(fm))(c) AND 
+                                          empty?(intersection(dom(eval(ck)(am)(c)),anSet))}
 
   unusedAssets: AXIOM FORALL am,ck,anSet,c: 
                          subset?(domain(eval(ck)(am)(c)),anSet) 
                          => 
-                         ([||](ck)(am)(c) = [||](ck)(filter(anSet,am))(c))  
+                         ([||](ck)(am)(c) = [||](ck)(filter(anSet,am))(c))
+
+  evalPreservesDom: AXIOM FORALL am,ck,c: subset?(domain(eval(ck)(am)(c)),domain(am))  
+
+  sameDomSameEval: AXIOM FORALL am,am2,ck,c: domain(am) = domain(am2) => domain(eval(ck)(am)(c)) = domain(eval(ck)(am2)(c))
 
   amPartialRefStrongDef: THEOREM
       FORALL (pl,am2,anSet):
@@ -41,7 +49,6 @@ SPLPartialAMCompositionality[Conf:TYPE,
        strongPartialRefinement(pl,pl2,s)
      )
      WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
-
 
   fullCompStrongDef: THEOREM
       FORALL (pl,fm2,am2,ck2,anSet,s,u):
@@ -55,5 +62,28 @@ SPLPartialAMCompositionality[Conf:TYPE,
        strongPartialRefinement(pl,pl2,intersection(u,intersection(s,t)))
      )
      WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Change asset template%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
+      am1=ow((an,a1),pairs) AND
+      am2=ow((an,a2),pairs)
+
+
+    changeAssetIsAmPartRef: LEMMA FORALL am1,am2,pairs,a1,a2,an: 
+                syntaxChangeAsset(am1,am2,pairs,a1,a2,an) => amPartialRef(am1, am2, domain(rm(an, pairs)))
+
+    changeAssetStrongPartialRef: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+         s = <>(F(pl),A(pl),K(pl),singleton(an))
+      )
+      =>
+        strongPartialRefinement(pl,pl2,s)
+    ) WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #) 
 
 END SPLPartialAMCompositionality
