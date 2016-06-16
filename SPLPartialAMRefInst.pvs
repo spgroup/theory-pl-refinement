@@ -11,6 +11,6 @@ BEGIN
   eval(ck)(am)(c) : AM = filter(eval(ck,c),am)
 
   IMPORTING SPLPartialAMCompositionality
-      [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,ConfigurationKnowledge.CK]{{eval:=eval}}
+      [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,ConfigurationKnowledge.CK]{{eval:=eval,wfCK:=wfCK}}
 
 END SPLPartialAMRefInst

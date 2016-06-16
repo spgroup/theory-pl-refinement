@@ -20,6 +20,8 @@ SPLPartialAMCompositionality[Conf:TYPE,
   an: VAR AssetName
   s, t, u: VAR set[Conf]
 
+  wfCK(fm,am,ck) : bool
+
   eval(ck)(am)(c): AM
 
   [||](ck)(am)(c): finite_sets[Asset].finite_set = image((eval)(ck)(am)(c))
@@ -39,16 +41,19 @@ SPLPartialAMCompositionality[Conf:TYPE,
 
   evalPreservesDom: AXIOM FORALL am,ck,c: subset?(domain(eval(ck)(am)(c)),domain(am))  
 
-  sameDomSameEval: AXIOM FORALL am,am2,ck,c: domain(am) = domain(am2) => domain(eval(ck)(am)(c)) = domain(eval(ck)(am2)(c))
+  ckValidNames: AXIOM FORALL fm,am,ck,am2: 
+                         (wfCK(fm,am,ck) AND wfCK(fm,am2,ck)) 
+                         =>  
+                         (FORALL c: ({||}(fm)(c)) => domain(eval(ck)(am)(c)) = domain(eval(ck)(am2)(c)))
 
   amPartialRefStrongDef: THEOREM
       FORALL (pl,am2,anSet):
      (
-       amPartialRef(am1,am2,anSet)
+       (amPartialRef(am1,am2,anSet) AND wfCK(F(pl),A(pl),K(pl)) AND wfCK(F(pl),am2,K(pl)))
        =>
        strongPartialRefinement(pl,pl2,s)
      )
-     WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
+     WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=^^(F(pl),A(pl),K(pl),anSet)
 
   fullCompStrongDef: THEOREM
       FORALL (pl,fm2,am2,ck2,anSet,s,u):
@@ -56,12 +61,14 @@ SPLPartialAMCompositionality[Conf:TYPE,
        fmPartialRefinement(F(pl),fm2,s) AND 
        amPartialRef(A(pl),am2,anSet) AND 
        ckWeakerEq(K(pl),ck2,u) AND
+       wfCK(F(pl),A(pl),K(pl)) AND
+       wfCK(F(pl),am2,K(pl)) AND
        subset?(u,{||}(F(pl))) AND subset?(u,{||}(F(pl2))) AND
        wfPL((# F:= F(pl), A:= am2, K:= K(pl)  #))
        =>
        strongPartialRefinement(pl,pl2,intersection(u,intersection(s,t)))
      )
-     WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
+     WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=^^(F(pl),A(pl),K(pl),anSet)
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Change asset template%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,6 +86,7 @@ SPLPartialAMCompositionality[Conf:TYPE,
     FORALL(pl,am2,pairs,a1,a2,an,s):
     (
       (
+       wfCK(F(pl),A(pl),K(pl)) AND wfCK(F(pl),am2,K(pl)) AND
         syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
          s = <>(F(pl),A(pl),K(pl),singleton(an))
       )
