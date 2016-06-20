@@ -1,0 +1,16 @@
+SPLPartialAMRefInstSelect: THEORY
+
+BEGIN
+  IMPORTING FeatureModelSemantics
+  IMPORTING CKmultiple
+
+  c: VAR Configuration
+  am: VAR AM
+  ck: VAR CK
+
+  eval(ck)(am)(c) : AM = semanticCK(ck,am,c,emptyset)
+
+  IMPORTING SPLPartialAMCompositionality
+      [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,CKtrans.CK]{{eval:=eval,wfCK:=wfCK}}
+
+END SPLPartialAMRefInstSelect

@@ -56,5 +56,11 @@ BEGIN
   	    Transformation:=Transformations,
 	    transform:=ckevaluation
   }}
+  
+  ck: VAR CK
+  it: VAR Item
+  c: VAR Configuration
+
+  domainPreserved: LEMMA FORALL ck,am,c,amt: subset?(dom(semanticCK(ck,am,c,amt)),union(dom(am),dom(amt)))   
 
 END CKmultiple
