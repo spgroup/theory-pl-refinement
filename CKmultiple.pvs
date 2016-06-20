@@ -10,7 +10,7 @@ BEGIN
   n,an: VAR AssetName
   a,b,a1,a2: VAR Asset
   tag: VAR bool
-  am,amt: VAR AM
+  am,amt,am2: VAR AM
   t: VAR AssetIfdef
   assets: VAR finite_sets[Asset].finite_set 
 
@@ -60,7 +60,21 @@ BEGIN
   ck: VAR CK
   it: VAR Item
   c: VAR Configuration
+  anSet: VAR finite_sets[AssetName].finite_set
 
-  domainPreserved: LEMMA FORALL ck,am,c,amt: subset?(dom(semanticCK(ck,am,c,amt)),union(dom(am),dom(amt)))   
+  domainPreserved: LEMMA FORALL ck,am,c,amt: subset?(dom(semanticCK(ck,am,c,amt)),union(dom(am),dom(amt)))  
+
+
+  domSubset: LEMMA FORALL ck,am,c,amt: subset?(dom(amt),dom(semanticCK(ck,am,c,amt)))
+
+  
+  unusedAssets: LEMMA FORALL ck,am,c,amt,anSet: subset?(domain(semanticCK(ck,am,c,amt)),anSet)
+                                                =>
+                                                (semanticCK(ck,am,c,amt) = semanticCK(ck,filter(anSet,am),c,amt))
+
+
+  
+
+  sameDom: LEMMA FORALL ck,am,am2,c,amt: domain(semanticCK(ck,am,c,amt)) = domain(semanticCK(ck,am2,c,amt))
 
 END CKmultiple

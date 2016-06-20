@@ -5,97 +5,6 @@
  (IMP_CKtrans_preserv_TCC1 0
   (IMP_CKtrans_preserv_TCC1-1 nil 3673777069
    ("" (mapped-axiom-tcc) nil nil) nil nil))
- (existingItem_Transformation_nonempty_TCC1 0
-  (existingItem_Transformation_nonempty_TCC1-1 nil 3673777069
-   ("" (mapped-axiom-tcc) nil nil) nil nil))
- (existingItem 0
-  (existingItem-1 nil 3673777082
-   ("" (skolem 1 (ck am c))
-    (("" (skolem 1 it)
-      (("" (bddsimp)
-        (("" (expand semantics)
-          (("" (expand semanticsCK)
-            (("" (case "null?(ck)")
-              (("1" (grind) nil nil)
-               ("2" (lift-if)
-                (("2" (bddsimp)
-                  (("1" (grind)
-                    (("1" (grind)
-                      (("1" (grind) (("1" (postpone) nil nil)) nil))
-                      nil)
-                     ("2" (postpone) nil nil) ("3" (postpone) nil nil)
-                     ("4" (postpone) nil nil))
-                    nil)
-                   ("2" (postpone) nil nil))
-                  nil))
-                nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   nil shostak))
- (semanticsPreservesUnion 0
-  (semanticsPreservesUnion-1 nil 3675100820
-   ("" (induct ck)
-    (("1" (skolem 1 (it am c))
-      (("1" (expand semantics)
-        (("1" (expand union)
-          (("1" (expand semanticsCK)
-            (("1" (decompose-equality)
-              (("1" (bddsimp)
-                (("1" (expand member)
-                  (("1" (expand semanticsCK) (("1" (bddsimp) nil nil))
-                    nil))
-                  nil)
-                 ("2" (expand semanticsCK)
-                  (("2" (expand member) (("2" (bddsimp) nil nil)) nil))
-                  nil)
-                 ("3" (expand member)
-                  (("3" (expand semanticsCK)
-                    (("3" (expand image)
-                      (("3" (skolem -2 name)
-                        (("3" (expand emptyset)
-                          (("3" (propax) nil nil)) nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil)
-                 ("4" (expand semanticsCK)
-                  (("4" (expand image)
-                    (("4" (skolem -1 n)
-                      (("4" (expand emptyset) (("4" (propax) nil nil))
-                        nil))
-                      nil))
-                    nil))
-                  nil)
-                 ("5" (expand member) (("5" (grind) nil nil)) nil)
-                 ("6" (grind) nil nil))
-                nil)
-               ("2" (skolem 1 a)
-                (("2" (expand member)
-                  (("2" (bddsimp)
-                    (("1" (expand unique) (("1" (grind) nil nil)) nil)
-                     ("2" (grind) nil nil))
-                    nil))
-                  nil))
-                nil)
-               ("3" (grind) nil nil) ("4" (grind) nil nil))
-              nil))
-            nil))
-          nil))
-        nil))
-      nil)
-     ("2" (skolem 1 (it its))
-      (("2" (bddsimp)
-        (("2" (skolem 1 (it2 am c))
-          (("2" (inst -1 it am c) (("2" (postpone) nil nil)) nil))
-          nil))
-        nil))
-      nil))
-    nil)
-   nil shostak))
  (domainPreserved 0
   (domainPreserved-1 nil 3675367228
    ("" (induct ck)
@@ -322,5 +231,1089 @@
     (filter const-decl "mapping" maps nil)
     (remove const-decl "mapping" maps nil)
     (overw const-decl "mapping" maps nil))
-   shostak)))
+   shostak))
+ (domSubset 0
+  (domSubset-1 nil 3675439523
+   ("" (induct ck)
+    (("1" (skolem 1 (am c amt))
+      (("1" (expand subset?)
+        (("1" (skolem 1 n)
+          (("1" (expand member)
+            (("1" (bddsimp)
+              (("1" (expand semanticCK) (("1" (propax) nil nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil)
+     ("2" (skolem 1 (it its))
+      (("2" (bddsimp)
+        (("2" (skolem 1 (am c amt))
+          (("2" (expand subset? 1)
+            (("2" (skolem 1 n)
+              (("2" (expand member)
+                (("2" (bddsimp)
+                  (("2" (expand semanticCK 1)
+                    (("2" (bddsimp)
+                      (("1"
+                        (inst -1 am c
+                         "ckevaluation(tasks(it), am, amt)")
+                        (("1" (expand subset?)
+                          (("1" (inst -1 n)
+                            (("1" (expand member)
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (expand dom -1 1)
+                                  (("1"
+                                    (expand ckevaluation 1)
+                                    (("1"
+                                      (lift-if)
+                                      (("1"
+                                        (bddsimp)
+                                        (("1"
+                                          (skolem -2 a)
+                                          (("1"
+                                            (lemma keepdom)
+                                            (("1"
+                                              (inst
+                                               -1
+                                               am
+                                               amt
+                                               "(an(tasks(it)), tag(tasks(it)))")
+                                              (("1"
+                                                (replace -1 1 RL)
+                                                (("1"
+                                                  (expand dom 1)
+                                                  (("1"
+                                                    (inst 1 a)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil)
+                                         ("2"
+                                          (skolem -1 a)
+                                          (("2"
+                                            (expand dom 2)
+                                            (("2"
+                                              (expand selectAssets)
+                                              (("2"
+                                                (expand overw)
+                                                (("2"
+                                                  (expand union)
+                                                  (("2"
+                                                    (expand member)
+                                                    (("2"
+                                                      (case
+                                                       "dom(filter(ans(tasks(it)),am))(n)")
+                                                      (("1"
+                                                        (expand dom)
+                                                        (("1"
+                                                          (skolem
+                                                           -1
+                                                           a2)
+                                                          (("1"
+                                                            (inst 2 a2)
+                                                            (("1"
+                                                              (bddsimp)
+                                                              nil
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (inst 3 a)
+                                                        (("2"
+                                                          (bddsimp)
+                                                          (("2"
+                                                            (expand
+                                                             remove)
+                                                            (("2"
+                                                              (bddsimp)
+                                                              (("2"
+                                                                (expand
+                                                                 domain)
+                                                                (("2"
+                                                                  (expand
+                                                                   dom)
+                                                                  (("2"
+                                                                    (propax)
+                                                                    nil
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil)
+                                                       ("3"
+                                                        (grind)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil)
+                       ("2" (inst -1 am c amt)
+                        (("2" (expand subset?)
+                          (("2" (inst -1 n)
+                            (("2" (expand member)
+                              (("2" (bddsimp) nil nil)) nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((list type-decl nil list_adt nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (Name type-decl nil Name nil)
+    (Configuration type-eq-decl nil Name nil)
+    (subset? const-decl "bool" sets nil)
+    (mapping type-eq-decl nil maps nil)
+    (dom const-decl "set[S]" maps nil)
+    (ckevaluation const-decl "AM" CKmultiple nil)
+    (semanticCK def-decl "AM" CKtrans nil)
+    (Transformations type-decl nil CKmultiple nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (list_induction formula-decl nil list_adt nil)
+    (member const-decl "bool" sets nil)
+    (keepdom formula-decl nil CKmultiple nil)
+    (AssetIfdef type-eq-decl nil CKmultiple nil)
+    (IFDEF? adt-recognizer-decl "[Transformations -> boolean]"
+     CKmultiple nil)
+    (an adt-accessor-decl "[(IFDEF?) -> AssetName]" CKmultiple nil)
+    (tag adt-accessor-decl "[(IFDEF?) -> boolean]" CKmultiple nil)
+    (overw const-decl "mapping" maps nil)
+    (remove const-decl "mapping" maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (ans adt-accessor-decl "[(SELECT?) -> AssetNames]" CKmultiple nil)
+    (AssetNames type-eq-decl nil CKmultiple nil)
+    (SELECT? adt-recognizer-decl "[Transformations -> boolean]"
+     CKmultiple nil)
+    (filter const-decl "mapping" maps nil)
+    (union const-decl "set" sets nil)
+    (selectAssets const-decl "AM" CKmultiple nil))
+   shostak))
+ (unusedAssets_Transformation_nonempty_TCC1 0
+  (unusedAssets_Transformation_nonempty_TCC1-1 nil 3675413656
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (unusedAssets 0
+  (unusedAssets-1 nil 3675414216
+   ("" (induct ck)
+    (("1" (skolem 1 (am c amt anSet))
+      (("1" (bddsimp)
+        (("1" (expand semanticCK) (("1" (propax) nil nil)) nil)) nil))
+      nil)
+     ("2" (skolem 1 (it its))
+      (("2" (bddsimp)
+        (("2" (skolem 1 (am c amt anSet))
+          (("2" (bddsimp)
+            (("2" (expand semanticCK 1)
+              (("2" (expand semanticCK -2)
+                (("2" (case "satisfies(exp(it),c)")
+                  (("1" (lift-if)
+                    (("1" (bddsimp)
+                      (("1"
+                        (inst -2 am c
+                         "ckevaluation(tasks(it), am, amt)" anSet)
+                        (("1" (bddsimp)
+                          (("1"
+                            (case "ckevaluation(tasks(it), am, amt) = ckevaluation(tasks(it), filter(anSet, am), amt)")
+                            (("1" (replace -1 -4)
+                              (("1"
+                                (replace -1 1)
+                                (("1" (propax) nil nil))
+                                nil))
+                              nil)
+                             ("2" (expand ckevaluation 1)
+                              (("2"
+                                (lift-if)
+                                (("2"
+                                  (bddsimp)
+                                  (("1"
+                                    (expand preprocess)
+                                    (("1" (propax) nil nil))
+                                    nil)
+                                   ("2"
+                                    (expand ckevaluation -2)
+                                    (("2"
+                                      (lift-if)
+                                      (("2"
+                                        (bddsimp)
+                                        (("2"
+                                          (case
+                                           "subset?(dom(selectAssets(ans(tasks(it)), am, amt)),anSet)")
+                                          (("1"
+                                            (expand selectAssets 2)
+                                            (("1"
+                                              (expand overw)
+                                              (("1"
+                                                (expand filter 2)
+                                                (("1"
+                                                  (expand union 2)
+                                                  (("1"
+                                                    (decompose-equality)
+                                                    (("1"
+                                                      (expand member)
+                                                      (("1"
+                                                        (expand remove)
+                                                        (("1"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (expand
+                                                             domain
+                                                             -3)
+                                                            (("1"
+                                                              (skolem
+                                                               -3
+                                                               a)
+                                                              (("1"
+                                                                (flatten)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil)
+                                                           ("2"
+                                                            (grind)
+                                                            nil
+                                                            nil)
+                                                           ("3"
+                                                            (grind)
+                                                            nil
+                                                            nil)
+                                                           ("4"
+                                                            (grind)
+                                                            nil
+                                                            nil)
+                                                           ("5"
+                                                            (expand
+                                                             domain
+                                                             2)
+                                                            (("5"
+                                                              (expand
+                                                               domain
+                                                               -2)
+                                                              (("5"
+                                                                (skolem
+                                                                 -2
+                                                                 a)
+                                                                (("5"
+                                                                  (expand
+                                                                   subset?
+                                                                   -3)
+                                                                  (("5"
+                                                                    (inst
+                                                                     -3
+                                                                     "x!1")
+                                                                    (("5"
+                                                                      (expand
+                                                                       member)
+                                                                      (("5"
+                                                                        (expand
+                                                                         selectAssets
+                                                                         -3)
+                                                                        (("5"
+                                                                          (expand
+                                                                           dom
+                                                                           -3)
+                                                                          (("5"
+                                                                            (expand
+                                                                             overw
+                                                                             -3)
+                                                                            (("5"
+                                                                              (bddsimp)
+                                                                              (("1"
+                                                                                (inst
+                                                                                 2
+                                                                                 a)
+                                                                                (("1"
+                                                                                  (bddsimp)
+                                                                                  nil
+                                                                                  nil))
+                                                                                nil)
+                                                                               ("2"
+                                                                                (inst
+                                                                                 2
+                                                                                 a)
+                                                                                (("2"
+                                                                                  (bddsimp)
+                                                                                  (("2"
+                                                                                    (expand
+                                                                                     union
+                                                                                     3)
+                                                                                    (("2"
+                                                                                      (expand
+                                                                                       filter
+                                                                                       3)
+                                                                                      (("2"
+                                                                                        (expand
+                                                                                         member)
+                                                                                        (("2"
+                                                                                          (inst
+                                                                                           3
+                                                                                           a)
+                                                                                          (("2"
+                                                                                            (bddsimp)
+                                                                                            nil
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil)
+                                                           ("6"
+                                                            (expand
+                                                             domain)
+                                                            (("6"
+                                                              (skolem
+                                                               -2
+                                                               a)
+                                                              (("6"
+                                                                (inst
+                                                                 2
+                                                                 a)
+                                                                (("6"
+                                                                  (bddsimp)
+                                                                  nil
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil)
+                                                     ("2"
+                                                      (skolem 1 pair)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (expand
+                                                           member)
+                                                          (("1"
+                                                            (expand
+                                                             unique)
+                                                            (("1"
+                                                              (skolem
+                                                               2
+                                                               (l
+                                                                r1
+                                                                r2))
+                                                              (("1"
+                                                                (bddsimp)
+                                                                (("1"
+                                                                  (typepred
+                                                                   am)
+                                                                  (("1"
+                                                                    (expand
+                                                                     unique)
+                                                                    (("1"
+                                                                      (inst
+                                                                       -2
+                                                                       l
+                                                                       r1
+                                                                       r2)
+                                                                      (("1"
+                                                                        (bddsimp)
+                                                                        nil
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil)
+                                                                 ("2"
+                                                                  (expand
+                                                                   subset?
+                                                                   -5)
+                                                                  (("2"
+                                                                    (typepred
+                                                                     am)
+                                                                    (("2"
+                                                                      (expand
+                                                                       unique)
+                                                                      (("2"
+                                                                        (inst
+                                                                         -2
+                                                                         l
+                                                                         r1
+                                                                         r2)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil)
+                                                                 ("3"
+                                                                  (typepred
+                                                                   am)
+                                                                  (("3"
+                                                                    (expand
+                                                                     unique)
+                                                                    (("3"
+                                                                      (inst
+                                                                       -2
+                                                                       l
+                                                                       r1
+                                                                       r2)
+                                                                      (("3"
+                                                                        (bddsimp)
+                                                                        nil
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil)
+                                                         ("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (typepred
+                                                             am)
+                                                            (("2"
+                                                              (lemma
+                                                               "finite_sets[[AssetName,Asset]].finite_subset")
+                                                              (("2"
+                                                                (inst
+                                                                 -1
+                                                                 am
+                                                                 " ({pair_1: [AssetName, Asset] |
+              (am(pair_1) AND anSet(pair_1`1)) AND
+               ans(tasks(it))(pair_1`1)})")
+                                                                (("2"
+                                                                  (bddsimp)
+                                                                  (("1"
+                                                                    (expand
+                                                                     subset?
+                                                                     1)
+                                                                    (("1"
+                                                                      (skolem
+                                                                       1
+                                                                       pair2)
+                                                                      (("1"
+                                                                        (expand
+                                                                         member)
+                                                                        (("1"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil)
+                                                                   ("2"
+                                                                    (expand
+                                                                     subset?
+                                                                     1)
+                                                                    (("2"
+                                                                      (skolem
+                                                                       1
+                                                                       pair2)
+                                                                      (("2"
+                                                                        (expand
+                                                                         member)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil)
+                                                                   ("3"
+                                                                    (expand
+                                                                     subset?
+                                                                     1)
+                                                                    (("3"
+                                                                      (skolem
+                                                                       1
+                                                                       pair2)
+                                                                      (("3"
+                                                                        (expand
+                                                                         member)
+                                                                        (("3"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil)
+                                                     ("3"
+                                                      (skolem 1 pair)
+                                                      (("3"
+                                                        (expand member)
+                                                        (("3"
+                                                          (bddsimp)
+                                                          (("1"
+                                                            (typepred
+                                                             am)
+                                                            (("1"
+                                                              (expand
+                                                               unique)
+                                                              (("1"
+                                                                (skolem
+                                                                 2
+                                                                 (l
+                                                                  r1
+                                                                  r2))
+                                                                (("1"
+                                                                  (inst
+                                                                   -2
+                                                                   l
+                                                                   r1
+                                                                   r2)
+                                                                  (("1"
+                                                                    (bddsimp)
+                                                                    nil
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil)
+                                                           ("2"
+                                                            (typepred
+                                                             am)
+                                                            (("2"
+                                                              (lemma
+                                                               "finite_sets[[AssetName,Asset]].finite_subset")
+                                                              (("2"
+                                                                (inst
+                                                                 -1
+                                                                 am
+                                                                 " ({pair: [AssetName, Asset] | am(pair) AND ans(tasks(it))(pair`1)})")
+                                                                (("2"
+                                                                  (bddsimp)
+                                                                  (("2"
+                                                                    (expand
+                                                                     subset?
+                                                                     1)
+                                                                    (("2"
+                                                                      (skolem
+                                                                       1
+                                                                       pair2)
+                                                                      (("2"
+                                                                        (expand
+                                                                         member)
+                                                                        (("2"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil)
+                                                           ("3"
+                                                            (typepred
+                                                             am)
+                                                            (("3"
+                                                              (expand
+                                                               unique)
+                                                              (("3"
+                                                                (skolem
+                                                                 2
+                                                                 (l
+                                                                  r1
+                                                                  r2))
+                                                                (("3"
+                                                                  (inst
+                                                                   -2
+                                                                   l
+                                                                   r1
+                                                                   r2)
+                                                                  (("3"
+                                                                    (bddsimp)
+                                                                    nil
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil)
+                                                           ("4"
+                                                            (typepred
+                                                             am)
+                                                            (("4"
+                                                              (lemma
+                                                               "finite_sets[[AssetName,Asset]].finite_subset")
+                                                              (("4"
+                                                                (inst
+                                                                 -1
+                                                                 am
+                                                                 "({pair: [AssetName, Asset] | am(pair) AND ans(tasks(it))(pair`1)})")
+                                                                (("4"
+                                                                  (bddsimp)
+                                                                  (("4"
+                                                                    (expand
+                                                                     subset?
+                                                                     1)
+                                                                    (("4"
+                                                                      (skolem
+                                                                       1
+                                                                       pair2)
+                                                                      (("4"
+                                                                        (expand
+                                                                         member)
+                                                                        (("4"
+                                                                          (bddsimp)
+                                                                          nil
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("2"
+                                            (lemma domainPreserved)
+                                            (("2"
+                                              (inst
+                                               -1
+                                               its
+                                               am
+                                               c
+                                               "selectAssets(ans(tasks(it)), am, amt)")
+                                              (("2"
+                                                (expand subset? 1)
+                                                (("2"
+                                                  (skolem 1 n)
+                                                  (("2"
+                                                    (expand member)
+                                                    (("2"
+                                                      (expand dom 1)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (skolem -2 a)
+                                                          (("2"
+                                                            (expand
+                                                             subset?
+                                                             -4)
+                                                            (("2"
+                                                              (inst
+                                                               -4
+                                                               n)
+                                                              (("2"
+                                                                (expand
+                                                                 member)
+                                                                (("2"
+                                                                  (bddsimp)
+                                                                  (("2"
+                                                                    (hide
+                                                                     3)
+                                                                    (("2"
+                                                                      (expand
+                                                                       subset?)
+                                                                      (("2"
+                                                                        (inst
+                                                                         -1
+                                                                         n)
+                                                                        (("2"
+                                                                          (expand
+                                                                           member)
+                                                                          (("2"
+                                                                            (bddsimp)
+                                                                            (("1"
+                                                                              (expand
+                                                                               union)
+                                                                              (("1"
+                                                                                (expand
+                                                                                 member)
+                                                                                (("1"
+                                                                                  (bddsimp)
+                                                                                  (("1"
+                                                                                    (expand
+                                                                                     ckevaluation
+                                                                                     -4)
+                                                                                    (("1"
+                                                                                      (lift-if)
+                                                                                      (("1"
+                                                                                        (lemma
+                                                                                         domSubset)
+                                                                                        (("1"
+                                                                                          (hide
+                                                                                           -5)
+                                                                                          (("1"
+                                                                                            (inst
+                                                                                             -1
+                                                                                             its
+                                                                                             am
+                                                                                             c
+                                                                                             "selectAssets(ans(tasks(it)), am, amt)")
+                                                                                            (("1"
+                                                                                              (expand
+                                                                                               subset?)
+                                                                                              (("1"
+                                                                                                (inst
+                                                                                                 -1
+                                                                                                 n)
+                                                                                                (("1"
+                                                                                                  (expand
+                                                                                                   member)
+                                                                                                  (("1"
+                                                                                                    (bddsimp)
+                                                                                                    (("1"
+                                                                                                      (expand
+                                                                                                       dom)
+                                                                                                      (("1"
+                                                                                                        (expand
+                                                                                                         domain)
+                                                                                                        (("1"
+                                                                                                          (propax)
+                                                                                                          nil
+                                                                                                          nil))
+                                                                                                        nil))
+                                                                                                      nil)
+                                                                                                     ("2"
+                                                                                                      (expand
+                                                                                                       dom)
+                                                                                                      (("2"
+                                                                                                        (inst
+                                                                                                         1
+                                                                                                         a)
+                                                                                                        nil
+                                                                                                        nil))
+                                                                                                      nil))
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil)
+                                                                                   ("2"
+                                                                                    (lemma
+                                                                                     domSubset)
+                                                                                    (("2"
+                                                                                      (inst
+                                                                                       -1
+                                                                                       its
+                                                                                       am
+                                                                                       c
+                                                                                       "selectAssets(ans(tasks(it)), am, amt)")
+                                                                                      (("2"
+                                                                                        (expand
+                                                                                         subset?)
+                                                                                        (("2"
+                                                                                          (inst
+                                                                                           -1
+                                                                                           n)
+                                                                                          (("2"
+                                                                                            (expand
+                                                                                             member)
+                                                                                            (("2"
+                                                                                              (bddsimp)
+                                                                                              (("2"
+                                                                                                (expand
+                                                                                                 dom)
+                                                                                                (("2"
+                                                                                                  (expand
+                                                                                                   domain)
+                                                                                                  (("2"
+                                                                                                    (propax)
+                                                                                                    nil
+                                                                                                    nil))
+                                                                                                  nil))
+                                                                                                nil))
+                                                                                              nil))
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil)
+                                                                             ("2"
+                                                                              (lemma
+                                                                               domSubset)
+                                                                              (("2"
+                                                                                (inst
+                                                                                 -1
+                                                                                 its
+                                                                                 am
+                                                                                 c
+                                                                                 "selectAssets(ans(tasks(it)), am, amt)")
+                                                                                (("2"
+                                                                                  (expand
+                                                                                   subset?)
+                                                                                  (("2"
+                                                                                    (inst
+                                                                                     -1
+                                                                                     n)
+                                                                                    (("2"
+                                                                                      (expand
+                                                                                       member)
+                                                                                      (("2"
+                                                                                        (bddsimp)
+                                                                                        (("2"
+                                                                                          (expand
+                                                                                           dom)
+                                                                                          (("2"
+                                                                                            (inst
+                                                                                             1
+                                                                                             a)
+                                                                                            nil
+                                                                                            nil))
+                                                                                          nil))
+                                                                                        nil))
+                                                                                      nil))
+                                                                                    nil))
+                                                                                  nil))
+                                                                                nil))
+                                                                              nil))
+                                                                            nil))
+                                                                          nil))
+                                                                        nil))
+                                                                      nil))
+                                                                    nil))
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (lift-if)
+                    (("2" (bddsimp)
+                      (("2" (inst -1 am c amt anSet)
+                        (("2" (bddsimp) nil nil)) nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((list type-decl nil list_adt nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (Name type-decl nil Name nil)
+    (Configuration type-eq-decl nil Name nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (subset? const-decl "bool" sets nil)
+    (mapping type-eq-decl nil maps nil)
+    (domain const-decl "finite_sets[S].finite_set" maps nil)
+    (ckevaluation const-decl "AM" CKmultiple nil)
+    (semanticCK def-decl "AM" CKtrans nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (filter const-decl "mapping" maps nil)
+    (Transformations type-decl nil CKmultiple nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (list_induction formula-decl nil list_adt nil)
+    (domainPreserved formula-decl nil CKmultiple nil)
+    (domSubset formula-decl nil CKmultiple nil)
+    (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
+     sets_lemmas nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (member const-decl "bool" sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (am skolem-const-decl "AM" CKmultiple nil)
+    (it skolem-const-decl "[# exp: Formula_, tasks: Transformations #]"
+     CKmultiple nil)
+    (anSet skolem-const-decl "finite_sets[AssetName].finite_set"
+     CKmultiple nil)
+    (remove const-decl "mapping" maps nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil)
+    (finite_union application-judgement "finite_set" finite_sets nil)
+    (finite_subset formula-decl nil finite_sets nil)
+    (union const-decl "set" sets nil)
+    (overw const-decl "mapping" maps nil)
+    (ans adt-accessor-decl "[(SELECT?) -> AssetNames]" CKmultiple nil)
+    (SELECT? adt-recognizer-decl "[Transformations -> boolean]"
+     CKmultiple nil)
+    (selectAssets const-decl "AM" CKmultiple nil)
+    (AssetNames type-eq-decl nil CKmultiple nil)
+    (dom const-decl "set[S]" maps nil)
+    (preprocess const-decl "AM" CKmultiple nil)
+    (satisfies def-decl "boolean" FormulaTheory nil))
+   shostak))
+ (sameDom 0
+  (sameDom-1 nil 3675436463
+   ("" (induct ck)
+    (("1" (skolem 1 (am am2 c amt))
+      (("1" (expand domain)
+        (("1" (expand semanticCK) (("1" (propax) nil nil)) nil)) nil))
+      nil)
+     ("2" (skolem 1 (it its))
+      (("2" (bddsimp)
+        (("2" (skolem 1 (am am2 c amt))
+          (("2" (expand semanticCK 1)
+            (("2" (lift-if)
+              (("2" (bddsimp)
+                (("1"
+                  (inst -1 am am2 c "ckevaluation(tasks(it), am, amt)")
+                  (("1" (expand domain)
+                    (("1" (decompose-equality)
+                      (("1" (decompose-equality)
+                        (("1" (bddsimp)
+                          (("1" (skolem -1 a)
+                            (("1" (inst -2 "x!1")
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (skolem -2 a2)
+                                  (("1"
+                                    (skolem -3 a3)
+                                    (("1"
+                                      (lemma domainPreserved)
+                                      (("1"
+                                        (inst
+                                         -1
+                                         its
+                                         am2
+                                         c
+                                         "ckevaluation(tasks(it), am, amt)")
+                                        (("1"
+                                          (expand subset?)
+                                          (("1"
+                                            (inst -1 "x!1")
+                                            (("1"
+                                              (expand member)
+                                              (("1"
+                                                (expand dom)
+                                                (("1"
+                                                  (bddsimp)
+                                                  (("1"
+                                                    (expand union)
+                                                    (("1"
+                                                      (expand member)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        (("1"
+                                                          (skolem
+                                                           -1
+                                                           a4)
+                                                          (("1"
+                                                            (postpone)
+                                                            nil
+                                                            nil))
+                                                          nil)
+                                                         ("2"
+                                                          (postpone)
+                                                          nil
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil)
+                                                   ("2"
+                                                    (postpone)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil)
+                                 ("2" (postpone) nil nil))
+                                nil))
+                              nil))
+                            nil)
+                           ("2" (postpone) nil nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil)
+                 ("2" (postpone) nil nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak)))
 
