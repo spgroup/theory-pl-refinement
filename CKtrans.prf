@@ -438,7 +438,34 @@
       nil))
     nil)
    nil shostak))
+ (compAmRefEmptyset 0
+  (compAmRefEmptyset-1 nil 3671360709 ("" (postpone) nil nil) nil
+   shostak))
  (wfCK_TCC1 0
   (wfCK_TCC1-1 nil 3596278242 ("" (subtype-tcc) nil nil)
-   ((wfTree const-decl "bool" FeatureModel nil)) nil)))
+   ((wfTree const-decl "bool" FeatureModel nil)) nil))
+ (existingItem 0
+  (existingItem-1 nil 3673774454
+   ("" (induct items)
+    (("1" (skolem 1 (am c))
+      (("1" (skolem 1 it)
+        (("1" (bddsimp)
+          (("1" (expand list2set)
+            (("1" (expand emptyset) (("1" (propax) nil nil)) nil))
+            nil))
+          nil))
+        nil))
+      nil)
+     ("2" (skolem 1 (it its))
+      (("2" (bddsimp)
+        (("2" (skolem 1 (am c))
+          (("2" (skolem 1 it2)
+            (("2" (inst -1 am c)
+              (("2" (bddsimp) (("2" (postpone) nil nil)) nil)) nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak)))
 

@@ -30,6 +30,7 @@ BEGIN
   getExp(it) : Formula_ = exp(it)
   getRS(it) : Transformation = tasks(it)
 
+  names(t):set[AssetName]
 
   transform(t,am,amt): AM
   
@@ -69,6 +70,7 @@ BEGIN
 
   wfCK(fm,am,ck) : bool =
     (FORALL exp: exps(ck)(exp) => wt(fm,exp))
+    AND FORALL c: semantics(fm)(c) => (FORALL it: items(ck)(it) => subset?(names(tasks(it)),dom(am))) 
 
 
 End CKtrans
