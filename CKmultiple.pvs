@@ -87,12 +87,10 @@ BEGIN
 
 
 
-  amNotChangesNames: LEMMA FORALL fm,ck,am,am2,amt: 
-                              FORALL c: (semantics(fm)(c) AND 
-                                        wfCK(fm,am,ck) AND
-                                        wfCK(fm,am2,ck)) 
-                                        =>
-                                        (domain(semanticCK(ck,am,c,amt)) = domain(semanticCK(ck,am2,c,amt)))
+  sameAmSameDom: LEMMA FORALL ck,am,am2,amt,c: 
+                                   domain(am) = domain(am2)  
+                                    =>
+                                   (domain(semanticCK(ck,am,c,amt)) = domain(semanticCK(ck,am2,c,amt)))
 
 
   falseExpsCK: LEMMA FORALL(am,ck,ck2,s):
