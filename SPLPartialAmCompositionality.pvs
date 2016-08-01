@@ -41,15 +41,24 @@ SPLPartialAMCompositionality[Conf:TYPE,
 
   evalPreservesDom: AXIOM FORALL am,ck,c: subset?(domain(eval(ck)(am)(c)),domain(am))  
 
-  ckValidNames: AXIOM FORALL fm,am,ck,am2: 
-                         (wfCK(fm,am,ck) AND wfCK(fm,am2,ck)) 
-                         =>  
-                         (FORALL c: ({||}(fm)(c)) => domain(eval(ck)(am)(c)) = domain(eval(ck)(am2)(c)))
+
+  sameDomSameEvalResult: AXIOM FORALL am,am2,ck,c: (domain(am) = domain(am2)) 
+                                                    => 
+                                                   domain(eval(ck)(am)(c)) = domain(eval(ck)(am2)(c))
 
   amPartialRefStrongDef: THEOREM
       FORALL (pl,am2,anSet):
      (
        (amPartialRef(am1,am2,anSet) AND wfCK(F(pl),A(pl),K(pl)) AND wfCK(F(pl),am2,K(pl)))
+       =>
+       strongPartialRefinement(pl,pl2,s)
+     )
+     WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
+
+    amPartialRefSameDomStrongDef: THEOREM
+      FORALL (pl,am2,anSet):
+     (
+       (amPartialRef(am1,am2,anSet) AND wfCK(F(pl),A(pl),K(pl)) AND wfCK(F(pl),am2,K(pl)) AND domain(am1) = domain(am2))
        =>
        strongPartialRefinement(pl,pl2,s)
      )
@@ -68,7 +77,7 @@ SPLPartialAMCompositionality[Conf:TYPE,
        =>
        strongPartialRefinement(pl,pl2,intersection(u,intersection(s,t)))
      )
-     WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=^^(F(pl),A(pl),K(pl),anSet)
+     WHERE am1=A(pl),pl2=(# F:= fm2, A := am2, K := ck2 #),t=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Change asset template%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
