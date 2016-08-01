@@ -1,4 +1,4 @@
-SPLPartialAMRefInstSelect: THEORY
+SPLPartialAMRefInstTrans: THEORY
 
 BEGIN
   IMPORTING FeatureModelSemantics
@@ -13,4 +13,4 @@ BEGIN
   IMPORTING SPLPartialAMCompositionality
       [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,CKtrans.CK]{{eval:=eval,wfCK:=wfCK}}
 
-END SPLPartialAMRefInstSelect
+END SPLPartialAMRefInstTrans
