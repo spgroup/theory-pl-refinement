@@ -69,8 +69,7 @@ BEGIN
 	=> wfProduct(semantics(ck)(am2)(c)) AND (semantics(ck)(am1)(c) |- semantics(ck)(am2)(c))
 
   wfCK(fm,am,ck) : bool =
-    (FORALL exp: exps(ck)(exp) => wt(fm,exp))
-    AND FORALL c: semantics(fm)(c) => (FORALL it: items(ck)(it) => subset?(names(tasks(it)),dom(am))) 
+    FORALL exp: exps(ck)(exp) => wt(fm,exp) 
 
 
 End CKtrans

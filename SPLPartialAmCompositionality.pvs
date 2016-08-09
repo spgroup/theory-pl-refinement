@@ -49,16 +49,17 @@ SPLPartialAMCompositionality[Conf:TYPE,
   amPartialRefStrongDef: THEOREM
       FORALL (pl,am2,anSet):
      (
-       (amPartialRef(am1,am2,anSet) AND wfCK(F(pl),A(pl),K(pl)) AND wfCK(F(pl),am2,K(pl)))
+       amPartialRef(am1,am2,anSet) 
        =>
        strongPartialRefinement(pl,pl2,s)
      )
      WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
 
-    amPartialRefSameDomStrongDef: THEOREM
+
+ amPartialRefSameDomStrongDef: THEOREM
       FORALL (pl,am2,anSet):
      (
-       (amPartialRef(am1,am2,anSet) AND wfCK(F(pl),A(pl),K(pl)) AND wfCK(F(pl),am2,K(pl)) AND domain(am1) = domain(am2))
+       (amPartialRef(am1,am2,anSet) AND domain(am1) = domain(am2))
        =>
        strongPartialRefinement(pl,pl2,s)
      )
