@@ -96,8 +96,8 @@ SPLPartialAMCompositionality[Conf:TYPE,
     FORALL(pl,am2,pairs,a1,a2,an,s):
     (
       (
-       wfCK(F(pl),A(pl),K(pl)) AND wfCK(F(pl),am2,K(pl)) AND
-        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        wfPL(pl2) AND
+	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
          s = <>(F(pl),A(pl),K(pl),singleton(an))
       )
       =>
