@@ -235,6 +235,26 @@ BEGIN
         WHERE pl2=(# F:=fm2, A:=am2, K:=ck2 #)
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    ADD UNUSED ASSETS    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  syntaxAddUnusedAssets(am1,am2,pairs) : bool =
+    am2 = overw(am1,pairs)
+
+  conditionsAddUnusedAssets(pairs,ck) : bool =
+    FORALL an : dom(pairs)(an) => NOT assetsCK(ck)(an)
+
+  addUnusedAssets : THEOREM
+     FORALL(pl,am2,pairs):
+        ( 
+          syntaxAddUnusedAssets(A(pl),am2,pairs) AND 
+          conditionsAddUnusedAssets(pairs, K(pl))
+          => 
+           (plRefinement(pl,pl2) AND wfPL(pl2))
+	)
+       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
