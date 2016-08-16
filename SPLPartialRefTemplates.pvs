@@ -15,7 +15,7 @@ fm,fm1,fm2: VAR FM
 ck,ck1,ck2,its: VAR CK
 item1,item2: VAR Item
 items: VAR set[Item]
-P,Q: VAR Name
+F,P,Q,R: VAR Name
 exp: VAR Formula_
 
 
@@ -40,77 +40,7 @@ m: VAR CM
 % ----Filter configurations that satisfy an expression exp and belong to a feature model fm
 <>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
 
-%---------------------------------------------------------------------------------------------------------------------------------------
-%---------------------------------------------CHANGE ASSET TEMPLATE---------------------------------------------------------------------
-%---------------------------------------------------------------------------------------------------------------------------------------
-
-syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
-      am1=ow((an,a1),pairs) AND
-      am2=ow((an,a2),pairs) 
-
-% Lemma <Since the only difference between "pairs" and "A(pl)" is the element "(an,a1)" and this asset is not included, the evaluation
-%        of A(pl) is the same as pairs.>
-sameEvalPairs: LEMMA 
-FORALL(pl,am2,pairs,a1,a2,an,s):
-    (
-      (
-        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(F(pl),K(pl),singleton(an))
-      )
-      =>
-        (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
-    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
-
-% Lemma <the same is true for am2>
-sameEvalPairs2: LEMMA 
-FORALL(pl,am2,pairs,a1,a2,an,s):
-    (
-      (
-        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(F(pl),K(pl),singleton(an))
-      )
-      =>
-        (FORALL c : s(c) => (semantics(K(pl))(am2)(c)) = semantics(K(pl2))(pairs)(c))
-    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
-
-% Theorem <The products that do not contain the changed asset do not change> 
-changeAssetSameProducts: THEOREM   
-    FORALL(pl,am2,pairs,a1,a2,an,s):
-    (
-      (
-        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(F(pl),K(pl),singleton(an))
-      )
-      =>
-        (FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(am2)(c))))
-    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
-
-% Theorem <Change asset template represents a strong partial refinement>
-changeAssetStrong: THEOREM
-    FORALL(pl,am2,pairs,a1,a2,an,s):
-    (
-      (
-        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
-        s = <>(F(pl),K(pl),singleton(an)) AND
-        FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
-      )
-      =>
-        strongPartialRefinement(pl,pl2,s)
-    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
-
-% Theorem <Change asset template represents a weak partial refinement>
-changeAssetWeak: THEOREM
-    FORALL(pl,am2,pairs,a1,a2,an,m):
-    (
-      (
-	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
-        domain(m) = <>(F(pl),K(pl),singleton(an)) AND
-        identity?(m) AND
-        FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
-      ) 
-      => weakPartialRefinement(pl,pl2,m)
-    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
-
+<>(exp,fm):set[Configuration]  = {c | semantics(fm)(c) AND not satisfies(exp,c)}
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
@@ -400,5 +330,28 @@ removeAssetsPartRefWeak: THEOREM
                )
                => weakPartialRefinement(pl,pl2,m)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------MOVE FEATURE DECL-------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+
+syntaxMoveFeature(fm1,fm2,P,Q,R) : bool =
+	features(fm1) = features(fm2) AND
+	formulae(fm2) = add(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)),
+	                    remove(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P)),formulae(fm1))) AND
+	subset?({F | F = P OR F = Q OR F = R},features(fm1))
+
+moveFeaturePartialRefStrong: THEOREM
+      FORALL (pl,fm2,s,P,Q,R): 
+            (
+               (
+                 syntaxMoveFeature(F(pl),fm2,P,Q,R) AND
+                 s = intersection(<>(NAME_FORMULA(R),F(pl)),<>(NAME_FORMULA(R),fm2)) AND
+		 (FORALL c : (semantics(fm2)(c) AND NOT s(c)) => SPLrefinement.wfProduct(semantics(K(pl))(A(pl))(c)))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
 
 END SPLPartialRefTemplates
