@@ -170,6 +170,19 @@ addCKLinesStrongPartRef: THEOREM
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
+%----------------------------------------------------REMOVE CK LINES--------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+removeCKLinesStrongPartRef: THEOREM
+            FORALL(pl,ck2,items,s):
+            (
+              (syntaxAddCKLines(ck2,K(pl),items) AND
+	      s = <>(exps(items),F(pl)) AND
+              (FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))))
+              => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+%---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -308,25 +321,15 @@ addAssetsPartRefWeak: THEOREM
 
 % The remove assets template is the same as the add assets but the inverse, so we are calling the same predicates. However, replacing 
 % A(pl) by am2 and K(pl) by ck2
-removeAssetsSameProducts: THEOREM
-            FORALL (pl,am2,ck2,s,its,pairs):
-            (
-               (
-                 s = <>(F(pl),K(pl),domain(pairs)) AND
-                 syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
-                 FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
-               )
-                 
-               =>  FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
-            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 % Theorem <Remove assets template represents a strong partial refinement>
 removeAssetsPartRefStrong: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(F(pl),K(pl),domain(pairs)) AND
+                 s = <>(exps(its),F(pl2)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
+		 conditionsAddAssets(pairs,K(pl)) AND
                  FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
                => strongPartialRefinement(pl,pl2,s)
