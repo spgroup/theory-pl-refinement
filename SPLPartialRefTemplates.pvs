@@ -14,9 +14,10 @@ c: VAR Configuration
 fm,fm1,fm2: VAR FM
 ck,ck1,ck2,its: VAR CK
 item1,item2: VAR Item
-items: VAR set[Item]
+items: VAR finite_sets[Item].finite_set
 F,P,Q,R: VAR Name
 exp: VAR Formula_
+exps: VAR set[Formula_]
 
 
 % Importing SPLPartialRefinement theory and instantiating types.
@@ -32,6 +33,8 @@ IMPORTING SPLPartialRefinement[Configuration,
 pl,pl2,pl3: VAR PL
 m: VAR CM
 
+IMPORTING SpecificSPL
+
 % --------------------------------------------Restriction Operator---------------------------------------------------------------------
 % ----Filter configurations whose products do not contain assets which were activated by any asset of anSet
 <>(fm,ck,anSet): set[Configuration] = {c | semantics(fm)(c) AND 
@@ -41,6 +44,8 @@ m: VAR CM
 <>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
 
 <>(exp,fm):set[Configuration]  = {c | semantics(fm)(c) AND not satisfies(exp,c)}
+
+<>(exps,fm): set[Configuration]  = {c | semantics(fm)(c) AND (FORALL exp: exps(exp) => not satisfies(exp,c))}
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
@@ -149,6 +154,22 @@ changeCKLineWeakPartRef: THEOREM
             ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
+%----------------------------------------------------ADD CK LINES-----------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+syntaxAddCKLines(ck1,ck2,items) : bool =
+            ck2 = union(ck1,items)
+
+addCKLinesStrongPartRef: THEOREM
+            FORALL(pl,ck2,items,s):
+            (
+              (syntaxAddCKLines(K(pl),ck2,items) AND
+	      s = <>(exps(items),F(pl)) AND
+              (FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))))
+              => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+%---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -244,32 +265,29 @@ removeFeaturePartRefWeak: THEOREM
 % The FM does not change (therefore we are not adding features). Only AM and CK, that now have new lines corresponding to the new assets.
 syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
             am2 = overw(pairs,am1) AND
-            ck2 = union(ck1,its)   
-
-% It is necessary to make sure that all assets added in the CK are present in the new lines of the AM.
-conditionsAddAssets(pairs,its): bool = 
-            FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs)) 
+            ck2 = union(ck1,its)    
 
 % Theorem <When we add assets but filter the assets added the resulting products are equal>
 addAssetsSameProducts: THEOREM
            FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                   s = <>(F(pl2),K(pl2),domain(pairs)) AND
-                   syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
-                   conditionsAddAssets(pairs,its) 
+                   s = <>(exps(its),F(pl2)) AND
+                   syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) 
                 ) 
                => FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+conditionsAddAssets(pairs,ck) : bool = FORALL an : dom(pairs)(an) => NOT assetsCK(ck)(an)
 
 % Theorem <Add assets template represents a strong partial refinement>
 addAssetsPartRefStrong: THEOREM
             FORALL (pl,am2,ck2,s,its,pairs):
             (
                (
-                 s = <>(F(pl2),K(pl2),domain(pairs)) AND
+                 s = <>(exps(its),F(pl2)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
-                 conditionsAddAssets(pairs,its) AND
+		 conditionsAddAssets(pairs,K(pl)) AND
                  FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
                => strongPartialRefinement(pl,pl2,s)
@@ -282,7 +300,6 @@ addAssetsPartRefWeak: THEOREM
                (
                  domain(m) = <>(F(pl2),K(pl2),domain(pairs)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
-                 conditionsAddAssets(pairs,its) AND
                  identity?(m) AND
                  FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
@@ -297,7 +314,6 @@ removeAssetsSameProducts: THEOREM
                (
                  s = <>(F(pl),K(pl),domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
-                 conditionsAddAssets(pairs,its) AND
                  FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
                  
@@ -311,7 +327,6 @@ removeAssetsPartRefStrong: THEOREM
                (
                  s = <>(F(pl),K(pl),domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
-                 conditionsAddAssets(pairs,its) AND
                  FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
                => strongPartialRefinement(pl,pl2,s)
@@ -324,7 +339,6 @@ removeAssetsPartRefWeak: THEOREM
                (
                  domain(m) = <>(F(pl),K(pl),domain(pairs)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
-                 conditionsAddAssets(pairs,its) AND
                  identity?(m) AND
                  FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
