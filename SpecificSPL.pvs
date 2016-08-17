@@ -265,6 +265,30 @@ BEGIN
        WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    REMOVE UNUSED ASSETS    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   removeUnusedAssetsSameEvalCK : THEOREM
+    FORALL(pl,am2,pairs):
+        ( 
+          syntaxAddUnusedAssets(am2,A(pl),pairs) AND 
+          conditionsAddUnusedAssets(pairs, K(pl))
+          => 
+          FORALL c : semantics(F(pl))(c) =>  (semantics(K(pl))(A(pl))(c) = semantics(K(pl))(am2)(c))
+	)
+       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+   removeUnusedAssets : THEOREM
+     FORALL(pl,am2,pairs):
+        ( 
+          syntaxAddUnusedAssets(am2,A(pl),pairs) AND 
+          conditionsAddUnusedAssets(pairs, K(pl))
+          => 
+           (strongerPLrefinement(pl,pl2) AND wfPL(pl2))
+	)
+       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)  
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
