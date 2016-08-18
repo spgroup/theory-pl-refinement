@@ -16,7 +16,8 @@ BEGIN
   item,it: VAR Item
   items,its1,its2: VAR list[Item]
   c: VAR Configuration
-  assets,S,S1,S2: VAR finite_sets[Asset].finite_set 
+  assets,S,S1,S2: VAR finite_sets[Asset].finite_set
+  s: VAR set[Configuration]
 
   exps(ck) : RECURSIVE set[Formula_] = 
     CASES ck OF 
@@ -71,5 +72,20 @@ BEGIN
   wfCK(fm,am,ck) : bool =
     FORALL exp: exps(ck)(exp) => wt(fm,exp) 
 
+  addItemsBefore: LEMMA FORALL (am,ck,its,s,amt) :
+       FORALL c: s(c) => 
+                         ( 
+                            (FORALL exp: exps(its)(exp) => NOT satisfies(exp,c))
+                            => 
+                            (semanticsCK(ck,am,c,amt) = semanticsCK(append(its,ck),am,c,amt))
+                         )
+
+  addItemsAfter: LEMMA FORALL (am,ck,its,s,amt):
+       FORALL c: s(c) => 
+                         ( 
+                            (FORALL it: member(it,its) => NOT satisfies(exp(it),c))
+                            => 
+                            (semanticsCK(ck,am,c,amt) = semanticsCK(append(ck,its),am,c,amt))
+                         )
 
 End CKtrans
