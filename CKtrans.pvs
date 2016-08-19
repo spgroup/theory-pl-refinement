@@ -73,19 +73,19 @@ BEGIN
     FORALL exp: exps(ck)(exp) => wt(fm,exp) 
 
   addItemsBefore: LEMMA FORALL (am,ck,its,s,amt) :
-       FORALL c: s(c) => 
+       (FORALL c: s(c) => 
                          ( 
                             (FORALL exp: exps(its)(exp) => NOT satisfies(exp,c))
                             => 
                             (semanticsCK(ck,am,c,amt) = semanticsCK(append(its,ck),am,c,amt))
-                         )
+                         ))
 
   addItemsAfter: LEMMA FORALL (am,ck,its,s,amt):
-       FORALL c: s(c) => 
+       (FORALL c: s(c) => 
                          ( 
-                            (FORALL it: member(it,its) => NOT satisfies(exp(it),c))
+                            (FORALL exp: exps(its)(exp) => NOT satisfies(exp,c))
                             => 
                             (semanticsCK(ck,am,c,amt) = semanticsCK(append(ck,its),am,c,amt))
-                         )
+                         ))
 
 End CKtrans

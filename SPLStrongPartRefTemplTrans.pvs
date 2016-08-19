@@ -1,0 +1,63 @@
+SPLStrongPartRefTemplTrans: THEORY
+BEGIN
+   IMPORTING CKtrans
+   
+   am,am1,am2,pairs: VAR AM
+   a,a1,a2: VAR Asset
+   an: VAR AssetName
+   s: VAR set[Configuration]
+   fm: VAR FM
+   ck,ck2: VAR CK
+   its: VAR list[Item]
+   c: VAR Configuration
+   anSet: VAR set[AssetName]
+
+   IMPORTING SPLPartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
+
+   pl: VAR PL
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD CK LINES %%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  addCKLinesBeforePartialRef: THEOREM
+     FORALL pl,ck2,its,s:
+      (
+	(s = <>(F(pl),exps(its)) AND
+      	ck2 = append(its,K(pl)))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+   addCKLinesAfterPartialRef: THEOREM
+     FORALL pl,ck2,its,s:
+      (
+	(s = <>(F(pl),exps(its)) AND
+      	ck2 = append(K(pl),its))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% REMOVE CK LINES %%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   removeCKLinesBeforePartialRef: THEOREM
+      FORALL pl,ck2,its,s:
+      (
+	(s = <>(F(pl),exps(its)) AND
+      	K(pl) = append(its,ck2))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+   removeCKLinesAfterPartialRef: THEOREM
+      FORALL pl,ck2,its,s:
+      (
+	(s = <>(F(pl),exps(its)) AND
+      	K(pl) = append(ck2,its))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+END SPLStrongPartRefTemplTrans

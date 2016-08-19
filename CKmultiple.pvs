@@ -67,11 +67,14 @@ BEGIN
   fm: VAR WFM
   ck,ck2: VAR CK
   it,it2: VAR Item
+  its: VAR list[Item]
+  exp: VAR Formula_
   c: VAR Configuration
   anSet: VAR finite_sets[AssetName].finite_set
   s: VAR set[Configuration]
 
   domainPreserved: LEMMA FORALL ck,am,c,amt: subset?(dom(semanticCK(ck,am,c,amt)),union(dom(am),dom(amt)))  
+
 
   domSubset: LEMMA FORALL ck,am,c,amt: subset?(dom(amt),dom(semanticCK(ck,am,c,amt)))
 
@@ -92,16 +95,6 @@ BEGIN
                                     =>
                                    (domain(semanticCK(ck,am,c,amt)) = domain(semanticCK(ck,am2,c,amt)))
 
-
-  falseExpsCK: LEMMA FORALL(am,ck,ck2,s):
-    (
-       FORALL c: s(c) => 
-                         ( 
-                            (FORALL it : diffIts(it) => NOT satisfies(exp(it),c))
-                            => 
-                            (FORALL amt: semanticCK(ck,am,c,amt) = semanticCK(ck2,am,c,amt))
-                         )
-      
-    ) WHERE diffIts = symmetric_difference(list2set(ck),list2set(ck2))
+  
 
 END CKmultiple
