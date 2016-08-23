@@ -1,4 +1,4 @@
-SPLPartialRefinementWeak[Conf: TYPE,
+PartialRefWeak[Conf: TYPE,
                      FM: TYPE,
                      {||}: [FM -> set[Conf]],
                      Asset: TYPE,
@@ -20,7 +20,7 @@ BEGIN
 
     IMPORTING maps_identity[Conf]
     IMPORTING maps_composite[Conf,Conf,Conf]
-    IMPORTING SPLPartialRefinementCommon[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+    IMPORTING PartialRefBasics[Conf,FM, {||}, Asset, AssetName, CK,[||]]
     
     pl, pl1, pl2, pl3: VAR PL
 

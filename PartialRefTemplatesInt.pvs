@@ -1,4 +1,4 @@
-SPLStrongPartRefTemplInt [Configuration:TYPE, 
+PartialRefTemplatesInt [Configuration:TYPE, 
    FeatureExpression:TYPE,
    sat: [FeatureExpression,Configuration -> boolean],
    FMi:TYPE, 
@@ -42,7 +42,7 @@ IMPORTING CK[Configuration,
    s: VAR set[Configuration]
    exp: VAR FeatureExpression
 
-   IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,evaluate]
+   IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,semantics]
    
    pl,pl2: VAR PL
    
@@ -95,23 +95,23 @@ IMPORTING CK[Configuration,
    % ------------------------------------------------ADD/REMOVE----------------------------------------------
    % --------------------------------------------------------------------------------------------------------
 
-   addAssetsStrongPartialRef: THEOREM
-    FORALL (pl,am2,ck2,s,its,pairs):
-     (
-       (
-         s = <>(F(pl2),am2,K(pl2),domain(pairs)) AND
-         syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
-         conditionsAddAssets(pairs,its) AND
-         FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
-       )
-       => strongPartialRefinement(pl,pl2,s)
-      ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+   %addAssetsStrongPartialRef: THEOREM
+   % FORALL (pl,am2,ck2,s,its,pairs):
+   %  (
+   %    (
+   %      s = <>(F(pl2),am2,K(pl2),domain(pairs)) AND
+   %      syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+   %      conditionsAddAssets(pairs,its) AND
+   %      FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
+   %    )
+   %    => strongPartialRefinement(pl,pl2,s)
+   %   ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
    removeAssetsStrongPartialRef: THEOREM
     FORALL (pl,am2,ck2,s,its,pairs):
      (
        (
-         s = <>(F(pl),A(pl),K(pl),domain(pairs)) AND
+   %      s = <>(F(pl),A(pl),K(pl),domain(pairs)) AND
          syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
          conditionsAddAssets(pairs,its) AND
          FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
@@ -152,7 +152,7 @@ IMPORTING CKIntFormula[Configuration,
   p,f: VAR Feature
   s: VAR set[Configuration]
 
-  IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,evaluate]
+  IMPORTING SPLPartialRefinement[Configuration,FMi,[||],Asset,AssetName,CK,semantics]
  
   pl,pl2: VAR PL
 
@@ -169,4 +169,4 @@ IMPORTING CKIntFormula[Configuration,
     ) WHERE pl2 = (# F:=fm2, A:=A(pl), K:=K(pl) #)
 
 
-END SPLStrongPartRefTemplIntForm
+END PartialRefTemplatesInt

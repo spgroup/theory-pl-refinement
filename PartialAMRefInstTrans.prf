@@ -1,4 +1,4 @@
-(SPLPartialAMRefInstTrans
+(PartialAMRefInstTrans
  (eval_preserv_TCC1 0
   (eval_preserv_TCC1-1 nil 3675377348 ("" (mapped-axiom-tcc) nil nil)
    nil nil))
@@ -48,7 +48,7 @@
     (FM type-eq-decl nil FeatureModel nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
-    (eval const-decl "AM" SPLPartialAMRefInstTrans nil)
+    (eval const-decl "AM" PartialAMRefInstTrans nil)
     (wfFM const-decl "bool" FeatureModelSemantics nil)
     (WFM type-eq-decl nil FeatureModelSemantics nil)
     (AM type-eq-decl nil SPLPartialAMCompositionality nil)
@@ -93,7 +93,7 @@
     (FM type-eq-decl nil FeatureModel nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
-    (eval const-decl "AM" SPLPartialAMRefInstTrans nil)
+    (eval const-decl "AM" PartialAMRefInstTrans nil)
     (wfFM const-decl "bool" FeatureModelSemantics nil)
     (WFM type-eq-decl nil FeatureModelSemantics nil)
     (AM type-eq-decl nil SPLPartialAMCompositionality nil)
@@ -123,7 +123,7 @@
         nil))
       nil))
     nil)
-   ((eval const-decl "AM" SPLPartialAMRefInstTrans nil)
+   ((eval const-decl "AM" PartialAMRefInstTrans nil)
     (emptyset const-decl "set" sets nil)
     (wfCK const-decl "bool" CKtrans nil)
     (cknames const-decl "set[AssetName]" CKmultiple nil)

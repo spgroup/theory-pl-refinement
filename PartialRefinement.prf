@@ -1,4 +1,4 @@
-(SPLPartialRefinement
+(PartialRefinement
  (strongPartCaseWeak 0
   (strongPartCaseWeak-1 nil 3655109962
    ("" (skolem 1 (pl1 pl2 m))
@@ -77,7 +77,7 @@
         nil))
       nil))
     nil)
-   ((Conf formal-type-decl nil SPLPartialRefinement nil)
+   ((Conf formal-type-decl nil PartialRefinement nil)
     (identity? const-decl "bool" maps_identity nil)
     (getRightResult formula-decl nil maps nil)
     (dom const-decl "set[S]" maps nil)
@@ -90,17 +90,17 @@
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
-    (FM formal-type-decl nil SPLPartialRefinement nil)
-    ({\|\|} formal-const-decl "[FM -> set[Conf]]" SPLPartialRefinement
+    (FM formal-type-decl nil PartialRefinement nil)
+    ({\|\|} formal-const-decl "[FM -> set[Conf]]" PartialRefinement
      nil)
-    (Asset formal-type-decl nil SPLPartialRefinement nil)
-    (AssetName formal-type-decl nil SPLPartialRefinement nil)
-    (CK formal-type-decl nil SPLPartialRefinement nil)
+    (Asset formal-type-decl nil PartialRefinement nil)
+    (AssetName formal-type-decl nil PartialRefinement nil)
+    (CK formal-type-decl nil PartialRefinement nil)
     (mapping type-eq-decl nil maps nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLPartialRefinement nil)
-    (CM type-eq-decl nil SPLPartialRefinementWeak nil)
+     PartialRefinement nil)
+    (CM type-eq-decl nil PartialRefinementWeak nil)
     (subset? const-decl "bool" sets nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
     (AM type-eq-decl nil SPLrefinement nil)
@@ -108,8 +108,8 @@
     (wfPL const-decl "bool" SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (strongPartialRefinement const-decl "bool"
-     SPLPartialRefinementStrong nil)
-    (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
+     PartialRefinementStrong nil)
+    (weakPartialRefinement const-decl "bool" PartialRefinementWeak
      nil))
    shostak)))
 

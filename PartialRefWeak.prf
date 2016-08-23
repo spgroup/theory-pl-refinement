@@ -1,4 +1,4 @@
-(SPLPartialRefinementWeak
+(PartialRefWeak
  (weakPartialRefinement_TCC1 0
   (weakPartialRefinement_TCC1-1 nil 3656408682
    ("" (skolem 1 (pl1 pl2 m))
@@ -98,29 +98,29 @@
     nil)
    ((subset? const-decl "bool" sets nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (CM type-eq-decl nil SPLPartialRefinementWeak nil)
+    (CM type-eq-decl nil PartialRefWeak nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (dom const-decl "set[S]" maps nil)
     (getRightResult formula-decl nil maps nil)
     (image const-decl "finite_sets[T].finite_set" maps nil)
     (member const-decl "bool" sets nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
-    (FM formal-type-decl nil SPLPartialRefinementWeak nil)
-    (Asset formal-type-decl nil SPLPartialRefinementWeak nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementWeak nil)
-    (CK formal-type-decl nil SPLPartialRefinementWeak nil)
+    (FM formal-type-decl nil PartialRefWeak nil)
+    (Asset formal-type-decl nil PartialRefWeak nil)
+    (AssetName formal-type-decl nil PartialRefWeak nil)
+    (CK formal-type-decl nil PartialRefWeak nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (set type-eq-decl nil sets nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementWeak nil)
+     PartialRefWeak nil)
     (is_finite const-decl "bool" finite_sets nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (unique const-decl "bool" maps nil)
     (mapping type-eq-decl nil maps nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLPartialRefinementWeak nil)
+     PartialRefWeak nil)
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
@@ -128,9 +128,9 @@
     (AM type-eq-decl nil SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil)
-    (Conf formal-type-decl nil SPLPartialRefinementWeak nil)
+    (Conf formal-type-decl nil PartialRefWeak nil)
     (identity? const-decl "bool" maps_identity nil)
-    (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
+    (weakPartialRefinement const-decl "bool" PartialRefWeak
      nil))
    shostak))
  (weakPartRefTransitive 0
@@ -310,7 +310,7 @@
         nil))
       nil))
     nil)
-   ((Conf formal-type-decl nil SPLPartialRefinementWeak nil)
+   ((Conf formal-type-decl nil PartialRefWeak nil)
     (preorder? const-decl "bool" orders nil)
     (same_img formula-decl nil maps_composite nil)
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
@@ -329,39 +329,39 @@
     (unique const-decl "bool" maps nil)
     (mapping type-eq-decl nil maps nil)
     (dom const-decl "set[S]" maps nil)
-    (CM type-eq-decl nil SPLPartialRefinementWeak nil)
+    (CM type-eq-decl nil PartialRefWeak nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (subset? const-decl "bool" sets nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
-    (FM formal-type-decl nil SPLPartialRefinementWeak nil)
+    (FM formal-type-decl nil PartialRefWeak nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementWeak nil)
-    (Asset formal-type-decl nil SPLPartialRefinementWeak nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementWeak nil)
-    (CK formal-type-decl nil SPLPartialRefinementWeak nil)
+     PartialRefWeak nil)
+    (Asset formal-type-decl nil PartialRefWeak nil)
+    (AssetName formal-type-decl nil PartialRefWeak nil)
+    (CK formal-type-decl nil PartialRefWeak nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLPartialRefinementWeak nil)
+     PartialRefWeak nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (pl1 skolem-const-decl
      "PL[Conf, FM, Asset, AssetName, CK, {||}, [||]]"
-     SPLPartialRefinementWeak nil)
+     PartialRefWeak nil)
     (image const-decl "finite_sets[T].finite_set" maps nil)
     (pl2 skolem-const-decl
      "PL[Conf, FM, Asset, AssetName, CK, {||}, [||]]"
-     SPLPartialRefinementWeak nil)
+     PartialRefWeak nil)
     (m skolem-const-decl "{m: CM |
          subset?(domain(m), {||}(F(pl1))) AND
-          subset?(image(m), {||}(F(pl2)))}" SPLPartialRefinementWeak
+          subset?(image(m), {||}(F(pl2)))}" PartialRefWeak
      nil)
-    (c skolem-const-decl "Conf" SPLPartialRefinementWeak nil)
+    (c skolem-const-decl "Conf" PartialRefWeak nil)
     (imgCompos formula-decl nil maps_composite nil)
     (member const-decl "bool" sets nil)
     (domCompos formula-decl nil maps_composite nil)
-    (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
+    (weakPartialRefinement const-decl "bool" PartialRefWeak
      nil))
    nil)
   (weakPartRefTransitive-3 nil 3656759693
@@ -997,7 +997,7 @@
         nil))
       nil))
     nil)
-   ((weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
+   ((weakPartialRefinement const-decl "bool" PartialRefWeak
      nil)
     (same_img formula-decl nil maps_composite nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
@@ -1032,6 +1032,6 @@
     (unique const-decl "bool" maps nil)
     (mapping type-eq-decl nil maps nil)
     (dom const-decl "set[S]" maps nil)
-    (CM type-eq-decl nil SPLPartialRefinementWeak nil))
+    (CM type-eq-decl nil PartialRefWeak nil))
    shostak)))
 

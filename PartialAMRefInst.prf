@@ -1,4 +1,4 @@
-(SPLPartialAMRefInst
+(PartialAMRefInst
  (IMP_SPLPartialAMCompositionality_unusedAssets_TCC1 0
   (IMP_SPLPartialAMCompositionality_unusedAssets_TCC1-1 nil 3673790399
    ("" (skolem 1 (am ck anSet c))
@@ -78,7 +78,7 @@
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
     (FM type-eq-decl nil FeatureModel nil)
-    (eval const-decl "AM" SPLPartialAMRefInst nil)
+    (eval const-decl "AM" PartialAMRefInst nil)
     (Configuration type-eq-decl nil Name nil)
     (Name type-decl nil Name nil)
     (AM type-eq-decl nil AssetMapping nil)
@@ -104,7 +104,7 @@
      ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (eval const-decl "AM" SPLPartialAMRefInst nil)
+    (eval const-decl "AM" PartialAMRefInst nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (real_ge_is_total_order name-judgement "(total_order?[real])"
@@ -236,14 +236,14 @@
         nil))
       nil))
     nil)
-   ((eval const-decl "AM" SPLPartialAMRefInst nil)
-    (c skolem-const-decl "Configuration" SPLPartialAMRefInst nil)
-    (ck skolem-const-decl "CK" SPLPartialAMRefInst nil)
+   ((eval const-decl "AM" PartialAMRefInst nil)
+    (c skolem-const-decl "Configuration" PartialAMRefInst nil)
+    (ck skolem-const-decl "CK" PartialAMRefInst nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (am skolem-const-decl "AM
     [Name.Configuration, FeatureModel.FM, FeatureModelSemantics.semantics,
-     Asset, AssetName, ConfigurationKnowledge.CK]" SPLPartialAMRefInst
+     Asset, AssetName, ConfigurationKnowledge.CK]" PartialAMRefInst
      nil)
     (AM type-eq-decl nil SPLPartialAMCompositionality nil)
     (wfCK const-decl "bool" ConfigurationKnowledge nil)
@@ -262,7 +262,7 @@
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (am2 skolem-const-decl "AM
     [Name.Configuration, FeatureModel.FM, FeatureModelSemantics.semantics,
-     Asset, AssetName, ConfigurationKnowledge.CK]" SPLPartialAMRefInst
+     Asset, AssetName, ConfigurationKnowledge.CK]" PartialAMRefInst
      nil)
     (mapping type-eq-decl nil maps nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)

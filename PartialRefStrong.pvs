@@ -1,4 +1,4 @@
-SPLPartialRefinementStrong[Conf: TYPE,
+PartialRefinementStrong[Conf: TYPE,
                      FM: TYPE,
                      {||}: [FM -> set[Conf]],
                      Asset: TYPE,
@@ -21,7 +21,7 @@ BEGIN
     anSet: VAR set[AssetName]
     pair: VAR [AssetName,Asset]
 
-    IMPORTING SPLPartialRefinementCommon[Conf,FM,{||},Asset,AssetName,CK,[||]]
+    IMPORTING PartialRefBasics[Conf,FM,{||},Asset,AssetName,CK,[||]]
     am,am1,am2,pairs: VAR AM
     pl, pl1, pl2, pl3, pl4: VAR PL
 

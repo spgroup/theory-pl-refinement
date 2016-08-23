@@ -1,4 +1,4 @@
-(SPLPartialRefTemplates
+(PartialRefTemplates
  (transfOptMand_TCC1 0
   (transfOptMand_TCC1-1 nil 3655826326 ("" (subtype-tcc) nil nil)
    ((singleton const-decl "(singleton?)" sets nil)) nil))
@@ -38,13 +38,13 @@
     (wfTree const-decl "bool" FeatureModel nil)
     (wfFormulae const-decl "boolean" FormulaTheory nil)
     (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (transfOptMand const-decl "bool" SPLPartialRefTemplates nil)
-    (syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+    (transfOptMand const-decl "bool" PartialRefTemplates nil)
+    (syntaxTransfOptMand const-decl "bool" PartialRefTemplates nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
-    (conditionsTransfOptMand const-decl "bool" SPLPartialRefTemplates
+    (conditionsTransfOptMand const-decl "bool" PartialRefTemplates
      nil))
    nil))
  (wfTransfOptMand 0
@@ -335,8 +335,8 @@
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
     (union const-decl "set" sets nil)
-    (transfOptMand const-decl "bool" SPLPartialRefTemplates nil)
-    (syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+    (transfOptMand const-decl "bool" PartialRefTemplates nil)
+    (syntaxTransfOptMand const-decl "bool" PartialRefTemplates nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (wfFormulae const-decl "boolean" FormulaTheory nil)
     (wt def-decl "boolean" FormulaTheory nil)
@@ -537,8 +537,8 @@
     (wt def-decl "boolean" FormulaTheory nil)
     (wfFormulae const-decl "boolean" FormulaTheory nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplates nil)
-    (transfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxTransfOptMand const-decl "bool" PartialRefTemplates nil)
+    (transfOptMand const-decl "bool" PartialRefTemplates nil)
     (union const-decl "set" sets nil)
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
@@ -605,12 +605,12 @@
         nil))
       nil))
     nil)
-   ((syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplates nil)
-    (transfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+   ((syntaxTransfOptMand const-decl "bool" PartialRefTemplates nil)
+    (transfOptMand const-decl "bool" PartialRefTemplates nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
-    (conditionsTransfOptMand const-decl "bool" SPLPartialRefTemplates
+    (conditionsTransfOptMand const-decl "bool" PartialRefTemplates
      nil)
     (wfTree const-decl "bool" FeatureModel nil)
     (wfFormulae const-decl "boolean" FormulaTheory nil)
@@ -642,7 +642,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (wfTransfOptMand formula-decl nil SPLPartialRefTemplates nil))
+    (wfTransfOptMand formula-decl nil PartialRefTemplates nil))
    nil))
  (transOptMandPartRefStrong 0
   (transOptMandPartRefStrong-1 nil 3655826327
@@ -874,9 +874,9 @@
     (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
      sets_lemmas nil)
     (member const-decl "bool" sets nil)
-    (conditionsTransfOptMand const-decl "bool" SPLPartialRefTemplates
+    (conditionsTransfOptMand const-decl "bool" PartialRefTemplates
      nil)
-    (transfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+    (transfOptMand const-decl "bool" PartialRefTemplates nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (singleton const-decl "(singleton?)" sets nil)
@@ -887,7 +887,7 @@
     (union const-decl "set" sets nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxTransfOptMand const-decl "bool" PartialRefTemplates nil)
     (subset? const-decl "bool" sets nil)
     (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil))
@@ -908,7 +908,7 @@
         nil))
       nil))
     nil)
-   ((syntaxTransfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+   ((syntaxTransfOptMand const-decl "bool" PartialRefTemplates nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (identity? const-decl "bool" maps_identity nil)
@@ -921,12 +921,12 @@
     (dom const-decl "set[S]" maps nil)
     (wfFormulae const-decl "boolean" FormulaTheory nil)
     (wfTree const-decl "bool" FeatureModel nil)
-    (conditionsTransfOptMand const-decl "bool" SPLPartialRefTemplates
+    (conditionsTransfOptMand const-decl "bool" PartialRefTemplates
      nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (transfOptMand const-decl "bool" SPLPartialRefTemplates nil)
+    (transfOptMand const-decl "bool" PartialRefTemplates nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (PL type-eq-decl nil SPLrefinement nil)
@@ -955,7 +955,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (wfTransfOptMand formula-decl nil SPLPartialRefTemplates nil))
+    (wfTransfOptMand formula-decl nil PartialRefTemplates nil))
    nil))
  (transOptMandPartRefWeak 0
   (transOptMandPartRefWeak-1 nil 3656876549
@@ -997,7 +997,7 @@
         nil))
       nil))
     nil)
-   ((transOptMandPartRefStrong formula-decl nil SPLPartialRefTemplates
+   ((transOptMandPartRefStrong formula-decl nil PartialRefTemplates
      nil)
     (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
      nil)
@@ -1171,7 +1171,7 @@
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (conditionsChangeCKLine const-decl "bool" SPLPartialRefTemplates
+    (conditionsChangeCKLine const-decl "bool" PartialRefTemplates
      nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -1183,7 +1183,7 @@
      ConfigurationKnowledge nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (union const-decl "set" sets nil)
-    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxChangeCKLine const-decl "bool" PartialRefTemplates nil)
     (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
      Formula__adt nil)
     (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
@@ -1219,7 +1219,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (predChangeCKLine const-decl "bool" SPLPartialRefTemplates nil))
+    (predChangeCKLine const-decl "bool" PartialRefTemplates nil))
    nil)
   (changeCKLineSameEvalCK-4 nil 3657448045
    ("" (skolem 1 (pl ck2 item1 item2 items s))
@@ -1350,7 +1350,7 @@
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (conditionsChangeCKLine const-decl "bool" SPLPartialRefTemplates
+    (conditionsChangeCKLine const-decl "bool" PartialRefTemplates
      nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -1362,7 +1362,7 @@
      ConfigurationKnowledge nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (union const-decl "set" sets nil)
-    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxChangeCKLine const-decl "bool" PartialRefTemplates nil)
     (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
      Formula__adt nil)
     (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
@@ -1687,7 +1687,7 @@
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (conditionsChangeCKLine const-decl "bool" SPLPartialRefTemplates
+    (conditionsChangeCKLine const-decl "bool" PartialRefTemplates
      nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
@@ -1699,7 +1699,7 @@
      ConfigurationKnowledge nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (union const-decl "set" sets nil)
-    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxChangeCKLine const-decl "bool" PartialRefTemplates nil)
     (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
      Formula__adt nil)
     (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
@@ -1793,9 +1793,9 @@
         nil))
       nil))
     nil)
-   ((predChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
-    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
-    (conditionsChangeCKLine const-decl "bool" SPLPartialRefTemplates
+   ((predChangeCKLine const-decl "bool" PartialRefTemplates nil)
+    (syntaxChangeCKLine const-decl "bool" PartialRefTemplates nil)
+    (conditionsChangeCKLine const-decl "bool" PartialRefTemplates
      nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
@@ -1804,7 +1804,7 @@
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (nonempty_union1 application-judgement "(nonempty?)" sets nil)
-    (changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
+    (changeCKLineSameEvalCK formula-decl nil PartialRefTemplates
      nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -1887,7 +1887,7 @@
         nil))
       nil))
     nil)
-   ((changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
+   ((changeCKLineSameEvalCK formula-decl nil PartialRefTemplates
      nil)
     (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
@@ -1934,7 +1934,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (predChangeCKLine const-decl "bool" SPLPartialRefTemplates nil))
+    (predChangeCKLine const-decl "bool" PartialRefTemplates nil))
    nil)
   (changeCKLineStrongPartRef-1 nil 3657448093
    ("" (lemma changeCKLineSameEvalCK)
@@ -1995,7 +1995,7 @@
     (FM type-eq-decl nil FeatureModel nil)
     (Formula_ type-decl nil Formula__adt nil)
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
-    (changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
+    (changeCKLineSameEvalCK formula-decl nil PartialRefTemplates
      nil))
    shostak))
  (changeCKLineWeakPartRef_TCC1 0
@@ -2071,11 +2071,11 @@
           ConfigurationKnowledge nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (conditionsChangeCKLine const-decl "bool" SPLPartialRefTemplates
+    (conditionsChangeCKLine const-decl "bool" PartialRefTemplates
      nil)
-    (syntaxChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
-    (predChangeCKLine const-decl "bool" SPLPartialRefTemplates nil)
-    (changeCKLineSameEvalCK formula-decl nil SPLPartialRefTemplates
+    (syntaxChangeCKLine const-decl "bool" PartialRefTemplates nil)
+    (predChangeCKLine const-decl "bool" PartialRefTemplates nil)
+    (changeCKLineSameEvalCK formula-decl nil PartialRefTemplates
      nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -2134,7 +2134,7 @@
         nil))
       nil))
     nil)
-   ((changeCKLineStrongPartRef formula-decl nil SPLPartialRefTemplates
+   ((changeCKLineStrongPartRef formula-decl nil PartialRefTemplates
      nil)
     (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
      nil)
@@ -2479,7 +2479,7 @@
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
-    (syntaxAddCKLines const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxAddCKLines const-decl "bool" PartialRefTemplates nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil)
     (member const-decl "bool" sets nil)
@@ -2721,7 +2721,7 @@
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil) nil
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (member const-decl "bool" sets nil)
-    (syntaxAddCKLines const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxAddCKLines const-decl "bool" PartialRefTemplates nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
@@ -2826,22 +2826,22 @@
      nil)
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (conditionsOpt const-decl "bool" SPLPartialRefTemplates nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (conditionsOpt const-decl "bool" PartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (overw const-decl "mapping" maps nil)
-    (removeFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (removeFeature const-decl "bool" PartialRefTemplates nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
     (finite_difference application-judgement "finite_set" finite_sets
      nil)
-    (conditionsMand const-decl "bool" SPLPartialRefTemplates nil)
-    (predRemoveFeature const-decl "bool" SPLPartialRefTemplates nil))
+    (conditionsMand const-decl "bool" PartialRefTemplates nil)
+    (predRemoveFeature const-decl "bool" PartialRefTemplates nil))
    nil)
   (itsNotIncluded-4 nil 3657555293
    ("" (skolem 1 (pl pl2 s its pairs P Q))
@@ -2929,13 +2929,13 @@
      nil)
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (difference const-decl "set" sets nil)
     (member const-decl "bool" sets nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil))
    nil)
   (itsNotIncluded-3 nil 3657554425
@@ -3039,14 +3039,14 @@
      nil)
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (difference const-decl "set" sets nil)
     (member const-decl "bool" sets nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil))
    nil)
   (itsNotIncluded-2 nil 3657553584
@@ -3150,14 +3150,14 @@
      nil)
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (difference const-decl "set" sets nil)
     (member const-decl "bool" sets nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil))
    nil)
   (itsNotIncluded-1 nil 3657533313
@@ -3261,7 +3261,7 @@
      nil)
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (difference const-decl "set" sets nil)
     (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
      sets_lemmas nil)
@@ -3270,7 +3270,7 @@
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil))
    shostak))
  (pairsNotIncluded 0
@@ -3324,24 +3324,24 @@
         nil))
       nil))
     nil)
-   ((conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+   ((conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil)
-    (itsNotIncluded formula-decl nil SPLPartialRefTemplates nil)
-    (conditionsMand const-decl "bool" SPLPartialRefTemplates nil)
+    (itsNotIncluded formula-decl nil PartialRefTemplates nil)
+    (conditionsMand const-decl "bool" PartialRefTemplates nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (finite_difference application-judgement "finite_set" finite_sets
      nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
-    (removeFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (removeFeature const-decl "bool" PartialRefTemplates nil)
     (overw const-decl "mapping" maps nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
-    (conditionsOpt const-decl "bool" SPLPartialRefTemplates nil)
+    (conditionsOpt const-decl "bool" PartialRefTemplates nil)
     (dom const-decl "set[S]" maps nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
@@ -3372,7 +3372,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (predRemoveFeature const-decl "bool" SPLPartialRefTemplates nil))
+    (predRemoveFeature const-decl "bool" PartialRefTemplates nil))
    nil)
   (pairsNotIncluded-1 nil 3657539564
    ("" (lemma itsNotIncluded)
@@ -3413,7 +3413,7 @@
         nil))
       nil))
     nil)
-   ((itsNotIncluded formula-decl nil SPLPartialRefTemplates nil)
+   ((itsNotIncluded formula-decl nil PartialRefTemplates nil)
     (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
     (Formula_ type-decl nil Formula__adt nil)
     (FM type-eq-decl nil FeatureModel nil)
@@ -3437,7 +3437,7 @@
      ConfigurationKnowledge nil)
     (AM type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
@@ -3714,27 +3714,27 @@
         nil))
       nil))
     nil)
-   ((itsNotIncluded formula-decl nil SPLPartialRefTemplates nil)
+   ((itsNotIncluded formula-decl nil PartialRefTemplates nil)
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (union const-decl "set" sets nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
     (remove const-decl "mapping" maps nil)
     (mapping type-eq-decl nil maps nil)
     (member const-decl "bool" sets nil)
     (OR const-decl "[bool, bool -> bool]" booleans nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil)
-    (conditionsMand const-decl "bool" SPLPartialRefTemplates nil)
-    (conditionsOpt const-decl "bool" SPLPartialRefTemplates nil)
+    (conditionsMand const-decl "bool" PartialRefTemplates nil)
+    (conditionsOpt const-decl "bool" PartialRefTemplates nil)
     (dom const-decl "set[S]" maps nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
-    (removeFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (removeFeature const-decl "bool" PartialRefTemplates nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
@@ -3753,7 +3753,7 @@
      Formula__adt nil)
     (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
-    (predRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (predRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -3780,7 +3780,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (pairsNotIncluded formula-decl nil SPLPartialRefTemplates nil))
+    (pairsNotIncluded formula-decl nil PartialRefTemplates nil))
    nil)
   (removeFeatureSameProducts-9 nil 3657556116
    ("" (skolem 1 (pl pl2 s its pairs p q))
@@ -4003,14 +4003,14 @@
         nil))
       nil))
     nil)
-   ((pairsNotIncluded formula-decl nil SPLPartialRefTemplates nil)
+   ((pairsNotIncluded formula-decl nil PartialRefTemplates nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (member const-decl "bool" sets nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (dom const-decl "set[S]" maps nil)
     (difference const-decl "set" sets nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
@@ -4041,7 +4041,7 @@
     (FM type-eq-decl nil FeatureModel nil)
     (Formula_ type-decl nil Formula__adt nil)
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
-    (itsNotIncluded formula-decl nil SPLPartialRefTemplates nil))
+    (itsNotIncluded formula-decl nil PartialRefTemplates nil))
    nil)
   (removeFeatureSameProducts-8 nil 3657555864
    ("" (skolem 1 (pl pl2 s its pairs p q))
@@ -5182,14 +5182,14 @@
         nil))
       nil))
     nil)
-   ((pairsNotIncluded formula-decl nil SPLPartialRefTemplates nil)
+   ((pairsNotIncluded formula-decl nil PartialRefTemplates nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (member const-decl "bool" sets nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (dom const-decl "set[S]" maps nil)
     (difference const-decl "set" sets nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
@@ -5220,7 +5220,7 @@
     (FM type-eq-decl nil FeatureModel nil)
     (Formula_ type-decl nil Formula__adt nil)
     (set type-eq-decl nil sets nil) (Name type-decl nil Name nil)
-    (itsNotIncluded formula-decl nil SPLPartialRefTemplates nil))
+    (itsNotIncluded formula-decl nil PartialRefTemplates nil))
    nil)
   (removeFeatureSameProducts-1 nil 3657408487
    ("" (skolem 1 (pl pl2 s its pairs p q))
@@ -5443,7 +5443,7 @@
         nil))
       nil))
     nil)
-   ((itsNotIncluded formula-decl nil SPLPartialRefTemplates nil)
+   ((itsNotIncluded formula-decl nil PartialRefTemplates nil)
     (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
     (Formula_ type-decl nil Formula__adt nil)
     (FM type-eq-decl nil FeatureModel nil)
@@ -5474,7 +5474,7 @@
      ConfigurationKnowledge nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (difference const-decl "set" sets nil)
     (dom const-decl "set[S]" maps nil)
     (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
@@ -5483,7 +5483,7 @@
     (member const-decl "bool" sets nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
-    (pairsNotIncluded formula-decl nil SPLPartialRefTemplates nil))
+    (pairsNotIncluded formula-decl nil PartialRefTemplates nil))
    shostak))
  (removeFeaturePartRefStrong 0
   (removeFeaturePartRefStrong-1 nil 3657619515
@@ -5655,30 +5655,30 @@
     (PL type-eq-decl nil SPLrefinement nil)
     (strongPartialRefinement const-decl "bool"
      SPLPartialRefinementStrong nil)
-    (predRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (predRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (subset? const-decl "bool" sets nil)
-    (syntaxRemoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplates nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (remove const-decl "set" sets nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (conditionsRemoveFeature const-decl "bool" SPLPartialRefTemplates
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplates
      nil)
-    (conditionsMand const-decl "bool" SPLPartialRefTemplates nil)
-    (conditionsOpt const-decl "bool" SPLPartialRefTemplates nil)
+    (conditionsMand const-decl "bool" PartialRefTemplates nil)
+    (conditionsOpt const-decl "bool" PartialRefTemplates nil)
     (dom const-decl "set[S]" maps nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (overw const-decl "mapping" maps nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
     (/= const-decl "boolean" notequal nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (filterFormulae const-decl "set[Formula_]" SPLPartialRefTemplates
+    (filterFormulae const-decl "set[Formula_]" PartialRefTemplates
      nil)
     (names def-decl "set[Name]" FormulaTheory nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (finite_difference application-judgement "finite_set" finite_sets
      nil)
-    (removeFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (removeFeature const-decl "bool" PartialRefTemplates nil)
     (member const-decl "bool" sets nil)
     (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
      sets_lemmas nil)
@@ -5696,7 +5696,7 @@
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (reflexive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil)
-    (removeFeatureSameProducts formula-decl nil SPLPartialRefTemplates
+    (removeFeatureSameProducts formula-decl nil PartialRefTemplates
      nil))
    shostak))
  (removeFeaturePartRefWeak 0
@@ -5731,7 +5731,7 @@
         nil))
       nil))
     nil)
-   ((removeFeaturePartRefStrong formula-decl nil SPLPartialRefTemplates
+   ((removeFeaturePartRefStrong formula-decl nil PartialRefTemplates
      nil)
     (identity? const-decl "bool" maps_identity nil)
     (sameDomImg formula-decl nil maps_identity nil)
@@ -5999,7 +5999,7 @@
     (member const-decl "bool" sets nil)
     (remove const-decl "mapping" maps nil)
     (overw const-decl "mapping" maps nil)
-    (syntaxAddAssets const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxAddAssets const-decl "bool" PartialRefTemplates nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
@@ -6564,7 +6564,7 @@
     (member const-decl "bool" sets nil)
     (remove const-decl "mapping" maps nil)
     (overw const-decl "mapping" maps nil)
-    (syntaxAddAssets const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxAddAssets const-decl "bool" PartialRefTemplates nil)
     (subset? const-decl "bool" sets nil)
     (dom const-decl "set[S]" maps nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
@@ -6626,7 +6626,7 @@
         nil))
       nil))
     nil)
-   ((syntaxAddAssets const-decl "bool" SPLPartialRefTemplates nil)
+   ((syntaxAddAssets const-decl "bool" PartialRefTemplates nil)
     (finite_intersection1 application-judgement "finite_set"
      finite_sets nil)
     (overw const-decl "mapping" maps nil)
@@ -6638,7 +6638,7 @@
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
-    (addAssetsSameProducts formula-decl nil SPLPartialRefTemplates nil)
+    (addAssetsSameProducts formula-decl nil PartialRefTemplates nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
@@ -6820,16 +6820,16 @@
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
-    (addCKLinesStrongPartRef formula-decl nil SPLPartialRefTemplates
+    (addCKLinesStrongPartRef formula-decl nil PartialRefTemplates
      nil)
-    (syntaxAddCKLines const-decl "bool" SPLPartialRefTemplates nil)
-    (syntaxAddAssets const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxAddCKLines const-decl "bool" PartialRefTemplates nil)
+    (syntaxAddAssets const-decl "bool" PartialRefTemplates nil)
     (preorder? const-decl "bool" orders nil)
     (transitive? const-decl "bool" relations nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (strongerPLrefinement const-decl "bool" SPLrefinement nil)
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (conditionsAddAssets const-decl "bool" SPLPartialRefTemplates nil))
+    (conditionsAddAssets const-decl "bool" PartialRefTemplates nil))
    shostak))
  (addAssetsPartRefWeak_TCC1 0
   (addAssetsPartRefWeak_TCC1-1 nil 3659808577
@@ -6868,7 +6868,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (addAssetsPartRefStrong_TCC1 subtype-tcc nil SPLPartialRefTemplates
+    (addAssetsPartRefStrong_TCC1 subtype-tcc nil PartialRefTemplates
      nil))
    nil))
  (addAssetsPartRefWeak 0
@@ -6900,7 +6900,7 @@
         nil))
       nil))
     nil)
-   ((addAssetsPartRefStrong formula-decl nil SPLPartialRefTemplates
+   ((addAssetsPartRefStrong formula-decl nil PartialRefTemplates
      nil)
     (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
      nil)
@@ -6997,7 +6997,7 @@
         nil))
       nil))
     nil)
-   (nil (syntaxAddAssets const-decl "bool" SPLPartialRefTemplates nil)
+   (nil (syntaxAddAssets const-decl "bool" PartialRefTemplates nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
@@ -7162,26 +7162,26 @@
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (removeUnusedAssets formula-decl nil SpecificSPL nil)
     (conditionsAddUnusedAssets const-decl "bool" SpecificSPL nil)
-    (<> const-decl "set[Configuration]" SPLPartialRefTemplates nil)
+    (<> const-decl "set[Configuration]" PartialRefTemplates nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
-    (am2 skolem-const-decl "AM" SPLPartialRefTemplates nil)
+    (am2 skolem-const-decl "AM" PartialRefTemplates nil)
     (pl skolem-const-decl "PL
     [Configuration, WFM, Assets.Asset, Assets.AssetName, CK,
      restrict[FM, WFM, set[Configuration]](semantics), semantics]"
-     SPLPartialRefTemplates nil)
-    (syntaxAddAssets const-decl "bool" SPLPartialRefTemplates nil)
+     PartialRefTemplates nil)
+    (syntaxAddAssets const-decl "bool" PartialRefTemplates nil)
     (preorder? const-decl "bool" orders nil)
     (transitive? const-decl "bool" relations nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
-    (syntaxAddCKLines const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxAddCKLines const-decl "bool" PartialRefTemplates nil)
     (strongerPLrefinement const-decl "bool" SPLrefinement nil)
     (syntaxAddUnusedAssets const-decl "bool" SpecificSPL nil)
-    (conditionsAddAssets const-decl "bool" SPLPartialRefTemplates nil)
+    (conditionsAddAssets const-decl "bool" PartialRefTemplates nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -7208,7 +7208,7 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
-    (removeCKLinesStrongPartRef formula-decl nil SPLPartialRefTemplates
+    (removeCKLinesStrongPartRef formula-decl nil PartialRefTemplates
      nil))
    shostak))
  (removeAssetsPartRefWeak_TCC1 0
@@ -7249,7 +7249,7 @@
     (boolean nonempty-type-decl nil booleans nil)
     (Name type-decl nil Name nil)
     (removeAssetsPartRefStrong_TCC1 subtype-tcc nil
-     SPLPartialRefTemplates nil))
+     PartialRefTemplates nil))
    nil))
  (removeAssetsPartRefWeak 0
   (removeAssetsPartRefWeak-1 nil 3659808943
@@ -7280,7 +7280,7 @@
         nil))
       nil))
     nil)
-   ((removeAssetsPartRefStrong formula-decl nil SPLPartialRefTemplates
+   ((removeAssetsPartRefStrong formula-decl nil PartialRefTemplates
      nil)
     (weakPartialRefinement const-decl "bool" SPLPartialRefinementWeak
      nil)
@@ -7513,7 +7513,7 @@
     (set type-eq-decl nil sets nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
     (subset? const-decl "bool" sets nil)
-    (syntaxMoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxMoveFeature const-decl "bool" PartialRefTemplates nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
@@ -7798,7 +7798,7 @@
     (fmPartialRefinement const-decl "bool" SPLPartialRefinementCommon
      nil)
     (wfTree const-decl "bool" FeatureModel nil)
-    (syntaxMoveFeature const-decl "bool" SPLPartialRefTemplates nil)
+    (syntaxMoveFeature const-decl "bool" PartialRefTemplates nil)
     (nonempty? const-decl "bool" sets nil)
     (add const-decl "(nonempty?)" sets nil)
     (IMPLIES? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt

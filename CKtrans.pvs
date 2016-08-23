@@ -31,8 +31,6 @@ BEGIN
   getExp(it) : Formula_ = exp(it)
   getRS(it) : Transformation = tasks(it)
 
-  names(t):set[AssetName]
-
   transform(t,am,amt): AM
   
   semanticsCK(ck,am,c,amt): RECURSIVE finite_sets[Asset].finite_set = 
@@ -79,6 +77,7 @@ BEGIN
                             => 
                             (semanticsCK(ck,am,c,amt) = semanticsCK(append(its,ck),am,c,amt))
                          ))
+
 
   addItemsAfter: LEMMA FORALL (am,ck,its,s,amt):
        (FORALL c: s(c) => 

@@ -1,4 +1,4 @@
-SPLStrongPartRefTemplTrans: THEORY
+PartialRefTemplatesTrans: THEORY
 BEGIN
    IMPORTING CKtrans
    
@@ -12,7 +12,7 @@ BEGIN
    c: VAR Configuration
    anSet: VAR set[AssetName]
 
-   IMPORTING SPLPartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
+   IMPORTING PartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
 
    pl: VAR PL
 
@@ -60,4 +60,4 @@ BEGIN
         strongPartialRefinement(pl,pl2,s)
       ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
 
-END SPLStrongPartRefTemplTrans
+END PartialRefTemplatesTrans

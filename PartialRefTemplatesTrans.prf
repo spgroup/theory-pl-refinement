@@ -1,4 +1,4 @@
-(SPLStrongPartRefTemplTrans
+(PartialRefTemplatesTrans
  (addCKLinesBeforePartialRef_TCC1 0
   (addCKLinesBeforePartialRef_TCC1-1 nil 3680614955
    ("" (subtype-tcc) nil nil) nil nil))

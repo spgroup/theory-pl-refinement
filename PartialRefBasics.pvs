@@ -1,4 +1,4 @@
-SPLPartialRefinementCommon[Conf: TYPE,
+PartialRefBasics[Conf: TYPE,
                      FM: TYPE,
                      {||}: [FM -> set[Conf]],
                      Asset: TYPE,
@@ -44,4 +44,4 @@ BEGIN
     ckWeakerEq(ck1,ck2,s) : bool = 
           FORALL am,c : s(c) => ([|ck1|](am))(c) = ([|ck2|](am))(c)   
 
-END SPLPartialRefinementCommon
+END PartialRefBasics

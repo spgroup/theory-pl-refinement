@@ -1,4 +1,4 @@
-SPLPartialAMCompositionality[Conf:TYPE,
+PartialAMCompositionality[Conf:TYPE,
                              FM:TYPE,
                              {||}:[FM->set[Conf]],
                              Asset:TYPE,
@@ -26,7 +26,7 @@ SPLPartialAMCompositionality[Conf:TYPE,
 
   [||](ck)(am)(c): finite_sets[Asset].finite_set = image((eval)(ck)(am)(c))
 
-  IMPORTING SPLPartialRefinementStrong[Conf,FM,{||},Asset,AssetName,CK,[||]]
+  IMPORTING PartialRefStrong[Conf,FM,{||},Asset,AssetName,CK,[||]]
 
   pl: VAR PL
 
@@ -103,5 +103,6 @@ SPLPartialAMCompositionality[Conf:TYPE,
       =>
         strongPartialRefinement(pl,pl2,s)
     ) WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #) 
+    
 
-END SPLPartialAMCompositionality
+END PartialAMCompositionality

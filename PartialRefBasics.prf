@@ -1,4 +1,4 @@
-(SPLPartialRefinementCommon
+(PartialRefBasics
  (fmPartRef 0
   (fmPartRef-1 nil 3659523903
    ("" (skolem 1 (fm1 fm2))
@@ -27,10 +27,10 @@
         nil))
       nil))
     nil)
-   ((fmPartialRefinement const-decl "bool" SPLPartialRefinementCommon
+   ((fmPartialRefinement const-decl "bool" PartialRefBasics
      nil)
     (member const-decl "bool" sets nil)
-    (Conf formal-type-decl nil SPLPartialRefinementCommon nil)
+    (Conf formal-type-decl nil PartialRefBasics nil)
     (subset? const-decl "bool" sets nil)
     (\|= const-decl "bool" SPLrefinement nil))
    shostak))
@@ -139,20 +139,20 @@
    ((filter const-decl "mapping" maps nil)
     (subset? const-decl "bool" sets nil)
     (member const-decl "bool" sets nil)
-    (Asset formal-type-decl nil SPLPartialRefinementCommon nil)
-    (AssetName formal-type-decl nil SPLPartialRefinementCommon nil)
+    (Asset formal-type-decl nil PartialRefBasics nil)
+    (AssetName formal-type-decl nil PartialRefBasics nil)
     (dom const-decl "set[S]" maps nil)
     (boolean nonempty-type-decl nil booleans nil)
     (AM type-eq-decl nil SPLrefinement nil)
     ([\|\|] formal-const-decl
      "[CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]"
-     SPLPartialRefinementCommon nil)
+     PartialRefBasics nil)
     (mapping type-eq-decl nil maps nil)
     ({\|\|} formal-const-decl "[FM -> set[Conf]]"
-     SPLPartialRefinementCommon nil)
-    (CK formal-type-decl nil SPLPartialRefinementCommon nil)
-    (FM formal-type-decl nil SPLPartialRefinementCommon nil)
-    (Conf formal-type-decl nil SPLPartialRefinementCommon nil)
+     PartialRefBasics nil)
+    (CK formal-type-decl nil PartialRefBasics nil)
+    (FM formal-type-decl nil PartialRefBasics nil)
+    (Conf formal-type-decl nil PartialRefBasics nil)
     (unique const-decl "bool" maps nil)
     (finite_set type-eq-decl nil finite_sets nil)
     (is_finite const-decl "bool" finite_sets nil)
@@ -162,6 +162,6 @@
     (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
      sets_lemmas nil)
     (\|> const-decl "bool" SPLrefinement nil)
-    (amPartialRef const-decl "bool" SPLPartialRefinementCommon nil))
+    (amPartialRef const-decl "bool" PartialRefBasics nil))
    shostak)))
 

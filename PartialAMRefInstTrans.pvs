@@ -1,4 +1,4 @@
-SPLPartialAMRefInstTrans: THEORY
+PartialAMRefInstTrans: THEORY
 
 BEGIN
   IMPORTING FeatureModelSemantics
@@ -10,7 +10,7 @@ BEGIN
 
   eval(ck)(am)(c) : AM = semanticCK(ck,am,c,emptyset)
 
-  IMPORTING SPLPartialAMCompositionality
+  IMPORTING PartialAMCompositionality
       [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,CKtrans.CK]{{eval:=eval,wfCK:=wfCK}}
 
-END SPLPartialAMRefInstTrans
+END PartialAMRefInstTrans

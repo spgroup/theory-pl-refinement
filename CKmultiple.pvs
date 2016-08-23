@@ -46,12 +46,6 @@ BEGIN
       SELECT(ans): selectAssets(ans,am,amt)
     ENDCASES
 
-  cknames(ts:Transformations):set[AssetName] =
-     CASES ts OF 
-      IFDEF(an,tag): singleton(an),
-      SELECT(ans): ans
-    ENDCASES
-
   ckPreserves: THEOREM
    FORALL (am1: AM, am2: AM, t: Transformations, amt1: AM, amt2: AM):
     (am1 |> am2) AND (amt1 |> amt2) =>
@@ -60,8 +54,7 @@ BEGIN
 
   IMPORTING CKtrans{{
   	    Transformation:=Transformations,
-	    transform:=ckevaluation,
-            names:=cknames
+	    transform:=ckevaluation
   }}
   
   fm: VAR WFM
