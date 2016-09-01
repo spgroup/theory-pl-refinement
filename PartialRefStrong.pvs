@@ -1,4 +1,4 @@
-PartialRefinementStrong[Conf: TYPE,
+PartialRefStrong[Conf: TYPE,
                      FM: TYPE,
                      {||}: [FM -> set[Conf]],
                      Asset: TYPE,
@@ -179,4 +179,4 @@ BEGIN
 
    
 
-END SPLPartialRefinementStrong
+END PartialRefStrong

@@ -28,4 +28,4 @@ BEGIN
                                     (strongPartialRefinement(pl1,pl2,domain(m)) <=> weakPartialRefinement(pl1,pl2,m))
 
 
-END SPLPartialRefinement
+END PartialRefinement

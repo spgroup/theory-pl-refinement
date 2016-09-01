@@ -62,4 +62,4 @@ BEGIN
                                       ) WHERE q = composeMaps(m,n)
    
 
-END SPLPartialRefinementWeak
+END PartialRefWeak
