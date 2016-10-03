@@ -1,4 +1,4 @@
-PartialRefTemplates: THEORY
+PartialRefTemplatesComp: THEORY
 BEGIN
 
 IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements
@@ -280,17 +280,6 @@ syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
             am2 = overw(pairs,am1) AND
             ck2 = union(ck1,its)    
 
-% Theorem <When we add assets but filter the assets added the resulting products are equal>
-addAssetsSameProducts: THEOREM
-           FORALL (pl,am2,ck2,s,its,pairs):
-            (
-               (
-                   s = <>(exps(its),F(pl2)) AND
-                   syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) 
-                ) 
-               => FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
-            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
-
 conditionsAddAssets(pairs,ck) : bool = FORALL an : dom(pairs)(an) => NOT assetsCK(ck)(an)
 
 % Theorem <Add assets template represents a strong partial refinement>
@@ -311,8 +300,9 @@ addAssetsPartRefWeak: THEOREM
             FORALL (pl,am2,ck2,m,its,pairs):
             (
                (
-                 domain(m) = <>(F(pl2),K(pl2),domain(pairs)) AND
+                 domain(m) = <>(exps(its),F(pl2)) AND
                  syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+		 conditionsAddAssets(pairs,K(pl)) AND
                  identity?(m) AND
                  FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
@@ -364,11 +354,33 @@ moveFeaturePartialRefStrong: THEOREM
             (
                (
                  syntaxMoveFeature(F(pl),fm2,P,Q,R) AND
-                 s = intersection(<>(NAME_FORMULA(R),F(pl)),<>(NAME_FORMULA(R),fm2)) AND
+                 s = union(
+		            intersection(
+			                  intersection(
+			                               <>(NAME_FORMULA(P),F(pl)),
+					               <>(NAME_FORMULA(R),F(pl))
+					              ),
+					  <>(NAME_FORMULA(Q),F(pl))
+					),
+			    intersection(
+			                  intersection(
+			                               <>(F(pl),NAME_FORMULA(P)),
+					               <>(F(pl),NAME_FORMULA(R))
+						      ),
+					  <>(F(pl),NAME_FORMULA(Q))
+					)) AND
+					  
 		 (FORALL c : (semantics(fm2)(c) AND NOT s(c)) => SPLrefinement.wfProduct(semantics(K(pl))(A(pl))(c)))
                )
                => strongPartialRefinement(pl,pl2,s)
             )
             WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
 
-END PartialRefTemplates
+%syntaxMoveFeature1(fm1,fm2,P,Q,R) : bool =
+%	features(fm1) = features(fm2) AND
+%	add(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)),formulae(fm1)) AND
+%	(FORALL c: semantics(fm1)(c) => satisfies(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)),c)) AND
+%	subset?({F | F = P OR F = Q OR F = R},features(fm1))
+
+
+END PartialRefTemplatesComp
