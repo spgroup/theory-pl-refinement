@@ -12,8 +12,8 @@ BEGIN
   am,am1,am2,amt,amt1,amt2: VAR AM
   fm: VAR WFM
   exp: VAR Formula_
-  ck,its: VAR CK
-  item,it: VAR Item
+  ck,ck2,its: VAR CK
+  item,it,it2: VAR Item
   items,its1,its2: VAR list[Item]
   c: VAR Configuration
   assets,S,S1,S2: VAR finite_sets[Asset].finite_set
@@ -86,5 +86,6 @@ BEGIN
                             => 
                             (semanticsCK(ck,am,c,amt) = semanticsCK(append(ck,its),am,c,amt))
                          ))
+                         
 
 End CKtrans

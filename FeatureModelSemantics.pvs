@@ -2,9 +2,15 @@ FeatureModelSemantics: THEORY
  BEGIN
   IMPORTING FormulaTheory
 
+  fm: VAR FM
+  exp: VAR Formula_
+  exps: VAR set[Formula_]
+  c: VAR Configuration
+
   % well-formed feature model
   wfFM(fm: FM): bool = 
     wfTree(fm) AND wfFormulae(fm)                 
+
 
   WFM : TYPE = (wfFM)
 
@@ -107,5 +113,11 @@ FeatureModelSemantics: THEORY
   renameFeature3 : THEOREM
     FORALL(fm1:WFM,F,G:Name): (NOT features(fm1)(G)) => refines2(fm1,fm2)
     WHERE fm2=renameFM(fm1,F,G)
+
+  <>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
+
+  <>(exp,fm):set[Configuration]  = {c | semantics(fm)(c) AND not satisfies(exp,c)}
+
+  <>(exps,fm): set[Configuration] = {c | semantics(fm)(c) AND (FORALL exp: exps(exp) => not satisfies(exp,c))}
 
  END FeatureModelSemantics

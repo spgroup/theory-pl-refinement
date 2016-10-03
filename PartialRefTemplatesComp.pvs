@@ -40,12 +40,6 @@ IMPORTING SpecificSPL
 <>(fm,ck,anSet): set[Configuration] = {c | semantics(fm)(c) AND 
                                        (FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
 
-% ----Filter configurations that satisfy an expression exp and belong to a feature model fm
-<>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
-
-<>(exp,fm):set[Configuration]  = {c | semantics(fm)(c) AND not satisfies(exp,c)}
-
-<>(exps,fm): set[Configuration]  = {c | semantics(fm)(c) AND (FORALL exp: exps(exp) => not satisfies(exp,c))}
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
