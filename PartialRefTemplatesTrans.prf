@@ -1,4 +1,10 @@
 (PartialRefTemplatesTrans
+ (IMP_PartialRefinement_preserv_TCC1 0
+  (IMP_PartialRefinement_preserv_TCC1-1 nil 3684668369
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (addCKLinesBeforePartialRef_Transformation_nonempty_TCC1 0
+  (addCKLinesBeforePartialRef_Transformation_nonempty_TCC1-1 nil
+   3684668369 ("" (mapped-axiom-tcc) nil nil) nil nil))
  (addCKLinesBeforePartialRef_TCC1 0
   (addCKLinesBeforePartialRef_TCC1-1 nil 3680614955
    ("" (subtype-tcc) nil nil) nil nil))
@@ -426,7 +432,7 @@
         nil))
       nil))
     nil)
-   ((addItemsAfter formula-decl nil CKtrans nil) nil
+   ((addItemsAfter formula-decl nil CKtrans nil)
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -577,7 +583,6 @@
     (getExp const-decl "Formula_" CKtrans nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (member const-decl "bool" sets nil)
     (intersection const-decl "set" sets nil)
     (finite_emptyset name-judgement "finite_set" finite_sets nil)
@@ -586,5 +591,70 @@
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (subset? const-decl "bool" sets nil)
     (strongPartialRefinement const-decl "bool" PartialRefStrong nil))
-   shostak)))
+   shostak))
+ (syntaxRemoveFeature_Transformation_nonempty_TCC1 0
+  (syntaxRemoveFeature_Transformation_nonempty_TCC1-1 nil 3684668369
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (syntaxRemoveFeature_preserv_TCC1 0
+  (syntaxRemoveFeature_preserv_TCC1-1 nil 3684668369
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (conditionsRemoveFeature_Transformation_nonempty_TCC1 0
+  (conditionsRemoveFeature_Transformation_nonempty_TCC1-1 nil
+   3684668369 ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (removeFeaturePartialRef_TCC1 0
+  (removeFeaturePartialRef_TCC1-1 nil 3684654135
+   ("" (subtype-tcc) nil nil) nil nil))
+ (removeFeaturePartialRef 0
+  (removeFeaturePartialRef-1 nil 3684654135
+   ("" (expand strongPartialRefinement)
+    (("" (expand prod)
+      (("" (use SPLrefinement.assetRefinement)
+        (("" (expand preorder?)
+          (("" (flatten)
+            (("" (expand reflexive?)
+              ((""
+                (skolem 1
+                 (pl fm2 am2 ck2 its s it it2 pairs P Q an a a2))
+                (("" (bddsimp)
+                  (("1" (skolem 1 c)
+                    (("1" (bddsimp)
+                      (("1"
+                        (case "(semantics(K(pl))(A(pl))(c)) = (semantics(ck2)(am2)(c))")
+                        (("1" (replace -1 1)
+                          (("1" (inst -2 "(semantics(ck2)(am2)(c))")
+                            (("1" (lemma ckPreserves)
+                              (("1" (propax) nil nil)) nil))
+                            nil))
+                          nil)
+                         ("2" (hide 2)
+                          (("2"
+                            (name "sem" "(semantics(K(pl))(A(pl))(c))")
+                            (("2" (replace -1 1)
+                              (("2"
+                                (expand semantics)
+                                (("2"
+                                  (expand syntaxRemoveFeature)
+                                  (("2"
+                                    (flatten)
+                                    (("2" (postpone) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil)
+                         ("3" (postpone) nil nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (postpone) nil nil) ("3" (postpone) nil nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak)))
 

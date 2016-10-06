@@ -6,6 +6,7 @@ FeatureModelSemantics: THEORY
   exp: VAR Formula_
   exps: VAR set[Formula_]
   c: VAR Configuration
+  Q: VAR Name
 
   % well-formed feature model
   wfFM(fm: FM): bool = 
@@ -119,5 +120,8 @@ FeatureModelSemantics: THEORY
   <>(exp,fm):set[Configuration]  = {c | semantics(fm)(c) AND not satisfies(exp,c)}
 
   <>(exps,fm): set[Configuration] = {c | semantics(fm)(c) AND (FORALL exp: exps(exp) => not satisfies(exp,c))}
+
+  % This function filters formulas from an FM that do not have Q
+  filterFormulae(fm,Q): set[Formula_] = {form: Formula_ | formulae(fm)(form) AND NOT member(Q,names(form))}
 
  END FeatureModelSemantics

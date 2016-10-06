@@ -1,21 +1,23 @@
 PartialRefTemplatesTrans: THEORY
 BEGIN
-   IMPORTING CKtrans
+   IMPORTING CKmultiple
    
    am,am1,am2,pairs: VAR AM
    a,a1,a2: VAR Asset
    an: VAR AssetName
    s: VAR set[Configuration]
-   fm: VAR FM
+   fm,fm2: VAR FM
    ck,ck2: VAR CK
    it,it2: VAR Item
    its: VAR list[Item]
    c: VAR Configuration
+   P,Q: VAR Name
+   exp: VAR Formula_
    anSet: VAR set[AssetName]
 
    IMPORTING PartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
 
-   pl: VAR PL
+   pl,pl2: VAR PL
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD CK LINES %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -74,6 +76,54 @@ BEGIN
       	=>
         strongPartialRefinement(pl,pl2,s)
       ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+  %The remove feature template uses specific language from ck multiple theory (preprocess)
+  %IMPORTING CKmultiple
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% REMOVE FEATURE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  removeFeature(fm,fm2,P,Q):bool = formulae(fm2) = filterFormulae(fm,Q) AND
+                                  features(fm2) = remove(Q,features(fm))
+
+  syntaxRemoveFeature(fm,fm2,am,am2,ck,ck2,P,Q,it,it2,its,pairs,an,a,a2): bool =
+                                 removeFeature(fm,fm2,P,Q) AND
+                                 features(fm)(P) AND
+                                 features(fm)(Q) AND
+                                 am = ow((an,a),pairs) AND
+				 am2 = ow((an,a2),pairs) AND
+                                 ck = cons(it,ck2) AND
+				 ck2 = cons(it2,its) AND
+				 getRS(it) = IFDEF(an,true) AND
+				 getRS(it2) = IFDEF(an,false)
+
+  conditionsOpt(fm,P,Q):bool =  FORALL c: semantics(fm)(c) =>  NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
+  conditionsMand(fm,P,Q):bool = FORALL c: semantics(fm)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
+                                
+  conditionsRemoveFeature(fm,it,pairs,P,Q,ck) : bool = 
+                                 (FORALL c : satisfies(exp(it),c) => satisfies(NAME_FORMULA(Q),c))
+                                 AND
+				 (FORALL c: FORALL exp: exps(ck)(exp) AND satisfies(exp,c) => NOT satisfies(NAME_FORMULA(Q),c))
+                                 %(FORALL (item:Item) : NOT its(item) => FORALL an: (assets(item))(an) => NOT dom(pairs)(an))
+                                 AND
+                                 (FORALL c: semantics(fm)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),c))
+                                 AND
+                                 (conditionsOpt(fm,P,Q) OR conditionsMand(fm,P,Q))
+         
+
+  % Theorem <Remove feature template represents partial refinement>
+  removeFeaturePartialRef: THEOREM
+            FORALL (pl,fm2,am2,ck2,its,s,it,it2,pairs,P,Q,an,a,a2):
+            (
+                (
+		  syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,it,it2,its,pairs,an,a,a2) AND
+                  conditionsRemoveFeature(F(pl),it,pairs,P,Q,K(pl)) AND
+                  s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q)))
+		)  
+	       =>
+	       strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2 = (#F:=fm2, A:=am2, K:=ck2#)
 
 
 END PartialRefTemplatesTrans

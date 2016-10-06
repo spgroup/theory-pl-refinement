@@ -178,10 +178,7 @@ removeCKLinesStrongPartRef: THEOREM
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
-%---------------------------------------------------------------------------------------------------------------------------------------
-
-% This function filters formulas from an FM that do not have Q
-filterFormulae(fm,Q): set[Formula_] = {form: Formula_ | formulae(fm)(form) AND NOT member(Q,names(form))}       
+%---------------------------------------------------------------------------------------------------------------------------------------       
 
 % The formulas of the new FM must not have the removed feature 
 removeFeature(fm1,fm2,P,Q):bool = formulae(fm2) = filterFormulae(fm1,Q) AND
@@ -331,50 +328,6 @@ removeAssetsPartRefWeak: THEOREM
                )
                => weakPartialRefinement(pl,pl2,m)
             ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
-
-%---------------------------------------------------------------------------------------------------------------------------------------
-%---------------------------------------------MOVE FEATURE DECL-------------------------------------------------------------------------
-%---------------------------------------------------------------------------------------------------------------------------------------
-
-
-syntaxMoveFeature(fm1,fm2,P,Q,R) : bool =
-	features(fm1) = features(fm2) AND
-	formulae(fm2) = add(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)),
-	                    remove(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P)),formulae(fm1))) AND
-	subset?({F | F = P OR F = Q OR F = R},features(fm1))
-
-moveFeaturePartialRefStrong: THEOREM
-      FORALL (pl,fm2,s,P,Q,R): 
-            (
-               (
-                 syntaxMoveFeature(F(pl),fm2,P,Q,R) AND
-                 s = union(
-		            intersection(
-			                  intersection(
-			                               <>(NAME_FORMULA(P),F(pl)),
-					               <>(NAME_FORMULA(R),F(pl))
-					              ),
-					  <>(NAME_FORMULA(Q),F(pl))
-					),
-			    intersection(
-			                  intersection(
-			                               <>(F(pl),NAME_FORMULA(P)),
-					               <>(F(pl),NAME_FORMULA(R))
-						      ),
-					  <>(F(pl),NAME_FORMULA(Q))
-					)) AND
-					  
-		 (FORALL c : (semantics(fm2)(c) AND NOT s(c)) => SPLrefinement.wfProduct(semantics(K(pl))(A(pl))(c)))
-               )
-               => strongPartialRefinement(pl,pl2,s)
-            )
-            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
-
-%syntaxMoveFeature1(fm1,fm2,P,Q,R) : bool =
-%	features(fm1) = features(fm2) AND
-%	add(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)),formulae(fm1)) AND
-%	(FORALL c: semantics(fm1)(c) => satisfies(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)),c)) AND
-%	subset?({F | F = P OR F = Q OR F = R},features(fm1))
 
 
 END PartialRefTemplatesComp
