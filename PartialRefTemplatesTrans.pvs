@@ -87,12 +87,13 @@ BEGIN
   removeFeature(fm,fm2,P,Q):bool = formulae(fm2) = filterFormulae(fm,Q) AND
                                   features(fm2) = remove(Q,features(fm))
 
-  syntaxRemoveFeature(fm,fm2,am,am2,ck,ck2,P,Q,it,it2,its,pairs,an,a,a2): bool =
+  syntaxRemoveFeature(fm,fm2,am,am2,ck,ck2,P,Q,it,it2,its,pairs,an,a): bool =
                                  removeFeature(fm,fm2,P,Q) AND
                                  features(fm)(P) AND
                                  features(fm)(Q) AND
                                  am = ow((an,a),pairs) AND
-				 am2 = ow((an,a2),pairs) AND
+				 %am2 = ow((an,preprocessfile(a,false)),pairs) AND
+				 am2 = am AND
                                  ck = cons(it,ck2) AND
 				 ck2 = cons(it2,its) AND
 				 getRS(it) = IFDEF(an,true) AND
@@ -114,10 +115,10 @@ BEGIN
 
   % Theorem <Remove feature template represents partial refinement>
   removeFeaturePartialRef: THEOREM
-            FORALL (pl,fm2,am2,ck2,its,s,it,it2,pairs,P,Q,an,a,a2):
+            FORALL (pl,fm2,am2,ck2,its,s,it,it2,pairs,P,Q,an,a):
             (
                 (
-		  syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,it,it2,its,pairs,an,a,a2) AND
+		  syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,it,it2,its,pairs,an,a) AND
                   conditionsRemoveFeature(F(pl),it,pairs,P,Q,K(pl)) AND
                   s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q)))
 		)  
