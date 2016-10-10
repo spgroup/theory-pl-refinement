@@ -474,46 +474,48 @@
                                             (("1"
                                               (decompose-equality)
                                               (("1"
-                                                (decompose-equality
-                                                 -11)
+                                                (expand union)
                                                 (("1"
-                                                  (inst -1 f)
+                                                  (expand member)
                                                   (("1"
-                                                    (bddsimp)
+                                                    (expand singleton)
                                                     (("1"
-                                                      (expand union)
+                                                      (decompose-equality
+                                                       -10)
                                                       (("1"
-                                                        (expand member)
+                                                        (inst -1 f)
                                                         (("1"
-                                                          (expand
-                                                           singleton)
+                                                          (bddsimp)
                                                           (("1"
-                                                            (bddsimp)
+                                                            (inst -6 f)
                                                             (("1"
-                                                              (inst
-                                                               -6
-                                                               f)
-                                                              (("1"
-                                                                (bddsimp)
-                                                                nil
-                                                                nil))
-                                                              nil)
-                                                             ("2"
-                                                              (replace
-                                                               -2
+                                                              (bddsimp)
+                                                              nil
+                                                              nil))
+                                                            nil)
+                                                           ("2"
+                                                            (replace
+                                                             -2
+                                                             1)
+                                                            (("2"
+                                                              (expand
+                                                               satisfies
                                                                1)
                                                               (("2"
-                                                                (expand
-                                                                 satisfies
-                                                                 1)
-                                                                (("2"
-                                                                  (bddsimp)
-                                                                  nil
-                                                                  nil))
+                                                                (bddsimp)
+                                                                nil
                                                                 nil))
                                                               nil))
                                                             nil))
                                                           nil))
+                                                        nil)
+                                                       ("2"
+                                                        (grind)
+                                                        nil
+                                                        nil)
+                                                       ("3"
+                                                        (grind)
+                                                        nil
                                                         nil))
                                                       nil))
                                                     nil))
@@ -571,18 +573,19 @@
                                           (("1"
                                             (bddsimp)
                                             (("1"
-                                              (decompose-equality -10)
+                                              (expand union)
                                               (("1"
-                                                (inst -1 f)
+                                                (expand member)
                                                 (("1"
-                                                  (bddsimp)
+                                                  (expand singleton)
                                                   (("1"
-                                                    (expand union)
+                                                    (expand
+                                                     satImpConsts)
                                                     (("1"
-                                                      (expand member)
+                                                      (decompose-equality
+                                                       -9)
                                                       (("1"
-                                                        (expand
-                                                         singleton)
+                                                        (inst -1 f)
                                                         (("1"
                                                           (bddsimp)
                                                           (("1"
@@ -604,7 +607,7 @@
                                                                 (("2"
                                                                   (expand
                                                                    satisfies
-                                                                   -12)
+                                                                   -11)
                                                                   (("2"
                                                                     (propax)
                                                                     nil
@@ -614,6 +617,14 @@
                                                               nil))
                                                             nil))
                                                           nil))
+                                                        nil)
+                                                       ("2"
+                                                        (grind)
+                                                        nil
+                                                        nil)
+                                                       ("3"
+                                                        (grind)
+                                                        nil
                                                         nil))
                                                       nil))
                                                     nil))
@@ -726,18 +737,20 @@
      nil)
     (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
      nil)
-    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (IMPLIES_FORMULA adt-constructor-decl
-     "[[Formula_, Formula_] -> (IMPLIES?)]" Formula__adt nil)
+    (union const-decl "set" sets nil)
     (singleton const-decl "(singleton?)" sets nil)
-    (singleton? const-decl "bool" sets nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (OR const-decl "[bool, bool -> bool]" booleans nil)
     (IMPLIES? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
      nil)
-    (union const-decl "set" sets nil)
+    (IMPLIES_FORMULA adt-constructor-decl
+     "[[Formula_, Formula_] -> (IMPLIES?)]" Formula__adt nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (nonempty_singleton_finite application-judgement
      "non_empty_finite_set" finite_sets nil)
     (syntaxMoveFeature1 const-decl "bool" PartialRefTemplatesFM nil)
+    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (member const-decl "bool" sets nil)
     (subset? const-decl "bool" sets nil)
     (strongPartialRefinement const-decl "bool" PartialRefStrong nil))
@@ -1274,8 +1287,7 @@
     (IMPLIES? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
      nil)
     (OR const-decl "[bool, bool -> bool]" booleans nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (= const-decl "[T, T -> boolean]" equalities nil) nil
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (preorder? const-decl "bool" orders nil)
     (reflexive? const-decl "bool" relations nil)

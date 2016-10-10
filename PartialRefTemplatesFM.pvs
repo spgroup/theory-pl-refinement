@@ -84,7 +84,6 @@ PartialRefTemplatesFM : THEORY
      features(fm1)(R) AND
      features(fm1) = features(fm2) AND
      formulae(fm1)(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P))) AND
-     formulae(fm1)(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P))) AND
      formulae(fm2) = union(formulae(fm1),IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)))
 
   moveFeaturePartialRefinement1: THEOREM
