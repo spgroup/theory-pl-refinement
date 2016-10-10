@@ -92,7 +92,7 @@ BEGIN
     ckWeakerEqStrongDef: THEOREM
      FORALL (pl,ck2,s):
      (
-       subset?(s,{||}(F(pl))) AND ckWeakerEq(ck1,ck2,s) 
+       subset?(s,{||}(F(pl))) AND ckWeakerEq(ck1,ck2,s) AND wfPL(pl2) 
        =>
        strongPartialRefinement(pl,pl2,s)
      )
@@ -154,7 +154,7 @@ BEGIN
 
    totalPlusPartImpliesPartRef: THEOREM FORALL pl1,pl2,pl3,s: 
                                plRefinement(pl1,pl2) AND strongPartialRefinement(pl2,pl3,s) => 
-                               (EXISTS (t:set[Conf]) : partRefRel(pl1,pl3,t))
+                               (EXISTS (t:set[Conf] | subset?(t,{||}(F(pl1)))) : partRefRel(pl1,pl3,t))
 
    partRefExistsFunId: LEMMA FORALL pl1,pl2,s: strongPartialRefinement(pl1,pl2,s) => 
                    (EXISTS (f:[(s) -> (s)])  :  (FORALL c : s(c) => ({||}(F(pl2))(f(c))) and (prod(pl1,c) |- prod(pl2,f(c)))))           
