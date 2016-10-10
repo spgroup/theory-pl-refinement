@@ -1,11 +1,13 @@
 CKmultiple: THEORY
 BEGIN
   IMPORTING AssetMapping
-  
+
+  Tag: TYPE
+
   AssetIfdef: TYPE = [AssetName,boolean]
 
   AssetNames: TYPE = finite_sets[AssetName].finite_set
-
+  
   ans: VAR AssetNames
   n,an: VAR AssetName
   a,b,a1,a2: VAR Asset
@@ -16,7 +18,6 @@ BEGIN
 
   selectAssets(ans,am,amt):AM = 
     overw(filter(ans,am),amt)
-
 
   preprocessfile(a,tag):Asset
 
