@@ -15,7 +15,7 @@ BEGIN
     fm1,fm2: VAR FM
     an: VAR AssetName
     a1,a2: VAR Asset
-    anSet: VAR set[AssetName]
+    anSet: VAR finite_sets[AssetName].finite_set
     ck1,ck2: VAR CK
 
     IMPORTING SPLrefinement[Conf,FM, Asset,AssetName,CK,{||},[||]]  
@@ -34,8 +34,6 @@ BEGIN
    % -------------------------------------------------------------------------------------------------------- 
     amPartialRef(am1,am2,anSet) : bool =
           |>(filter(anSet,am1),filter(anSet,am2))
-     %     (FORALL an: (anSet)(an) =>
-     %    EXISTS a1,a2: (am1(an,a1)) AND (am2(an,a2)) AND |-(a1,a2))  
             
 
    % --------------------------------------------------------------------------------------------------------
