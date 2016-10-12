@@ -321,8 +321,9 @@ removeAssetsPartRefWeak: THEOREM
             FORALL (pl,am2,ck2,m,its,pairs):
             (
                (
-                 domain(m) = <>(F(pl),K(pl),domain(pairs)) AND
+                 domain(m) = <>(exps(its),F(pl2)) AND
                  syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
+		 conditionsAddAssets(pairs,K(pl)) AND
                  identity?(m) AND
                  FORALL c: NOT domain(m)(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
                )
