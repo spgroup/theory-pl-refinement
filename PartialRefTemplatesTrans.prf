@@ -1,7 +1,8 @@
 (PartialRefTemplatesTrans
  (IMP_PartialRefinement_preserv_TCC1 0
   (IMP_PartialRefinement_preserv_TCC1-1 nil 3684668369
-   ("" (mapped-axiom-tcc) nil nil) nil nil))
+   ("" (lemma ckPreserves) (("" (propax) nil nil)) nil)
+   ((ckPreserves formula-decl nil CKmultiple nil)) nil))
  (addCKLinesBeforePartialRef_Transformation_nonempty_TCC1 0
   (addCKLinesBeforePartialRef_Transformation_nonempty_TCC1-1 nil
    3684668369 ("" (mapped-axiom-tcc) nil nil) nil nil))
@@ -912,8 +913,7 @@
     (ckevaluation const-decl "AM" CKmultiple nil)
     (semantics const-decl "finite_sets[Asset].finite_set" CKtrans nil)
     (ckPreserves formula-decl nil CKmultiple nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (= const-decl "[T, T -> boolean]" equalities nil) nil
     (conditionsRemoveFeature const-decl "bool" PartialRefTemplatesTrans
      nil)
     (semanticsCK def-decl "finite_sets[Asset].finite_set" CKtrans nil)
