@@ -24,7 +24,7 @@ PartialAMCompositionality[Conf:TYPE,
 
   eval(ck)(am)(c): AM
 
-  [||](ck)(am)(c): finite_sets[Asset].finite_set = image((eval)(ck)(am)(c))
+  [||](ck)(am)(c): finite_sets[Asset].finite_set = image(eval(ck)(am)(c))
 
   IMPORTING PartialRefStrong[Conf,FM,{||},Asset,AssetName,CK,[||]]
 
@@ -46,10 +46,20 @@ PartialAMCompositionality[Conf:TYPE,
                                                     => 
                                                    domain(eval(ck)(am)(c)) = domain(eval(ck)(am2)(c))
 
-  amPartialRefStrongDef: THEOREM
+  amPartialRefProdRef: LEMMA
       FORALL (pl,am2,anSet):
      (
-       amPartialRef(am1,am2,anSet) 
+       amPartialRef(am1,am2,anSet)
+       =>
+       (FORALL c: s(c)  => (([||](K(pl))(am1)(c)) |- ([||](K(pl))(am2)(c))))
+     )
+     WHERE am1=A(pl),pl2=(# F:= F(pl), A := am2, K := K(pl) #),s=intersection(^^(F(pl),A(pl),K(pl),anSet),^^(F(pl),am2,K(pl),anSet))
+
+ amPartialRefStrongDef: THEOREM
+      FORALL (pl,am2,anSet):
+     (
+       (amPartialRef(am1,am2,anSet) AND
+       FORALL c: NOT s(c) AND {||}(F(pl))(c) => wfProduct([||](K(pl2))(A(pl2))(c)))
        =>
        strongPartialRefinement(pl,pl2,s)
      )
@@ -59,7 +69,9 @@ PartialAMCompositionality[Conf:TYPE,
  amPartialRefSameDomStrongDef: THEOREM
       FORALL (pl,am2,anSet):
      (
-       (amPartialRef(am1,am2,anSet) AND domain(am1) = domain(am2))
+       (amPartialRef(am1,am2,anSet) AND
+        domain(am1) = domain(am2) AND
+	(FORALL c: NOT s(c) AND {||}(F(pl))(c) => wfProduct([||](K(pl2))(A(pl2))(c))))
        =>
        strongPartialRefinement(pl,pl2,s)
      )
@@ -74,7 +86,9 @@ PartialAMCompositionality[Conf:TYPE,
        wfCK(F(pl),A(pl),K(pl)) AND
        wfCK(F(pl),am2,K(pl)) AND
        subset?(u,{||}(F(pl))) AND subset?(u,{||}(F(pl2))) AND
-       wfPL((# F:= F(pl), A:= am2, K:= K(pl)  #))
+       wfPL((# F:= F(pl), A:= am2, K:= K(pl)  #)) AND
+       wfPL((# F:= F(pl), A:= am2, K:=ck2  #)) AND
+       wfPL(pl2) 
        =>
        strongPartialRefinement(pl,pl2,intersection(u,intersection(s,t)))
      )
