@@ -27,7 +27,8 @@ BEGIN
      FORALL pl,ck2,its,s:
       (
 	(s = <>(exps(its),F(pl)) AND
-      	ck2 = append(its,K(pl)))
+      	ck2 = append(its,K(pl)) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
       	=>
         strongPartialRefinement(pl,pl2,s)
       ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
