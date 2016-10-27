@@ -37,7 +37,8 @@ BEGIN
      FORALL pl,ck2,its,s:
       (
 	(s = <>(exps(its),F(pl)) AND
-      	ck2 = append(K(pl),its))
+      	ck2 = append(K(pl),its) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c)))
       	=>
         strongPartialRefinement(pl,pl2,s)
       ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
@@ -50,7 +51,8 @@ BEGIN
       FORALL pl,ck2,its,s:
       (
 	(s = <>(exps(its),F(pl)) AND
-      	K(pl) = append(its,ck2))
+      	K(pl) = append(its,ck2) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
       	=>
         strongPartialRefinement(pl,pl2,s)
       ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
@@ -59,7 +61,8 @@ BEGIN
       FORALL pl,ck2,its,s:
       (
 	(s = <>(exps(its),F(pl)) AND
-      	K(pl) = append(ck2,its))
+      	K(pl) = append(ck2,its) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
       	=>
         strongPartialRefinement(pl,pl2,s)
       ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
@@ -73,7 +76,8 @@ BEGIN
       (
 	(s = intersection(<>(getExp(it),F(pl)),<>(getExp(it2),F(pl))) AND
 	K(pl) = cons(it,its) AND
-     	ck2 = cons(it2,its))
+     	ck2 = cons(it2,its) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
       	=>
         strongPartialRefinement(pl,pl2,s)
       ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
@@ -111,7 +115,8 @@ BEGIN
                 (
 		  syntaxRemoveFeature(F(pl),F(pl2),A(pl),K(pl),K(pl2),P,Q,it,pairs,an,a) AND
                   conditionsRemoveFeature(F(pl),it,pairs,P,Q,K(pl)) AND
-                  s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q)))
+                  s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q))) AND
+		  (FORALL c: (NOT s(c) AND semantics(F(pl2))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
 		)  
 	       =>
 	       strongPartialRefinement(pl,pl2,s)
