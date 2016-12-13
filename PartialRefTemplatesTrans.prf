@@ -89,7 +89,6 @@
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
     (addItemsBefore formula-decl nil CKtrans nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (exps def-decl "set[Formula_]" CKtrans nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
@@ -273,8 +272,7 @@
         nil))
       nil))
     nil)
-   ((<> const-decl "set[Configuration]" FeatureModelSemantics nil)
-    (addItemsAfter formula-decl nil CKtrans nil)
+   ((addItemsAfter formula-decl nil CKtrans nil)
     (emptyset const-decl "set" sets nil)
     (finite_emptyset name-judgement "finite_set" finite_sets nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
@@ -410,7 +408,7 @@
     (= const-decl "[T, T -> boolean]" equalities nil)
     (exps def-decl "set[Formula_]" CKtrans nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
-    (satisfies def-decl "boolean" FormulaTheory nil) nil
+    (satisfies def-decl "boolean" FormulaTheory nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -502,7 +500,6 @@
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (exps def-decl "set[Formula_]" CKtrans nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
@@ -626,7 +623,6 @@
     (ckPreserves formula-decl nil CKmultiple nil)
     (reflexive? const-decl "bool" relations nil)
     (preorder? const-decl "bool" orders nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
     (exps def-decl "set[Formula_]" CKtrans nil)
@@ -725,7 +721,6 @@
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (NOT const-decl "[bool -> bool]" booleans nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (exps def-decl "set[Formula_]" CKtrans nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
@@ -837,7 +832,6 @@
     (AssetName nonempty-type-decl nil Assets nil)
     (Transformations type-decl nil CKmultiple nil)
     (addItemsAfter formula-decl nil CKtrans nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (Name type-decl nil Name nil)
     (Configuration type-eq-decl nil Name nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
@@ -1042,7 +1036,6 @@
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (intersection const-decl "set" sets nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (getExp const-decl "Formula_" CKtrans nil)
     (finite_emptyset name-judgement "finite_set" finite_sets nil)
     (semanticsCK def-decl "finite_sets[Asset].finite_set" CKtrans nil)
@@ -1165,7 +1158,6 @@
     (getExp const-decl "Formula_" CKtrans nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (member const-decl "bool" sets nil)
     (intersection const-decl "set" sets nil)
     (finite_emptyset name-judgement "finite_set" finite_sets nil)
@@ -1505,7 +1497,6 @@
     (semantics const-decl "finite_sets[Asset].finite_set" CKtrans nil)
     (ckPreserves formula-decl nil CKmultiple nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (conditionsRemoveFeature const-decl "bool" PartialRefTemplatesTrans
      nil)
     (semanticsCK def-decl "finite_sets[Asset].finite_set" CKtrans nil)
@@ -1542,5 +1533,184 @@
     (preorder? const-decl "bool" orders nil)
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement
      nil))
+   shostak))
+ (removeIfDefFromCode_Transformation_nonempty_TCC1 0
+  (removeIfDefFromCode_Transformation_nonempty_TCC1-1 nil 3688726335
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (removeIfDefFromCode_preserv_TCC1 0
+  (removeIfDefFromCode_preserv_TCC1-1 nil 3688726214
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (removeIfDefFromCode_TCC1 0
+  (removeIfDefFromCode_TCC1-1 nil 3688726214 ("" (subtype-tcc) nil nil)
+   nil nil))
+ (removeIfDefFromCode 0
+  (removeIfDefFromCode-1 nil 3688726215
+   ("" (skolem 1 (pl s am2 its pairs an a a2))
+    (("" (postpone) nil nil)) nil)
+   nil shostak)))
+(PartialRefTemplatesIfDef
+ (removeIfDefPartialRef_Transformation_nonempty_TCC1 0
+  (removeIfDefPartialRef_Transformation_nonempty_TCC1-1 nil 3690559485
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (removeIfDefPartialRef_preserv_TCC1 0
+  (removeIfDefPartialRef_preserv_TCC1-1 nil 3690559485
+   ("" (mapped-axiom-tcc) nil nil) nil nil))
+ (removeIfDefPartialRef_TCC1 0
+  (removeIfDefPartialRef_TCC1-1 nil 3690559485
+   ("" (subtype-tcc) nil nil) nil nil))
+ (removeIfDefPartialRef 0
+  (removeIfDefPartialRef-1 nil 3690559486
+   ("" (skolem 1 (pl s am2 pairs n a a2 it its))
+    (("" (expand strongPartialRefinement)
+      (("" (bddsimp)
+        (("1" (lemma removeIfDefFromCode)
+          (("1" (skolem 2 c)
+            (("1" (bddsimp)
+              (("1" (expand prod)
+                (("1" (inst -1 "A(pl)" s am2 pairs "K(pl)" n a a2)
+                  (("1" (bddsimp)
+                    (("1" (expand semantics)
+                      (("1" (inst -4 emptyset)
+                        (("1" (inst -4 c)
+                          (("1" (bddsimp)
+                            (("1" (replace -5 2)
+                              (("1"
+                                (lemma SPLrefinement.assetRefinement)
+                                (("1"
+                                  (expand preorder?)
+                                  (("1"
+                                    (flatten)
+                                    (("1"
+                                      (expand reflexive?)
+                                      (("1"
+                                        (inst
+                                         -1
+                                         "semanticsCK(K(pl), am2, c, emptyset)")
+                                        (("1"
+                                          (lemma preprocessPreserves)
+                                          (("1" (propax) nil nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil)
+                     ("2" (skolem 2 item)
+                      (("2" (bddsimp)
+                        (("2" (skolem 2 c2)
+                          (("2" (bddsimp)
+                            (("2" (expand "<>")
+                              (("2"
+                                (decompose-equality -10)
+                                (("2"
+                                  (inst -1 c2)
+                                  (("2"
+                                    (bddsimp)
+                                    (("2"
+                                      (replace -10 -6)
+                                      (("2"
+                                        (expand member -6)
+                                        (("2"
+                                          (bddsimp)
+                                          (("1"
+                                            (replace -6 1 RL)
+                                            (("1" (propax) nil nil))
+                                            nil)
+                                           ("2"
+                                            (inst -11 item)
+                                            (("2"
+                                              (bddsimp)
+                                              (("1"
+                                                (decompose-equality -7)
+                                                nil
+                                                nil)
+                                               ("2"
+                                                (decompose-equality -7)
+                                                nil
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("2" (expand "<>")
+          (("2" (decompose-equality -6)
+            (("2" (expand subset?)
+              (("2" (skolem 2 c)
+                (("2" (inst -1 c)
+                  (("2" (expand member) (("2" (bddsimp) nil nil)) nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (finite_emptyset name-judgement "finite_set" finite_sets nil)
+    (emptyset const-decl "set" sets nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (semanticsCK def-decl "finite_sets[Asset].finite_set" CKtrans nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (\|> const-decl "bool" AssetMapping nil)
+    (preprocessPreserves formula-decl nil CKifdef nil)
+    (reflexive? const-decl "bool" relations nil)
+    (preorder? const-decl "bool" orders nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (member def-decl "bool" list_props nil)
+    (TRUE const-decl "bool" booleans nil)
+    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (semantics const-decl "finite_sets[Asset].finite_set" CKtrans nil)
+    (preprocess const-decl "AM" CKifdef nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (list type-decl nil list_adt nil)
+    (AssetIfdef type-eq-decl nil CKifdef nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (Configuration type-eq-decl nil Name nil)
+    (Name type-decl nil Name nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (removeIfDefFromCode formula-decl nil CKifdef nil)
+    (subset_is_partial_order name-judgement "(partial_order?[set[T]])"
+     sets_lemmas nil)
+    (member const-decl "bool" sets nil)
+    (subset? const-decl "bool" sets nil)
+    (strongPartialRefinement const-decl "bool" PartialRefStrong nil))
    shostak)))
 

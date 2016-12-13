@@ -7,7 +7,7 @@ BEGIN
   n: VAR AssetName
   a,b,a1,a2: VAR Asset
   tag: VAR bool
-  am,amt: VAR AM
+  am,am2,amt,pairs: VAR AM
   t: VAR AssetIfdef
   assets: VAR finite_sets[Asset].finite_set 
 
@@ -20,9 +20,7 @@ BEGIN
     |-(a,b) <=> FORALL(tag):|-(preprocessfile(a,tag),preprocessfile(b,tag))
 
   preprocess(t,am,amt):AM = 
-    IF (dom(amt)(t`1)) THEN ow((t`1,preprocessfile(map(amt,singleton(t`1)),t`2)),amt)
-    ELSE amt
-    ENDIF
+    ow((t`1,preprocessfile(map(am,singleton(t`1)),t`2)),amt)
 
   keepdom: LEMMA
     dom(amt) = dom(preprocess(t,am,amt))
@@ -30,6 +28,31 @@ BEGIN
   preprocessPreserves: THEOREM
    FORALL (am1: AM, am2: AM, t: AssetIfdef, amt1: AM, amt2: AM):
     (am1 |> am2) AND (amt1 |> amt2) =>
-     (preprocess(t, am1, amt1) |> preprocess(t, am2, amt2));
+     (preprocess(t, am1, amt1) |> preprocess(t, am2, amt2))
+
+  IMPORTING CKtrans{{
+    Transformation := AssetIfdef,
+    transform := preprocess
+  }}
+
+  c: VAR Configuration
+  s: VAR set[Configuration]
+  ck: VAR CK
+  it: VAR Item
+
+  removeIfDefFromCode: THEOREM
+         FORALL (am,s,am2,pairs,ck,n,a,a2):
+                (
+		  am = ow((n,a),pairs) AND
+		  am2 = ow((n,a2),pairs) AND
+		  NOT preprocessfile(a,true) = preprocessfile(a2,true) AND
+		  preprocessfile(a,false) = preprocessfile(a2,false) AND
+		  (FORALL it: member(it,ck) =>
+		  	  (tasks(it) = (n,true)
+			  =>
+			  FORALL c: s(c) => NOT satisfies(exp(it),c))
+		)  
+	       =>
+	       (FORALL amt: (FORALL c: s(c) => semanticsCK(ck,am,c,amt) = semanticsCK(ck,am2,c,amt))))
 
 END CKifdef

@@ -2,17 +2,15 @@ CKmultiple: THEORY
 BEGIN
   IMPORTING AssetMapping
 
-  Tag: TYPE
-
-  AssetIfdef: TYPE = [AssetName,boolean]
+  AssetIfdef: TYPE = [AssetName,bool]
 
   AssetNames: TYPE = finite_sets[AssetName].finite_set
-  
+
   ans: VAR AssetNames
   n,an: VAR AssetName
   a,b,a1,a2: VAR Asset
   tag: VAR bool
-  am,amt,am2,amt2: VAR AM
+  am,amt,am2,amt2,pairs: VAR AM
   t: VAR AssetIfdef
   assets: VAR finite_sets[Asset].finite_set 
 
@@ -42,7 +40,7 @@ BEGIN
    END Transformations
 
   ckevaluation(ts:Transformations,am,amt:AM):AM =
-    CASES ts OF 
+    CASES ts OF
       IFDEF(an,tag): preprocess((an,tag),am,amt),
       SELECT(ans): selectAssets(ans,am,amt)
     ENDCASES
@@ -67,6 +65,7 @@ BEGIN
   anSet: VAR finite_sets[AssetName].finite_set
   s: VAR set[Configuration]
 
+
   domainPreserved: LEMMA FORALL ck,am,c,amt: subset?(dom(semanticCK(ck,am,c,amt)),union(dom(am),dom(amt)))  
 
 
@@ -88,6 +87,25 @@ BEGIN
                                    domain(am) = domain(am2)  
                                     =>
                                    (domain(semanticCK(ck,am,c,amt)) = domain(semanticCK(ck,am2,c,amt)))
+
+
+  removeIfDefFromCode: THEOREM
+         FORALL (am,s,am2,pairs,ck,an,a,a2):
+                (
+		  am = ow((an,a),pairs) AND
+		  am2 = ow((an,a2),pairs) AND
+		  NOT preprocessfile(a,true) = preprocessfile(a2,true) AND
+		  preprocessfile(a,false) = preprocessfile(a2,false) AND
+		  %getRS(it) = IFDEF(an,true) AND
+		  (FORALL it: member(it,ck) =>
+		  	  (tasks(it) = IFDEF(an,true) OR
+			  tasks(it) = SELECT(an))
+			  =>
+			  FORALL c: s(c) => NOT satisfies(exp(it),c))
+		)  
+	       =>
+	       (FORALL amt: (FORALL c: s(c) => semanticsCK(ck,am,c,amt) = semanticsCK(ck,am2,c,amt)))
+            
 
   
 

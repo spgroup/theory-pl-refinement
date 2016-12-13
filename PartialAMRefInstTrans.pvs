@@ -4,13 +4,40 @@ BEGIN
   IMPORTING FeatureModelSemantics
   IMPORTING CKmultiple
 
+  fm: VAR FM
   c: VAR Configuration
-  am: VAR AM
-  ck: VAR CK
-
+  am,am1,am2,pairs: VAR AM
+  ck,ck1,ck2: VAR CK
+  its: VAR list[Item]
+  s: VAR set[Configuration]
+  
   eval(ck)(am)(c) : AM = semanticCK(ck,am,c,emptyset)
 
   IMPORTING PartialAMCompositionality
       [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,CKtrans.CK]{{eval:=eval,wfCK:=wfCK}}
+
+  pl: VAR PL
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% ADD ASSETS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
+            am2 = overw(pairs,am1) AND
+	    ck2 = append(its,ck1)
+
+  conditionsAddAssets(pairs,fm,am,ck): bool = FORALL c: semantics(fm)(c) => empty?(intersection(dom(eval(ck)(am)(c)),dom(pairs)))
+
+  addAssetsPartRefStrong: THEOREM
+            FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(exps(its),F(pl2)) AND
+                 syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+		 conditionsAddAssets(pairs,F(pl),am2,K(pl)) AND
+                 FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+	    ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
 
 END PartialAMRefInstTrans

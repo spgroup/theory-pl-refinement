@@ -22,7 +22,6 @@ BEGIN
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD CK LINES %%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
   addCKLinesBeforePartialRef: THEOREM
      FORALL pl,ck2,its,s:
       (
@@ -122,5 +121,57 @@ BEGIN
 	       strongPartialRefinement(pl,pl2,s)
             ) WHERE pl2 = (#F:=fm2, A:=A(pl), K:=ck2#)
 
+  removeIfDefFromCode: THEOREM
+         FORALL (pl,s,am2,its,pairs,an,a,a2):
+            (
+                (
+		  A(pl) = ow((an,a),pairs) AND
+		  am2 = ow((an,a2),pairs) AND
+		  NOT preprocessfile(a,true) = preprocessfile(a2,true) AND
+		  preprocessfile(a,false) = preprocessfile(a2,false) AND
+                  s = <>(exps(its),F(pl)) AND
+		  (FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl))(A(pl))(c))) 
+		)  
+	       =>
+	       strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2 = (#F:=F(pl), A:=am2, K:=K(pl)#), its = {it | getRS(it) = IFDEF(an,true)}
 
 END PartialRefTemplatesTrans
+
+PartialRefTemplatesIfDef: THEORY
+BEGIN
+
+  IMPORTING CKifdef
+
+   am2,pairs: VAR AM
+   a,a2: VAR Asset
+   n: VAR AssetName
+   s: VAR set[Configuration]
+   it: VAR Item
+   its: VAR list[Item]
+   c: VAR Configuration
+
+  IMPORTING PartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
+
+  pl,pl2: VAR PL
+
+  removeIfDefPartialRef: THEOREM
+         FORALL (pl,s,am2,pairs,n,a,a2,it,its):
+                (
+		  A(pl) = ow((n,a),pairs) AND
+		  am2 = ow((n,a2),pairs) AND
+		  NOT preprocessfile(a,true) = preprocessfile(a2,true) AND
+		  preprocessfile(a,false) = preprocessfile(a2,false) AND
+		  getRS(it) = (n,true) AND
+		  K(pl) = cons(it,its) AND
+		  s = <>(exp(it),F(pl)) AND
+		  (FORALL it: member(it,its) =>
+		  	  (tasks(it)`1 = n)
+			  =>
+			  (tasks(it)`2 = false)
+	         )  
+	       =>
+	       strongPartialRefinement(pl,pl2,s))
+	       WHERE pl2 = (#F:= F(pl), A:=am2, K:=K(pl)#)
+
+END PartialRefTemplatesIfDef

@@ -50,6 +50,8 @@ BEGIN
   semantics(ck)(am)(c): finite_sets[Asset].finite_set = 
     semanticsCK(ck,am,c,emptyset)
 
+  similarFunctions: LEMMA FORALL ck,am,c,amt: semanticsCK(ck,am,c,amt) = image(semanticCK(ck,am,c,amt))
+
   preserv: AXIOM
     FORALL(am1,am2,t,amt1,amt2):
          |>(am1,am2) AND |>(amt1,amt2) 
