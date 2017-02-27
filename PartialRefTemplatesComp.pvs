@@ -204,17 +204,15 @@ conditionsMand(fm1,P,Q):bool = FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES
 % 3) fm1 |= (Q => P)
 % 4) The feature to be removed needs to be either optional or mandatory
 conditionsRemoveFeature(fm1,its,pairs,P,Q,ck) : bool = 
-                                 (FORALL c : 
+                                 (FORALL c : semantics(fm1)(c) => 
                                           FORALL exp : 
                                                     exps(ck)(exp) AND satisfies(exp,c) => 
                                                        (exps(its)(exp) <=> satisfies(NAME_FORMULA(Q),c))
                                  )   
                                  AND
-                                 (FORALL (item:Item) : NOT its(item) => FORALL an: (assets(item))(an) => NOT dom(pairs)(an))
+                                 (FORALL (item:Item) : (ck(item) AND NOT its(item)) => FORALL an: (assets(item))(an) => NOT dom(pairs)(an))
                                  AND
                                  (FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),c))
-                                 AND
-                                 (conditionsOpt(fm1,P,Q) OR conditionsMand(fm1,P,Q))
 
 predRemoveFeature(pl,pl2,s,its,pairs,P,Q): bool = 
              (syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,its,pairs) AND
@@ -235,7 +233,16 @@ pairsNotIncluded: LEMMA
              FORALL (pl,pl2,s,its,pairs,P,Q):
             (
                predRemoveFeature(pl,pl2,s,its,pairs,P,Q) => FORALL c: s(c) => FORALL an: eval(K(pl),c)(an) => NOT dom(pairs)(an) 
-            )           
+            )
+
+wfTreeSameResult: LEMMA
+	    FORALL pl,fm2,P,Q:
+	    	   (features(F(pl))(P) AND
+                   features(F(pl))(Q) AND
+		   removeFeature(F(pl),fm2,P,Q))
+		   =>
+		   FORALL (f:Formula_): (wt(F(pl),f) AND NOT names(f)(Q)) => wt(fm2,f) 
+
 
 % Theorem <If we filter the removed feature, the remaining products are equal>
 removeFeatureSameProducts: THEOREM
@@ -246,10 +253,14 @@ removeFeatureSameProducts: THEOREM
 
 % Theorem <Remove feature template represents a strong partial refinement>
 removeFeaturePartRefStrong: THEOREM
-            FORALL (pl,pl2,s,its,pairs,P,Q):
+            FORALL (pl,fm2,am2,ck2,s,its,pairs,P,Q):
             (
-               predRemoveFeature(pl,pl2,s,its,pairs,P,Q) => strongPartialRefinement(pl,pl2,s)
+               (predRemoveFeature(pl,pl2,s,its,pairs,P,Q) AND
+	       (FORALL c: NOT s(c) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))))
+	       =>
+	       strongPartialRefinement(pl,pl2,s)
             )
+	    WHERE pl2=(#F:=fm2,A:=am2,K:=ck2#) 
 
 % Theorem <Remove feature template represents a weak partial refinement>
 removeFeaturePartRefWeak: THEOREM

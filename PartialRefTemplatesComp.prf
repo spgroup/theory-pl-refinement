@@ -2401,7 +2401,7 @@
     (= const-decl "[T, T -> boolean]" equalities nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil) nil
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
@@ -2809,7 +2809,7 @@
     (union const-decl "set" sets nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
-    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil) nil
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (member const-decl "bool" sets nil)
     (syntaxAddCKLines const-decl "bool" PartialRefTemplatesComp nil)
@@ -3107,18 +3107,53 @@
    ("" (skolem 1 (pl pl2 s its pairs P Q))
     (("" (bddsimp)
       (("" (skolem 1 c)
-        (("" (expand predRemoveFeature)
-          (("" (flatten)
-            (("" (expand "<>")
-              (("" (decompose-equality)
-                (("" (inst -1 c)
-                  (("" (expand conditionsRemoveFeature)
-                    (("" (flatten)
-                      (("" (skolem 1 i)
-                        (("" (inst -4 i)
-                          (("" (bddsimp)
-                            (("1" (grind) nil nil)
-                             ("2" (grind) nil nil))
+        (("" (bddsimp)
+          (("" (skolem 1 i)
+            (("" (bddsimp)
+              (("" (expand evalCK)
+                (("" (flatten)
+                  (("" (expand predRemoveFeature)
+                    (("" (bddsimp)
+                      (("" (expand "<>")
+                        (("" (decompose-equality -3)
+                          (("" (inst -1 c)
+                            (("" (bddsimp)
+                              ((""
+                                (expand conditionsRemoveFeature)
+                                ((""
+                                  (flatten)
+                                  ((""
+                                    (inst -5 c)
+                                    ((""
+                                      (bddsimp)
+                                      ((""
+                                        (expand satisfies -3)
+                                        ((""
+                                          (inst -4 "exp(i)")
+                                          ((""
+                                            (bddsimp)
+                                            (("1"
+                                              (expand exps 2)
+                                              (("1"
+                                                (inst 2 i)
+                                                nil
+                                                nil))
+                                              nil)
+                                             ("2"
+                                              (expand exps 2)
+                                              (("2"
+                                                (inst 2 i)
+                                                nil
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
                             nil))
                           nil))
                         nil))
@@ -3132,51 +3167,49 @@
         nil))
       nil))
     nil)
-   ((Name type-decl nil Name nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (Configuration type-eq-decl nil Name nil)
-    (= const-decl "[T, T -> boolean]" equalities nil)
-    (set type-eq-decl nil sets nil)
-    (AND const-decl "[bool, bool -> bool]" booleans nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (semantics const-decl "set[Configuration]" FeatureModelSemantics
-     nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (Item type-eq-decl nil ConfigurationKnowledge nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (CK type-eq-decl nil ConfigurationKnowledge nil)
-    (restrict const-decl "R" restrict nil)
-    (unique const-decl "bool" maps nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (semantics const-decl "finite_sets[Asset].finite_set"
+   ((evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (satisfies def-decl "boolean" FormulaTheory nil)
-    (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
-    (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
-     Formula__adt nil)
-    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
-     nil)
-    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+    (predRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplatesComp
      nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
-    (evalCK const-decl "finite_sets[Item].finite_set"
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
+     Formula__adt nil)
+    (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
      ConfigurationKnowledge nil)
-    (overw const-decl "mapping" maps nil)
-    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (finite_union application-judgement "finite_set" finite_sets nil)
-    (finite_difference application-judgement "finite_set" finite_sets
-     nil))
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (restrict const-decl "R" restrict nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (set type-eq-decl nil sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (Configuration type-eq-decl nil Name nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Name type-decl nil Name nil))
    nil)
   (itsNotIncluded-4 nil 3657555293
    ("" (skolem 1 (pl pl2 s its pairs P Q))
@@ -3601,30 +3634,66 @@
    ("" (skolem 1 (pl pl2 s its pairs P Q))
     (("" (bddsimp)
       (("" (skolem 1 c)
-        (("" (expand predRemoveFeature)
-          (("" (flatten)
-            (("" (skolem 1 an)
-              (("" (expand conditionsRemoveFeature)
+        (("" (bddsimp)
+          (("" (skolem 1 an)
+            (("" (bddsimp)
+              (("" (expand predRemoveFeature)
                 (("" (flatten)
                   (("" (lemma itsNotIncluded)
                     (("" (inst -1 pl pl2 s its pairs P Q)
                       (("" (expand predRemoveFeature)
                         (("" (bddsimp)
-                          (("1" (inst -3 c)
-                            (("1" (bddsimp)
-                              (("1"
+                          (("" (inst -4 c)
+                            (("" (bddsimp)
+                              ((""
                                 (expand eval)
-                                (("1"
+                                ((""
                                   (expand assetsCK)
-                                  (("1"
-                                    (skolem -9 i)
-                                    (("1"
-                                      (inst -4 i)
-                                      (("1"
-                                        (inst -6 i)
-                                        (("1"
-                                          (bddsimp)
-                                          (("1" (grind) nil nil))
+                                  ((""
+                                    (skolem -6 it)
+                                    ((""
+                                      (inst -5 it)
+                                      ((""
+                                        (bddsimp)
+                                        ((""
+                                          (expand
+                                           conditionsRemoveFeature)
+                                          ((""
+                                            (flatten)
+                                            ((""
+                                              (inst -3 it)
+                                              ((""
+                                                (bddsimp)
+                                                (("1"
+                                                  (inst -3 an)
+                                                  (("1"
+                                                    (bddsimp)
+                                                    nil
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (expand "<>")
+                                                  (("2"
+                                                    (decompose-equality)
+                                                    (("2"
+                                                      (inst -1 c)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (expand
+                                                           evalCK)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            nil
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
                                           nil))
                                         nil))
                                       nil))
@@ -3632,9 +3701,7 @@
                                   nil))
                                 nil))
                               nil))
-                            nil)
-                           ("2" (grind) nil nil) ("3" (grind) nil nil)
-                           ("4" (grind) nil nil))
+                            nil))
                           nil))
                         nil))
                       nil))
@@ -3647,19 +3714,25 @@
         nil))
       nil))
     nil)
-   ((eval const-decl "finite_sets[AssetName].finite_set"
+   ((predRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (itsNotIncluded formula-decl nil PartialRefTemplatesComp nil)
+    (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
-    (finite_difference application-judgement "finite_set" finite_sets
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
+    (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
+     Formula__adt nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
      nil)
-    (finite_union application-judgement "finite_set" finite_sets nil)
-    (overw const-decl "mapping" maps nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
-    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
-    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (satisfies def-decl "boolean" FormulaTheory nil)
-    (dom const-decl "set[S]" maps nil)
-    (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
+    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplatesComp
+     nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil)
     (PL type-eq-decl nil SPLrefinement nil)
@@ -3755,6 +3828,184 @@
           ConfigurationKnowledge nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set"
      ConfigurationKnowledge nil))
+   shostak))
+ (wfTreeSameResult_TCC1 0
+  (wfTreeSameResult_TCC1-1 nil 3697207547
+   ("" (skolem 1 (pl fm2 P Q))
+    (("" (expand wfTree) (("" (propax) nil nil)) nil)) nil)
+   ((wfTree const-decl "bool" FeatureModel nil)) nil))
+ (wfTreeSameResult_TCC2 0
+  (wfTreeSameResult_TCC2-1 nil 3697212934 ("" (subtype-tcc) nil nil)
+   nil nil))
+ (wfTreeSameResult 0
+  (wfTreeSameResult-1 nil 3697207547
+   ("" (skolem 1 (pl fm2 P Q))
+    (("" (bddsimp)
+      (("" (induct f)
+        (("1" (bddsimp)
+          (("1" (expand wt) (("1" (propax) nil nil)) nil)) nil)
+         ("2" (bddsimp)
+          (("2" (expand wt) (("2" (propax) nil nil)) nil)) nil)
+         ("3" (skolem 1 n)
+          (("3" (bddsimp)
+            (("3" (expand wt 2)
+              (("3" (expand removeFeature)
+                (("3" (expand wt -1)
+                  (("3" (skolem -1 n1)
+                    (("3" (inst 2 n1)
+                      (("3" (flatten)
+                        (("3" (expand remove)
+                          (("3" (decompose-equality -6)
+                            (("3" (inst -1 n1)
+                              (("3"
+                                (bddsimp)
+                                (("1"
+                                  (expand member)
+                                  (("1" (propax) nil nil))
+                                  nil)
+                                 ("2"
+                                  (expand names)
+                                  (("2" (grind) nil nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("4" (skolem 1 f)
+          (("4" (bddsimp)
+            (("1" (expand wt 2)
+              (("1" (expand names 1) (("1" (propax) nil nil)) nil))
+              nil)
+             ("2" (expand wt 2) (("2" (propax) nil nil)) nil)
+             ("3" (expand wt -1) (("3" (propax) nil nil)) nil))
+            nil))
+          nil)
+         ("5" (skolem 1 (f1 f2))
+          (("5" (bddsimp)
+            (("1" (expand names 1) (("1" (bddsimp) nil nil)) nil)
+             ("2" (expand wt 2)
+              (("2" (bddsimp)
+                (("2" (expand names 1) (("2" (bddsimp) nil nil)) nil))
+                nil))
+              nil)
+             ("3" (expand names 2) (("3" (bddsimp) nil nil)) nil)
+             ("4" (expand names 1) (("4" (bddsimp) nil nil)) nil)
+             ("5" (expand wt 2) (("5" (bddsimp) nil nil)) nil)
+             ("6" (expand wt 3)
+              (("6" (bddsimp)
+                (("6" (expand names 2)
+                  (("6" (bddsimp)
+                    (("6" (expand wt -2) (("6" (bddsimp) nil nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("7" (expand wt -2) (("7" (bddsimp) nil nil)) nil)
+             ("8" (expand names 2)
+              (("8" (bddsimp)
+                (("8" (expand wt 4)
+                  (("8" (bddsimp)
+                    (("8" (expand wt -2) (("8" (bddsimp) nil nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("9" (expand wt 4)
+              (("9" (bddsimp)
+                (("1" (expand wt -1) (("1" (bddsimp) nil nil)) nil)
+                 ("2" (expand wt -1) (("2" (bddsimp) nil nil)) nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("6" (skolem 1 (f1 f2))
+          (("6" (bddsimp)
+            (("1" (expand wt 2)
+              (("1" (expand names 1) (("1" (bddsimp) nil nil)) nil))
+              nil)
+             ("2" (expand names 1) (("2" (bddsimp) nil nil)) nil)
+             ("3" (expand wt -2) (("3" (flatten) nil nil)) nil)
+             ("4" (expand wt -3)
+              (("4" (flatten)
+                (("4" (expand names 1) (("4" (bddsimp) nil nil)) nil))
+                nil))
+              nil)
+             ("5" (expand wt -3)
+              (("5" (bddsimp)
+                (("5" (expand names 1)
+                  (("5" (bddsimp)
+                    (("5" (expand wt 3) (("5" (bddsimp) nil nil)) nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("6" (expand wt -2) (("6" (flatten) nil nil)) nil)
+             ("7" (expand names 2) (("7" (bddsimp) nil nil)) nil)
+             ("8" (expand names 2)
+              (("8" (bddsimp)
+                (("8" (expand wt -2) (("8" (bddsimp) nil nil)) nil))
+                nil))
+              nil)
+             ("9" (expand names 3)
+              (("9" (bddsimp)
+                (("9" (expand wt -1) (("9" (bddsimp) nil nil)) nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("7" (skolem 1 f)
+          (("7" (expand wfTree) (("7" (propax) nil nil)) nil)) nil)
+         ("8" (expand wfTree) (("8" (propax) nil nil)) nil))
+        nil))
+      nil))
+    nil)
+   ((remove const-decl "set" sets nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (/= const-decl "boolean" notequal nil)
+    (member const-decl "bool" sets nil)
+    (removeFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (Formula__induction formula-decl nil Formula__adt nil)
+    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (wt def-decl "boolean" FormulaTheory nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (names def-decl "set[Name]" FormulaTheory nil)
+    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfTree const-decl "bool" FeatureModel nil)
+    (Configuration type-eq-decl nil Name nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (restrict const-decl "R" restrict nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil))
    shostak))
  (removeFeatureSameProducts 0
   (removeFeatureSameProducts-10 nil 3657619438
@@ -4026,20 +4277,27 @@
         nil))
       nil))
     nil)
-   ((prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+   ((itsNotIncluded formula-decl nil PartialRefTemplatesComp nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (eval const-decl "finite_sets[AssetName].finite_set"
           ConfigurationKnowledge nil)
     (AND const-decl "[bool, bool -> bool]" booleans nil)
     (finite_union application-judgement "finite_set" finite_sets nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
     (union const-decl "set" sets nil)
     (domain const-decl "finite_sets[S].finite_set" maps nil)
     (remove const-decl "mapping" maps nil)
     (mapping type-eq-decl nil maps nil)
     (member const-decl "bool" sets nil)
     (OR const-decl "[bool, bool -> bool]" booleans nil)
+    (conditionsRemoveFeature const-decl "bool" PartialRefTemplatesComp
+     nil)
+    (conditionsMand const-decl "bool" PartialRefTemplatesComp nil)
+    (conditionsOpt const-decl "bool" PartialRefTemplatesComp nil)
     (dom const-decl "set[S]" maps nil)
     (exps const-decl "set[Formula_]" ConfigurationKnowledge nil)
+    (removeFeature const-decl "bool" PartialRefTemplatesComp nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (satExpConsts const-decl "bool" FeatureModelSemantics nil)
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
@@ -4058,6 +4316,7 @@
      Formula__adt nil)
     (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
     (= const-decl "[T, T -> boolean]" equalities nil)
+    (predRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
@@ -4083,7 +4342,8 @@
     (Configuration type-eq-decl nil Name nil)
     (bool nonempty-type-eq-decl nil booleans nil)
     (boolean nonempty-type-decl nil booleans nil)
-    (Name type-decl nil Name nil))
+    (Name type-decl nil Name nil)
+    (pairsNotIncluded formula-decl nil PartialRefTemplatesComp nil))
    nil)
   (removeFeatureSameProducts-9 nil 3657556116
    ("" (skolem 1 (pl pl2 s its pairs p q))
@@ -5779,7 +6039,677 @@
     (= const-decl "[T, T -> boolean]" equalities nil)
     (map const-decl "finite_sets[T].finite_set" maps nil))
    shostak))
+ (removeFeaturePartRefStrong_TCC1 0
+  (removeFeaturePartRefStrong_TCC1-1 nil 3697193676
+   ("" (subtype-tcc) nil nil) nil nil))
  (removeFeaturePartRefStrong 0
+  (removeFeaturePartRefStrong-4 nil 3697210623
+   ("" (skolem 1 (pl fm2 am2 ck2 s its pairs P Q))
+    (("" (expand strongPartialRefinement)
+      (("" (bddsimp)
+        (("1" (skolem 1 c)
+          (("1" (bddsimp)
+            (("1" (expand prod)
+              (("1" (lemma removeFeatureSameProducts)
+                (("1"
+                  (inst -1 pl "(#F:=fm2, A:=am2, K:=ck2#)" s its pairs
+                   P Q)
+                  (("1" (bddsimp)
+                    (("1" (inst -2 c)
+                      (("1" (bddsimp)
+                        (("1" (expand prod)
+                          (("1" (replace -3 1)
+                            (("1" (lemma SPLrefinement.assetRefinement)
+                              (("1"
+                                (expand preorder?)
+                                (("1"
+                                  (flatten)
+                                  (("1"
+                                    (expand reflexive?)
+                                    (("1"
+                                      (inst
+                                       -1
+                                       "(semantics(ck2)(am2)(c))")
+                                      nil
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (expand predRemoveFeature)
+                    (("2" (flatten)
+                      (("2" (expand syntaxRemoveFeature)
+                        (("2" (flatten)
+                          (("2" (typepred "F(pl)")
+                            (("2" (expand wfFM)
+                              (("2"
+                                (expand wfTree)
+                                (("2"
+                                  (expand wfFormulae)
+                                  (("2"
+                                    (expand removeFeature)
+                                    (("2"
+                                      (lemma wfTreeSameResult)
+                                      (("2"
+                                        (skolem 1 f)
+                                        (("2"
+                                          (bddsimp)
+                                          (("2"
+                                            (inst -1 pl fm2 P Q)
+                                            (("2"
+                                              (expand removeFeature)
+                                              (("2"
+                                                (bddsimp)
+                                                (("2"
+                                                  (expand
+                                                   filterFormulae)
+                                                  (("2"
+                                                    (decompose-equality)
+                                                    (("2"
+                                                      (inst -1 f)
+                                                      (("2"
+                                                        (bddsimp)
+                                                        (("2"
+                                                          (inst -7 f)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (inst
+                                                               -6
+                                                               f)
+                                                              (("2"
+                                                                (expand
+                                                                 member)
+                                                                (("2"
+                                                                  (bddsimp)
+                                                                  nil
+                                                                  nil))
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("2" (expand subset?)
+          (("2" (skolem 1 c)
+            (("2" (expand member)
+              (("2" (expand predRemoveFeature)
+                (("2" (flatten)
+                  (("2" (expand "<>")
+                    (("2" (decompose-equality)
+                      (("2" (inst -1 c)
+                        (("2" (bddsimp)
+                          (("2" (expand semantics)
+                            (("2" (bddsimp)
+                              (("1"
+                                (expand satExpConsts)
+                                (("1"
+                                  (skolem 1 f)
+                                  (("1"
+                                    (inst -3 f)
+                                    (("1"
+                                      (bddsimp)
+                                      (("1"
+                                        (expand syntaxRemoveFeature)
+                                        (("1"
+                                          (flatten)
+                                          (("1"
+                                            (expand removeFeature)
+                                            (("1"
+                                              (flatten)
+                                              (("1"
+                                                (expand filterFormulae)
+                                                (("1"
+                                                  (decompose-equality)
+                                                  (("1"
+                                                    (inst -1 f)
+                                                    (("1"
+                                                      (bddsimp)
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2"
+                                (expand satImpConsts)
+                                (("2"
+                                  (skolem 1 n)
+                                  (("2"
+                                    (bddsimp)
+                                    (("2"
+                                      (inst -2 n)
+                                      (("2"
+                                        (bddsimp)
+                                        (("2"
+                                          (expand satisfies)
+                                          (("2"
+                                            (expand satisfies)
+                                            (("2"
+                                              (inst 1 Q)
+                                              (("2"
+                                                (expand
+                                                 syntaxRemoveFeature)
+                                                (("2"
+                                                  (flatten)
+                                                  (("2"
+                                                    (expand
+                                                     removeFeature)
+                                                    (("2"
+                                                      (flatten)
+                                                      (("2"
+                                                        (expand remove)
+                                                        (("2"
+                                                          (decompose-equality
+                                                           -6)
+                                                          (("2"
+                                                            (inst -1 n)
+                                                            (("2"
+                                                              (bddsimp)
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (propax)
+                                                                  nil
+                                                                  nil))
+                                                                nil)
+                                                               ("2"
+                                                                (grind)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("3" (expand subset?)
+          (("3" (skolem 1 c)
+            (("3" (expand member)
+              (("3" (bddsimp)
+                (("3" (expand predRemoveFeature)
+                  (("3" (flatten)
+                    (("3" (expand "<>")
+                      (("3" (decompose-equality)
+                        (("3" (inst -1 c) (("3" (bddsimp) nil nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((removeFeatureSameProducts formula-decl nil PartialRefTemplatesComp
+     nil)
+    (predRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (wfTree const-decl "bool" FeatureModel nil)
+    (removeFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (member const-decl "bool" sets nil)
+    (names def-decl "set[Name]" FormulaTheory nil)
+    (finite_difference application-judgement "finite_set" finite_sets
+     nil)
+    (filterFormulae const-decl "set[Formula_]" FeatureModelSemantics
+     nil)
+    (wfTreeSameResult formula-decl nil PartialRefTemplatesComp nil)
+    (wfFormulae const-decl "boolean" FormulaTheory nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (restrict const-decl "R" restrict nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (Configuration type-eq-decl nil Name nil)
+    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (remove const-decl "set" sets nil)
+    (/= const-decl "boolean" notequal nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
+     Formula__adt nil)
+    (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (subset? const-decl "bool" sets nil)
+    (strongPartialRefinement const-decl "bool" PartialRefStrong nil))
+   nil)
+  (removeFeaturePartRefStrong-3 nil 3697196360
+   ("" (skolem 1 (pl fm2 am2 ck2 s its pairs P Q))
+    (("" (expand strongPartialRefinement)
+      (("" (bddsimp)
+        (("1" (skolem 1 c)
+          (("1" (bddsimp)
+            (("1" (expand prod)
+              (("1" (lemma removeFeatureSameProducts)
+                (("1"
+                  (inst -1 pl "(#F:=fm2, A:=am2, K:=ck2#)" s its pairs
+                   P Q)
+                  (("1" (bddsimp)
+                    (("1" (inst -2 c)
+                      (("1" (bddsimp)
+                        (("1" (expand prod)
+                          (("1" (replace -3 1)
+                            (("1" (lemma SPLrefinement.assetRefinement)
+                              (("1"
+                                (expand preorder?)
+                                (("1"
+                                  (flatten)
+                                  (("1"
+                                    (expand reflexive?)
+                                    (("1"
+                                      (inst
+                                       -1
+                                       "(semantics(ck2)(am2)(c))")
+                                      nil
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil)
+                   ("2" (lemma resultingFMIsWellFormed)
+                    (("2" (expand predRemoveFeature)
+                      (("2" (flatten)
+                        (("2" (expand syntaxRemoveFeature)
+                          (("2" (flatten)
+                            (("2" (inst -1 pl fm2 P Q)
+                              (("2" (bddsimp) nil nil)) nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("2" (expand subset?)
+          (("2" (skolem 1 c)
+            (("2" (expand member)
+              (("2" (expand predRemoveFeature)
+                (("2" (flatten)
+                  (("2" (expand "<>")
+                    (("2" (decompose-equality)
+                      (("2" (inst -1 c)
+                        (("2" (bddsimp)
+                          (("2" (expand semantics)
+                            (("2" (bddsimp)
+                              (("1"
+                                (expand satExpConsts)
+                                (("1"
+                                  (skolem 1 f)
+                                  (("1"
+                                    (inst -3 f)
+                                    (("1"
+                                      (bddsimp)
+                                      (("1"
+                                        (expand syntaxRemoveFeature)
+                                        (("1"
+                                          (flatten)
+                                          (("1"
+                                            (expand removeFeature)
+                                            (("1"
+                                              (flatten)
+                                              (("1"
+                                                (expand filterFormulae)
+                                                (("1"
+                                                  (decompose-equality)
+                                                  (("1"
+                                                    (inst -1 f)
+                                                    (("1"
+                                                      (bddsimp)
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2"
+                                (expand satImpConsts)
+                                (("2"
+                                  (skolem 1 n)
+                                  (("2"
+                                    (bddsimp)
+                                    (("2"
+                                      (inst -2 n)
+                                      (("2"
+                                        (bddsimp)
+                                        (("2"
+                                          (expand satisfies)
+                                          (("2"
+                                            (expand satisfies)
+                                            (("2"
+                                              (inst 1 Q)
+                                              (("2"
+                                                (expand
+                                                 syntaxRemoveFeature)
+                                                (("2"
+                                                  (flatten)
+                                                  (("2"
+                                                    (expand
+                                                     removeFeature)
+                                                    (("2"
+                                                      (flatten)
+                                                      (("2"
+                                                        (expand remove)
+                                                        (("2"
+                                                          (decompose-equality
+                                                           -6)
+                                                          (("2"
+                                                            (inst -1 n)
+                                                            (("2"
+                                                              (bddsimp)
+                                                              (("1"
+                                                                (expand
+                                                                 member)
+                                                                (("1"
+                                                                  (propax)
+                                                                  nil
+                                                                  nil))
+                                                                nil)
+                                                               ("2"
+                                                                (grind)
+                                                                nil
+                                                                nil))
+                                                              nil))
+                                                            nil))
+                                                          nil))
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil)
+         ("3" (expand subset?)
+          (("3" (skolem 1 c)
+            (("3" (expand member)
+              (("3" (bddsimp)
+                (("3" (expand predRemoveFeature)
+                  (("3" (flatten)
+                    (("3" (expand "<>")
+                      (("3" (decompose-equality)
+                        (("3" (inst -1 c) (("3" (bddsimp) nil nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((removeFeatureSameProducts formula-decl nil PartialRefTemplatesComp
+     nil)
+    (syntaxRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (predRemoveFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (semantics const-decl "finite_sets[Asset].finite_set"
+     ConfigurationKnowledge nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (semantics const-decl "set[Configuration]" FeatureModelSemantics
+     nil)
+    (restrict const-decl "R" restrict nil)
+    (CK type-eq-decl nil ConfigurationKnowledge nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil ConfigurationKnowledge nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (Configuration type-eq-decl nil Name nil)
+    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (remove const-decl "set" sets nil)
+    (/= const-decl "boolean" notequal nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (removeFeature const-decl "bool" PartialRefTemplatesComp nil)
+    (filterFormulae const-decl "set[Formula_]" FeatureModelSemantics
+     nil)
+    (finite_difference application-judgement "finite_set" finite_sets
+     nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (names def-decl "set[Name]" FormulaTheory nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (NOT_FORMULA adt-constructor-decl "[Formula_ -> (NOT?)]"
+     Formula__adt nil)
+    (NOT? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (= const-decl "[T, T -> boolean]" equalities nil)
+    (member const-decl "bool" sets nil)
+    (subset? const-decl "bool" sets nil)
+    (strongPartialRefinement const-decl "bool" PartialRefStrong nil))
+   nil)
+  (removeFeaturePartRefStrong-2 nil 3697196182
+   ("" (skolem 1 (pl fm2 am2 ck2 s its pairs P Q))
+    (("" (lemma removeFeatureSameProducts)
+      (("" (inst -1 pl "(#F:=fm2,A:=am2,K:=ck2#)" s its pairs P Q)
+        (("" (bddsimp)
+          (("" (expand strongPartialRefinement)
+            (("" (bddsimp)
+              (("1" (use SPLrefinement.assetRefinement)
+                (("1" (expand preorder?)
+                  (("1" (flatten)
+                    (("1" (expand reflexive?)
+                      (("1" (skolem 1 c)
+                        (("1" (inst -4 c)
+                          (("1" (bddsimp)
+                            (("1" (replace -5 1)
+                              (("1"
+                                (inst -1 "prod(pl2,c)")
+                                nil)))))))))))))))))
+               ("2" (expand predRemoveFeature)
+                (("2" (bddsimp)
+                  (("2" (expand "<>")
+                    (("2" (decompose-equality)
+                      (("2" (expand subset?)
+                        (("2" (skolem 1 c)
+                          (("2" (inst -1 c)
+                            (("2" (expand member)
+                              (("2"
+                                (expand syntaxRemoveFeature)
+                                (("2"
+                                  (bddsimp)
+                                  (("2"
+                                    (expand semantics)
+                                    (("2"
+                                      (bddsimp)
+                                      (("1"
+                                        (expand satExpConsts)
+                                        (("1"
+                                          (skolem 1 f)
+                                          (("1"
+                                            (inst -3 f)
+                                            (("1"
+                                              (expand removeFeature)
+                                              (("1"
+                                                (expand filterFormulae)
+                                                (("1"
+                                                  (flatten)
+                                                  (("1"
+                                                    (decompose-equality)
+                                                    (("1"
+                                                      (inst -1 f)
+                                                      (("1"
+                                                        (bddsimp)
+                                                        nil)))))))))))))))))
+                                       ("2"
+                                        (expand satImpConsts)
+                                        (("2"
+                                          (skolem 1 n)
+                                          (("2"
+                                            (inst -2 n)
+                                            (("2"
+                                              (bddsimp)
+                                              (("2"
+                                                (expand removeFeature)
+                                                (("2"
+                                                  (flatten)
+                                                  (("2"
+                                                    (expand remove)
+                                                    (("2"
+                                                      (decompose-equality
+                                                       -7)
+                                                      (("2"
+                                                        (inst -1 n)
+                                                        (("2"
+                                                          (expand
+                                                           member)
+                                                          (("2"
+                                                            (bddsimp)
+                                                            (("2"
+                                                              (grind)
+                                                              nil)))))))))))))))))))))))))))))))))))))))))))))))
+               ("3" (expand predRemoveFeature)
+                (("3" (bddsimp)
+                  (("3" (expand "<>")
+                    (("3" (decompose-equality -3)
+                      (("3" (expand subset?)
+                        (("3" (skolem 1 c)
+                          (("3" (inst -1 c)
+                            (("3" (expand member)
+                              (("3"
+                                (bddsimp)
+                                nil))))))))))))))))))))))))))))
+    nil)
+   nil nil)
   (removeFeaturePartRefStrong-1 nil 3657619515
    ("" (skolem 1 (pl pl2 s its pairs P Q))
     (("" (lemma removeFeatureSameProducts)
@@ -6606,7 +7536,6 @@
     (member const-decl "bool" sets nil)
     (OR const-decl "[bool, bool -> bool]" booleans nil)
     (conditionsAddAssets const-decl "bool" PartialRefTemplatesComp nil)
-    nil
     (evalCK const-decl "finite_sets[Item].finite_set"
      ConfigurationKnowledge nil)
     (IMPLIES const-decl "[bool, bool -> bool]" booleans nil)
@@ -7604,7 +8533,7 @@
         nil))
       nil))
     nil)
-   (nil (map const-decl "finite_sets[T].finite_set" maps nil)
+   ((map const-decl "finite_sets[T].finite_set" maps nil)
     (syntaxAddAssets const-decl "bool" PartialRefTemplatesComp nil)
     (conditionsAddAssets const-decl "bool" PartialRefTemplatesComp nil)
     (overw const-decl "mapping" maps nil)
