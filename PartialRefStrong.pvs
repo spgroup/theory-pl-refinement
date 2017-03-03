@@ -60,6 +60,8 @@ BEGIN
                                               => strongPartialRefinement(pl1,pl3,intersection(s,t))
                                       )
 
+     newprop: THEOREM FORALL pl1,s,pl2 : strongPartialRefinement(pl1,pl2,s) => (FORALL t: subset?(t,s) => strongPartialRefinement(pl1,pl2,t))
+
     %-------------------------------------------------------COMPOSITIONALITY---------------------------------------------------
     % Theorem <FM Equivalence compositionality - weak definition>
     %fmCompStrongDef: THEOREM
