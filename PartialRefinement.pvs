@@ -8,7 +8,7 @@ PartialRefinement[Conf: TYPE,
 BEGIN
 
 % Partial SPL Refinement
-    IMPORTING PartialRefStrong[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+    IMPORTING PartialRefDefault[Conf,FM, {||}, Asset, AssetName, CK,[||]]
     IMPORTING PartialRefWeak[Conf,FM, {||}, Asset, AssetName, CK,[||]]
      
    % --------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-PartialRefStrong[Conf: TYPE,
+PartialRefDefault[Conf: TYPE,
                      FM: TYPE,
                      {||}: [FM -> set[Conf]],
                      Asset: TYPE,
@@ -181,4 +181,4 @@ BEGIN
 
    
 
-END PartialRefStrong
+END PartialRefDefault
