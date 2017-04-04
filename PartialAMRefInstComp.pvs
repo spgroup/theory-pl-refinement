@@ -1,4 +1,4 @@
-PartialAMRefInst: THEORY
+PartialAMRefInstComp: THEORY
 
 BEGIN
   IMPORTING FeatureModelSemantics
@@ -13,4 +13,4 @@ BEGIN
   IMPORTING PartialAMCompositionality
       [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,ConfigurationKnowledge.CK]{{eval:=eval,wfCK:=wfCK}}
 
-END PartialAMRefInst
+END PartialAMRefInstComp

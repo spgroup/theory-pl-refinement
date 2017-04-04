@@ -1,4 +1,4 @@
-(PartialAMRefInst
+(PartialAMRefInstComp
  (IMP_PartialAMCompositionality_unusedAssets_TCC1 0
   (IMP_PartialAMCompositionality_unusedAssets_TCC1-1 nil 3686489230
    ("" (skolem 1 (am ck anSet c))
@@ -86,7 +86,7 @@
     (AM type-eq-decl nil AssetMapping nil)
     (Name type-decl nil Name nil)
     (Configuration type-eq-decl nil Name nil)
-    (eval const-decl "AM" PartialAMRefInst nil)
+    (eval const-decl "AM" PartialAMRefInstComp nil)
     (FM type-eq-decl nil FeatureModel nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
@@ -126,7 +126,7 @@
     (domain const-decl "finite_sets[S].finite_set" maps nil)
     (Asset nonempty-type-decl nil Assets nil)
     (filter const-decl "mapping" maps nil)
-    (eval const-decl "AM" PartialAMRefInst nil)
+    (eval const-decl "AM" PartialAMRefInstComp nil)
     (member const-decl "bool" sets nil))
    nil))
  (IMP_PartialAMCompositionality_sameDomSameEvalResult_TCC1 0
@@ -203,7 +203,7 @@
     (Item type-eq-decl nil ConfigurationKnowledge nil)
     (CK type-eq-decl nil ConfigurationKnowledge nil)
     (AM type-eq-decl nil AssetMapping nil)
-    (eval const-decl "AM" PartialAMRefInst nil)
+    (eval const-decl "AM" PartialAMRefInstComp nil)
     (wfCK const-decl "bool" ConfigurationKnowledge nil)
     (AM type-eq-decl nil PartialAMCompositionality nil)
     (filter const-decl "mapping" maps nil)
