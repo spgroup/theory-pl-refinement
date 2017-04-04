@@ -2,7 +2,7 @@
 
 This repository contains the PVS specification files for the theory of Software Product Line Refinement and Partial Refinement. 
 
-The Partial Refinement theories are built on the Refinement Theory concepts and start with <b>Partial</b>. 
+The Partial Refinement theories are built on the Refinement theories and start with <b>Partial</b>. 
 
 In the Documentation folder, you can find a summary of the theories and also information regarding templates. 
 
