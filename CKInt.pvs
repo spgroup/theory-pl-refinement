@@ -1,4 +1,4 @@
-CK[Configuration:TYPE, 
+CKInt[Configuration:TYPE, 
    FeatureExpression:TYPE,
    sat: [FeatureExpression,Configuration -> boolean],
    FMi:TYPE, 
@@ -259,4 +259,4 @@ BEGIN
             %FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs)) 
     
 
-End CK
+End CKInt
