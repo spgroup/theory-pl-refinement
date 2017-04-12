@@ -6,7 +6,7 @@ The Partial Refinement theories are built on the Refinement theories and start w
 
 In the Documentation folder, you can find a summary of the theories and also information regarding templates. 
 
-![alt tag](https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/theory-structure.pdf)
+To view the theory structure, please follow this ![link](https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/theory-structure.pdf). There, you can navigate through the theories and understand the dependencies (imports and instantiations) among them.
 
 ## Experiment
 
