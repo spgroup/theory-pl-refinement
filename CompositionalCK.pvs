@@ -1,4 +1,4 @@
-ConfigurationKnowledge: THEORY
+CompositionalCK: THEORY
 BEGIN
   IMPORTING FeatureModelSemantics, AssetMapping, set_comp_lemmas
   CONVERSION+ singleton
@@ -166,4 +166,4 @@ BEGIN
     =>
       (FORALL exp: exps(ck)(exp) => NOT(names(exp)(opt)) ) 
 
-End ConfigurationKnowledge
+End CompositionalCK
