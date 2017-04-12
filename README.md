@@ -6,6 +6,8 @@ The Partial Refinement theories are built on the Refinement theories and start w
 
 In the Documentation folder, you can find a summary of the theories and also information regarding templates. 
 
+![alt tag](https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/theory-structure.pdf)
+
 ## Experiment
 
 To run the experiment, the following steps are necessary:
