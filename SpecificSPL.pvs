@@ -2,7 +2,7 @@ SpecificSPL: THEORY
 BEGIN
 
   IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements
-  IMPORTING Assets, AssetMapping, ConfigurationKnowledge
+  IMPORTING Assets, AssetMapping, CKComp
 
   fm,fm1,fm2: VAR WFM
   am,am1,am2,pairs: VAR AM

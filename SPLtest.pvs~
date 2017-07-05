@@ -1,0 +1,36 @@
+SPLtest[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE]:THEORY
+BEGIN
+ IMPORTING maps
+ AM: TYPE = maps[AssetName,Asset].mapping
+ fm: VAR FM
+ ck: VAR CK
+ am,am2: VAR AM
+ c: VAR Conf
+ anSet: VAR set[AssetName]
+
+ eval(ck,am,c):AM
+ sem(ck)(am)(c) : finite_sets[Asset].finite_set = image(eval(ck,am,c))
+ filterConfs(fm,am,ck,anSet) : set[Conf] = {c:Conf | ({||}(fm))(c) AND subset?(dom(eval(ck,am,c)),anSet)}
+  
+ IMPORTING SPLPartialRefinementStrong[Conf,FM,{||},Asset,AssetName,CK,sem]
+ pl: VAR PL 
+  
+ axiom1: AXIOM FORALL am,ck,anSet,c: subset?(dom(eval(ck,am,c)),anSet) => (sem(ck)(am)(c) = sem(ck)(filter(anSet,am))(c))
+
+ %axiom2: AXIOM FORALL fm,am,am2,anSet,ck: amPartialRef(am,am2,anSet) => 
+  %                                           (FORALL c: filterConfs(fm,am,ck,anSet)(c) => dom(eval(ck,am,c)) = dom(eval(ck,am2,c)))
+
+ amCompos: THEOREM FORALL pl,am2,anSet:
+                             (
+                                amPartialRef(A(pl),am2,anSet) 
+                                => 
+                                strongPartialRefinement(pl,pl2,s)
+                             )WHERE pl2=(#F:=F(pl),A:=am2,K:=K(pl)#),s=filterConfs(F(pl),union(A(pl),am2),K(pl),anSet)
+
+
+END SPLtest

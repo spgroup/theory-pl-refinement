@@ -1,0 +1,23 @@
+SPLRefinementFunctional[Conf:TYPE,
+              FM:TYPE,
+              Asset:TYPE,
+              AssetName:TYPE,
+              CK:TYPE,
+              {||}:[FM -> set[Conf]],
+              (IMPORTING maps[AssetName,Asset])[||]:[CK->[mapping->[Conf->finite_sets[Asset].finite_set]]]]: THEORY
+BEGIN
+
+  IMPORTING SPLrefinement[Conf,FM,Asset,AssetName,CK,{||},[||]]
+
+  pl,pl1,pl2: VAR PL
+
+  t,t1,t2: VAR [PL -> PL]
+  
+  plRefinement(pl,t):bool = plRefinement(pl,t(pl))
+
+  order_ref: THEOREM FORALL pl,t1,t2: plRefinement(pl,t1(pl)) AND plRefinement(t1(pl),t2(t1(pl))) <=>
+                                   plRefinement(pl,t2(pl)) AND plRefinement(t2(pl),t1(t2(pl)))
+
+
+
+END SPLRefinementFunctional

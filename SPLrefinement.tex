@@ -1,0 +1,343 @@
+% The following substitutions are from the file:
+%   /home/augusto/Desktop/PVS/pvs-tex.sub
+\def\munderscoretimestwofn#1#2{{#1 \times #2}}% How to print function m_times with arity (2)
+\def\fmunderscoretimestwofn#1#2{{#1 \times #2}}% How to print function fm_times with arity (2)
+\def\sigmaunderscoretimestwofn#1#2{{#1 \times #2}}% How to print function sigma_times with arity (2)
+\def\generatedunderscoresubsetunderscorealgebraonefn#1{{{\cal A}(#1)}}% How to print function generated_subset_algebra with arity (1)
+\def\generatedunderscoresigmaunderscorealgebraonefn#1{{{\cal S}(#1)}}% How to print function generated_sigma_algebra with arity (1)
+\def\aeunderscoredecreasingotheronefn#1{{\pvsid{decreasing?}(#1)~\mbox{\it a.e.}}}% How to print function ae_decreasing? with arity (1)
+\def\aeunderscoreincreasingotheronefn#1{{\pvsid{increasing?}(#1)~\mbox{\it a.e.}}}% How to print function ae_increasing? with arity (1)
+\def\aeunderscoreconvergenceothertwofn#1#2{{#1 \longrightarrow #2~\mbox{\it a.e.}}}% How to print function ae_convergence? with arity (2)
+\def\aeunderscoreeqothertwofn#1#2{{#1 = #2~\mbox{\it a.e.}}}% How to print function ae_eq? with arity (2)
+\def\aeunderscoreleothertwofn#1#2{{#1 \leq #2~\mbox{\it a.e.}}}% How to print function ae_le? with arity (2)
+\def\aeunderscoreposotheronefn#1{{#1> 0~\mbox{\it a.e.}}}% How to print function ae_pos? with arity (1)
+\def\aeunderscorenonnegotheronefn#1{{#1 \geq 0~\mbox{\it a.e.}}}% How to print function ae_nonneg? with arity (1)
+\def\aeunderscorezerootheronefn#1{{#1 = 0~\mbox{\it a.e.}}}% How to print function ae_0? with arity (1)
+\def\xunderscorelttwofn#1#2{{#1 < #2}}% How to print function x_lt with arity (2)
+\def\xunderscoreletwofn#1#2{{#1 \leq #2}}% How to print function x_le with arity (2)
+\def\xunderscoreeqtwofn#1#2{{#1 = #2}}% How to print function x_eq with arity (2)
+\def\xunderscoretimestwofn#1#2{{#1 \times #2}}% How to print function x_times with arity (2)
+\def\xunderscoreaddtwofn#1#2{{#1 + #2}}% How to print function x_add with arity (2)
+\def\xunderscorelimitonefn#1{{\pvsid{limit}(#1)}}% How to print function x_limit with arity (1)
+\def\xunderscoresumonefn#1{{\sum #1}}% How to print function x_sum with arity (1)
+\def\xunderscoresigmathreefn#1#2#3{{\sum_{#1}^{#2} #3}}% How to print function x_sigma with arity (3)
+\def\xunderscoresuponefn#1{{\pvsid{sup}(#1)}}% How to print function x_sup with arity (1)
+\def\xunderscoreinfonefn#1{{\pvsid{inf}(#1)}}% How to print function x_inf with arity (1)
+\def\pointwiseunderscoreconvergesunderscoredowntoothertwofn#1#2{{#1 \searrow #2}}% How to print function pointwise_converges_downto? with arity (2)
+\def\pointwiseunderscoreconvergesunderscoreuptoothertwofn#1#2{{#1 \nearrow #2}}% How to print function pointwise_converges_upto? with arity (2)
+\def\pointwiseunderscoreconvergenceothertwofn#1#2{{#1 \longrightarrow #2}}% How to print function pointwise_convergence? with arity (2)
+\def\convergesunderscoredowntoothertwofn#1#2{{#1 \searrow #2}}% How to print function converges_downto? with arity (2)
+\def\convergesunderscoreuptoothertwofn#1#2{{#1 \nearrow #2}}% How to print function converges_upto? with arity (2)
+\def\convergenceothertwofn#1#2{{#1 \longrightarrow #2}}% How to print function convergence? with arity (2)
+\def\convergencetwofn#1#2{{#1 \longrightarrow #2}}% How to print function convergence with arity (2)
+\def\crossunderscoreproducttwofn#1#2{{#1 \times #2}}% How to print function cross_product with arity (2)
+\def\conjugateonefn#1{{\overline{#1}}}% How to print function conjugate with arity (1)
+\def\cunderscoredivtwofn#1#2{{#1/#2}}% How to print function c_div with arity (2)
+\def\cunderscoremultwofn#1#2{{#1\times#2}}% How to print function c_mul with arity (2)
+\def\cunderscoresubtwofn#1#2{{#1-#2}}% How to print function c_sub with arity (2)
+\def\cunderscorenegonefn#1{{-#1}}% How to print function c_neg with arity (1)
+\def\cunderscoreaddtwofn#1#2{{#1+#2}}% How to print function c_add with arity (2)
+\def\Imonefn#1{{\Im(#1)}}% How to print function Im with arity (1)
+\def\Reonefn#1{{\Re(#1)}}% How to print function Re with arity (1)
+\def\Etwofn#1#2{{\mathbb{E}(#1~|~#2)}}% How to print function E with arity (2)
+\def\Eonefn#1{{\mathbb{E}(#1)}}% How to print function E with arity (1)
+\def\Ptwofn#1#2{{\mathbb{P}(#1~|~#2)}}% How to print function P with arity (2)
+\def\Ponefn#1{{\mathbb{P}(#1)}}% How to print function P with arity (1)
+\def\xtwofn#1#2{{#1\times#2}}% How to print function x with arity (2)
+\def\asttwofn#1#2{{#1\ast#2}}% How to print function ast with arity (2)
+\def\minusonefn#1{{{#1}^{-}}}% How to print function minus with arity (1)
+\def\plusonefn#1{{{#1}^{+}}}% How to print function plus with arity (1)
+\def\astonefn#1{{{#1}^{\ast}}}% How to print function ast with arity (1)
+\def\dottwofn#1#2{{#1\bullet#2}}% How to print function dot with arity (2)
+\def\integralthreefn#1#2#3{{\int_{#1}^{#2} #3}}% How to print function integral with arity (3)
+\def\integraltwofn#1#2{{\int_{#1} #2}}% How to print function integral with arity (2)
+\def\integralonefn#1{{\int#1}}% How to print function integral with arity (1)
+\def\normonefn#1{{\left||{#1}\right||}}% How to print function norm with arity (1)
+\def\phionefn#1{{\pvssubscript{\phi}{#1}}}% How to print function phi with arity (1)
+\def\infunderscoreclosedonefn#1{{\left(-\infty,~#1\right]}}% How to print function inf_closed with arity (1)
+\def\closedunderscoreinfonefn#1{{\left[#1,~\infty\right)}}% How to print function closed_inf with arity (1)
+\def\infunderscoreopenonefn#1{(-\infty,~#1)}% How to print function inf_open with arity (1)
+\def\openunderscoreinfonefn#1{(#1,~\infty)}% How to print function open_inf with arity (1)
+\def\closedtwofn#1#2{{\left[#1,~#2\right]}}% How to print function closed with arity (2)
+\def\opentwofn#1#2{(#1,~#2)}% How to print function open with arity (2)
+\def\sigmathreefn#1#2#3{{\sum_{#1}^{#2} #3}}% How to print function sigma with arity (3)
+\def\sigmatwofn#1#2{{\sum_{#1} {#2}}}% How to print function sigma with arity (2)
+\def\ceilingonefn#1{{\lceil{#1}\rceil}}% How to print function ceiling with arity (1)
+\def\flooronefn#1{{\lfloor{#1}\rfloor}}% How to print function floor with arity (1)
+\def\absonefn#1{{\left|{#1}\right|}}% How to print function abs with arity (1)
+\def\roottwofn#1#2{{\sqrt[#2]{#1}}}% How to print function root with arity (2)
+\def\sqrtonefn#1{{\sqrt{#1}}}% How to print function sqrt with arity (1)
+\def\sqonefn#1{{\pvssuperscript{#1}{2}}}% How to print function sq with arity (1)
+\def\expttwofn#1#2{{\pvssuperscript{#1}{#2}}}% How to print function expt with arity (2)
+\def\opcarettwofn#1#2{{\pvssuperscript{#1}{#2}}}% How to print function ^ with arity (2)
+\def\indexedunderscoresetsotherIIntersectiononefn#1{{\bigcap #1}}% How to print function indexed_sets.IIntersection with arity (1)
+\def\indexedunderscoresetsotherIUniononefn#1{{\bigcup #1}}% How to print function indexed_sets.IUnion with arity (1)
+\def\setsotherIntersectiononefn#1{{\bigcap #1}}% How to print function sets.Intersection with arity (1)
+\def\setsotherUniononefn#1{{\bigcup #1}}% How to print function sets.Union with arity (1)
+\def\setsotherremovetwofn#1#2{{(#2 \setminus \{#1\})}}% How to print function sets.remove with arity (2)
+\def\setsotheraddtwofn#1#2{{(#2 \cup \{#1\})}}% How to print function sets.add with arity (2)
+\def\setsotherdifferencetwofn#1#2{{(#1 \setminus #2)}}% How to print function sets.difference with arity (2)
+\def\setsothercomplementonefn#1{{\overline{#1}}}% How to print function sets.complement with arity (1)
+\def\setsotherintersectiontwofn#1#2{{(#1 \cap #2)}}% How to print function sets.intersection with arity (2)
+\def\setsotheruniontwofn#1#2{{(#1 \cup #2)}}% How to print function sets.union with arity (2)
+\def\setsotherstrictunderscoresubsetothertwofn#1#2{{(#1 \subset #2)}}% How to print function sets.strict_subset? with arity (2)
+\def\setsothersubsetothertwofn#1#2{{(#1 \subseteq #2)}}% How to print function sets.subset? with arity (2)
+\def\setsothermembertwofn#1#2{{(#1 \in #2)}}% How to print function sets.member with arity (2)
+\def\opohtwofn#1#2{{#1\circ#2}}% How to print function O with arity (2)
+\def\opdividetwofn#1#2{{\frac{#1}{#2}}}% How to print function / with arity (2)
+\def\optimestwofn#1#2{{#1\times#2}}% How to print function * with arity (2)
+\def\opdifferenceonefn#1{{-#1}}% How to print function - with arity (1)
+\def\opdifferencetwofn#1#2{{#1-#2}}% How to print function - with arity (2)
+\def\opplustwofn#1#2{{#1+#2}}% How to print function + with arity (2)
+\begin{alltt}
+\pvsid{SPLrefinement}\({\pvsbracketl}\)\pvsid{Conf}: \pvskey{TYPE}, \pvsid{FM}: \pvskey{TYPE}, \pvsid{Asset}: \pvskey{TYPE}, \pvsid{AssetName}: \pvskey{TYPE}, \pvsid{CK}: \pvskey{TYPE},
+               \pvsid{\{||\}}: \({\pvsbracketl}\)\pvsid{FM} \(\rightarrow\) \pvsid{set}\({\pvsbracketl}\)\pvsid{Conf}\({\pvsbracketr}\)\({\pvsbracketr}\),
+               \pvsid{(}\pvskey{IMPORTING} \pvsid{maps}\({\pvsbracketl}\)\pvsid{AssetName}, \pvsid{Asset}\({\pvsbracketr}\)\pvsid{)} \pvsid{[||]}: \({\pvsbracketl}\)\pvsid{CK} \(\rightarrow\)
+                                                              \({\pvsbracketl}\)\pvsid{mapping} \(\rightarrow\)
+                                                                \({\pvsbracketl}\)\pvsid{Conf} \(\rightarrow\)
+                                                                  \pvsid{finite\_sets}
+                                                                  \({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\).\pvsid{finite\_set}\({\pvsbracketr}\)\({\pvsbracketr}\)\({\pvsbracketr}\)\({\pvsbracketr}\): \pvskey{THEORY}
+ \pvskey{BEGIN}
+
+  \pvsid{fm}, \pvsid{fm1}, \pvsid{fm2}: \pvskey{VAR} \pvsid{FM}\vspace*{\pvsdeclspacing}
+
+  \(c\), \(c\sb{1}\), \(c\sb{2}\), \(c\sb{3}\): \pvskey{VAR} \pvsid{Conf}\vspace*{\pvsdeclspacing}
+
+  \(\models\)\pvsid{(}\pvsid{fm1}, \pvsid{fm2}\pvsid{)}: \pvsid{bool} \pvskey{=} \(\setsothersubsetothertwofn{\pvsid{\{|}\pvsid{fm1}\pvsid{|\}}}{\pvsid{\{|}\pvsid{fm2}\pvsid{|\}}}\)\vspace*{\pvsdeclspacing}
+
+  \pvsid{equivalentFMs}\pvsid{(}\pvsid{fm1}, \pvsid{fm2}\pvsid{)}: \pvsid{bool} \pvskey{=} \pvsid{\{|}\pvsid{fm1}\pvsid{|\}} \(=\) \pvsid{\{|}\pvsid{fm2}\pvsid{|\}}\vspace*{\pvsdeclspacing}
+
+  \pvsid{eqFM}: \pvskey{THEOREM} \pvsid{relations}\({\pvsbracketl}\)\pvsid{FM}\({\pvsbracketr}\).\pvsid{equivalence?}\pvsid{(}\pvsid{equivalentFMs}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{refFM}: \pvskey{THEOREM} \pvsid{orders}\({\pvsbracketl}\)\pvsid{FM}\({\pvsbracketr}\).\pvsid{preorder?}\pvsid{(}\(\models\)\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \(a\), \(a\sb{1}\), \(a\sb{2}\): \pvskey{VAR} \pvsid{Asset}\vspace*{\pvsdeclspacing}
+
+  \pvsid{an}, \pvsid{an1}, \pvsid{an2}: \pvskey{VAR} \pvsid{AssetName}\vspace*{\pvsdeclspacing}
+
+  \pvsid{aSet}, \(S\sb{1}\), \(S\sb{2}\): \pvskey{VAR} \pvsid{set}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\)\vspace*{\pvsdeclspacing}
+
+  \pvsid{anSet}: \pvskey{VAR} \pvsid{finite\_sets}\({\pvsbracketl}\)\pvsid{AssetName}\({\pvsbracketr}\).\pvsid{finite\_set}\vspace*{\pvsdeclspacing}
+
+  \pvsid{as1}, \pvsid{as2}, \(p\), \(p\sb{1}\), \(p\sb{2}\): \pvskey{VAR} \pvsid{finite\_sets}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\).\pvsid{finite\_set}\vspace*{\pvsdeclspacing}
+
+  \pvsid{prods}, \pvsid{ps}, \pvsid{ps1}, \pvsid{ps2}: \pvskey{VAR}
+        \pvsid{finite\_sets}\({\pvsbracketl}\)\pvsid{finite\_sets}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\).\pvsid{finite\_set}\({\pvsbracketr}\).\pvsid{finite\_set}\vspace*{\pvsdeclspacing}
+
+  \pvsid{|-}: \({\pvsbracketl}\)\pvsid{set}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\), \pvsid{set}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\) \(\rightarrow\) \pvsid{bool}\({\pvsbracketr}\)\vspace*{\pvsdeclspacing}
+
+  \pvsid{wfProduct}: \({\pvsbracketl}\)\pvsid{set}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\) \(\rightarrow\) \pvsid{bool}\({\pvsbracketr}\)\vspace*{\pvsdeclspacing}
+
+  \pvsid{Product}: \pvskey{TYPE} = \pvsid{(}\pvsid{wfProduct}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{assetRefinement}: \pvskey{AXIOM} \pvsid{orders}\({\pvsbracketl}\)\pvsid{set}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\)\({\pvsbracketr}\).\pvsid{preorder?}\pvsid{(}\pvsid{|-}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{asRefCompositional}: \pvskey{AXIOM}
+    \pvskey{forall} \pvsid{(}\(S\sb{1}\), \(S\sb{2}\), \pvsid{aSet}\pvsid{)}:
+      \pvsid{(}\(S\sb{1}\) \pvsid{|-} \(S\sb{2}\)\pvsid{)} \(\wedge\) \pvsid{wfProduct}\pvsid{(}\(\setsotheruniontwofn{S\sb{1}}{\pvsid{aSet}}\)\pvsid{)} \(\Rightarrow\)
+       \pvsid{wfProduct}\pvsid{(}\(\setsotheruniontwofn{S\sb{2}}{\pvsid{aSet}}\)\pvsid{)} \(\wedge\)
+        \pvsid{(}\(\pvsid{(}\setsotheruniontwofn{S\sb{1}}{\pvsid{aSet}}\pvsid{)}\) \pvsid{|-} \(\pvsid{(}\setsotheruniontwofn{S\sb{2}}{\pvsid{aSet}}\pvsid{)}\)\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvskey{IMPORTING} \pvsid{maps}
+
+  \pvsid{AM}: \pvskey{TYPE} = \pvsid{maps}\({\pvsbracketl}\)\pvsid{AssetName}, \pvsid{Asset}\({\pvsbracketr}\).\pvsid{mapping}\vspace*{\pvsdeclspacing}
+
+  \pvsid{am}, \pvsid{am1}, \pvsid{am2}: \pvskey{VAR} \pvsid{AM}\vspace*{\pvsdeclspacing}
+
+  \(\rhd\)\pvsid{(}\pvsid{am1}, \pvsid{am2}\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvsid{(}\pvsid{dom}\pvsid{(}\pvsid{am1}\pvsid{)} \(=\) \pvsid{dom}\pvsid{(}\pvsid{am2}\pvsid{)} \(\wedge\)
+         \pvsid{(}\pvskey{forall} \pvsid{an}:
+             \pvsid{dom}\pvsid{(}\pvsid{am1}\pvsid{)}\pvsid{(}\pvsid{an}\pvsid{)} \(\Rightarrow\)
+              \pvsid{(}\pvskey{exists} \(a\sb{1}\), \(a\sb{2}\):
+                  \pvsid{(}\pvsid{am1}\pvsid{(}\pvsid{an}, \(a\sb{1}\)\pvsid{)}\pvsid{)} \(\wedge\)
+                   \pvsid{(}\pvsid{am2}\pvsid{(}\pvsid{an}, \(a\sb{2}\)\pvsid{)}\pvsid{)} \(\wedge\)
+                    \pvsid{|-}\pvsid{(}\pvsid{singleton}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\)\pvsid{(}\(a\sb{1}\)\pvsid{)},
+                        \pvsid{singleton}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\)\pvsid{(}\(a\sb{2}\)\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{assetMappingRefinement}: \pvskey{THEOREM} \pvsid{orders}\({\pvsbracketl}\)\pvsid{AM}\({\pvsbracketr}\).\pvsid{preorder?}\pvsid{(}\(\rhd\)\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{amRefCompositional}: \pvskey{LEMMA}
+    \pvskey{forall} \pvsid{(}\pvsid{am1}, \pvsid{am2}\pvsid{)}:
+      \(\rhd\)\pvsid{(}\pvsid{am1}, \pvsid{am2}\pvsid{)} \(\Rightarrow\)
+       \pvsid{(}\pvskey{forall} \pvsid{(}\pvsid{anSet}\pvsid{)}:
+           \pvskey{forall} \pvsid{(}\pvsid{aSet}\pvsid{)}:
+             \pvsid{wfProduct}\pvsid{(}\(\setsotheruniontwofn{\pvsid{aSet}}{\pvsid{map}\pvsid{(}\pvsid{am1}, \pvsid{anSet}\pvsid{)}}\)\pvsid{)} \(\Rightarrow\)
+              \pvsid{wfProduct}\pvsid{(}\(\setsotheruniontwofn{\pvsid{aSet}}{\pvsid{map}\pvsid{(}\pvsid{am2}, \pvsid{anSet}\pvsid{)}}\)\pvsid{)} \(\wedge\)
+               \pvsid{|-}\pvsid{(}\(\setsotheruniontwofn{\pvsid{aSet}}{\pvsid{map}\pvsid{(}\pvsid{am1}, \pvsid{anSet}\pvsid{)}}\),
+                   \(\setsotheruniontwofn{\pvsid{aSet}}{\pvsid{map}\pvsid{(}\pvsid{am2}, \pvsid{anSet}\pvsid{)}}\)\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{ck}, \pvsid{ck1}, \pvsid{ck2}, \pvsid{ck3}: \pvskey{VAR} \pvsid{CK}\vspace*{\pvsdeclspacing}
+
+  \pvsid{amRef}: \pvskey{AXIOM}
+    \pvskey{forall} \pvsid{(}\pvsid{am1}, \pvsid{am2}\pvsid{)}:
+      \(\rhd\)\pvsid{(}\pvsid{am1}, \pvsid{am2}\pvsid{)} \(\Rightarrow\)
+       \pvsid{(}\pvskey{forall} \pvsid{(}\(K\): \pvsid{CK}, \(c\): \pvsid{Conf}\pvsid{)}:
+           \pvsid{wfProduct}\pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{)}\pvsid{(}\pvsid{am1}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\pvsid{)} \(\Rightarrow\)
+            \pvsid{wfProduct}\pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{)}\pvsid{(}\pvsid{am2}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\pvsid{)} \(\wedge\)
+             \pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{)}\pvsid{(}\pvsid{am1}\pvsid{)}\pvsid{(}\(c\)\pvsid{)} \pvsid{|-} \pvsid{[||]}\pvsid{(}\(K\)\pvsid{)}\pvsid{(}\pvsid{am2}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{equivalentCKs}\pvsid{(}\pvsid{ck1}, \pvsid{ck2}\pvsid{)}: \pvsid{bool} \pvskey{=} \pvsid{[|}\pvsid{ck1}\pvsid{|]} \(=\) \pvsid{[|}\pvsid{ck2}\pvsid{|]}\vspace*{\pvsdeclspacing}
+
+  \pvsid{eqCK}: \pvskey{THEOREM} \pvsid{relations}\({\pvsbracketl}\)\pvsid{CK}\({\pvsbracketr}\).\pvsid{equivalence?}\pvsid{(}\pvsid{equivalentCKs}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakerEqCK}\pvsid{(}\pvsid{fm}, \pvsid{ck1}, \pvsid{ck2}\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvskey{forall} \pvsid{am}:
+        \pvskey{forall} \(c\):
+          \pvsid{\{||\}}\pvsid{(}\pvsid{fm}\pvsid{)}\pvsid{(}\(c\)\pvsid{)} \(\Rightarrow\)
+           \pvsid{[||]}\pvsid{(}\pvsid{ck1}\pvsid{)}\pvsid{(}\pvsid{am}\pvsid{)}\pvsid{(}\(c\)\pvsid{)} \(=\) \pvsid{[||]}\pvsid{(}\pvsid{ck2}\pvsid{)}\pvsid{(}\pvsid{am}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakerEqReflexive}: \pvskey{THEOREM} \pvskey{forall} \pvsid{(}\pvsid{fm}, \pvsid{ck}\pvsid{)}: \pvsid{weakerEqCK}\pvsid{(}\pvsid{fm}, \pvsid{ck}, \pvsid{ck}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakerEqSymmetric}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{fm}, \pvsid{ck1}, \pvsid{ck2}\pvsid{)}:
+      \pvsid{weakerEqCK}\pvsid{(}\pvsid{fm}, \pvsid{ck1}, \pvsid{ck2}\pvsid{)} \(\Rightarrow\) \pvsid{weakerEqCK}\pvsid{(}\pvsid{fm}, \pvsid{ck2}, \pvsid{ck1}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakerEqTransitive}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{fm}, \pvsid{ck1}, \pvsid{ck2}, \pvsid{ck3}\pvsid{)}:
+      \pvsid{(}\pvsid{weakerEqCK}\pvsid{(}\pvsid{fm}, \pvsid{ck1}, \pvsid{ck2}\pvsid{)} \(\wedge\) \pvsid{weakerEqCK}\pvsid{(}\pvsid{fm}, \pvsid{ck2}, \pvsid{ck3}\pvsid{)}\pvsid{)} \(\Rightarrow\)
+       \pvsid{weakerEqCK}\pvsid{(}\pvsid{fm}, \pvsid{ck1}, \pvsid{ck3}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{ArbitrarySPL}: \pvskey{TYPE} = \({\pvsrectypel}\)\(F\): \pvsid{FM}, \(A\): \pvsid{AM}, \(K\): \pvsid{CK}\({\pvsrectyper}\)\vspace*{\pvsdeclspacing}
+
+  \pvsid{wfPL}\pvsid{(}\pvsid{pl}: \pvsid{ArbitrarySPL}\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvsid{(}\pvskey{forall} \(c\):
+          \pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(c\)\pvsid{)} \(\Rightarrow\)
+           \pvsid{wfProduct}\pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(A\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{PL}: \pvskey{TYPE} = \pvsid{(}\pvsid{wfPL}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{pl}, \pvsid{pl1}, \pvsid{pl2}: \pvskey{VAR} \pvsid{PL}\vspace*{\pvsdeclspacing}
+
+  \pvsid{plRefinement}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvsid{(}\pvskey{forall} \(c\sb{1}\):
+          \pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{1}\)\pvsid{)} \(\Rightarrow\)
+           \pvsid{(}\pvskey{exists} \(c\sb{2}\):
+               \pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{2}\)\pvsid{)} \(\wedge\)
+                \pvsid{(}\pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{(}\(A\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{1}\)\pvsid{)}\pvsid{)} \pvsid{|-}
+                   \pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{(}\(A\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{2}\)\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{plRef}: \pvskey{THEOREM} \pvsid{orders}\({\pvsbracketl}\)\pvsid{PL}\({\pvsbracketr}\).\pvsid{preorder?}\pvsid{(}\pvsid{plRefinement}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{products}\pvsid{(}\pvsid{pl}\pvsid{)}: \pvsid{set}\({\pvsbracketl}\)\pvsid{finite\_sets}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\).\pvsid{finite\_set}\({\pvsbracketr}\) \pvskey{=}
+      \{\(p\) |
+          \pvskey{exists} \pvsid{(}\(c\): \pvsid{Conf}\pvsid{)}:
+            \pvsid{(}\pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\pvsid{)} \(\wedge\)
+             \pvsid{(}\(p\) \(=\) \pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(A\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\pvsid{)}\pvsid{)}\}\vspace*{\pvsdeclspacing}
+
+  \pvsid{prod}\pvsid{(}\pvsid{pl}, \(c\)\pvsid{)}: \pvsid{finite\_sets}\({\pvsbracketl}\)\pvsid{Asset}\({\pvsbracketr}\).\pvsid{finite\_set} \pvskey{=}
+      \pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(A\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\pvsid{(}\(c\)\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{plRefinementAlt}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvsid{(}\pvskey{forall} \(p\sb{1}\):
+          \pvsid{products}\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{(}\(p\sb{1}\)\pvsid{)} \(\Rightarrow\)
+           \pvsid{(}\pvskey{exists} \(p\sb{2}\): \pvsid{products}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{(}\(p\sb{2}\)\pvsid{)} \(\wedge\) \pvsid{(}\pvsid{(}\(p\sb{1}\)\pvsid{)} \pvsid{|-} \pvsid{(}\(p\sb{2}\)\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{plRefAlt}: \pvskey{THEOREM} \pvsid{orders}\({\pvsbracketl}\)\pvsid{PL}\({\pvsbracketr}\).\pvsid{preorder?}\pvsid{(}\pvsid{plRefinementAlt}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{plRefEq}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)}:
+      \pvsid{(}\pvsid{plRefinement}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)}\pvsid{)} \(\Leftrightarrow\) \pvsid{(}\pvsid{plRefinementAlt}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{subsetProducts}\pvsid{(}\pvsid{prods}, \pvsid{pl1}\pvsid{)}: \pvsid{bool} \pvskey{=} \(\setsothersubsetothertwofn{\pvsid{prods}}{\pvsid{products}\pvsid{(}\pvsid{pl1}\pvsid{)}}\)\vspace*{\pvsdeclspacing}
+
+  \pvsid{plWeakRefinement}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}: \pvsid{PL}, \pvsid{prods}: \{\pvsid{ps} | \(\setsothersubsetothertwofn{\pvsid{ps}}{\pvsid{products}\pvsid{(}\pvsid{pl1}\pvsid{)}}\)\}\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvsid{(}\pvskey{forall} \(p\sb{1}\):
+          \pvsid{prods}\pvsid{(}\(p\sb{1}\)\pvsid{)} \(\Rightarrow\)
+           \pvsid{(}\pvskey{exists} \(p\sb{2}\): \pvsid{products}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{(}\(p\sb{2}\)\pvsid{)} \(\wedge\) \pvsid{(}\pvsid{(}\(p\sb{1}\)\pvsid{)} \pvsid{|-} \pvsid{(}\(p\sb{2}\)\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{strongerPLrefinement}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}: \pvsid{PL}\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvsid{(}\pvskey{forall} \(c\sb{1}\):
+          \pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{1}\)\pvsid{)} \(\Rightarrow\)
+           \pvsid{(}\pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{1}\)\pvsid{)} \(\wedge\)
+              \pvsid{(}\pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{(}\(A\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{1}\)\pvsid{)}\pvsid{)} \pvsid{|-}
+                 \pvsid{(}\pvsid{[||]}\pvsid{(}\(K\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{(}\(A\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{(}\(c\sb{1}\)\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{strongerPLref}: \pvskey{THEOREM} \pvsid{orders}\({\pvsbracketl}\)\pvsid{PL}\({\pvsbracketr}\).\pvsid{preorder?}\pvsid{(}\pvsid{strongerPLrefinement}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{plStrongSubset}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)}:
+      \pvsid{(}\pvsid{strongerPLrefinement}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)}\pvsid{)} \(\Rightarrow\)
+       \(\pvsid{(}\setsothersubsetothertwofn{\pvsid{\{|}F\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{|\}}}{\pvsid{\{|}F\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{|\}}}\pvsid{)}\)\vspace*{\pvsdeclspacing}
+
+  \pvsid{plRefinementFun}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}: \pvsid{PL}, \(f\): \({\pvsbracketl}\)\pvsid{Conf} \(\rightarrow\) \pvsid{Conf}\({\pvsbracketr}\)\pvsid{)}: \pvsid{bool} \pvskey{=}
+      \pvsid{(}\pvskey{forall} \(c\):
+          \pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{(}\(c\)\pvsid{)} \(\Rightarrow\)
+           \pvsid{(}\pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{(}\(f\)\pvsid{(}\(c\)\pvsid{)}\pvsid{)} \(\wedge\)
+              \pvsid{(}\pvsid{prod}\pvsid{(}\pvsid{pl1}, \(c\)\pvsid{)} \pvsid{|-} \pvsid{prod}\pvsid{(}\pvsid{pl2}, \(f\)\pvsid{(}\(c\)\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{totalRefIFFExistsFun}: \pvskey{LEMMA}
+    \pvskey{forall} \pvsid{pl1}, \pvsid{pl2}:
+      \pvsid{plRefinement}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}\pvsid{)} \(\Leftrightarrow\)
+       \pvsid{(}\pvskey{exists} \pvsid{(}\(f\): \({\pvsbracketl}\)\pvsid{(}\pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl1}\pvsid{)}\pvsid{)}\pvsid{)} \(\rightarrow\) \pvsid{(}\pvsid{\{||\}}\pvsid{(}\(F\)\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}\pvsid{)}\({\pvsbracketr}\)\pvsid{)}:
+           \pvsid{plRefinementFun}\pvsid{(}\pvsid{pl1}, \pvsid{pl2}, \(f\)\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakFMcompositionality}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{fm}\pvsid{)}:
+      \pvsid{(}\pvsid{(}\(F\) \(\models\) \pvsid{fm}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)} \(\Rightarrow\) \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(F\) \pvskey{=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \pvsid{fm}, \(A\) \pvskey{:=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)}, \(K\) \pvskey{:=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{fmEquivalenceCompositionality}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{fm}\pvsid{)}:
+      \pvsid{(}\pvsid{equivalentFMs}\pvsid{(}\(F\), \pvsid{fm}\pvsid{)} \(\Rightarrow\) \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(F\) \pvskey{=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \pvsid{fm}, \(A\) \pvskey{:=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)}, \(K\) \pvskey{:=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{ckEquivalenceCompositionality}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{ck}\pvsid{)}:
+      \pvsid{(}\pvsid{equivalentCKs}\pvsid{(}\(K\), \pvsid{ck}\pvsid{)} \(\Rightarrow\) \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(K\) \pvskey{=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)}, \(A\) \pvskey{:=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)}, \(K\) \pvskey{:=} \pvsid{ck}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakerCKcompositionality}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{ck}\pvsid{)}:
+      \pvsid{(}\pvsid{weakerEqCK}\pvsid{(}\(F\), \(K\), \pvsid{ck}\pvsid{)} \(\Rightarrow\) \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(F\) \pvskey{=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(K\) \pvskey{=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)}, \(A\) \pvskey{:=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)}, \(K\) \pvskey{:=} \pvsid{ck}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{amRefinementCompositionality}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{am}\pvsid{)}:
+      \pvsid{(}\(\rhd\)\pvsid{(}\(A\), \pvsid{am}\pvsid{)} \(\Rightarrow\) \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(A\) \pvskey{=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)}, \(A\) \pvskey{:=} \pvsid{am}, \(K\) \pvskey{:=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{fullCompositionality}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{fm}, \pvsid{am}, \pvsid{ck}\pvsid{)}:
+      \pvsid{(}\pvsid{equivalentFMs}\pvsid{(}\(F\), \pvsid{fm}\pvsid{)} \(\wedge\) \pvsid{equivalentCKs}\pvsid{(}\(K\), \pvsid{ck}\pvsid{)} \(\wedge\) \(\rhd\)\pvsid{(}\(A\), \pvsid{am}\pvsid{)} \(\Rightarrow\)
+         \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(F\) \pvskey{=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(K\) \pvskey{=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(A\) \pvskey{=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \pvsid{fm}, \(A\) \pvskey{:=} \pvsid{am}, \(K\) \pvskey{:=} \pvsid{ck}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakFullCompositionality}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{fm}, \pvsid{am}, \pvsid{ck}\pvsid{)}:
+      \pvsid{(}\pvsid{(}\(F\) \(\models\) \pvsid{fm}\pvsid{)} \(\wedge\) \pvsid{equivalentCKs}\pvsid{(}\(K\), \pvsid{ck}\pvsid{)} \(\wedge\) \(\rhd\)\pvsid{(}\(A\), \pvsid{am}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)} \(\Rightarrow\)
+         \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(F\) \pvskey{=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(K\) \pvskey{=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(A\) \pvskey{=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \pvsid{fm}, \(A\) \pvskey{:=} \pvsid{am}, \(K\) \pvskey{:=} \pvsid{ck}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{fullCompositionality2}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{fm}, \pvsid{am}, \pvsid{ck}\pvsid{)}:
+      \pvsid{(}\pvsid{equivalentFMs}\pvsid{(}\(F\), \pvsid{fm}\pvsid{)} \(\wedge\) \pvsid{weakerEqCK}\pvsid{(}\(F\), \(K\), \pvsid{ck}\pvsid{)} \(\wedge\) \(\rhd\)\pvsid{(}\(A\), \pvsid{am}\pvsid{)} \(\Rightarrow\)
+         \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(F\) \pvskey{=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(K\) \pvskey{=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(A\) \pvskey{=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \pvsid{fm}, \(A\) \pvskey{:=} \pvsid{am}, \(K\) \pvskey{:=} \pvsid{ck}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{weakFullCompositionality2}: \pvskey{THEOREM}
+    \pvskey{forall} \pvsid{(}\pvsid{pl}, \pvsid{fm}, \pvsid{am}, \pvsid{ck}\pvsid{)}:
+      \pvsid{(}\pvsid{(}\(F\) \(\models\) \pvsid{fm}\pvsid{)} \(\wedge\) \pvsid{weakerEqCK}\pvsid{(}\(F\), \(K\), \pvsid{ck}\pvsid{)} \(\wedge\) \(\rhd\)\pvsid{(}\(A\), \pvsid{am}\pvsid{)} \(\wedge\) \pvsid{wfPL}\pvsid{(}\pvsid{pl2}\pvsid{)} \(\Rightarrow\)
+         \pvsid{plRefinement}\pvsid{(}\pvsid{pl}, \pvsid{pl2}\pvsid{)}\pvsid{)}
+        \pvskey{WHERE} \(F\) \pvskey{=} \(F\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(K\) \pvskey{=} \(K\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \(A\) \pvskey{=} \(A\)\pvsid{(}\pvsid{pl}\pvsid{)},
+              \pvsid{pl2} \pvskey{=} \pvsid{(\#}\(F\) \pvskey{:=} \pvsid{fm}, \(A\) \pvskey{:=} \pvsid{am}, \(K\) \pvskey{:=} \pvsid{ck}\pvsid{\#)}\vspace*{\pvsdeclspacing}
+
+  \pvsid{singletonPL}\pvsid{(}\pvsid{pl}\pvsid{)}: \pvsid{bool} \pvskey{=} \pvsid{singleton?}\pvsid{(}\pvsid{products}\pvsid{(}\pvsid{pl}\pvsid{)}\pvsid{)}\vspace*{\pvsdeclspacing}
+
+ \pvskey{END} \pvsid{SPLrefinement}\end{alltt}

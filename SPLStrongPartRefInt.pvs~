@@ -1,0 +1,37 @@
+SPLStrongPartRefInt: THEORY
+BEGIN
+
+IMPORTING CK
+IMPORTING AssetMapping
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+   
+   fm: VAR FMi
+   am: VAR AM
+   ck1: VAR CK
+   ck2: VAR CK
+   
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------REPLACE FEATURE EXP-------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+
+   replaceFeatureExpStrongPartialRef: THEOREM
+     FORALL(fm,am,ck1,ck2,item1,item2,its,s):
+    (
+      (
+      wfCK(fm,am,ck1) AND
+      s = intersection(<>(fm,getExp(item1)),<>(fm,getExp(item2))) AND
+      syntaxReplaceFeatureExp(ck1,ck2,item1,item2,its) AND
+      conditionsReplaceFeatureExpPartial(fm,item2)
+      )
+      =>
+        FORALL c: s(c) => (semantics(ck1)(am)(c) |- semantics(ck2)(am)(c))
+    ) 
+
+
+
+
+
+END SPLStrongPartRefInt

@@ -26,7 +26,7 @@ PartialAMCompositionality[Conf:TYPE,
 
   [||](ck)(am)(c): finite_sets[Asset].finite_set = image(eval(ck)(am)(c))
 
-  IMPORTING PartialRefStrong[Conf,FM,{||},Asset,AssetName,CK,[||]]
+  IMPORTING PartialRefDefault[Conf,FM,{||},Asset,AssetName,CK,[||]]
 
   pl: VAR PL
 

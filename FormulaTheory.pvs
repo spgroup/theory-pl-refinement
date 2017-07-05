@@ -22,6 +22,17 @@ FormulaTheory: THEORY
     ENDCASES
    MEASURE complexity(f)
 
+  replace(f:Formula_,n:Name): RECURSIVE Formula_ =
+    CASES f OF
+       TRUE_FORMULA: TRUE_FORMULA,
+       FALSE_FORMULA: FALSE_FORMULA,
+       NAME_FORMULA(n1): IF n1 = n THEN FALSE_FORMULA ELSE NAME_FORMULA(n1) ENDIF,
+       NOT_FORMULA(f1) : NOT_FORMULA(replace(f1,n)),
+       AND_FORMULA(f1,f2): AND_FORMULA(replace(f1,n),replace(f2,n)),
+       IMPLIES_FORMULA(f1,f2): IMPLIES_FORMULA(replace(f1,n),replace(f2,n))
+     ENDCASES
+    MEASURE complexity(f)
+
   % indicates whether a formula is well-typed
   wt(fm: {featMod: FM | wfTree(featMod)}, f:Formula_): RECURSIVE boolean =
     CASES f OF 
@@ -69,6 +80,21 @@ FormulaTheory: THEORY
                   IMPLIES_FORMULA(rename(f1,x,y), rename(f2,x,y))
       ENDCASES
   MEASURE complexity(f)
+
+  replaceWithoutEffect: LEMMA FORALL (f:Formula_,x:Name) : NOT names(f)(x) => replace(f,x) = f
+
+  onlyNameMatters: LEMMA FORALL (f:Formula_,x:Name,c:Configuration) : (NOT (satisfies(f,c) => (satisfies(NAME_FORMULA(x),c))))
+  		   	 					      =>
+								      (satisfies(f,c) = satisfies(replace(f,x),c))
+
+  satisfiesPreservesReplace : LEMMA FORALL (f:Formula_,x:Name,c:Configuration) :
+  			      	    (NOT c(x))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,x),c))
+
+
+  replaceSameNames: LEMMA FORALL (f:Formula_,x:Name) : (NOT names(f)(x)) => (names(f) = names(replace(f,x)))
+
 
   %Caso x nao esteja presente na formula, o efeito de rename eh nulo
   notInNames: THEOREM

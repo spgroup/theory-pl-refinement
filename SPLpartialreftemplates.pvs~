@@ -1,0 +1,58 @@
+SPLpartialreftemplates: THEORY
+BEGIN
+
+IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements
+IMPORTING Assets, AssetMapping, ConfigurationKnowledge
+
+aSet: VAR finite_sets[Asset].finite_set
+am1,am2,pairs: VAR AM
+a1,a2: VAR Asset
+an: VAR AssetName
+s: VAR set[Configuration]
+c: VAR Configuration
+
+IMPORTING SPLpartialrefinement{{Conf:=Configuration}}
+IMPORTING SPLrefinement{{
+FM:=WFM, Conf:=Configuration, {||} := semantics,
+CK:=CK, Asset:=Assets.Asset,AssetName:=Assets.AssetName,[||] := semantics
+}}
+
+
+pl,pl2,pl3: VAR PL
+
+
+% Restriction Operator
+<>(pl,aSet):set[Configuration] = {c | ({|F(pl)|}(c)) AND empty?(intersection(aSet,prod(pl,c)))}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------CHANGE ASSET------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
+      am1=union((an,a1),pairs) AND
+      am2=union((an,a2),pairs)
+
+assetsChangedNotIncluded: LEMMA  
+    FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(pl,singleton(a1))
+      )
+      =>
+        (FORALL c : s(c) => NOT member(a1,prod(pl,c)))
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+changeAssetStrong: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(pl,singleton(a1))
+      )
+      =>
+        strongPartialRefinement(pl,pl2,s)
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+END SPLpartialreftemplates

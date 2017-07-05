@@ -145,8 +145,8 @@
     (strongPartialRefinement const-decl "bool" PartialRefDefault nil)
     (intersection const-decl "set" sets nil))
    shostak))
- (newprop 0
-  (newprop-1 nil 3697559286
+ (partialRefSubset 0
+  (partialRefSubset-1 nil 3697559286
    ("" (skolem 1 (pl1 s pl2))
     (("" (bddsimp)
       (("" (skolem 1 t)

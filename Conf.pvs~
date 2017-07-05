@@ -1,0 +1,14 @@
+Conf: THEORY
+  BEGIN
+
+    IMPORTING maps
+    AM: TYPE = maps[AssetName,Asset].mapping
+
+    Conf: TYPE
+    FM: TYPE
+    Asset: TYPE
+    AssetName: TYPE
+    CK: TYPE
+    {||}: [FM -> set[Conf]]
+    [||]: [CK->[AM->[Conf->finite_sets[Asset].finite_set]]]
+  END Conf
