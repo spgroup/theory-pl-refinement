@@ -293,12 +293,12 @@ removeFeaturePartialRefinement : THEOREM
 	   strongPartialRefinement(pl,pl2,s) 
 	) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=ck2  #)
 removeFeatureGuydance: THEOREM
-     FORALL(pl,fm2,P,ck2) :
+     FORALL(pl,fm2,P) :
      (
-	   (syntaxRemoveFeatureGuydance(F(pl),fm2,P,K(pl),ck2))
-	   =>
-	   (FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
-     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=ck2  #)
+	wfPL(pl2)
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P)  #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------ADD/REMOVE ASSETS TEMPLATE----------------------------------------------------------------
