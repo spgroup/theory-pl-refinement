@@ -301,6 +301,32 @@ removeFeatureGuydance: THEOREM
      ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P)  #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
+%----------------------------------------------MERGE FEATURE (GUYDANCE)-----------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+syntaxMergeFeatureGuydance(fm1,fm2,P,Q,ck1,ck2): bool=
+	(features(fm1))(P) AND
+	(features(fm1))(Q) AND
+	features(fm2) = remove(Q,remove(P,features(fm1))) AND
+	ck2 = replace(ck1,P,Q) AND
+	(FORALL c: (semantics(fm1)(c) AND NOT satisfies(NAME_FORMULA(P),c)) => semantics(fm2)(c))
+
+
+mergeFeatureGuydance1: THEOREM 
+        FORALL(pl,fm2,P,Q) :
+     (
+	wfPL(pl2)
+	=>
+	(FORALL c: (<>(F(pl),AND_FORMULA(NOT_FORMULA(NAME_FORMULA(P)),NOT_FORMULA(NAME_FORMULA(Q)))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,Q)  #)
+
+mergeFeatureGuydance2: THEOREM 
+        FORALL(pl,fm2,P,Q) :
+     (
+	(wfPL(pl2) AND NOT P = Q)
+	=>
+	(FORALL c: (<>(F(pl),AND_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,remove(P,c))))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,Q)  #)
+%---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------ADD/REMOVE ASSETS TEMPLATE----------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
 

@@ -138,7 +138,12 @@ BEGIN
   replace(it:Item,F):Item =
     it WITH [exp:=replace(exp(it),F)]
 
+  replace(it:Item,F,G):Item =
+    it WITH [exp:=replace(exp(it),F,G)]
+
   replace(ck:CK,F:Name):CK = {i2:Item | EXISTS (i:Item) : ck(i) AND i2 = replace(i,F)}
+
+  replace(ck:CK,F:Name,G:Name):CK = {i2:Item | EXISTS (i:Item) : ck(i) AND i2 = replace(i,F,G)}
 
 % operacao de renaming --> ren: CK x F x F -> CK
 %  renameCK(ck: CK, F,G:Name): set[CKitem] =
@@ -179,4 +184,23 @@ BEGIN
     (semantics(ck)(am)(c) = semantics(replace(ck,F))(am)(c))
 
   )
+
+  replaceDoesNotInfluence2: THEOREM
+   FORALL(c,am,ck,F,G):
+  (
+    (NOT c(F) AND NOT c(G))
+    =>
+    (semantics(ck)(am)(c) = semantics(replace(ck,F,G))(am)(c))
+
+  )
+
+  replaceDoesNotInfluence3: THEOREM
+  FORALL(c,am,ck,F,G):
+  (
+    (c(F) AND c(G) AND NOT F = G)
+    =>
+    (semantics(ck)(am)(c) = semantics(replace(ck,F,G))(am)(remove(F,c)))
+
+  )
+
 End CKComp
