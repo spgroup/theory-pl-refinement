@@ -22,28 +22,6 @@ FormulaTheory: THEORY
     ENDCASES
    MEASURE complexity(f)
 
-  replace(f:Formula_,n:Name): RECURSIVE Formula_ =
-    CASES f OF
-       TRUE_FORMULA: TRUE_FORMULA,
-       FALSE_FORMULA: FALSE_FORMULA,
-       NAME_FORMULA(n1): IF n1 = n THEN FALSE_FORMULA ELSE NAME_FORMULA(n1) ENDIF,
-       NOT_FORMULA(f1) : NOT_FORMULA(replace(f1,n)),
-       AND_FORMULA(f1,f2): AND_FORMULA(replace(f1,n),replace(f2,n)),
-       IMPLIES_FORMULA(f1,f2): IMPLIES_FORMULA(replace(f1,n),replace(f2,n))
-     ENDCASES
-    MEASURE complexity(f)
-
-  replace(f:Formula_,n:Name,n2:Name): RECURSIVE Formula_ =
-    CASES f OF
-       TRUE_FORMULA: TRUE_FORMULA,
-       FALSE_FORMULA: FALSE_FORMULA,
-       NAME_FORMULA(n1): IF n1 = n THEN NAME_FORMULA(n2) ELSE NAME_FORMULA(n1) ENDIF,
-       NOT_FORMULA(f1) : NOT_FORMULA(replace(f1,n,n2)),
-       AND_FORMULA(f1,f2): AND_FORMULA(replace(f1,n,n2),replace(f2,n,n2)),
-       IMPLIES_FORMULA(f1,f2): IMPLIES_FORMULA(replace(f1,n,n2),replace(f2,n,n2))
-     ENDCASES
-    MEASURE complexity(f)
-
   replace(f:Formula_,n:Name,f3:Formula_): RECURSIVE Formula_ =
       CASES f OF
        TRUE_FORMULA: TRUE_FORMULA,
@@ -103,28 +81,24 @@ FormulaTheory: THEORY
       ENDCASES
   MEASURE complexity(f)
 
-  replaceWithoutEffect: LEMMA FORALL (f:Formula_,x:Name) : NOT names(f)(x) => replace(f,x) = f
+  replaceWithoutEffect: LEMMA FORALL (f:Formula_,x:Name) : NOT names(f)(x) => replace(f,x,FALSE_FORMULA) = f
 
-  replaceWithoutEffect2: LEMMA FORALL (f:Formula_,x:Name,x2:Name) : NOT names(f)(x) => replace(f,x,x2) = f
-  
-  onlyNameMatters: LEMMA FORALL (f:Formula_,x:Name,c:Configuration) : (NOT (satisfies(f,c) => (satisfies(NAME_FORMULA(x),c))))
-  		   	 					      =>
-								      (satisfies(f,c) = satisfies(replace(f,x),c))
+  replaceWithoutEffect2: LEMMA FORALL (f:Formula_,x:Name,x2:Name) : NOT names(f)(x) => replace(f,x,NAME_FORMULA(x2)) = f
 
   satisfiesPreservesReplace : LEMMA FORALL (f:Formula_,x:Name,c:Configuration) :
   			      	    (NOT c(x))
 				    =>
-				    (satisfies(f,c) = satisfies(replace(f,x),c))
+				    (satisfies(f,c) = satisfies(replace(f,x,FALSE_FORMULA),c))
 
   satisfiesPreservesReplace2: LEMMA FORALL (f:Formula_,x:Name,x2:Name,c:Configuration) :
   			      	    (NOT c(x) AND NOT c(x2))
 				    =>
-				    (satisfies(f,c) = satisfies(replace(f,x,x2),c))
+				    (satisfies(f,c) = satisfies(replace(f,x,NAME_FORMULA(x2)),c))
 
   satisfiesPreservesReplace3: LEMMA FORALL (f:Formula_,x:Name,x2:Name,c:Configuration) :
   			      	    (c(x) AND c(x2) AND NOT x = x2)
 				    =>
-				    (satisfies(f,c) = satisfies(replace(f,x,x2),remove(x,c)))
+				    (satisfies(f,c) = satisfies(replace(f,x,NAME_FORMULA(x2)),remove(x,c)))
 
   satisfiesPreservesReplace4: LEMMA FORALL (f:Formula_,x:Name,x2:Name,c:Configuration) :
   			      	    (NOT c(x) AND NOT c(x2))
@@ -136,7 +110,7 @@ FormulaTheory: THEORY
 				    =>
 				    (satisfies(f,c) = satisfies(replace(f,x,IMPLIES_FORMULA(NOT_FORMULA(NAME_FORMULA(x)),NAME_FORMULA(x2))),c))
 
-  replaceSameNames: LEMMA FORALL (f:Formula_,x:Name) : (NOT names(f)(x)) => (names(f) = names(replace(f,x)))
+  replaceSameNames: LEMMA FORALL (f:Formula_,x:Name) : (NOT names(f)(x)) => (names(f) = names(replace(f,x,FALSE_FORMULA)))
 
 
   %Caso x nao esteja presente na formula, o efeito de rename eh nulo

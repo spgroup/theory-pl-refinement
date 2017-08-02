@@ -72,10 +72,6 @@
    ((ckEq2 const-decl "bool" CKComp nil)) shostak))
  (replace_TCC1 0
   (replace_TCC1-1 nil 3708249306 ("" (subtype-tcc) nil nil) nil nil))
- (replace_TCC2 0
-  (replace_TCC2-1 nil 3709464004 ("" (subtype-tcc) nil nil) nil nil))
- (replace_TCC3 0
-  (replace_TCC3-1 nil 3710682330 ("" (subtype-tcc) nil nil) nil nil))
  (renameCK_TCC1 0
   (renameCK_TCC1-1 nil 3593880902 ("" (subtype-tcc) nil nil) nil nil))
  (evalEqCK 0
@@ -104,6 +100,208 @@
     nil)
    nil shostak))
  (replaceDoesNotInfluence 0
+  (replaceDoesNotInfluence-2 nil 3710685538
+   ("" (skolem 1 (c am ck F))
+    (("" (bddsimp)
+      (("" (expand semantics)
+        (("" (expand map)
+          (("" (decompose-equality)
+            (("" (bddsimp)
+              (("1" (skolem -1 an)
+                (("1" (inst 1 an)
+                  (("1" (bddsimp)
+                    (("1" (expand eval)
+                      (("1" (expand assetsCK)
+                        (("1" (skolem -1 it)
+                          (("1" (bddsimp)
+                            (("1" (case "names(exp(it))(F)")
+                              (("1"
+                                (expand evalCK)
+                                (("1"
+                                  (bddsimp)
+                                  (("1"
+                                    (expand replace)
+                                    (("1"
+                                      (lemma satisfiesPreservesReplace)
+                                      (("1"
+                                        (inst -1 "exp(it)" F c)
+                                        (("1"
+                                          (bddsimp)
+                                          (("1"
+                                            (inst
+                                             2
+                                             "replace(it,F,FALSE_FORMULA)")
+                                            (("1"
+                                              (bddsimp)
+                                              (("1" (grind) nil nil)
+                                               ("2" (grind) nil nil)
+                                               ("3" (grind) nil nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil)
+                               ("2"
+                                (inst 2 it)
+                                (("2"
+                                  (bddsimp)
+                                  (("2"
+                                    (expand replace 2)
+                                    (("2"
+                                      (expand evalCK)
+                                      (("2"
+                                        (bddsimp)
+                                        (("2"
+                                          (inst 2 it)
+                                          (("2"
+                                            (bddsimp)
+                                            (("2"
+                                              (lemma
+                                               replaceWithoutEffect)
+                                              (("2"
+                                                (inst -1 "exp(it)" F)
+                                                (("2"
+                                                  (bddsimp)
+                                                  (("2"
+                                                    (expand replace 2)
+                                                    (("2"
+                                                      (replace -1 2)
+                                                      (("2"
+                                                        (grind)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil)
+               ("2" (skolem -1 an)
+                (("2" (inst 1 an)
+                  (("2" (bddsimp)
+                    (("2" (expand eval)
+                      (("2" (expand assetsCK)
+                        (("2" (skolem -2 it)
+                          (("2" (flatten)
+                            (("2" (expand evalCK)
+                              (("2"
+                                (flatten)
+                                (("2"
+                                  (expand replace)
+                                  (("2"
+                                    (skolem -3 it1)
+                                    (("2"
+                                      (bddsimp)
+                                      (("2"
+                                        (case "NOT names(exp(it1))(F)")
+                                        (("1"
+                                          (lemma replaceWithoutEffect)
+                                          (("1"
+                                            (inst -1 "exp(it1)" F)
+                                            (("1"
+                                              (bddsimp)
+                                              (("1"
+                                                (expand replace -5)
+                                                (("1"
+                                                  (replace -1 -5)
+                                                  (("1"
+                                                    (grind)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil)
+                                         ("2"
+                                          (lemma
+                                           satisfiesPreservesReplace)
+                                          (("2"
+                                            (inst -1 "exp(it1)" F c)
+                                            (("2"
+                                              (bddsimp)
+                                              (("1"
+                                                (inst 2 it1)
+                                                (("1"
+                                                  (bddsimp)
+                                                  (("1"
+                                                    (grind)
+                                                    nil
+                                                    nil))
+                                                  nil))
+                                                nil)
+                                               ("2"
+                                                (replace -5 -6)
+                                                (("2" (grind) nil nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((semantics const-decl "finite_sets[Asset].finite_set" CKComp nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (Item type-eq-decl nil CKComp nil) (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (CK type-eq-decl nil CKComp nil) (Name type-decl nil Name nil)
+    (Configuration type-eq-decl nil Name nil)
+    (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (replace const-decl "CK" CKComp nil)
+    (FALSE? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (FALSE_FORMULA adt-constructor-decl "(FALSE?)" Formula__adt nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (NOT const-decl "[bool -> bool]" booleans nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
+     nil)
+    (replaceWithoutEffect formula-decl nil FormulaTheory nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (replace const-decl "Item" CKComp nil)
+    (satisfiesPreservesReplace formula-decl nil FormulaTheory nil)
+    (names def-decl "set[Name]" FormulaTheory nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil))
+   nil)
   (replaceDoesNotInfluence-1 nil 3708249308
    ("" (skolem 1 (c am ck F))
     (("" (bddsimp)
@@ -325,6 +523,156 @@
     (map const-decl "finite_sets[T].finite_set" maps nil))
    shostak))
  (replaceDoesNotInfluence2 0
+  (replaceDoesNotInfluence2-2 nil 3710685727
+   ("" (skolem 1 (c am ck F G))
+    (("" (bddsimp)
+      (("" (lemma satisfiesPreservesReplace2)
+        (("" (expand semantics)
+          (("" (expand map)
+            (("" (decompose-equality)
+              (("" (bddsimp)
+                (("1" (skolem -1 an)
+                  (("1" (flatten)
+                    (("1" (inst 1 an)
+                      (("1" (bddsimp)
+                        (("1" (expand eval)
+                          (("1" (expand assetsCK)
+                            (("1" (skolem -1 i)
+                              (("1"
+                                (flatten)
+                                (("1"
+                                  (expand evalCK -2)
+                                  (("1"
+                                    (flatten)
+                                    (("1"
+                                      (inst -5 "exp(i)" F G c)
+                                      (("1"
+                                        (bddsimp)
+                                        (("1"
+                                          (inst
+                                           1
+                                           "replace(i,F,NAME_FORMULA(G))")
+                                          (("1"
+                                            (bddsimp)
+                                            (("1"
+                                              (expand evalCK)
+                                              (("1"
+                                                (bddsimp)
+                                                (("1" (grind) nil nil)
+                                                 ("2" (grind) nil nil))
+                                                nil))
+                                              nil)
+                                             ("2" (grind) nil nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil)
+                 ("2" (skolem -1 an)
+                  (("2" (flatten)
+                    (("2" (expand eval -1)
+                      (("2" (expand assetsCK)
+                        (("2" (skolem -1 i2)
+                          (("2" (bddsimp)
+                            (("2" (expand evalCK)
+                              (("2"
+                                (flatten)
+                                (("2"
+                                  (expand replace -2)
+                                  (("2"
+                                    (skolem -2 i)
+                                    (("2"
+                                      (flatten)
+                                      (("2"
+                                        (inst -6 "exp(i)" F G c)
+                                        (("2"
+                                          (bddsimp)
+                                          (("1"
+                                            (inst 1 an)
+                                            (("1"
+                                              (bddsimp)
+                                              (("1"
+                                                (expand eval)
+                                                (("1"
+                                                  (expand assetsCK)
+                                                  (("1"
+                                                    (inst 1 i)
+                                                    (("1"
+                                                      (bddsimp)
+                                                      (("1"
+                                                        (expand evalCK)
+                                                        (("1"
+                                                          (bddsimp)
+                                                          nil
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (grind)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil)
+                                           ("2" (grind) nil nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((satisfiesPreservesReplace2 formula-decl nil FormulaTheory nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
+     nil)
+    (replace const-decl "Item" CKComp nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (replace const-decl "CK" CKComp nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
+    (Configuration type-eq-decl nil Name nil)
+    (Name type-decl nil Name nil) (CK type-eq-decl nil CKComp nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil) (Item type-eq-decl nil CKComp nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (semantics const-decl "finite_sets[Asset].finite_set" CKComp nil))
+   nil)
   (replaceDoesNotInfluence2-1 nil 3709464006
    ("" (skolem 1 (c am ck F G))
     (("" (bddsimp)
@@ -468,6 +816,125 @@
     (satisfiesPreservesReplace2 formula-decl nil FormulaTheory nil))
    shostak))
  (replaceDoesNotInfluence3 0
+  (replaceDoesNotInfluence3-2 nil 3710685786
+   ("" (skolem 1 (c am ck F G))
+    (("" (lemma satisfiesPreservesReplace3)
+      (("" (bddsimp)
+        (("" (expand semantics)
+          (("" (expand map)
+            (("" (decompose-equality 2)
+              (("" (bddsimp)
+                (("1" (skolem -1 an)
+                  (("1" (inst 1 an)
+                    (("1" (bddsimp)
+                      (("1" (expand eval)
+                        (("1" (expand assetsCK)
+                          (("1" (skolem -1 i)
+                            (("1"
+                              (inst 1 "replace(i,F,NAME_FORMULA(G))")
+                              (("1"
+                                (bddsimp)
+                                (("1"
+                                  (expand evalCK)
+                                  (("1"
+                                    (bddsimp)
+                                    (("1"
+                                      (inst -5 "exp(i)" F G c)
+                                      (("1"
+                                        (bddsimp)
+                                        (("1" (grind) nil nil))
+                                        nil))
+                                      nil)
+                                     ("2" (grind) nil nil))
+                                    nil))
+                                  nil)
+                                 ("2" (grind) nil nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil)
+                 ("2" (skolem -1 an)
+                  (("2" (inst 1 an)
+                    (("2" (bddsimp)
+                      (("2" (expand eval)
+                        (("2" (expand assetsCK)
+                          (("2" (skolem -2 i2)
+                            (("2" (bddsimp)
+                              (("2"
+                                (expand evalCK)
+                                (("2"
+                                  (flatten)
+                                  (("2"
+                                    (expand replace -3)
+                                    (("2"
+                                      (skolem -3 i)
+                                      (("2"
+                                        (bddsimp)
+                                        (("2"
+                                          (inst 1 i)
+                                          (("2"
+                                            (bddsimp)
+                                            (("1"
+                                              (inst -6 "exp(i)" F G c)
+                                              (("1"
+                                                (bddsimp)
+                                                (("1" (grind) nil nil))
+                                                nil))
+                                              nil)
+                                             ("2" (grind) nil nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((map const-decl "finite_sets[T].finite_set" maps nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (replace const-decl "Item" CKComp nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
+     nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (remove const-decl "set" sets nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (replace const-decl "CK" CKComp nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
+    (Configuration type-eq-decl nil Name nil)
+    (Name type-decl nil Name nil) (CK type-eq-decl nil CKComp nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (set type-eq-decl nil sets nil) (Item type-eq-decl nil CKComp nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AND const-decl "[bool, bool -> bool]" booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (semantics const-decl "finite_sets[Asset].finite_set" CKComp nil)
+    (satisfiesPreservesReplace3 formula-decl nil FormulaTheory nil))
+   nil)
   (replaceDoesNotInfluence3-1 nil 3709464606
    ("" (skolem 1 (c am ck F G))
     (("" (lemma satisfiesPreservesReplace3)
@@ -581,6 +1048,114 @@
     (map const-decl "finite_sets[T].finite_set" maps nil))
    shostak))
  (replaceDoesNotInfluence4 0
+  (replaceDoesNotInfluence4-2 nil 3710685816
+   ("" (skolem 1 (c am ck F G))
+    (("" (bddsimp)
+      (("" (lemma satisfiesPreservesReplace4)
+        (("" (decompose-equality)
+          (("" (bddsimp)
+            (("1" (expand semantics)
+              (("1" (expand map)
+                (("1" (skolem -1 an)
+                  (("1" (inst 1 an)
+                    (("1" (bddsimp)
+                      (("1" (expand eval -1)
+                        (("1" (expand assetsCK)
+                          (("1" (skolem -1 i)
+                            (("1" (bddsimp)
+                              (("1"
+                                (expand eval 1)
+                                (("1"
+                                  (expand assetsCK)
+                                  (("1"
+                                    (expand evalCK)
+                                    (("1"
+                                      (bddsimp)
+                                      (("1"
+                                        (inst -5 "exp(i)" F G c)
+                                        (("1"
+                                          (bddsimp)
+                                          (("1"
+                                            (inst
+                                             1
+                                             "replace(i,F,AND_FORMULA(NAME_FORMULA(F),NAME_FORMULA(G)))")
+                                            (("1"
+                                              (bddsimp)
+                                              (("1"
+                                                (expand replace 1)
+                                                (("1"
+                                                  (propax)
+                                                  nil
+                                                  nil))
+                                                nil)
+                                               ("2"
+                                                (expand replace 1)
+                                                (("2"
+                                                  (inst 1 i)
+                                                  (("2"
+                                                    (bddsimp)
+                                                    (("2"
+                                                      (grind)
+                                                      nil
+                                                      nil))
+                                                    nil))
+                                                  nil))
+                                                nil)
+                                               ("3" (grind) nil nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil)
+             ("2" (grind) nil nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((satisfiesPreservesReplace4 formula-decl nil FormulaTheory nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (replace const-decl "Item" CKComp nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
+     nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (set type-eq-decl nil sets nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (AND_FORMULA adt-constructor-decl
+     "[[Formula_, Formula_] -> (AND?)]" Formula__adt nil)
+    (AND? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
+    (replace const-decl "CK" CKComp nil)
+    (semantics const-decl "finite_sets[Asset].finite_set" CKComp nil)
+    (Configuration type-eq-decl nil Name nil)
+    (Name type-decl nil Name nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (unique const-decl "bool" maps nil)
+    (CK type-eq-decl nil CKComp nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (Item type-eq-decl nil CKComp nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (AssetName nonempty-type-decl nil Assets nil))
+   nil)
   (replaceDoesNotInfluence4-1 nil 3710682331
    ("" (skolem 1 (c am ck F G))
     (("" (bddsimp)
@@ -669,7 +1244,6 @@
     (Name type-decl nil Name nil)
     (Configuration type-eq-decl nil Name nil)
     (semantics const-decl "finite_sets[Asset].finite_set" CKComp nil)
-    nil
     (AND? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
     (AND_FORMULA adt-constructor-decl
      "[[Formula_, Formula_] -> (AND?)]" Formula__adt nil)
@@ -683,7 +1257,7 @@
     (Asset nonempty-type-decl nil Assets nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
      nil)
-    nil (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
     (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (satisfiesPreservesReplace4 formula-decl nil FormulaTheory nil))

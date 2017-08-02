@@ -6900,12 +6900,7 @@
                                   (bddsimp)
                                   ((""
                                     (replace -3 2)
-                                    ((""
-                                      (inst
-                                       -1
-                                       "semantics(replace(K(pl), P))(A(pl))(c)")
-                                      nil
-                                      nil))
+                                    (("" (grind) nil nil))
                                     nil))
                                   nil))
                                 nil))
@@ -6924,12 +6919,26 @@
       nil))
     nil)
    ((prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
     (preorder? const-decl "bool" orders nil)
     (reflexive? const-decl "bool" relations nil)
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (AM type-eq-decl nil SPLrefinement nil)
+    (mapping type-eq-decl nil maps nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
+     nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (replace const-decl "CK" CKComp nil)
+    (FALSE? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (FALSE_FORMULA adt-constructor-decl "(FALSE?)" Formula__adt nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
+    (transitive? const-decl "bool" relations nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
@@ -6989,12 +6998,7 @@
                                           (flatten)
                                           ((""
                                             (expand reflexive?)
-                                            ((""
-                                              (inst
-                                               -1
-                                               "semantics(replace(K(pl), P, Q))(A(pl))(c)")
-                                              nil
-                                              nil))
+                                            (("" (grind) nil nil))
                                             nil))
                                           nil))
                                         nil))
@@ -7016,7 +7020,8 @@
         nil))
       nil))
     nil)
-   ((satisfies def-decl "boolean" FormulaTheory nil)
+   ((<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
     (Name type-decl nil Name nil)
     (boolean nonempty-type-decl nil booleans nil)
     (bool nonempty-type-eq-decl nil booleans nil)
@@ -7043,6 +7048,20 @@
     (PL type-eq-decl nil SPLrefinement nil)
     (preorder? const-decl "bool" orders nil)
     (reflexive? const-decl "bool" relations nil)
+    (mapping type-eq-decl nil maps nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
+     nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (replace const-decl "CK" CKComp nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
+    (transitive? const-decl "bool" relations nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (replaceDoesNotInfluence2 formula-decl nil CKComp nil)
     (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement
@@ -7083,12 +7102,7 @@
                                               (flatten)
                                               ((""
                                                 (expand reflexive?)
-                                                ((""
-                                                  (inst
-                                                   -1
-                                                   "semantics(replace(K(pl), P, Q))(A(pl))(remove(P, c))")
-                                                  nil
-                                                  nil))
+                                                (("" (grind) nil nil))
                                                 nil))
                                               nil))
                                             nil))
@@ -7112,37 +7126,52 @@
         nil))
       nil))
     nil)
-   ((assetRefinement formula-decl nil SPLrefinement nil)
-    (remove const-decl "set" sets nil)
-    (reflexive? const-decl "bool" relations nil)
-    (preorder? const-decl "bool" orders nil)
-    (PL type-eq-decl nil SPLrefinement nil)
-    (wfPL const-decl "bool" SPLrefinement nil)
-    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
-    (AM type-eq-decl nil SPLrefinement nil)
-    (semantics const-decl "finite_sets[Asset].finite_set" CKComp nil)
+   ((replaceDoesNotInfluence3 formula-decl nil CKComp nil)
+    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
+    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (satisfies def-decl "boolean" FormulaTheory nil)
+    (Name type-decl nil Name nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (Configuration type-eq-decl nil Name nil)
+    (AssetName nonempty-type-decl nil Assets nil)
+    (Asset nonempty-type-decl nil Assets nil)
+    (set type-eq-decl nil sets nil)
+    (is_finite const-decl "bool" finite_sets nil)
+    (finite_set type-eq-decl nil finite_sets nil)
+    (unique const-decl "bool" maps nil)
+    (AM type-eq-decl nil AssetMapping nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (Item type-eq-decl nil CKComp nil) (CK type-eq-decl nil CKComp nil)
+    (restrict const-decl "R" restrict nil)
     (semantics const-decl "set[Configuration]" FeatureModelSemantics
      nil)
-    (restrict const-decl "R" restrict nil)
-    (CK type-eq-decl nil CKComp nil) (Item type-eq-decl nil CKComp nil)
-    (WFM type-eq-decl nil FeatureModelSemantics nil)
-    (wfFM const-decl "bool" FeatureModelSemantics nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (AM type-eq-decl nil AssetMapping nil)
-    (unique const-decl "bool" maps nil)
-    (finite_set type-eq-decl nil finite_sets nil)
-    (is_finite const-decl "bool" finite_sets nil)
-    (set type-eq-decl nil sets nil)
-    (Asset nonempty-type-decl nil Assets nil)
-    (AssetName nonempty-type-decl nil Assets nil)
-    (Configuration type-eq-decl nil Name nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (Name type-decl nil Name nil)
-    (satisfies def-decl "boolean" FormulaTheory nil)
-    (prod const-decl "finite_sets[Asset].finite_set" SPLrefinement nil)
-    (replaceDoesNotInfluence3 formula-decl nil CKComp nil))
+    (semantics const-decl "finite_sets[Asset].finite_set" CKComp nil)
+    (AM type-eq-decl nil SPLrefinement nil)
+    (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
+    (wfPL const-decl "bool" SPLrefinement nil)
+    (PL type-eq-decl nil SPLrefinement nil)
+    (preorder? const-decl "bool" orders nil)
+    (reflexive? const-decl "bool" relations nil)
+    (mapping type-eq-decl nil maps nil)
+    (map const-decl "finite_sets[T].finite_set" maps nil)
+    (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
+     nil)
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
+    (replace const-decl "CK" CKComp nil)
+    (NAME? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt
+     nil)
+    (NAME_FORMULA adt-constructor-decl "[Name -> (NAME?)]" Formula__adt
+     nil)
+    (remove const-decl "set" sets nil)
+    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
+    (satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (eval const-decl "finite_sets[AssetName].finite_set" CKComp nil)
+    (transitive? const-decl "bool" relations nil)
+    (assetRefinement formula-decl nil SPLrefinement nil))
    shostak))
  (extractFeatureGuidance1_TCC1 0
   (extractFeatureGuidance1_TCC1-1 nil 3710676425
@@ -7382,7 +7411,7 @@
     (AM type-eq-decl nil SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
-    (PL type-eq-decl nil SPLrefinement nil) nil
+    (PL type-eq-decl nil SPLrefinement nil)
     (satisfies def-decl "boolean" FormulaTheory nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
     (transitive? const-decl "bool" relations nil)
@@ -7393,7 +7422,7 @@
     (map const-decl "finite_sets[T].finite_set" maps nil)
     (assetsCK const-decl "finite_sets[AssetName].finite_set" CKComp
      nil)
-    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil) nil
+    (evalCK const-decl "finite_sets[Item].finite_set" CKComp nil)
     (AND? adt-recognizer-decl "[Formula_ -> boolean]" Formula__adt nil)
     (AND_FORMULA adt-constructor-decl
      "[[Formula_, Formula_] -> (AND?)]" Formula__adt nil)
@@ -7491,8 +7520,7 @@
     (satImpConsts const-decl "bool" FeatureModelSemantics nil)
     (transitive? const-decl "bool" relations nil)
     (assetRefinement formula-decl nil SPLrefinement nil)
-    (satisfies def-decl "boolean" FormulaTheory nil)
-    (<> const-decl "set[Configuration]" FeatureModelSemantics nil)
+    (satisfies def-decl "boolean" FormulaTheory nil) nil
     (PL type-eq-decl nil SPLrefinement nil)
     (wfPL const-decl "bool" SPLrefinement nil)
     (ArbitrarySPL type-eq-decl nil SPLrefinement nil)

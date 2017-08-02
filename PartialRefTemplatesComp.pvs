@@ -280,7 +280,7 @@ removeFeaturePartRefWeak: THEOREM
 syntaxRemoveFeatureGuydance(fm1,fm2,P,ck1,ck2): bool=
 	(features(fm1))(P) AND
 	features(fm2) = remove(P,features(fm1)) AND
-	ck2 = replace(ck1,P) AND
+	ck2 = replace(ck1,P,FALSE_FORMULA) AND
 	(FORALL c: (semantics(fm1)(c) AND NOT satisfies(NAME_FORMULA(P),c)) => semantics(fm2)(c))
 
 %ADD well-formedness condition!!!
@@ -298,7 +298,7 @@ removeFeatureGuydance: THEOREM
 	wfPL(pl2)
 	=>
 	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
-     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P)  #)
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,FALSE_FORMULA)  #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %----------------------------------------------MERGE FEATURE (GUYDANCE)-----------------------------------------------------------------
@@ -307,7 +307,7 @@ syntaxMergeFeatureGuydance(fm1,fm2,P,Q,ck1,ck2): bool=
 	(features(fm1))(P) AND
 	(features(fm1))(Q) AND
 	features(fm2) = remove(Q,remove(P,features(fm1))) AND
-	ck2 = replace(ck1,P,Q) AND
+	ck2 = replace(ck1,P,NAME_FORMULA(Q)) AND
 	(FORALL c: (semantics(fm1)(c) AND NOT satisfies(NAME_FORMULA(P),c)) => semantics(fm2)(c))
 
 
@@ -317,7 +317,7 @@ mergeFeatureGuydance1: THEOREM
 	wfPL(pl2)
 	=>
 	(FORALL c: (<>(F(pl),AND_FORMULA(NOT_FORMULA(NAME_FORMULA(P)),NOT_FORMULA(NAME_FORMULA(Q)))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
-     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,Q)  #)
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,NAME_FORMULA(Q))  #)
 
 mergeFeatureGuydance2: THEOREM 
         FORALL(pl,fm2,P,Q) :
@@ -325,7 +325,7 @@ mergeFeatureGuydance2: THEOREM
 	(wfPL(pl2) AND NOT P = Q)
 	=>
 	(FORALL c: (<>(F(pl),AND_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,remove(P,c))))) 
-     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,Q)  #)
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,NAME_FORMULA(Q))  #)
 
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------EXTRACT TEMPLATE--------------------------------------------------------------------------
@@ -345,7 +345,7 @@ extractFeatureGuidance2: THEOREM
 	(wfPL(pl2) AND NOT features(F(pl))(Q))
 	=>
 	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c))))
-     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,Q) #)
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,NAME_FORMULA(Q)) #)
 
 extractFeatureGuidance3: THEOREM
 	FORALL(pl,fm2,P,Q) :

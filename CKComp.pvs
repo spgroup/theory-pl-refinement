@@ -135,18 +135,8 @@ BEGIN
   renameCKitem(item:Item, F,G:Name):Item =
     (item WITH [exp:= rename(exp(item),F,G)])
 
-  replace(it:Item,F):Item =
-    it WITH [exp:=replace(exp(it),F)]
-
-  replace(it:Item,F,G):Item =
-    it WITH [exp:=replace(exp(it),F,G)]
-
   replace(it:Item,F:Name,f:Formula_):Item =
     it WITH [exp:=replace(exp(it),F,f)]
-
-  replace(ck:CK,F:Name):CK = {i2:Item | EXISTS (i:Item) : ck(i) AND i2 = replace(i,F)}
-
-  replace(ck:CK,F:Name,G:Name):CK = {i2:Item | EXISTS (i:Item) : ck(i) AND i2 = replace(i,F,G)}
 
   replace(ck:CK,F:Name,f:Formula_):CK = {i2: Item | EXISTS (i:Item) : ck(i) AND i2 = replace(i,F,f)}
 
@@ -186,7 +176,7 @@ BEGIN
   (
     (NOT c(F))
     =>
-    (semantics(ck)(am)(c) = semantics(replace(ck,F))(am)(c))
+    (semantics(ck)(am)(c) = semantics(replace(ck,F,FALSE_FORMULA))(am)(c))
 
   )
 
@@ -195,7 +185,7 @@ BEGIN
   (
     (NOT c(F) AND NOT c(G))
     =>
-    (semantics(ck)(am)(c) = semantics(replace(ck,F,G))(am)(c))
+    (semantics(ck)(am)(c) = semantics(replace(ck,F,NAME_FORMULA(G)))(am)(c))
 
   )
 
@@ -204,7 +194,7 @@ BEGIN
   (
     (c(F) AND c(G) AND NOT F = G)
     =>
-    (semantics(ck)(am)(c) = semantics(replace(ck,F,G))(am)(remove(F,c)))
+    (semantics(ck)(am)(c) = semantics(replace(ck,F,NAME_FORMULA(G)))(am)(remove(F,c)))
 
   )
 
