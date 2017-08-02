@@ -326,6 +326,44 @@ mergeFeatureGuydance2: THEOREM
 	=>
 	(FORALL c: (<>(F(pl),AND_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,remove(P,c))))) 
      ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,Q)  #)
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------EXTRACT TEMPLATE--------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+extractFeatureGuidance1: THEOREM
+	FORALL(pl,fm2,P) :
+     (
+	wfPL(pl2)
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c))))
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=K(pl) #)
+
+extractFeatureGuidance2: THEOREM
+	FORALL(pl,fm2,P,Q) :
+     (
+	(wfPL(pl2) AND NOT features(F(pl))(Q))
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c))))
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,Q) #)
+
+extractFeatureGuidance3: THEOREM
+	FORALL(pl,fm2,P,Q) :
+     (
+	(wfPL(pl2) AND NOT features(F(pl))(Q))
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c))))
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,AND_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))) #)
+
+extractFeatureGuidance4: THEOREM
+	FORALL(pl,fm2,P,Q) :
+     (
+	(wfPL(pl2) AND NOT features(F(pl))(Q))
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c))))
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,IMPLIES_FORMULA(NOT_FORMULA(NAME_FORMULA(P)),NAME_FORMULA(Q))) #)
+
+
 %---------------------------------------------------------------------------------------------------------------------------------------
 %---------------------------------------------ADD/REMOVE ASSETS TEMPLATE----------------------------------------------------------------
 %---------------------------------------------------------------------------------------------------------------------------------------
