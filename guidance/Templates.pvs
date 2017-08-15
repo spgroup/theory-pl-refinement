@@ -1,0 +1,73 @@
+Templates: THEORY
+BEGIN
+
+IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements, Assets, MappingOperator
+fm,fm2: VAR WFM
+f0,f1: VAR Name
+c: VAR Configuration
+m: VAR Item
+
+IMPORTING SPLrefinement[Configuration,WFM,Assets.Asset,Assets.AssetName,CK,semantics,semantics]
+pl: VAR PL
+
+%%%%%%%%REMOVE%%%%%%%%%
+removeFeatureGuydance: THEOREM
+     FORALL(pl,fm2,f0) :
+     (
+	(features(F(pl))(f0) AND features(fm2) = remove(f0,features(F(pl))) AND wfPL(pl2))
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(f0))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),f0,FALSE_FORMULA)  #)
+
+completenessRemove: THEOREM
+     FORALL (fm,f0) : (semantics(fm) = union(<>(fm,NAME_FORMULA(f0)),<>(fm,NOT_FORMULA(NAME_FORMULA(f0)))))
+     	    	     AND
+		     (intersection(<>(fm,NAME_FORMULA(f0)),<>(fm,NOT_FORMULA(NAME_FORMULA(f0)))) = emptyset)
+
+%%%%%%%%%MERGE%%%%%%%%%%
+mergeFeatureGuydanceNonePresent: THEOREM 
+        FORALL(pl,fm2,f0,f1) :
+     (
+	(features(F(pl))(f0) AND features(F(pl))(f1) AND features(fm2) = remove(f0,features(F(pl))) AND wfPL(pl2))
+	=>
+	(FORALL c: (<>(F(pl),AND_FORMULA(NOT_FORMULA(NAME_FORMULA(f0)),NOT_FORMULA(NAME_FORMULA(f1)))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),f0,NAME_FORMULA(f1))  #)
+
+mergeFeatureGuydanceBothPresent: THEOREM 
+        FORALL(pl,fm2,f0,f1) :
+     (
+	(features(F(pl))(f0) AND features(F(pl))(f1) AND features(fm2) = remove(f0,features(F(pl))) AND wfPL(pl2) AND NOT f0 = f1)
+	=>
+	(FORALL c: (<>(F(pl),AND_FORMULA(NAME_FORMULA(f0),NAME_FORMULA(f1))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,remove(f0,c))))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),f0,NAME_FORMULA(f1))  #)
+
+mergeFormulas(f0,f1) : set[Formula_] = {f:Formula_ | f = AND_FORMULA(NAME_FORMULA(f0),NAME_FORMULA(f1)) OR
+    		    		     f = AND_FORMULA(NAME_FORMULA(f0),NOT_FORMULA(NAME_FORMULA(f1))) OR
+				    f = AND_FORMULA(NOT_FORMULA(NAME_FORMULA(f0)),NAME_FORMULA(f1)) OR
+				    f =  AND_FORMULA(NOT_FORMULA(NAME_FORMULA(f0)),NOT_FORMULA(NAME_FORMULA(f1)))}
+
+completenessMerge: THEOREM FORALL f0,f1,fm : FORALL (form1:Formula_,form2:Formula_) :
+		   (mergeFormulas(f0,f1)(form1) AND mergeFormulas(f0,f1)(form2) AND NOT form1 = form2)
+		   =>
+		   (intersection(<>(fm,form1),<>(fm,form2)) = emptyset)
+
+%%%%%%%%%%%%%EXTRACT%%%%%%%%%%
+extractFeatureGuidanceNonePresent: THEOREM
+	FORALL(pl,fm2,f0,f1) :
+     (
+	features(F(pl))(f0) AND NOT features(F(pl))(f1) AND features(fm2) = union(features(F(pl)),f1) AND wfPL(pl2)
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(f0))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c))))
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replaceMultiple(K(pl),f0,f1) #)
+
+extractFeatureGuidanceBothPresent: THEOREM
+	FORALL(pl,fm2,f0,f1) :
+     (
+	(features(F(pl))(f0) AND NOT features(F(pl))(f1) AND features(fm2) = union(features(F(pl)),f1) AND wfPL(pl2) AND
+	(FORALL m:K(pl)(m) => NOT names(exp(m))(f1)))
+	=>
+	(FORALL c: (<>(F(pl),NAME_FORMULA(f0)))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,add(f1,c)))))
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replaceMultiple(K(pl),f0,f1) #)
+
+
+END Templates

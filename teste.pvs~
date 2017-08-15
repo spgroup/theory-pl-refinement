@@ -1,9 +1,0 @@
-T [t: TYPE,
-subt: TYPE FROM t,
-(IMPORTING orders[subt]) <=: (partial_order?),
-c: subt,
-d: fx:subt | c <= xg]: THEORY
-
-BEGIN
-
-END T

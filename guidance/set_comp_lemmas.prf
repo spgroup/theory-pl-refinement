@@ -1,0 +1,98 @@
+(set_comp_lemmas
+ (basicLemma3_TCC1 0
+  (basicLemma3_TCC1-1 nil 3656493223 ("" (subtype-tcc) nil nil) nil
+   nil))
+ (singletonIsFinite 0
+  (singletonIsFinite-1 nil 3656493224
+   ("" (skolem 1 c)
+    (("" (flatten)
+      (("" (lemma sets[S].singleton_elt_def)
+        (("" (instantiate -1 c)
+          (("" (assert)
+            (("" (lemma sets[S].the_lem)
+              (("" (instantiate -1 c)
+                (("" (lemma sets[S].the_prop)
+                  (("" (instantiate -1 c)
+                    (("" (lemma finite_sets[S].finite_singleton)
+                      (("" (instantiate -1 c)
+                        ((""
+                          (case "c=singleton[S](singleton_elt[S](c))")
+                          (("1" (assert) nil nil)
+                           ("2" (decompose-equality 1)
+                            (("2" (expand singleton)
+                              (("2"
+                                (expand singleton_elt)
+                                (("2"
+                                  (expand member)
+                                  (("2"
+                                    (bddsimp)
+                                    (("1"
+                                      (expand singleton?)
+                                      (("1"
+                                        (copy -6)
+                                        (("1"
+                                          (skolem -1 elm)
+                                          (("1"
+                                            (copy -1)
+                                            (("1"
+                                              (copy -1)
+                                              (("1"
+                                                (instantiate -1 x!1)
+                                                (("1"
+                                                  (instantiate
+                                                   -2
+                                                   "the(c)")
+                                                  (("1"
+                                                    (instantiate
+                                                     -3
+                                                     "the! (x: S): c(x)")
+                                                    (("1"
+                                                      (assert)
+                                                      nil
+                                                      nil)
+                                                     ("2"
+                                                      (grind)
+                                                      (("1"
+                                                        (grind)
+                                                        (("1"
+                                                          (postpone)
+                                                          nil
+                                                          nil))
+                                                        nil)
+                                                       ("2"
+                                                        (postpone)
+                                                        nil
+                                                        nil))
+                                                      nil))
+                                                    nil))
+                                                  nil)
+                                                 ("2"
+                                                  (postpone)
+                                                  nil
+                                                  nil))
+                                                nil))
+                                              nil))
+                                            nil))
+                                          nil))
+                                        nil))
+                                      nil)
+                                     ("2" (postpone) nil nil))
+                                    nil))
+                                  nil))
+                                nil))
+                              nil))
+                            nil))
+                          nil))
+                        nil))
+                      nil))
+                    nil))
+                  nil))
+                nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   nil shostak)))
+

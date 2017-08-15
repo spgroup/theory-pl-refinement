@@ -1,0 +1,10 @@
+Formula_: DATATYPE
+ BEGIN
+  IMPORTING Name
+  TRUE_FORMULA: TRUE?: Formula_
+  FALSE_FORMULA: FALSE?: Formula_
+  NAME_FORMULA(n: Name): NAME?: Formula_
+  NOT_FORMULA(f: Formula_): NOT?: Formula_
+  AND_FORMULA(f_0, f_1: Formula_): AND?: Formula_
+  IMPLIES_FORMULA(f_0, f_1: Formula_): IMPLIES?: Formula_
+ END Formula_

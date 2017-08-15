@@ -1,0 +1,337 @@
+%%% ADT file generated from Formula_
+
+Formula__adt: THEORY
+ BEGIN
+
+  Formula_: TYPE
+
+  IMPORTING Name
+
+  TRUE?, FALSE?, NAME?, NOT?, AND?, IMPLIES?: [Formula_ -> boolean]
+
+  n: [(NAME?) -> Name]
+
+  f: [(NOT?) -> Formula_]
+
+  f_0: [{x: Formula_ | AND?(x) OR IMPLIES?(x)} -> Formula_]
+
+  f_1: [{x: Formula_ | AND?(x) OR IMPLIES?(x)} -> Formula_]
+
+  TRUE_FORMULA: (TRUE?)
+
+  FALSE_FORMULA: (FALSE?)
+
+  NAME_FORMULA: [Name -> (NAME?)]
+
+  NOT_FORMULA: [Formula_ -> (NOT?)]
+
+  AND_FORMULA: [[Formula_, Formula_] -> (AND?)]
+
+  IMPLIES_FORMULA: [[Formula_, Formula_] -> (IMPLIES?)]
+
+  Formula__ord: [Formula_ -> upto(5)]
+
+  Formula__ord_defaxiom: AXIOM
+         Formula__ord(TRUE_FORMULA) = 0 AND Formula__ord(FALSE_FORMULA) = 1
+     AND (FORALL (n: Name): Formula__ord(NAME_FORMULA(n)) = 2)
+     AND (FORALL (f: Formula_): Formula__ord(NOT_FORMULA(f)) = 3)
+     AND (FORALL (f_0: Formula_, f_1: Formula_):
+            Formula__ord(AND_FORMULA(f_0, f_1)) = 4)
+     AND (FORALL (f_0: Formula_, f_1: Formula_):
+            Formula__ord(IMPLIES_FORMULA(f_0, f_1)) = 5);
+
+  ord(x: Formula_): [Formula_ -> upto(5)] =
+      CASES x
+        OF TRUE_FORMULA: 0,
+           FALSE_FORMULA: 1,
+           NAME_FORMULA(NAME_FORMULA1_var): 2,
+           NOT_FORMULA(NOT_FORMULA1_var): 3,
+           AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var): 4,
+           IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var): 5
+        ENDCASES
+
+  Formula__TRUE_FORMULA_extensionality: AXIOM
+    FORALL (TRUE?_var: (TRUE?), TRUE?_var2: (TRUE?)):
+      TRUE?_var = TRUE?_var2;
+
+  Formula__FALSE_FORMULA_extensionality: AXIOM
+    FORALL (FALSE?_var: (FALSE?), FALSE?_var2: (FALSE?)):
+      FALSE?_var = FALSE?_var2;
+
+  Formula__NAME_FORMULA_extensionality: AXIOM
+    FORALL (NAME?_var: (NAME?), NAME?_var2: (NAME?)):
+      n(NAME?_var) = n(NAME?_var2) IMPLIES NAME?_var = NAME?_var2;
+
+  Formula__NAME_FORMULA_eta: AXIOM
+    FORALL (NAME?_var: (NAME?)): NAME_FORMULA(n(NAME?_var)) = NAME?_var;
+
+  Formula__NOT_FORMULA_extensionality: AXIOM
+    FORALL (NOT?_var: (NOT?), NOT?_var2: (NOT?)):
+      f(NOT?_var) = f(NOT?_var2) IMPLIES NOT?_var = NOT?_var2;
+
+  Formula__NOT_FORMULA_eta: AXIOM
+    FORALL (NOT?_var: (NOT?)): NOT_FORMULA(f(NOT?_var)) = NOT?_var;
+
+  Formula__AND_FORMULA_extensionality: AXIOM
+    FORALL (AND?_var: (AND?), AND?_var2: (AND?)):
+      f_0(AND?_var) = f_0(AND?_var2) AND f_1(AND?_var) = f_1(AND?_var2)
+       IMPLIES AND?_var = AND?_var2;
+
+  Formula__AND_FORMULA_eta: AXIOM
+    FORALL (AND?_var: (AND?)):
+      AND_FORMULA(f_0(AND?_var), f_1(AND?_var)) = AND?_var;
+
+  Formula__IMPLIES_FORMULA_extensionality: AXIOM
+    FORALL (IMPLIES?_var: (IMPLIES?), IMPLIES?_var2: (IMPLIES?)):
+      f_0(IMPLIES?_var) = f_0(IMPLIES?_var2) AND
+       f_1(IMPLIES?_var) = f_1(IMPLIES?_var2)
+       IMPLIES IMPLIES?_var = IMPLIES?_var2;
+
+  Formula__IMPLIES_FORMULA_eta: AXIOM
+    FORALL (IMPLIES?_var: (IMPLIES?)):
+      IMPLIES_FORMULA(f_0(IMPLIES?_var), f_1(IMPLIES?_var)) = IMPLIES?_var;
+
+  Formula__n_NAME_FORMULA: AXIOM
+    FORALL (NAME_FORMULA1_var: Name):
+      n(NAME_FORMULA(NAME_FORMULA1_var)) = NAME_FORMULA1_var;
+
+  Formula__f_NOT_FORMULA: AXIOM
+    FORALL (NOT_FORMULA1_var: Formula_):
+      f(NOT_FORMULA(NOT_FORMULA1_var)) = NOT_FORMULA1_var;
+
+  Formula__f_0_AND_FORMULA: AXIOM
+    FORALL (AND_FORMULA1_var: Formula_, AND_FORMULA2_var: Formula_):
+      f_0(AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var)) =
+       AND_FORMULA1_var;
+
+  Formula__f_1_AND_FORMULA: AXIOM
+    FORALL (AND_FORMULA1_var: Formula_, AND_FORMULA2_var: Formula_):
+      f_1(AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var)) =
+       AND_FORMULA2_var;
+
+  Formula__f_0_IMPLIES_FORMULA: AXIOM
+    FORALL (IMPLIES_FORMULA1_var: Formula_,
+            IMPLIES_FORMULA2_var: Formula_):
+      f_0(IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var)) =
+       IMPLIES_FORMULA1_var;
+
+  Formula__f_1_IMPLIES_FORMULA: AXIOM
+    FORALL (IMPLIES_FORMULA1_var: Formula_,
+            IMPLIES_FORMULA2_var: Formula_):
+      f_1(IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var)) =
+       IMPLIES_FORMULA2_var;
+
+  Formula__inclusive: AXIOM
+    FORALL (Formula__var: Formula_):
+          TRUE?(Formula__var) OR FALSE?(Formula__var) OR NAME?(Formula__var)
+       OR NOT?(Formula__var) OR AND?(Formula__var)
+       OR IMPLIES?(Formula__var);
+
+  Formula__induction: AXIOM
+    FORALL (p: [Formula_ -> boolean]):
+      (     p(TRUE_FORMULA) AND p(FALSE_FORMULA)
+        AND FORALL (NAME_FORMULA1_var: Name):
+              p(NAME_FORMULA(NAME_FORMULA1_var))
+        AND FORALL (NOT_FORMULA1_var: Formula_):
+              p(NOT_FORMULA1_var) IMPLIES p(NOT_FORMULA(NOT_FORMULA1_var))
+        AND FORALL (AND_FORMULA1_var: Formula_,
+                    AND_FORMULA2_var: Formula_):
+              p(AND_FORMULA1_var) AND p(AND_FORMULA2_var) IMPLIES
+               p(AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var))
+        AND FORALL (IMPLIES_FORMULA1_var: Formula_,
+                    IMPLIES_FORMULA2_var: Formula_):
+              p(IMPLIES_FORMULA1_var) AND p(IMPLIES_FORMULA2_var) IMPLIES
+               p(IMPLIES_FORMULA(IMPLIES_FORMULA1_var,
+                                 IMPLIES_FORMULA2_var)))
+       IMPLIES (FORALL (Formula__var: Formula_): p(Formula__var));
+
+  subterm(x: Formula_, y: Formula_):  boolean =
+      x = y OR
+       CASES y
+         OF TRUE_FORMULA: FALSE,
+            FALSE_FORMULA: FALSE,
+            NAME_FORMULA(NAME_FORMULA1_var): FALSE,
+            NOT_FORMULA(NOT_FORMULA1_var): subterm(x, NOT_FORMULA1_var),
+            AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+              subterm(x, AND_FORMULA1_var) OR subterm(x, AND_FORMULA2_var),
+            IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+              subterm(x, IMPLIES_FORMULA1_var) OR
+               subterm(x, IMPLIES_FORMULA2_var)
+         ENDCASES;
+
+  <<:  (strict_well_founded?[Formula_]) =
+      LAMBDA (x, y: Formula_):
+        CASES y
+          OF TRUE_FORMULA: FALSE,
+             FALSE_FORMULA: FALSE,
+             NAME_FORMULA(NAME_FORMULA1_var): FALSE,
+             NOT_FORMULA(NOT_FORMULA1_var):
+               x = NOT_FORMULA1_var OR x << NOT_FORMULA1_var,
+             AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+               (x = AND_FORMULA1_var OR x << AND_FORMULA1_var) OR
+                x = AND_FORMULA2_var OR x << AND_FORMULA2_var,
+             IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+               (x = IMPLIES_FORMULA1_var OR x << IMPLIES_FORMULA1_var) OR
+                x = IMPLIES_FORMULA2_var OR x << IMPLIES_FORMULA2_var
+          ENDCASES;
+
+  Formula__well_founded: AXIOM strict_well_founded?[Formula_](<<);
+
+  reduce_nat(TRUE?_fun: nat, FALSE?_fun: nat, NAME?_fun: [Name -> nat],
+             NOT?_fun: [nat -> nat], AND?_fun: [[nat, nat] -> nat],
+             IMPLIES?_fun: [[nat, nat] -> nat]):
+        [Formula_ -> nat] =
+      LAMBDA (Formula__adtvar: Formula_):
+        LET red: [Formula_ -> nat] =
+              reduce_nat(TRUE?_fun, FALSE?_fun, NAME?_fun, NOT?_fun,
+                         AND?_fun, IMPLIES?_fun)
+          IN
+          CASES Formula__adtvar
+            OF TRUE_FORMULA: TRUE?_fun,
+               FALSE_FORMULA: FALSE?_fun,
+               NAME_FORMULA(NAME_FORMULA1_var):
+                 NAME?_fun(NAME_FORMULA1_var),
+               NOT_FORMULA(NOT_FORMULA1_var):
+                 NOT?_fun(red(NOT_FORMULA1_var)),
+               AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+                 AND?_fun(red(AND_FORMULA1_var), red(AND_FORMULA2_var)),
+               IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+                 IMPLIES?_fun(red(IMPLIES_FORMULA1_var),
+                              red(IMPLIES_FORMULA2_var))
+            ENDCASES;
+
+  REDUCE_nat(TRUE?_fun: [Formula_ -> nat], FALSE?_fun: [Formula_ -> nat],
+             NAME?_fun: [[Name, Formula_] -> nat],
+             NOT?_fun: [[nat, Formula_] -> nat],
+             AND?_fun: [[nat, nat, Formula_] -> nat],
+             IMPLIES?_fun: [[nat, nat, Formula_] -> nat]):
+        [Formula_ -> nat] =
+      LAMBDA (Formula__adtvar: Formula_):
+        LET red: [Formula_ -> nat] =
+              REDUCE_nat(TRUE?_fun, FALSE?_fun, NAME?_fun, NOT?_fun,
+                         AND?_fun, IMPLIES?_fun)
+          IN
+          CASES Formula__adtvar
+            OF TRUE_FORMULA: TRUE?_fun(Formula__adtvar),
+               FALSE_FORMULA: FALSE?_fun(Formula__adtvar),
+               NAME_FORMULA(NAME_FORMULA1_var):
+                 NAME?_fun(NAME_FORMULA1_var, Formula__adtvar),
+               NOT_FORMULA(NOT_FORMULA1_var):
+                 NOT?_fun(red(NOT_FORMULA1_var), Formula__adtvar),
+               AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+                 AND?_fun(red(AND_FORMULA1_var), red(AND_FORMULA2_var),
+                          Formula__adtvar),
+               IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+                 IMPLIES?_fun(red(IMPLIES_FORMULA1_var),
+                              red(IMPLIES_FORMULA2_var), Formula__adtvar)
+            ENDCASES;
+
+  reduce_ordinal(TRUE?_fun: ordinal, FALSE?_fun: ordinal,
+                 NAME?_fun: [Name -> ordinal],
+                 NOT?_fun: [ordinal -> ordinal],
+                 AND?_fun: [[ordinal, ordinal] -> ordinal],
+                 IMPLIES?_fun: [[ordinal, ordinal] -> ordinal]):
+        [Formula_ -> ordinal] =
+      LAMBDA (Formula__adtvar: Formula_):
+        LET red: [Formula_ -> ordinal] =
+              reduce_ordinal(TRUE?_fun, FALSE?_fun, NAME?_fun, NOT?_fun,
+                             AND?_fun, IMPLIES?_fun)
+          IN
+          CASES Formula__adtvar
+            OF TRUE_FORMULA: TRUE?_fun,
+               FALSE_FORMULA: FALSE?_fun,
+               NAME_FORMULA(NAME_FORMULA1_var):
+                 NAME?_fun(NAME_FORMULA1_var),
+               NOT_FORMULA(NOT_FORMULA1_var):
+                 NOT?_fun(red(NOT_FORMULA1_var)),
+               AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+                 AND?_fun(red(AND_FORMULA1_var), red(AND_FORMULA2_var)),
+               IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+                 IMPLIES?_fun(red(IMPLIES_FORMULA1_var),
+                              red(IMPLIES_FORMULA2_var))
+            ENDCASES;
+
+  REDUCE_ordinal(TRUE?_fun: [Formula_ -> ordinal],
+                 FALSE?_fun: [Formula_ -> ordinal],
+                 NAME?_fun: [[Name, Formula_] -> ordinal],
+                 NOT?_fun: [[ordinal, Formula_] -> ordinal],
+                 AND?_fun: [[ordinal, ordinal, Formula_] -> ordinal],
+                 IMPLIES?_fun: [[ordinal, ordinal, Formula_] -> ordinal]):
+        [Formula_ -> ordinal] =
+      LAMBDA (Formula__adtvar: Formula_):
+        LET red: [Formula_ -> ordinal] =
+              REDUCE_ordinal(TRUE?_fun, FALSE?_fun, NAME?_fun, NOT?_fun,
+                             AND?_fun, IMPLIES?_fun)
+          IN
+          CASES Formula__adtvar
+            OF TRUE_FORMULA: TRUE?_fun(Formula__adtvar),
+               FALSE_FORMULA: FALSE?_fun(Formula__adtvar),
+               NAME_FORMULA(NAME_FORMULA1_var):
+                 NAME?_fun(NAME_FORMULA1_var, Formula__adtvar),
+               NOT_FORMULA(NOT_FORMULA1_var):
+                 NOT?_fun(red(NOT_FORMULA1_var), Formula__adtvar),
+               AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+                 AND?_fun(red(AND_FORMULA1_var), red(AND_FORMULA2_var),
+                          Formula__adtvar),
+               IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+                 IMPLIES?_fun(red(IMPLIES_FORMULA1_var),
+                              red(IMPLIES_FORMULA2_var), Formula__adtvar)
+            ENDCASES;
+ END Formula__adt
+
+Formula__adt_reduce[range: TYPE]: THEORY
+ BEGIN
+
+  IMPORTING Formula__adt
+
+  IMPORTING Name
+
+  reduce(TRUE?_fun: range, FALSE?_fun: range, NAME?_fun: [Name -> range],
+         NOT?_fun: [range -> range], AND?_fun: [[range, range] -> range],
+         IMPLIES?_fun: [[range, range] -> range]):
+        [Formula_ -> range] =
+      LAMBDA (Formula__adtvar: Formula_):
+        LET red: [Formula_ -> range] =
+              reduce(TRUE?_fun, FALSE?_fun, NAME?_fun, NOT?_fun, AND?_fun,
+                     IMPLIES?_fun)
+          IN
+          CASES Formula__adtvar
+            OF TRUE_FORMULA: TRUE?_fun,
+               FALSE_FORMULA: FALSE?_fun,
+               NAME_FORMULA(NAME_FORMULA1_var):
+                 NAME?_fun(NAME_FORMULA1_var),
+               NOT_FORMULA(NOT_FORMULA1_var):
+                 NOT?_fun(red(NOT_FORMULA1_var)),
+               AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+                 AND?_fun(red(AND_FORMULA1_var), red(AND_FORMULA2_var)),
+               IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+                 IMPLIES?_fun(red(IMPLIES_FORMULA1_var),
+                              red(IMPLIES_FORMULA2_var))
+            ENDCASES;
+
+  REDUCE(TRUE?_fun: [Formula_ -> range], FALSE?_fun: [Formula_ -> range],
+         NAME?_fun: [[Name, Formula_] -> range],
+         NOT?_fun: [[range, Formula_] -> range],
+         AND?_fun: [[range, range, Formula_] -> range],
+         IMPLIES?_fun: [[range, range, Formula_] -> range]):
+        [Formula_ -> range] =
+      LAMBDA (Formula__adtvar: Formula_):
+        LET red: [Formula_ -> range] =
+              REDUCE(TRUE?_fun, FALSE?_fun, NAME?_fun, NOT?_fun, AND?_fun,
+                     IMPLIES?_fun)
+          IN
+          CASES Formula__adtvar
+            OF TRUE_FORMULA: TRUE?_fun(Formula__adtvar),
+               FALSE_FORMULA: FALSE?_fun(Formula__adtvar),
+               NAME_FORMULA(NAME_FORMULA1_var):
+                 NAME?_fun(NAME_FORMULA1_var, Formula__adtvar),
+               NOT_FORMULA(NOT_FORMULA1_var):
+                 NOT?_fun(red(NOT_FORMULA1_var), Formula__adtvar),
+               AND_FORMULA(AND_FORMULA1_var, AND_FORMULA2_var):
+                 AND?_fun(red(AND_FORMULA1_var), red(AND_FORMULA2_var),
+                          Formula__adtvar),
+               IMPLIES_FORMULA(IMPLIES_FORMULA1_var, IMPLIES_FORMULA2_var):
+                 IMPLIES?_fun(red(IMPLIES_FORMULA1_var),
+                              red(IMPLIES_FORMULA2_var), Formula__adtvar)
+            ENDCASES;
+ END Formula__adt_reduce

@@ -2,7 +2,7 @@ FMpInst: THEORY
 BEGIN
   IMPORTING FeatureModelSemantics
 
-  IMPORTING FMint{{ 
+  IMPORTING FMint[Configuration, Formula_, satisfies]{{ 
   	    FMi:=FeatureModel.FM, 
   	    Feature:=Name.Name, 
   	    [||]:=FeatureModelSemantics.semantics, 

@@ -1,0 +1,55 @@
+Templates: THEORY
+BEGIN
+
+---------REMOVE-----------------
+removeFeatureGuydance: THEOREM
+     FORALL(pl,fm2,P) :
+     (
+	(features(F(pl))(P) AND features(fm2) = remove(P,features(F(pl))) AND wfPL(pl2))
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,FALSE_FORMULA)  #)
+
+completenessRemove: THEOREM
+     FORALL (fm,P) : (semantics(fm) = union(<>(fm,NAME_FORMULA(P)),<>(fm,NOT_FORMULA(NAME_FORMULA(P)))))
+     	    	     AND
+		     (intersection(<>(fm,NAME_FORMULA(P)),<>(fm,NOT_FORMULA(NAME_FORMULA(P)))) = emptyset)
+
+---------MERGE-----------------
+mergeFeatureGuydance1: THEOREM 
+        FORALL(pl,fm2,P,Q) :
+     (
+	(features(F(pl))(P) AND features(F(pl))(Q) AND features(fm2) = remove(P,features(F(pl))) AND wfPL(pl2))
+	=>
+	(FORALL c: (<>(F(pl),AND_FORMULA(NOT_FORMULA(NAME_FORMULA(P)),NOT_FORMULA(NAME_FORMULA(Q)))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,NAME_FORMULA(Q))  #)
+
+mergeFeatureGuydance2: THEOREM 
+        FORALL(pl,fm2,P,Q) :
+     (
+	(features(F(pl))(P) AND features(F(pl))(Q) AND features(fm2) = remove(P,features(F(pl))) AND wfPL(pl2) AND NOT P = Q)
+	=>
+	(FORALL c: (<>(F(pl),AND_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,remove(P,c))))) 
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),P,NAME_FORMULA(Q))  #)
+
+mergeFormulas(P,Q) : set[Formula_] = {f:Formula_ | f = AND_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)) OR
+    		    		     f = AND_FORMULA(NAME_FORMULA(P),NOT_FORMULA(NAME_FORMULA(Q))) OR
+				    f = AND_FORMULA(NOT_FORMULA(NAME_FORMULA(P)),NAME_FORMULA(Q)) OR
+				    f =  AND_FORMULA(NOT_FORMULA(NAME_FORMULA(P)),NOT_FORMULA(NAME_FORMULA(Q)))}
+
+completenessMerge: THEOREM FORALL P,Q,fm : FORALL (f1:Formula_,f2:Formula_) :
+		   (mergeFormulas(P,Q)(f1) AND mergeFormulas(P,Q)(f2) AND NOT f1 = f2)
+		   =>
+		   (intersection(<>(fm,f1),<>(fm,f2)) = emptyset)
+
+----------EXTRACT--------------
+extractFeatureGuidance: THEOREM
+	FORALL(pl,fm2,P,Q) :
+     (
+	features(F(pl))(P) AND NOT features(F(pl))(Q) AND features(fm2) = union(features(F(pl)),Q) AND wfPL(pl2)
+	=>
+	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(P))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c))))
+     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replaceMultiple(K(pl),P,Q) #)
+
+
+END Templates

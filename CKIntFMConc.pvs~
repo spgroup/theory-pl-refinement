@@ -3,7 +3,7 @@ CKIntFMConc : THEORY
 
   IMPORTING FeatureModel
   IMPORTING FeatureModelSemantics
-  IMPORTING CK[Configuration,
+  IMPORTING CKInt[Configuration,
 	       Formula_,
 	       satisfies,
 	       FM,

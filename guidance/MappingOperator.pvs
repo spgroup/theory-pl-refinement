@@ -1,0 +1,122 @@
+MappingOperator: THEORY 
+BEGIN
+
+  IMPORTING FormulaTheory, CKComp, AssetMapping
+
+  c: VAR Name.Configuration
+  f0,f1,n: VAR Name
+  f,f2,f3: VAR Formula_
+  m,m2: VAR CKComp.Item
+  M,M2: VAR CKComp.CK
+  I,I2: VAR AssetMapping.AM
+
+  replace(f,n,f3): RECURSIVE Formula_ =
+      CASES f OF
+       TRUE_FORMULA: TRUE_FORMULA,
+       FALSE_FORMULA: FALSE_FORMULA,
+       NAME_FORMULA(n1): IF n1 = n THEN f3 ELSE NAME_FORMULA(n1) ENDIF,
+       NOT_FORMULA(f1) : NOT_FORMULA(replace(f1,n,f3)),
+       AND_FORMULA(f1,f2): AND_FORMULA(replace(f1,n,f3),replace(f2,n,f3)),
+       IMPLIES_FORMULA(f1,f2): IMPLIES_FORMULA(replace(f1,n,f3),replace(f2,n,f3))
+     ENDCASES
+    MEASURE complexity(f)
+
+  replace(m,f0,f):CKComp.Item =
+    m WITH [exp:=replace(exp(m),f0,f)]
+
+  replace(M,f0,f):CKComp.CK = {m2: CKComp.Item | EXISTS (m:CKComp.Item) : M(m) AND m2 = replace(m,f0,f)}
+
+  replaceMultiple(M:CKComp.CK,f0:Name,f1:Name):CKComp.CK = {m2: CKComp.Item | EXISTS (m:CKComp.Item) : M(m) AND
+  		   (m2 = m OR m2 = replace(m,f0,NAME_FORMULA(f1)) OR m2 = replace(m,f0,AND_FORMULA(NAME_FORMULA(f0),NAME_FORMULA(f1))) OR
+		   m2 = replace(m,f0,IMPLIES_FORMULA(NOT_FORMULA(NAME_FORMULA(f0)),NAME_FORMULA(f1)))) }
+
+  %%%%%REMOVE%%%%%%%
+  replaceFalseSatisfies: LEMMA FORALL (f,f0,c) :
+  			      	    (NOT c(f0))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,FALSE_FORMULA),c))
+
+  replaceRemoveSemantics: THEOREM
+  FORALL(c,I,M,f0):
+  (
+    (NOT c(f0))
+    =>
+    (semantics(M)(I)(c) = semantics(replace(M,f0,FALSE_FORMULA))(I)(c))
+
+  )
+
+  %%%%%MERGE%%%%%%%
+  replaceNameSatisfies: LEMMA FORALL (f,f0,f1,c) :
+  			      	    (NOT c(f0) AND NOT c(f1))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,NAME_FORMULA(f1)),c))
+
+  replaceNameSatisfiesRemConf: LEMMA FORALL (f,f0,f1,c) :
+  			      	    (c(f0) AND c(f1) AND NOT f0 = f1)
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,NAME_FORMULA(f1)),remove(f0,c)))
+
+  replaceMergeSemanticsNonePresent: THEOREM
+   FORALL(c,I,M,f0,f1):
+  (
+    (NOT c(f0) AND NOT c(f1))
+    =>
+    (semantics(M)(I)(c) = semantics(replace(M,f0,NAME_FORMULA(f1)))(I)(c))
+
+  )
+
+  replaceMergeSemanticsBothPresent: THEOREM
+  FORALL(c,I,M,f0,f1):
+  (
+    (c(f0) AND c(f1) AND NOT f0 = f1)
+    =>
+    (semantics(M)(I)(c) = semantics(replace(M,f0,NAME_FORMULA(f1)))(I)(remove(f0,c)))
+
+  )
+
+  %%%%%%EXTRACT%%%%%
+  replaceAndSatisfies: LEMMA FORALL (f,f0,f1,c) :
+  			      	    (NOT c(f0) AND NOT c(f1))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,AND_FORMULA(NAME_FORMULA(f0),NAME_FORMULA(f1))),c))
+
+  replaceImpliesSatisfies: LEMMA FORALL (f,f0,f1,c) :
+  			      	    (NOT c(f0) AND NOT c(f1))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,IMPLIES_FORMULA(NOT_FORMULA(NAME_FORMULA(f0)),NAME_FORMULA(f1))),c))
+
+  replaceNameSatisfiesAddConf: LEMMA FORALL (f,f0,f1,c) :
+  			      	    (c(f0) AND NOT names(f)(f1))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,NAME_FORMULA(f1)),add(f1,c)))
+
+  replaceAndSatisfiesAddConf: LEMMA FORALL (f,f0,f1,c) :
+  			      	    (c(f0) AND NOT names(f)(f1))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,AND_FORMULA(NAME_FORMULA(f0),NAME_FORMULA(f1))),add(f1,c)))
+
+  replaceImpliesSatisfiesAddConf: LEMMA FORALL (f,f0,f1,c) :
+  				    (c(f0) AND NOT names(f)(f1))
+				    =>
+				    (satisfies(f,c) = satisfies(replace(f,f0,IMPLIES_FORMULA(NOT_FORMULA(NAME_FORMULA(f0)),NAME_FORMULA(f1))),add(f1,c))) 
+
+
+  replaceExtractNonePresent: THEOREM
+   FORALL(c,I,M,f0,f1):
+  (
+    (NOT c(f0) AND NOT c(f1))
+    =>
+    (semantics(M)(I)(c) = semantics(replaceMultiple(M,f0,f1))(I)(c))
+
+  )
+
+  replaceExtractBothPresent:  THEOREM
+   FORALL(c,I,M,f0,f1):
+  (
+    (c(f0) AND (FORALL m: M(m) => NOT names(exp(m))(f1)))
+    =>
+    (semantics(M)(I)(c) = semantics(replaceMultiple(M,f0,f1))(I)(add(f1,c)))
+
+  )
+
+END MappingOperator

@@ -2,9 +2,9 @@ CKinst: THEORY
 BEGIN
 
   IMPORTING FeatureModelSemantics
-  IMPORTING ConfigurationKnowledge
+  IMPORTING CKComp
 
-  IMPORTING CK[Name.Configuration, 
+  IMPORTING CKInt[Name.Configuration, 
   	       Formula_, 
   	       FormulaTheory.satisfies, 
 	       FeatureModel.FM, 
@@ -18,16 +18,16 @@ BEGIN
 	       FeatureModelSemantics.addOptional 
 	    ]{{ 
   	    RightSide:=finite_sets[AssetName].finite_set, 
-  	    Item:=ConfigurationKnowledge.Item, 
-  	    CK:=ConfigurationKnowledge.CK, 
-	    exps:=ConfigurationKnowledge.expsCK, 
-	    getExp := ConfigurationKnowledge.getExp,
-	    getRS := ConfigurationKnowledge.getRS,
-	    items := ConfigurationKnowledge.items,
-  	    wfCK:=ConfigurationKnowledge.wfCK, 
-	    semantics:=ConfigurationKnowledge.semantics, 
-	    notshowupItem := ConfigurationKnowledge.notshowupItem, 
-	    showupItem:=ConfigurationKnowledge.showupItem
+  	    Item:=CKComp.Item, 
+  	    CK:=CKComp.CK, 
+	    exps:=CKComp.expsCK, 
+	    getExp := CKComp.getExp,
+	    getRS := CKComp.getRS,
+	    items := CKComp.items,
+  	    wfCK:=CKComp.wfCK, 
+	    semantics:=CKComp.semantics, 
+	    notshowupItem := CKComp.notshowupItem, 
+	    showupItem:=CKComp.showupItem
   }}
 
   

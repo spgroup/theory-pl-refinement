@@ -1,0 +1,183 @@
+maps[S:TYPE,T:TYPE]: THEORY
+ BEGIN
+  IMPORTING set_aux_lemmas
+
+  l,l1,l2: VAR S
+  r,r1,r2: VAR T
+  s: VAR finite_sets[[S,T]].finite_set
+  ls,ls1,ls2: VAR finite_sets[S].finite_set
+  rs,rs1,rs2: VAR finite_sets[T].finite_set
+  pair: VAR [S,T]
+  
+  %sets of unique pairs
+  unique(s): bool = 
+    FORALL(l,r1,r2):
+      (s(l,r1) and s(l,r2) => r1=r2)
+
+  %type defined using function above
+  mapping: TYPE = (unique)
+  
+  m,m1,m2,pairs: VAR mapping
+
+  %get pairs
+  pairs(m): finite_sets[[S,T]].finite_set = {p:[S,T] | m(p)}
+
+  %get domain of pairs
+  dom(m): set[S] = {l: S | EXISTS (r: T): m(l,r)}
+  domain(m): finite_sets[S].finite_set = {l: S | EXISTS (r: T): m(l,r)}
+
+  indomain?(l,m):bool = NOT(dom(m)(l))
+
+  %get image of pairs
+  img(m): set[T] = {r: T | EXISTS (l: S): m(l,r)}
+  image(m): finite_sets[T].finite_set = {r: T | EXISTS (l: S): m(l,r)}
+
+  % Lemma <Mapping is unique, otherwise empty>
+  mappingUnique : LEMMA
+    FORALL(m,l) :
+      singleton?({r:T | m(l,r)}) or empty?({r:T | m(l,r)})
+
+  % Lemma <Asset mapping domain membership>
+  inDom: LEMMA
+    FORALL(m,l,r):
+      m(l,r) => dom(m)(l)
+
+  % Definition <Auxiliary asset mapping functions>
+  map(m, ls): finite_sets[T].finite_set =
+    {r: T | EXISTS (l: S): ls(l) AND m(l,r)}
+
+  getRight(m:mapping, l:{n:S | dom(m)(n)}): T = 
+    map(m,singleton(l))  
+
+  unmap(m, rs): finite_sets[S].finite_set =
+    {l: S | EXISTS (r: T): rs(r) AND m(l,r)}
+
+%  getLeft(m:mapping, r:{n:T | img(m)(n)}): S = 
+%    unmap(m,singleton(r))
+
+  uniqueUnion: LEMMA
+    FORALL (m1,m2):
+      (FORALL l: dom(m2)(l) => NOT (dom(m1)(l))) 
+      =>
+      unique(union(m1, m2))
+
+  uniqueSingleton: LEMMA
+    FORALL (pair):
+      unique(pair)
+
+  domUnion: LEMMA
+    FORALL (m1,m2):
+      (FORALL l: dom(m2)(l) => NOT (dom(m1)(l)))
+      =>
+      dom(union(m1,m2)) = union(dom(m1),dom(m2)) 
+
+ % Lemma <Map over union is equivalent to union of maps>
+  unionMap : LEMMA
+    FORALL(m,ls1,ls2) :
+      map(m,union(ls1,ls2)) = union(map(m,ls1),map(m,ls2))
+
+  existsMap : LEMMA
+    FORALL(m,l,r) : 
+      m(l,r) =>
+        map(m,singleton(l)) = singleton(r)
+
+  %remove a pair from a mapping
+  rm(l,m): mapping  = 
+    IF (dom(m)(l)) THEN remove((l,map(m,singleton(l))),m)
+    ELSE m
+    ENDIF
+
+  remove(ls,m): mapping  = 
+    {pair | m(pair) AND (NOT ls(pair`1))}
+
+  filter(ls,m): mapping  = 
+    {pair | m(pair) AND ls(pair`1)}
+
+  %overwrite operator ++ de VDM    
+  ow(pair,m): mapping =
+    IF (dom(m)(pair`1)) THEN union(pair,rm(pair`1,m))
+    ELSE union(pair,m)
+    ENDIF
+
+  overw(pairs,m): mapping  = 
+    union(pairs,remove(domain(pairs),m))
+
+
+%  ow(s,m): mapping =
+%    IF (dom(m)(pair`1)) THEN union(pair,rm(pair`1,m))
+%    ELSE union(pair,m)
+%    ENDIF
+
+  uniqueUnionRM: LEMMA
+    FORALL(m,l,r):
+      unique(union((l,r),rm(l,m)))
+
+  domainContained: LEMMA
+    FORALL(m,l,r):
+      subset?(dom(m),dom(ow((l,r),m)))
+
+  mapOR: LEMMA
+    FORALL(m,m1,l,r):
+      m=ow((l,r),m1) => map(m,singleton(l))=singleton(r)
+
+ % Lemma <Distributed mapping over union>
+  mapUnion: LEMMA
+    FORALL(m,ls1,ls2,r):
+      map(m,union(ls1,ls2))(r) => 
+        map(m,ls1)(r) or map(m,ls2)(r)
+
+  % Lemma <Distributed mapping over singleton>
+  mapAM: LEMMA
+    FORALL(m,l,ls):
+      dom(m)(l) =>
+        EXISTS(r:T): m(l,r) and map(m,union(l,ls)) = union(r,map(m,ls))
+
+  % Lemma <Distributed mapping over set of non domain elements>
+  notExists: LEMMA
+    FORALL(m,ls):
+      not(EXISTS(l:S): ls(l) and dom(m)(l)) => map(m,ls) = emptyset
+
+  getRightResult: LEMMA 
+     FORALL m,r,(l:{n:S | dom(m)(n)}): m(l,r) => getRight(m,l) = r
+
+ END maps
+
+%Theory for composing maps.
+maps_composite[S:TYPE,T:TYPE,U:TYPE]: THEORY
+ BEGIN
+
+  IMPORTING maps
+  m: VAR maps[S,T].mapping
+  n: VAR maps[T,U].mapping
+  l: VAR S
+  r: VAR U
+
+  %If we know that e1 is associated to e1 in map1 and e2 is associated with e3 in map2, by transitivity
+  % we can compose these maps and generate a new map map3 where e1 is directly associated with e3.
+  composeMaps(m,n):maps[S,U].mapping  = {(l,r) | domain(m)(l) AND r = getRight(n,getRight(m,l))}
+ 
+  same_img: LEMMA FORALL m,n,l: (domain(q)(l)  => getRight(q,l) = getRight(n,getRight(m,l))) WHERE q = composeMaps(m,n)
+ 
+  domCompos: LEMMA FORALL m,n: subset?(domain(composeMaps(m,n)),domain(m))
+
+  imgCompos: LEMMA forall m,n: image(m) = domain(n) => image(composeMaps(m,n)) = image(n)
+
+ END maps_composite
+
+% Theory for maps that have the same type for the domain and image
+maps_identity[S:TYPE]: THEORY
+ BEGIN
+
+  IMPORTING maps
+  IMPORTING maps_composite[S,S,S]
+
+  m: VAR maps[S,S].mapping
+
+  %Checks whether each element is associated with itself
+  identity?(m):bool = FORALL (l:S) : getRight(m, l) = l
+
+  composeIdResultsId: LEMMA FORALL m: identity?(m) => composeMaps(m,m) = m
+
+  sameDomImg: LEMMA FORALL m: identity?(m) => domain(m) = image(m) 
+
+ END maps_identity

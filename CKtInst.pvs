@@ -4,7 +4,7 @@ BEGIN
   IMPORTING FeatureModelSemantics
   IMPORTING CKtrans
 
-  IMPORTING CK[Name.Configuration, 
+  IMPORTING CKInt[Name.Configuration, 
   	       Formula_, 
   	       FormulaTheory.satisfies, 
 	       FeatureModel.FM, 

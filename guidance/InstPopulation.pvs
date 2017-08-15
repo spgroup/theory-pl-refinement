@@ -1,0 +1,23 @@
+InstPopulation: THEORY
+BEGIN
+%  IMPORTING SPLrefinement
+  PL: TYPE
+  plRef : [PL,PL->bool]
+  popRefinement (x:set[PL],y:set[PL]):bool=true
+  popRefPre: THEOREM orders[set[PL]].preorder?( popRefinement ) 
+
+  IMPORTING Assets{{
+  	    Asset:=PL, 
+	    |-:=popRefinement
+  }}
+
+  CONVERSION+ singleton
+
+  pl,pl1,pl2,pl3: VAR PL
+
+
+% colocar na instanciacao especifica a funcao que cria linha a partir de 1 produto
+END InstPopulation
+
+
+

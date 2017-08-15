@@ -1,0 +1,42 @@
+Assets: THEORY
+BEGIN
+  IMPORTING set_aux_lemmas
+
+  % Assets
+  Asset: TYPE+
+  AssetName: TYPE+
+
+  CONVERSION+ singleton
+
+  a,a1,a2,a3: VAR Asset
+  aSet, S1,S2: VAR set[Asset]
+  
+  % Assumption <Assets refinement>
+  |- : [set[Asset],set[Asset]->bool]
+
+  wfProduct : [set[Asset]->bool]
+  Product: TYPE = (wfProduct)
+
+  % Axiom <Asset refinement is pre-order>
+  assetRefinement: AXIOM orders[set[Asset]].preorder?( |- ) 
+
+  % Axiom 5 <Asset refinement compositionality>
+  asRefCompositional: AXIOM
+    FORALL(S1,S2,aSet):
+      ( S1 |- S2 ) and wfProduct( union(S1,aSet) ) =>
+        wfProduct( union(S2,aSet) ) and ((union(S1,aSet)) |- (union(S2,aSet)))
+
+%    (FORALL(a1:Asset): s1(a1) => (EXISTS(a2:Asset): s2(a2) and |-(a1,a2) AND (FORALL(a2:Asset,a3:Asset): s2(a2) and s2(a3) and |-(a1,a2) AND |-(a1,a3) => a2=a3) )) AND
+%    (FORALL(a2:Asset): s2(a2) => (EXISTS(a1:Asset): s1(a1) and |-(a1,a2) AND (FORALL(a1:Asset,a0:Asset): s1(a1) and s1(a0) and |-(a1,a2) AND |-(a0,a2) => a1=a0) ))
+%    (FORALL(a1:Asset): s1(a1) => 
+%      (EXISTS(a2:Asset): s2(a2) AND |-(a1,a2) AND (NOT(EXISTS(a3:Asset): s2(a3) and (a2/=a3) and |-(a1,a3))) )) AND
+%    (FORALL(a2:Asset): s2(a2) => 
+%      (EXISTS(a1:Asset): s1(a1) AND |-(a1,a2) AND (NOT(EXISTS(a0:Asset): s1(a0) and (a1/=a0) and |-(a0,a2))) )) 
+
+%    EXISTS(f:[{x:Asset | s1(x)}->Asset]): 
+  AssetTest: THEOREM
+    FORALL(S,T,x,y:finite_sets[Asset].finite_set,a,b:Asset):
+      wfProduct(x) AND (S |- T) AND x(a) AND (a |- b) AND x=union(S,a) AND y=union(T,b)
+      => (x |- y)
+
+END Assets
