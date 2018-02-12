@@ -2,6 +2,26 @@
  (wtFormRefinement 0
   (wtFormRefinement-1 nil 3697197518 ("" (postpone) nil nil) nil
    shostak))
+ (notMember2 0
+  (notMember2-1 nil 3727442621
+   ("" (skolem 1 (fm feature))
+    (("" (bddsimp)
+      (("" (skolem 2 c)
+        (("" (bddsimp)
+          (("" (expand wfConfigurations)
+            (("" (expand satImpConsts)
+              (("" (inst -1 feature) (("" (bddsimp) nil nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (Name type-decl nil Name nil)
+    (wfConfigurations const-decl "set[Configuration]"
+     FeatureModelSemantics nil))
+   shostak))
  (renameFeature3_TCC1 0
   (renameFeature3_TCC1-1 nil 3592754295
    ("" (lemma renameFeature_WF)

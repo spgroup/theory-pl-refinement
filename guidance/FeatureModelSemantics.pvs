@@ -30,6 +30,9 @@ FeatureModelSemantics: THEORY
   semantics(fm: FM): set[Configuration] =
     {c:Configuration | satImpConsts(fm,c) AND satExpConsts(fm,c)}
 
+  wfConfigurations(fm: FM) : set[Configuration] =
+    {c:Configuration | satImpConsts(fm,c)}
+
   % refinement notion for feature models
   refines(abs,con: WFM): bool = subset?(semantics(abs),semantics(con))
 
@@ -66,7 +69,12 @@ FeatureModelSemantics: THEORY
   notMember: THEOREM
     FORALL(fm:WFM,opt:Name):
       (not(features(fm)(opt))) =>
-        (FORALL (c:Configuration) : semantics(fm)(c) => NOT c(opt)) 
+        (FORALL (c:Configuration) : semantics(fm)(c) => NOT c(opt))
+
+  notMember2 : THEOREM
+    FORALL(fm:WFM,opt:Name):
+      (not(features(fm)(opt))) =>
+        (FORALL (c:Configuration) : wfConfigurations(fm)(c) => NOT c(opt))
 
   teste2: LEMMA
        FORALL (F,G:Name):
@@ -115,11 +123,11 @@ FeatureModelSemantics: THEORY
     FORALL(fm1:WFM,F,G:Name): (NOT features(fm1)(G)) => refines2(fm1,fm2)
     WHERE fm2=renameFM(fm1,F,G)
 
-  <>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
+  <>(fm,exp):set[Configuration]  = {c | wfConfigurations(fm)(c) AND satisfies(exp,c)}
 
-  <>(exp,fm):set[Configuration]  = {c | semantics(fm)(c) AND not satisfies(exp,c)}
+  <>(exp,fm):set[Configuration]  = {c | wfConfigurations(fm)(c) AND not satisfies(exp,c)}
 
-  <>(exps,fm): set[Configuration] = {c | semantics(fm)(c) AND (FORALL exp: exps(exp) => not satisfies(exp,c))}
+  <>(exps,fm): set[Configuration] = {c | wfConfigurations(fm)(c) AND (FORALL exp: exps(exp) => not satisfies(exp,c))}
 
   % This function filters formulas from an FM that do not have Q
   filterFormulae(fm,Q): set[Formula_] = {form: Formula_ | formulae(fm)(form) AND NOT member(Q,names(form))}
