@@ -20,7 +20,7 @@ removeFeatureGuydance: THEOREM
      ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),f0,FALSE_FORMULA)  #)
 
 completenessRemove: THEOREM
-     FORALL (fm,f0) : (semantics(fm) = union(<>(fm,NAME_FORMULA(f0)),<>(fm,NOT_FORMULA(NAME_FORMULA(f0)))))
+     FORALL (fm,f0) : (wfConfigurations(fm) = union(<>(fm,NAME_FORMULA(f0)),<>(fm,NOT_FORMULA(NAME_FORMULA(f0)))))
      	    	     AND
 		     (intersection(<>(fm,NAME_FORMULA(f0)),<>(fm,NOT_FORMULA(NAME_FORMULA(f0)))) = emptyset)
 
