@@ -94,6 +94,8 @@ BEGIN
   ckEq(fm:FM,am:AM,ck1,ck2:{K:CK | wfCK(fm,am,K)} ): bool =
     FORALL c: semantics(fm)(c) =>  semantics(ck1)(am)(c)=semantics(ck2)(am)(c)
 
+  assetsInCK(ck, am) : bool = (FORALL item: ck(item) => subset?(assets(item),dom(am)))
+
   % Equivalence properties - reflexive
   eqReflexive: THEOREM
     FORALL(fm:FM, am:AM, ck:{K: CK | wfCK(fm,am,K)}):

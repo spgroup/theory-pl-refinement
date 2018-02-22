@@ -9,6 +9,7 @@ BEGIN
   m,m2: VAR CKComp.Item
   M,M2: VAR CKComp.CK
   I,I2: VAR AssetMapping.AM
+  F: VAR FM
 
   replace(f,n,f3): RECURSIVE Formula_ =
       CASES f OF
@@ -35,7 +36,7 @@ BEGIN
   			      	    (NOT c(f0))
 				    =>
 				    (satisfies(f,c) = satisfies(replace(f,f0,FALSE_FORMULA),c))
-
+  
   replaceRemoveSemantics: THEOREM
   FORALL(c,I,M,f0):
   (
@@ -44,6 +45,8 @@ BEGIN
     (semantics(M)(I)(c) = semantics(replace(M,f0,FALSE_FORMULA))(I)(c))
 
   )
+
+  replacePreservesWf: LEMMA FORALL (I, M, f0): assetsInCK(M,I) => assetsInCK(replace(M, f0, FALSE_FORMULA), I) 
 
   %%%%%MERGE%%%%%%%
   replaceNameSatisfies: LEMMA FORALL (f,f0,f1,c) :

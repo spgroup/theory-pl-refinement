@@ -6,18 +6,20 @@ fm,fm2: VAR WFM
 f0,f1: VAR Name
 c: VAR Configuration
 m: VAR Item
+am2: VAR AM
 
 IMPORTING SPLrefinement[Configuration,WFM,Assets.Asset,Assets.AssetName,CK,semantics,semantics]
 pl: VAR PL
 
+
 %%%%%%%%REMOVE%%%%%%%%%
 removeFeatureGuydance: THEOREM
-     FORALL(pl,fm2,f0) :
+     FORALL(pl,am2,fm2,f0) :
      (
-	(features(F(pl))(f0) AND features(fm2) = remove(f0,features(F(pl))) AND wfPL(pl2))
+	(subset?(A(pl),am2) AND assetsInCK(K(pl), A(pl)) AND  features(F(pl))(f0) AND features(fm2) = remove(f0,features(F(pl))) AND wfPL(pl2))
 	=>
 	(FORALL c: (<>(F(pl),NOT_FORMULA(NAME_FORMULA(f0))))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,c)))) 
-     ) WHERE pl2 = (# F:=fm2,A:=A(pl),K:=replace(K(pl),f0,FALSE_FORMULA)  #)
+     ) WHERE pl2 = (# F:=fm2,A:=am2,K:=replace(K(pl),f0,FALSE_FORMULA)  #)
 
 completenessRemove: THEOREM
      FORALL (fm,f0) : (wfConfigurations(fm) = union(<>(fm,NAME_FORMULA(f0)),<>(fm,NOT_FORMULA(NAME_FORMULA(f0)))))
