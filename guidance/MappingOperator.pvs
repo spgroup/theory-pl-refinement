@@ -46,7 +46,7 @@ BEGIN
 
   )
 
-  replacePreservesWf: LEMMA FORALL (I, M, f0): assetsInCK(M,I) => assetsInCK(replace(M, f0, FALSE_FORMULA), I) 
+  replacePreservesWf: LEMMA FORALL (I, M, f0, f): assetsInCK(M,I) => assetsInCK(replace(M, f0, f), I) 
 
   %%%%%MERGE%%%%%%%
   replaceNameSatisfies: LEMMA FORALL (f,f0,f1,c) :
