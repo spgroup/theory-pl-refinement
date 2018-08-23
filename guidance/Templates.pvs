@@ -65,8 +65,8 @@ extractFeatureGuidanceNonePresent: THEOREM
 extractFeatureGuidanceBothPresent: THEOREM
 	FORALL(pl,am2,fm2,f0,f1) :
      (
-	(subset?(A(pl),am2) AND assetsInCK(K(pl),A(pl) AND features(F(pl))(f0) AND NOT features(F(pl))(f1) AND features(fm2) = union(features(F(pl)),f1) AND wfPL(pl2) AND
-	(FORALL m:K(pl)(m) => NOT names(exp(m))(f1))))
+	(subset?(A(pl),am2) AND assetsInCK(K(pl),A(pl)) AND features(F(pl))(f0) AND NOT features(F(pl))(f1) AND features(fm2) = union(features(F(pl)),f1) AND wfPL(pl2)) AND
+	(FORALL m:K(pl)(m) => NOT names(exp(m))(f1))
 	=>
 	(FORALL c: (<>(F(pl),NAME_FORMULA(f0)))(c) => (SPLrefinement.|-(prod(pl,c),prod(pl2,add(f1,c)))))
      ) WHERE pl2 = (# F:=fm2,A:=am2,K:=replaceMultiple(K(pl),f0,f1) #)
