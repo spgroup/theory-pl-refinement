@@ -25,12 +25,12 @@ We list the templates and steps for performing the experiment below.
 
 <figure>
 <img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/movefeature.png" alt="Move Feature Template" width="50%" height="50%">
-<figcaption>Move Feature</figcaption>
+<figcaption>Move Feature to its Parent</figcaption>
 </figure>
 
 <figure>
 <img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/movefeature2.png" alt="Move Feature Template" width="50%" height="50%">
-<figcaption>Move Feature</figcaption>
+<figcaption>Move Feature to its Sibling</figcaption>
 </figure>
 <br><br>
 
