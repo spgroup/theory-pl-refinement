@@ -8,6 +8,78 @@ In the Documentation folder, you can find a summary of the theories and also inf
 
 To view the theory structure, please follow this ![link](https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/theory-structure.pdf). There, you can navigate through the theories and understand the dependencies (imports and instantiations) among them.
 
+We list the templates and steps for performing the experiment below.
+
+## Templates
+
+<b>General Templates</b>
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/changeasset.png" alt="Change Asset Template" width="50%" height="50%">
+<figcaption>Change Asset</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/transfoptmand.png" alt="Transform Optional Feature to Mandatory Template" width="50%" height="50%">
+<figcaption>Transform Optional Feature to Mandatory</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/movefeature.png" alt="Move Feature Template" width="50%" height="50%">
+<figcaption>Move Feature</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/movefeature2.png" alt="Move Feature Template" width="50%" height="50%">
+<figcaption>Move Feature</figcaption>
+</figure>
+<br><br>
+
+<b>Compositional Templates</b>
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/addassets.png" alt="Add Assets Template" width="50%" height="50%">
+<figcaption>Add Assets</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/addcklines.png" alt="Add CK Lines Template" width="50%" height="50%">
+<figcaption>Add CK Lines</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/changeckline.png" alt="Add CK Lines Template" width="50%" height="50%">
+<figcaption>Change CK Line</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/removefeature.png" alt="Remove Feature Template" width="50%" height="50%">
+<figcaption>Remove Feature</figcaption>
+</figure>
+
+<br><br>
+
+<b>Transformational Templates</b>
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/addassetsannotative.png" alt="Add Assets Template" width="50%" height="50%">
+<figcaption>Add Assets</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/addcklinesannotative.png" alt="Add CK Lines Template" width="50%" height="50%">
+<figcaption>Add CK Lines</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/changecklineannotative.png" alt="Add CK Lines Template" width="50%" height="50%">
+<figcaption>Change CK Line</figcaption>
+</figure>
+
+<figure>
+<img src="https://github.com/spgroup/theory-pl-refinement/blob/dev/Documentation/templates/removefeatureannotative.png" alt="Remove Feature Template" width="50%" height="50%">
+<figcaption>Remove Feature</figcaption>
+</figure>
+
+
+
 ## Experiment
 
 To run the experiment, the following steps are necessary:
