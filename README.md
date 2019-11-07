@@ -92,3 +92,9 @@ We also make available the Java program used to create txt files with the commit
 You can also find the Lucene jar file used, but you can check their website for latest versions if preferred.
 
 If you have any further questions, please contact Gabriela Sampaio (gcs@cin.ufpe.br) or Leopoldo Teixeira (lmt@cin.ufpe.br)
+=======
+This repository contains the PVS specification files for the theory of Software Product Line Refinement
+
+For the development branch of the theory (work in progress), refer to the dev branch. 
+
+For the feature extractions scenarios, part of a current SBCARS'16 submission, refer to the sbcars branch. 
