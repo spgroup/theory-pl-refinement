@@ -1,0 +1,153 @@
+PartialRefTemplatesFM : THEORY
+  BEGIN
+
+  IMPORTING FeatureModel
+  IMPORTING FeatureModelSemantics
+  IMPORTING CK[Configuration,
+	       Formula_,
+	       satisfies,
+	       FM,
+	       Name,
+	       semantics,
+	       wfFM,
+	       FormulaTheory.wt,
+	       FeatureModelSemantics.genFE,
+	       FeatureModelSemantics.getFeatures,
+	       FeatureModelSemantics.addMandatory,
+	       FeatureModelSemantics.addOptional
+	       ]
+  
+
+  IMPORTING PartialRefinement[Configuration,WFM,semantics,Asset,AssetName,CK,semantics]
+  
+  fm1,fm2: VAR FM
+  P,Q,R,M: VAR Name
+  pl: VAR PL
+  c: VAR Configuration
+  s: VAR set[Configuration]
+  fs: VAR set[Formula_]
+  
+  %---------------------------------------------------------------------------------------------------------------------------------------
+  %---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------
+  %---------------------------------------------------------------------------------------------------------------------------------------
+
+  % Predicate that compares fm1 and fm2 for this template. The fms have the same features. However, their formulas are different
+  % because Q is optional in fm1 and mandatory in fm2
+  transfOptMand(fm1,fm2,P,Q): bool = 
+       features(fm1) = features(fm2) AND 
+       formulae(fm2) = union(formulae(fm1),IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)))
+
+  % Template syntax. We need to make sure that the features P and Q belong to the feature models.
+  syntaxTransfOptMand(fm1,fm2,P,Q): bool = 
+       transfOptMand(fm1,fm2,P,Q) AND
+       (features(fm1))(P) AND
+       (features(fm1))(Q) 
+
+  % The initial feature model must satisfy the formula Q => P because the feature Q is supposed to be optional
+  conditionsTransfOptMand(fm1,P,Q): bool = FORALL c: 
+                                  (semantics(fm1))(c) => satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)),c)
+
+  % Theorem <Transforming an optional feature into mandatory, results in a wf FM and a wf PL>
+  wfTransfOptMand: THEOREM 
+            FORALL (pl,fm2,P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) 
+               )
+               => wfFM(fm2) AND wfPL(pl2)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+  % Theorem <Transform optional to mandatory feature template represents a strong partial refinement>
+  transOptMandPartRefStrong: THEOREM 
+            FORALL (pl,fm2,s,P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) AND
+                 s = <>((IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))),F(pl))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+	    )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+
+  %----------------------------------------------------------------------------------------------------------------
+  %---------------------------------------MOVE FEATURE TEMPLATE----------------------------------------------------
+  %----------------------------------------------------------------------------------------------------------------
+
+  % CASE 1 - P is the parent of Q 
+  syntaxMoveFeature1(fm1,fm2,P,Q,R): bool =
+     features(fm1)(P) AND
+     features(fm1)(Q) AND
+     features(fm1)(R) AND
+     features(fm1) = features(fm2) AND
+     formulae(fm1)(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P))) AND
+     formulae(fm2) = union(formulae(fm1),IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)))
+
+  moveFeaturePartialRefinement1: THEOREM
+      FORALL (pl,fm2,s,P,Q,R): 
+            (
+               (
+                 syntaxMoveFeature1(F(pl),fm2,P,Q,R) AND
+                 s = <>(AND_FORMULA(NOT_FORMULA(NAME_FORMULA(Q)),NAME_FORMULA(R)),F(pl))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+	    )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+  % CASE 2 - Q is the parent of P (mandatory, optional is refinement)
+  syntaxMoveFeature2(fm1,fm2,P,Q,R,fs): bool =
+     features(fm1)(P) AND
+     features(fm1)(Q) AND
+     features(fm1)(R) AND
+     features(fm1) = features(fm2) AND
+     fs(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q))) AND
+     NOT fs(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P))) AND
+     NOT fs(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(R))) AND
+     formulae(fm1) = union(fs,union(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P)),IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(R)))) AND
+     formulae(fm2) = union(fs,IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(R)))
+
+   moveFeaturePartialRefinement2: THEOREM
+      FORALL (pl,fm2,s,P,Q,R,fs): 
+            (
+               (
+                 syntaxMoveFeature2(F(pl),fm2,P,Q,R,fs) AND
+                 s = <>(AND_FORMULA(NOT_FORMULA(NAME_FORMULA(R)),NAME_FORMULA(Q)),F(pl))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+	    )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+   % CASE 3 - Q and P are siblings
+  syntaxMoveFeature3(fm1,fm2,M,P,Q,R,fs): bool =
+     features(fm1)(P) AND
+     features(fm1)(Q) AND
+     features(fm1)(R) AND
+     features(fm1)(M) AND
+     features(fm1) = features(fm2) AND
+     fs(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(M))) AND
+     fs(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(M))) AND
+     NOT fs(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P))) AND
+     NOT fs(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(R))) AND
+     NOT fs(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(R))) AND
+     NOT fs(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q))) AND
+     formulae(fm1) = add(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(P)),fs) AND
+     formulae(fm2) = add(IMPLIES_FORMULA(NAME_FORMULA(R),NAME_FORMULA(Q)),fs) 
+
+   moveFeaturePartialRefinement3: THEOREM
+      FORALL (pl,fm2,s,M,P,Q,R,fs): 
+            (
+               (
+                 syntaxMoveFeature3(F(pl),fm2,M,P,Q,R,fs) AND
+                 s = <>(AND_FORMULA(NOT_FORMULA(NAME_FORMULA(Q)),NAME_FORMULA(R)),F(pl))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+	    )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+     
+     
+  
+
+  END PartialRefTemplatesFM

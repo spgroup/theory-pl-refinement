@@ -1,0 +1,48 @@
+SPLStrongPartRefTemplTrans: THEORY
+BEGIN
+   IMPORTING CKmultiple
+   
+   am,am1,am2,pairs: VAR AM
+   a,a1,a2: VAR Asset
+   an: VAR AssetName
+   s: VAR set[Configuration]
+   fm: VAR FM
+   ck,ck2: VAR CK
+   its: VAR list[Item]
+   c: VAR Configuration
+   anSet: VAR set[AssetName]
+
+   IMPORTING SPLPartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
+
+   pl: VAR PL
+
+
+  addCKLinesBefore: THEOREM
+     FORALL pl,ck2,its,s:
+      (
+	(s = <>(F(pl),exps(its)) AND
+      	ck2 = append(its,K(pl)))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+   addCKLinesAfter: THEOREM
+     FORALL pl,ck2,its,s:
+      (
+	(s = <>(F(pl),exps(its)) AND
+      	ck2 = append(K(pl),its))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+   
+   removeCKLinesBefore: THEOREM
+      FORALL pl,ck2,its,s:
+      (
+	(s = <>(F(pl),exps(its)) AND
+      	K(pl) = append(its,ck2))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+
+END SPLStrongPartRefTemplTrans

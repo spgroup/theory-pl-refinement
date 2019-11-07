@@ -1,0 +1,65 @@
+PartialRefWeak[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE,
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]] ]: THEORY
+BEGIN
+
+% Partial SPL Refinement
+    IMPORTING maps
+
+    CM:TYPE = maps[Conf,Conf].mapping
+     
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------VARIABLES-----------------------------------------------
+   % -------------------------------------------------------------------------------------------------------- 
+    c: VAR Conf
+    m,n: VAR CM
+
+    IMPORTING maps_identity[Conf]
+    IMPORTING maps_composite[Conf,Conf,Conf]
+    IMPORTING PartialRefBasics[Conf,FM, {||}, Asset, AssetName, CK,[||]]
+    
+    pl, pl1, pl2, pl3: VAR PL
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------RELATION DEF--------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+
+   % Partial Refinement Relation - this definition considers a mapping that maps configurations from the two PLs.
+    weakPartialRefinement(pl1,pl2,m) : bool = 
+    	subset?(domain(m),{||}(F(pl1))) AND
+        subset?(image(m),{||}(F(pl2))) AND
+        FORALL c : domain(m)(c)  => 
+            (
+               prod(pl1,c) 
+               |- 
+               prod(pl2,getRight(m,c))
+            )  
+
+   % --------------------------------------------------------------------------------------------------------
+   % ------------------------------------------------PROPERTIES----------------------------------------------
+   % --------------------------------------------------------------------------------------------------------
+   
+   %--------------------------------------------------PREORDER-----------------------------------------------
+
+   % Theorem <weak partial refinement is reflexive>
+    weakPartRefReflexive: THEOREM FORALL pl,(m:CM | subset?(domain(m), {||}(F(pl)))) : 
+                                         identity?(m) => weakPartialRefinement(pl,pl,m)
+   % Theorem <weak partial refinement is transitive>
+    weakPartRefTransitive: THEOREM FORALL pl1, pl2, pl3, m,n :
+                                     ( 
+                                          (
+                                            weakPartialRefinement(pl1,pl2,m) 
+                                           AND 
+                                            weakPartialRefinement(pl2,pl3,n) 
+                                           AND 
+                                            image(m) = domain(n)
+                                          )
+                                          => weakPartialRefinement(pl1,pl3,q)
+                                      ) WHERE q = composeMaps(m,n)
+   
+
+END PartialRefWeak

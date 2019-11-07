@@ -1,0 +1,13 @@
+SPLRefinementFiniteFM[Conf: TYPE,
+                     FM: TYPE,
+                     {||}: [FM -> set[Conf]],
+                     Asset: TYPE,
+                     AssetName: TYPE,
+                     CK: TYPE,
+                     (IMPORTING maps[AssetName,Asset]) [||]: [CK -> [mapping -> [Conf -> finite_sets[Asset].finite_set]]]]: THEORY
+   BEGIN
+       IMPORTING SPLrefinement[Conf]{{Asset:=Asset,AssetName:=AssetName,CK:=CK,FM:=FM,{||} := {||},
+   	    [||] := [||]}}
+      finite_semantics: AXIOM FORALL (fm:FM): is_finite({||}(fm))     
+
+   END SPLRefinementFiniteFM

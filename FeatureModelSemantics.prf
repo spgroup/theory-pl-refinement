@@ -1,45 +1,30 @@
 (FeatureModelSemantics
  (wtFormRefinement 0
-  (wtFormRefinement-1 nil 3498314283 3498314303
-   ("" (skolem 1 (fm1 fm2))
-    (("" (flatten)
-      (("" (induct "f" 1)
-        (("1" (grind) nil nil) ("2" (grind) nil nil)
-         ("3" (grind) nil nil) ("4" (grind) nil nil)
-         ("5" (grind) nil nil) ("6" (grind) nil nil)
-         ("7" (grind) nil nil))
-        nil))
-      nil))
-    nil)
-   unchecked
-   ((names const-decl "set[Name]" FeatureModel nil)
-    (Formula__induction formula-decl nil Formula__adt nil)
-    (IMPLIES const-decl "[bool, bool -> bool]" booleans nil) nil
-    (Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
-    (Formula_ type-decl nil Formula__adt nil)
-    (FM type-eq-decl nil FeatureModel nil)
-    (boolean nonempty-type-decl nil booleans nil)
-    (bool nonempty-type-eq-decl nil booleans nil)
-    (wfTree const-decl "bool" FeatureModel nil))
-   20206 180 t shostak))
- (notMember 0
-  (notMember-1 nil 3498314331 3507478008
-   ("" (skolem 1 (fm opt))
-    (("" (expand* names member semantics satImpConsts satExpConsts)
-      (("" (flatten)
-        (("" (skolem 2 c1)
-          (("" (flatten)
-            (("" (instantiate -1 opt) (("" (assert) nil nil)) nil))
+  (wtFormRefinement-1 nil 3697197518 ("" (postpone) nil nil) nil
+   shostak))
+ (renameFeature3_TCC1 0
+  (renameFeature3_TCC1-1 nil 3592754295
+   ("" (lemma renameFeature_WF)
+    (("" (skolem 1 (fm1 F G))
+      (("" (instantiate -1 (fm1 F G))
+        (("" (flatten)
+          (("" (assert)
+            (("" (skolem 2 fm2)
+              (("" (flatten)
+                (("" (replace -2) (("" (propax) nil nil)) nil)) nil))
+              nil))
             nil))
           nil))
         nil))
       nil))
     nil)
-   proved
-   ((Name type-decl nil Name nil)
-    (semantics const-decl "set[Configuration]" FeatureModelSemantics
-     nil)
-    (satExpConsts const-decl "bool" FeatureModelSemantics nil)
-    (satImpConsts const-decl "bool" FeatureModelSemantics nil))
-   2030 20 t shostak)))
+   ((Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (renameFeature_WF formula-decl nil FeatureModelSemantics nil))
+   nil)))
 

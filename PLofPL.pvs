@@ -1,0 +1,18 @@
+PLofPL: THEORY
+BEGIN
+  IMPORTING FeatureModelRefinements
+  IMPORTING Assets, AssetMapping, ConfigurationKnowledge
+  IMPORTING SPLrefinement 
+
+  CONVERSION+ singleton
+
+  IMPORTING SPLrefinement{{ 
+%  	    FM:=WFM, Conf:=Configuration, {||} := semantics,
+  	    AssetName:=Assets.AssetName, Asset:=SPLrefinement.PL, |- := SPLrefinement.popRefinement%,
+%	    CK:=ConfigurationKnowledge.CK, [||] := ConfigurationKnowledge.semantics
+  }}
+
+  pl,pl1,pl2: VAR PL
+
+
+END PLofPL

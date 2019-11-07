@@ -1,0 +1,363 @@
+SPLPartialRefTemplConc: THEORY
+BEGIN
+
+IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements
+IMPORTING Assets, AssetMapping, ConfigurationKnowledge
+
+aSet: VAR finite_sets[Asset].finite_set
+am1,am2,pairs: VAR AM
+a1,a2: VAR Asset
+an: VAR AssetName
+anSet: VAR finite_sets[AssetName].finite_set
+s,t: VAR set[Configuration]
+c: VAR Configuration
+fm,fm1,fm2: VAR FFM
+ck,ck1,ck2,its: VAR CK
+item1,item2: VAR Item
+items: VAR set[Item]
+P,Q: VAR Name
+exp: VAR Formula_
+
+
+% Importing SPLPartialRefinement theory and instantiating types. 
+IMPORTING SPLpartialrefinement[Configuration,
+                               WFFM,
+                               FeatureModelSemantics.semantics,
+                               Assets.Asset,
+                               Assets.AssetName,
+                               CK,
+                               ConfigurationKnowledge.semantics]
+	                       
+                              
+pl,pl2,pl3: VAR PL
+plA: VAR ArbitrarySPL
+m: VAR CM
+
+% --------------------------------------------Restriction Operator---------------------------------------------------------------------
+% ----Filter configurations whose products do not contain assets which were activated by any asset of anSet
+
+<>(fm,ck,anSet): set[Configuration] = {c | semantics(fm)(c) AND 
+                                       (FORALL (i:Item) : evalCK(ck,c)(i) => empty?(intersection(getRS(i),anSet)))}
+
+<>(pl,anSet):set[Configuration] = <>(F(pl),K(pl),anSet)
+
+% ----Filter configurations whose products do not contain aSet ****THIS DEFINITION MIGHT NOT BE USED ANYMORE****
+<>(pl,aSet):set[Configuration] = {c | semantics(F(pl))(c) AND empty?(intersection(aSet, prod(pl,c)))}
+
+% ----Filter configurations that satisfy an expression exp and belong to a feature model fm
+<>(fm,exp):set[Configuration]  = {c | semantics(fm)(c) AND satisfies(exp,c)}
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------CHANGE ASSET TEMPLATE---------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+syntaxChangeAsset(am1,am2,pairs,a1,a2,an):bool =
+      am1=ow((an,a1),pairs) AND
+      am2=ow((an,a2),pairs) 
+
+% Lemma <Since the only difference between "pairs" and "A(pl)" is the element "(an,a1)" and this asset is not included, the evaluation
+%        of A(pl) is the same as pairs.>
+sameEvalPairs: LEMMA 
+FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(pl,singleton(an))
+      )
+      =>
+        (FORALL c : s(c) => (semantics(K(pl))(A(pl))(c)) = semantics(K(pl2))(pairs)(c))
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+sameEvalPairs2: LEMMA 
+FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(pl,singleton(an))
+      )
+      =>
+        (FORALL c : s(c) => (semantics(K(pl))(am2)(c)) = semantics(K(pl2))(pairs)(c))
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+% Theorem <The products that do not contain the changed asset do not change> 
+changeAssetSameProducts: THEOREM   
+    FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(pl,singleton(an))
+      )
+      =>
+        (FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(am2)(c))))
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+% Theorem <Change asset template represents a strong partial refinement>
+changeAssetStrong: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,s):
+    (
+      (
+        syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND
+        s = <>(pl,singleton(an)) AND
+        wfPL(pl2) 
+      )
+      =>
+        strongPartialRefinement(pl,pl2,s)
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+% Theorem <Change asset template represents a weak partial refinement>
+changeAssetWeak: THEOREM
+    FORALL(pl,am2,pairs,a1,a2,an,m):
+    (
+      (
+	syntaxChangeAsset(A(pl),am2,pairs,a1,a2,an) AND 
+        domain(m) = <>(pl,singleton(an)) AND
+        identity?(m) AND
+        wfPL(pl2)
+      ) 
+      => weakPartialRefinement(pl,pl2,m)
+    )  WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------TRANSF OPTIONAL TO MANDATORY TEMPLATE-----------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+% Predicate that compares fm1 and fm2 for this template. The fms have the same features. However, their formulas are different
+% because Q is optional in fm1 and mandatory in fm2
+transfOptMand(fm1,fm2,P,Q): bool = 
+       features(fm1) = features(fm2) AND 
+       formulae(fm2) = union(formulae(fm1),IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)))
+
+% Template syntax. We need to make sure that the features belong to the feature models and that Q is optional in fm1. Otherwise
+% the change would not make sense
+syntaxTransfOptMand(fm1,fm2,P,Q): bool = 
+       transfOptMand(fm1,fm2,P,Q) AND
+       (features(fm1))(P) AND
+       (features(fm1))(Q) 
+
+conditionsTransfOptMand(fm1,P,Q): bool = FORALL c: 
+                                  (semantics(fm1))(c) => NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P),NAME_FORMULA(Q)),c) AND
+                                                             satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q),NAME_FORMULA(P)),c)
+
+wfTransfOptMand: THEOREM 
+            FORALL (pl,fm2,P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) 
+               )
+               => wfFM(fm2) AND wfPL(pl2)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+% Theorem <Transform optional to mandatory feature template represents a strong partial refinement>
+transOptMandPartRefStrong: THEOREM 
+            FORALL (pl,fm2,s,P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) AND
+                 s = <>(F(pl),(IMPLIES_FORMULA (NAME_FORMULA(P),NAME_FORMULA(Q))))
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+
+% Theorem <Transform optional to mandatory feature template represents a weak partial refinement>
+transOptMandPartRefWeak: THEOREM 
+            FORALL (pl,fm2,m,P,Q): 
+            (
+               (
+                 syntaxTransfOptMand(F(pl),fm2,P,Q) AND
+                 conditionsTransfOptMand(F(pl),P,Q) AND
+                 domain(m) = <>(F(pl),(IMPLIES_FORMULA (NAME_FORMULA(P),NAME_FORMULA(Q)))) AND
+                 identity?(m)
+               )
+               => weakPartialRefinement(pl,pl2,m)
+            )
+            WHERE pl2=(# F:=fm2, A:=A(pl), K:=K(pl) #)
+           
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------CHANGE FEATURE EXPRESSION-----------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+% Predicate that represents syntax for change feature expression. Basically, cks differ in only one line and in a feature expression.
+syntaxChangeFeatureExp(ck1,ck2,item1,item2,items) : bool =
+            ck1 = union(item1,items) AND
+            ck2 = union(item2,items) AND
+            assets(item1)=assets(item2)
+
+% Predicate that represents conditions for change feature expression. We are only making sure that the new item is well formed according 
+% to the fm.
+conditionsChangeFeatureExp(fm,item1,item2) : bool = wt(fm,exp(item2)) 
+
+predChangeFeatureExp(pl,ck2,item1,item2,items,s) : bool = 
+           (syntaxChangeFeatureExp(K(pl),ck2,item1,item2,items) AND
+            conditionsChangeFeatureExp(F(pl),item1,item2)       AND
+            s = <>(F(pl),AND_FORMULA(NOT_FORMULA(exp(item1)),NOT_FORMULA(exp(item2)))))
+
+% Lemma <Since the only difference between "K(pl)" and "ck2" "item1" and "item2" and these items are discarded by s, the evaluation
+%        of K(pl) is the same as ck2.>
+changeFeatureExpSameEvalCK: LEMMA
+            FORALL(pl,ck2,item1,item2,items,s):
+            (
+               predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND wfPL(pl2) => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+% Theorem <Change feature expression template represents a strong partial refinement>
+changeFeatureExpStrongPartRef: THEOREM
+            FORALL(pl,ck2,item1,item2,items,s):
+            (
+              predChangeFeatureExp(pl,ck2,item1,item2,items,s) AND wfPL(pl2) => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------REMOVE FEATURE TEMPLATE-------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+filterFormulae(fm,Q): set[Formula_] = {form: Formula_ | formulae(fm)(form) AND NOT member(Q,names(form))}       
+
+% Removals can be of an optional or mandatory feature
+removeFeature(fm1,fm2,P,Q):bool = formulae(fm2) = filterFormulae(fm1,Q) AND
+                                  features(fm2) = remove(Q,features(fm1))
+
+% The AMs differ only in pairs (set of pairs that have the assets that represent the removed feature) and the CKs in its 
+% (items that represent the removed feature)
+syntaxRemoveFeature(fm1,fm2,am1,am2,ck1,ck2,P,Q,its,pairs): bool =
+                                 removeFeature(fm1,fm2,P,Q) AND
+                                 features(fm1)(P) AND
+                                 features(fm1)(Q) AND
+                                 am1 = overw(pairs,am2) AND
+                                 ck2 = difference(ck1,its)    
+
+conditionsOpt(fm1,P,Q):bool =  FORALL c: semantics(fm1)(c) =>  NOT satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
+conditionsMand(fm1,P,Q):bool = FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(P), NAME_FORMULA(Q)),c)
+                                
+% We need to make sure that two conditions hold:
+% 1) Q HAS appear ONLY in an expression from its. Otherwise it would not be refinement
+% 2) The items that are not in its do not appear in pairs.
+conditionsRemoveFeature(fm1,its,pairs,P,Q,ck) : bool = 
+                                 (FORALL c : 
+                                          FORALL exp : 
+                                                    exps(ck)(exp) AND satisfies(exp,c) => 
+                                                       (exps(its)(exp) <=> satisfies(NAME_FORMULA(Q),c))
+                                 )   
+                                 AND
+                                 (FORALL (item:Item) : NOT its(item) => FORALL an: (assets(item))(an) => NOT dom(pairs)(an))
+                                 AND
+                                 (FORALL c: semantics(fm1)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),c))
+                                 AND
+                                 (conditionsOpt(fm1,P,Q) OR conditionsMand(fm1,P,Q))
+
+predRemoveFeature(pl,pl2,s,its,pairs,P,Q): bool = 
+             (syntaxRemoveFeature(F(pl),F(pl2),A(pl),A(pl2),K(pl),K(pl2),P,Q,its,pairs) AND
+             conditionsRemoveFeature(F(pl),its,pairs,P,Q,K(pl)) AND
+             s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q))))
+
+% Lemma <Since s is filtering configurations that do not have the removed feature (Q) and all items from its have Q, we can conclude
+% that the result of the CK evaluation will not contain any item from its>
+itsNotIncluded: LEMMA
+            FORALL (pl,pl2,s,its,pairs,P,Q):
+            (
+               predRemoveFeature(pl,pl2,s,its,pairs,P,Q) => FORALL c: s(c) => FORALL (i:Item) : evalCK(K(pl),c)(i) => NOT its(i) 
+            )
+
+% Lemma <Since all items resultant from CK evaluation are not in "its" and all assets from items that are not in "its" are not in "pairs", 
+% we conclude that all the resulting assets are not in "pairs">
+pairsNotIncluded: LEMMA
+             FORALL (pl,pl2,s,its,pairs,P,Q):
+            (
+               predRemoveFeature(pl,pl2,s,its,pairs,P,Q) => FORALL c: s(c) => FORALL an: eval(K(pl),c)(an) => NOT dom(pairs)(an) 
+            )           
+
+% Theorem <Remove feature template represents a strong partial refinement>
+removeFeatureSameProducts: THEOREM
+            FORALL (pl,pl2,s,its,pairs,P,Q):
+            (
+               predRemoveFeature(pl,pl2,s,its,pairs,P,Q) => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+            )
+
+% Theorem <Remove feature template represents a strong partial refinement>
+removeFeaturePartRefStrong: THEOREM
+            FORALL (pl,pl2,s,its,pairs,P,Q):
+            (
+               predRemoveFeature(pl,pl2,s,its,pairs,P,Q) => strongPartialRefinement(pl,pl2,s)
+            )
+
+% Theorem <Remove feature template represents a weak partial refinement>
+removeFeaturePartRefWeak: THEOREM
+            FORALL (pl,pl2,m,its,pairs,P,Q):
+            (
+               (
+                 identity?(m) AND
+                 predRemoveFeature(pl,pl2,domain(m),its,pairs,P,Q)
+               )
+               => weakPartialRefinement(pl,pl2,m)
+            )
+
+%---------------------------------------------------------------------------------------------------------------------------------------
+%---------------------------------------------ADD/REMOVE ASSETS TEMPLATE----------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------------------------------------------
+
+% The FM does not change (therefore we are not adding features). Only AM and CK, that now have new lines corresponding to the new assets.
+syntaxAddAssets(am1,am2,ck1,ck2,pairs,its): bool =
+            am2 = overw(pairs,am1) AND
+            ck2 = union(ck1,its)   
+
+% It is necessary to make sure that all assets added in the CK are present in the new lines of the AM.
+conditionsAddAssets(pairs,its): bool = 
+            FORALL (item:Item) : its(item) => subset?(assets(item),dom(pairs)) 
+
+% Theorem <When we add assets but filter the assets added the resulting products are equal>
+addAssetsSameProducts: THEOREM
+           FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                   s = <>(F(pl2),K(pl2),domain(pairs)) AND
+                   syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+                   conditionsAddAssets(pairs,its) 
+                ) 
+               => FORALL c : s(c) => ((semantics(K(pl))(A(pl))(c)) = (semantics(K(pl2))(A(pl2))(c)))
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% Theorem <Add assets template represents a strong partial refinement>
+addAssetsPartRefStrong: THEOREM
+            FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(F(pl2),K(pl2),domain(pairs)) AND
+                 syntaxAddAssets(A(pl),am2,K(pl),ck2,pairs,its) AND
+                 conditionsAddAssets(pairs,its) AND
+                 wfPL(pl2)
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% The remove assets template is the same as the add assets but the inverse, so we are calling the same predicates. However, replacing 
+% A(pl) by am2 and K(pl) by ck2
+removeAssetsSameProducts: THEOREM
+            FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(pl,domain(pairs)) AND
+                 syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
+                 conditionsAddAssets(pairs,its) AND
+                 wfPL(pl2) 
+               )
+               => FORALL c: s(c) => prod(pl,c) = prod(pl2,c)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+% Theorem <Remove assets template represents a strong partial refinement>
+removeAssetsPartRefStrong: THEOREM
+            FORALL (pl,am2,ck2,s,its,pairs):
+            (
+               (
+                 s = <>(pl,domain(pairs)) AND
+                 syntaxAddAssets(am2,A(pl),ck2,K(pl),pairs,its) AND
+                 conditionsAddAssets(pairs,its) AND
+                 wfPL(pl2) 
+               )
+               => strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2=(# F:=F(pl), A:=am2, K:=ck2 #)
+
+END SPLPartialRefTemplConc

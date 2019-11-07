@@ -1,0 +1,16 @@
+PartialAMRefInstComp: THEORY
+
+BEGIN
+  IMPORTING FeatureModelSemantics
+  IMPORTING ConfigurationKnowledge
+
+  c: VAR Configuration
+  am: VAR AM
+  ck: VAR CK
+
+  eval(ck)(am)(c) : AM = filter(eval(ck,c),am)
+
+  IMPORTING PartialAMCompositionality
+      [Name.Configuration,FeatureModel.FM,FeatureModelSemantics.semantics,Asset,AssetName,ConfigurationKnowledge.CK]{{eval:=eval,wfCK:=wfCK}}
+
+END PartialAMRefInstComp

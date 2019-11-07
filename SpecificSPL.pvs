@@ -2,7 +2,7 @@ SpecificSPL: THEORY
 BEGIN
 
   IMPORTING FeatureModel, Name, FeatureModelSemantics, FeatureModelRefinements
-  IMPORTING Assets, AssetMapping, ConfigurationKnowledge
+  IMPORTING Assets, AssetMapping, CKComp
 
   fm,fm1,fm2: VAR WFM
   am,am1,am2,pairs: VAR AM
@@ -15,10 +15,7 @@ BEGIN
   a,a1,a2,a3: VAR Asset
   an,an1,an2: VAR AssetName
 
-  IMPORTING SPLrefinement{{ 
-  	    FM:=WFM, Conf:=Configuration, {||} := semantics,
-	    CK:=CK, [||] := semantics
-  }}
+  IMPORTING SPLrefinement[Configuration,WFM,Assets.Asset,Assets.AssetName,CK,semantics,semantics] 
 
   pl,pl1,pl2: VAR PL
 
@@ -121,7 +118,7 @@ BEGIN
       )
 
   conditionsSplitAssets(a1,a2,a3, an1,an2, items):bool =
-      (  |-(a1,union(singleton(a2),singleton(a3))) ) AND 
+      (  Assets.|-(a1,union(singleton(a2),singleton(a3))) ) AND 
       (FORALL item: items(item) => (NOT(assets(item)(an1)) AND NOT(assets(item)(an2))))
 
 
@@ -236,6 +233,60 @@ BEGIN
            plRefinement(pl,pl2) AND wfCK(fm2,am2,ck2) AND wfPL(pl2)
 	)
         WHERE pl2=(# F:=fm2, A:=am2, K:=ck2 #)
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    ADD UNUSED ASSETS    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  syntaxAddUnusedAssets(am1,am2,pairs) : bool =
+    am2 = overw(pairs,am1)
+
+  conditionsAddUnusedAssets(pairs,ck) : bool =
+    FORALL an : dom(pairs)(an) => NOT assetsCK(ck)(an)
+
+  addUnusedAssetsSameCK : THEOREM
+    FORALL(pl,am2,pairs):
+        ( 
+          syntaxAddUnusedAssets(A(pl),am2,pairs) AND 
+          conditionsAddUnusedAssets(pairs, K(pl))
+          => 
+          FORALL c : semantics(F(pl))(c) =>  (semantics(K(pl))(A(pl))(c) = semantics(K(pl))(am2)(c))
+	)
+       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+  addUnusedAssets : THEOREM
+     FORALL(pl,am2,pairs):
+        ( 
+          syntaxAddUnusedAssets(A(pl),am2,pairs) AND 
+          conditionsAddUnusedAssets(pairs, K(pl))
+          => 
+           (strongerPLrefinement(pl,pl2) AND wfPL(pl2))
+	)
+       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    REMOVE UNUSED ASSETS    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   removeUnusedAssetsSameEvalCK : THEOREM
+    FORALL(pl,am2,pairs):
+        ( 
+          syntaxAddUnusedAssets(am2,A(pl),pairs) AND 
+          conditionsAddUnusedAssets(pairs, K(pl))
+          => 
+          FORALL c : semantics(F(pl))(c) =>  (semantics(K(pl))(A(pl))(c) = semantics(K(pl))(am2)(c))
+	)
+       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)
+
+   removeUnusedAssets : THEOREM
+     FORALL(pl,am2,pairs):
+        ( 
+          syntaxAddUnusedAssets(am2,A(pl),pairs) AND 
+          conditionsAddUnusedAssets(pairs, K(pl))
+          => 
+           (strongerPLrefinement(pl,pl2) AND wfPL(pl2))
+	)
+       WHERE pl2=(# F:=F(pl), A:=am2, K:=K(pl) #)  
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

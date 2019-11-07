@@ -1,0 +1,50 @@
+(FeatureModelSemantics
+ (wtFormRefinement 0
+  (wtFormRefinement-1 nil 3697197518 ("" (postpone) nil nil) nil
+   shostak))
+ (notMember2 0
+  (notMember2-1 nil 3727442621
+   ("" (skolem 1 (fm feature))
+    (("" (bddsimp)
+      (("" (skolem 2 c)
+        (("" (bddsimp)
+          (("" (expand wfConfigurations)
+            (("" (expand satImpConsts)
+              (("" (inst -1 feature) (("" (bddsimp) nil nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((satImpConsts const-decl "bool" FeatureModelSemantics nil)
+    (Name type-decl nil Name nil)
+    (wfConfigurations const-decl "set[Configuration]"
+     FeatureModelSemantics nil))
+   shostak))
+ (renameFeature3_TCC1 0
+  (renameFeature3_TCC1-1 nil 3592754295
+   ("" (lemma renameFeature_WF)
+    (("" (skolem 1 (fm1 F G))
+      (("" (instantiate -1 (fm1 F G))
+        (("" (flatten)
+          (("" (assert)
+            (("" (skolem 2 fm2)
+              (("" (flatten)
+                (("" (replace -2) (("" (propax) nil nil)) nil)) nil))
+              nil))
+            nil))
+          nil))
+        nil))
+      nil))
+    nil)
+   ((Name type-decl nil Name nil) (set type-eq-decl nil sets nil)
+    (Formula_ type-decl nil Formula__adt nil)
+    (FM type-eq-decl nil FeatureModel nil)
+    (boolean nonempty-type-decl nil booleans nil)
+    (bool nonempty-type-eq-decl nil booleans nil)
+    (wfFM const-decl "bool" FeatureModelSemantics nil)
+    (WFM type-eq-decl nil FeatureModelSemantics nil)
+    (renameFeature_WF formula-decl nil FeatureModelSemantics nil))
+   nil)))
+

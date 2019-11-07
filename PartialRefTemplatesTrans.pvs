@@ -1,0 +1,177 @@
+PartialRefTemplatesTrans: THEORY
+BEGIN
+   IMPORTING CKmultiple
+   
+   am,am1,am2,pairs: VAR AM
+   a,a1,a2: VAR Asset
+   an: VAR AssetName
+   s: VAR set[Configuration]
+   fm,fm2: VAR FM
+   ck,ck2: VAR CK
+   it,it2: VAR Item
+   its: VAR list[Item]
+   c: VAR Configuration
+   P,Q: VAR Name
+   exp: VAR Formula_
+   anSet: VAR set[AssetName]
+
+   IMPORTING PartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
+
+   pl,pl2: VAR PL
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ADD CK LINES %%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  addCKLinesBeforePartialRef: THEOREM
+     FORALL pl,ck2,its,s:
+      (
+	(s = <>(exps(its),F(pl)) AND
+      	ck2 = append(its,K(pl)) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+   addCKLinesAfterPartialRef: THEOREM
+     FORALL pl,ck2,its,s:
+      (
+	(s = <>(exps(its),F(pl)) AND
+      	ck2 = append(K(pl),its) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c)))
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% REMOVE CK LINES %%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   removeCKLinesBeforePartialRef: THEOREM
+      FORALL pl,ck2,its,s:
+      (
+	(s = <>(exps(its),F(pl)) AND
+      	K(pl) = append(its,ck2) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+   removeCKLinesAfterPartialRef: THEOREM
+      FORALL pl,ck2,its,s:
+      (
+	(s = <>(exps(its),F(pl)) AND
+      	K(pl) = append(ck2,its) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% CHANGE CK LINE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   changeCKLineBeforePartialRef: THEOREM
+      FORALL pl,ck2,it,it2,its,s:
+      (
+	(s = intersection(<>(getExp(it),F(pl)),<>(getExp(it2),F(pl))) AND
+	K(pl) = cons(it,its) AND
+     	ck2 = cons(it2,its) AND
+	FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
+      	=>
+        strongPartialRefinement(pl,pl2,s)
+      ) WHERE pl2=(# F:=F(pl), A:=A(pl), K:=ck2 #)
+
+  %The remove feature template uses specific language from ck multiple theory (preprocess)
+  %IMPORTING CKmultiple
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% REMOVE FEATURE %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  removeFeature(fm,fm2,P,Q):bool = formulae(fm2) = filterFormulae(fm,Q) AND
+                                  features(fm2) = remove(Q,features(fm))
+
+  syntaxRemoveFeature(fm,fm2,am,ck,ck2,P,Q,it,pairs,an,a): bool =
+                                 removeFeature(fm,fm2,P,Q) AND
+                                 features(fm)(P) AND
+                                 features(fm)(Q) AND
+                                 am = ow((an,a),pairs) AND
+                                 ck = cons(it,ck2) AND
+				 getRS(it) = IFDEF(an,true)
+                                
+  conditionsRemoveFeature(fm,it,pairs,P,Q,ck) : bool = 
+                                 (FORALL c : satisfies(exp(it),c) => satisfies(NAME_FORMULA(Q),c))
+                                 AND
+				 (FORALL c: FORALL exp: exps(ck)(exp) AND satisfies(exp,c) => NOT satisfies(NAME_FORMULA(Q),c))
+                                 AND
+                                 (FORALL c: semantics(fm)(c) =>  satisfies(IMPLIES_FORMULA(NAME_FORMULA(Q), NAME_FORMULA(P)),c))
+         
+
+  % Theorem <Remove feature template represents partial refinement>
+  removeFeaturePartialRef: THEOREM
+            FORALL (pl,fm2,ck2,s,it,pairs,P,Q,an,a):
+            (
+                (
+		  syntaxRemoveFeature(F(pl),F(pl2),A(pl),K(pl),K(pl2),P,Q,it,pairs,an,a) AND
+                  conditionsRemoveFeature(F(pl),it,pairs,P,Q,K(pl)) AND
+                  s = <>(F(pl),NOT_FORMULA (NAME_FORMULA(Q))) AND
+		  (FORALL c: (NOT s(c) AND semantics(F(pl2))(c)) => SPLrefinement.wfProduct(semantics(K(pl2))(A(pl2))(c))) 
+		)  
+	       =>
+	       strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2 = (#F:=fm2, A:=A(pl), K:=ck2#)
+
+  removeIfDefFromCode: THEOREM
+         FORALL (pl,s,am2,its,pairs,an,a,a2):
+            (
+                (
+		  A(pl) = ow((an,a),pairs) AND
+		  am2 = ow((an,a2),pairs) AND
+		  NOT preprocessfile(a,true) = preprocessfile(a2,true) AND
+		  preprocessfile(a,false) = preprocessfile(a2,false) AND
+                  s = <>(exps(its),F(pl)) AND
+		  (FORALL c: (NOT s(c) AND semantics(F(pl))(c)) => SPLrefinement.wfProduct(semantics(K(pl))(A(pl))(c))) 
+		)  
+	       =>
+	       strongPartialRefinement(pl,pl2,s)
+            ) WHERE pl2 = (#F:=F(pl), A:=am2, K:=K(pl)#), its = {it | getRS(it) = IFDEF(an,true)}
+
+END PartialRefTemplatesTrans
+
+PartialRefTemplatesIfDef: THEORY
+BEGIN
+
+  IMPORTING CKifdef
+
+   am2,pairs: VAR AM
+   a,a2: VAR Asset
+   n: VAR AssetName
+   s: VAR set[Configuration]
+   it: VAR Item
+   its: VAR list[Item]
+   c: VAR Configuration
+
+  IMPORTING PartialRefinement[Configuration,FM,semantics,Asset,AssetName,CK,semantics]
+
+  pl,pl2: VAR PL
+
+  removeIfDefPartialRef: THEOREM
+         FORALL (pl,s,am2,pairs,n,a,a2,it,its):
+                (
+		  A(pl) = ow((n,a),pairs) AND
+		  am2 = ow((n,a2),pairs) AND
+		  NOT preprocessfile(a,true) = preprocessfile(a2,true) AND
+		  preprocessfile(a,false) = preprocessfile(a2,false) AND
+		  getRS(it) = (n,true) AND
+		  K(pl) = cons(it,its) AND
+		  s = <>(exp(it),F(pl)) AND
+		  (FORALL it: member(it,its) =>
+		  	  (tasks(it)`1 = n)
+			  =>
+			  (tasks(it)`2 = false)
+	         )  
+	       =>
+	       strongPartialRefinement(pl,pl2,s))
+	       WHERE pl2 = (#F:= F(pl), A:=am2, K:=K(pl)#)
+
+END PartialRefTemplatesIfDef
